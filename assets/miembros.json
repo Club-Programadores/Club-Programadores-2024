@@ -23,7 +23,54 @@
             ]
         },
         {
-
+            "nombres": "Bautista",
+            "apellidos": "Mateo",
+            "email":"email@email.com",
+            "password":"unapassword",
+            "bio":"una bio pero de Bautista...",
+            "intereses":["interesA", "interesB", "interesC"],
+            "skills":[
+                {
+                    "nombre":"HTML",
+                    "nivel":5
+                },
+                {
+                    "nombre":"CSS",
+                    "nivel":5
+                },                {
+                    "nombre":"Javascript",
+                    "nivel":5
+                },
+                {
+                    "nombre":"React",
+                    "nivel":3
+                }
+            ]
+        },
+        {
+            "nombres": "Maite",
+            "apellidos": "Arakaki",
+            "email":"email@email.com",
+            "password":"unapassword",
+            "bio":"una bio pero de Maite...",
+            "intereses":["Networking", "Knowledge Graphs", "Arquitectura de Información"],
+            "skills":[
+                {
+                    "nombre":"HTML",
+                    "nivel":5
+                },
+                {
+                    "nombre":"CSS",
+                    "nivel":5
+                },                {
+                    "nombre":"Javascript",
+                    "nivel":5
+                },
+                {
+                    "nombre":"SPARQL",
+                    "nivel":3
+                }
+            ]
         }
     ]
 }
