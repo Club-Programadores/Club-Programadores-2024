@@ -2,7 +2,7 @@
   "name": "proyectos-cuvl",
   "version": "1.0.0",
   "description": "Pagina para presentar las habilidades e intereses de los participantes delclub del programador y sus proyectos.",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
