@@ -6,6 +6,13 @@
 	"image": "mcr.microsoft.com/devcontainers/base:bullseye",
 	"features": {
 		"ghcr.io/devcontainers-contrib/features/node-asdf:0": {}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"yandeu.five-server"
+			]
+		}
 	}
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
