@@ -1,0 +1,15 @@
+.logo-container {
+    width: 250px; /* Set your desired width */
+    height: 60px; /* Set your desired height */
+    clip-path:inset(0 0 0 0);
+}
+
+#logo{
+    max-width: 250px;
+    margin-top:-65px;
+}
+
+.buttons-container{
+    width: 15%;
+    justify-content: space-around;
+}
