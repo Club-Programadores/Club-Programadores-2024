@@ -8,3 +8,8 @@
     max-width: 250px;
     margin-top:-65px;
 }
+
+.buttons-container{
+    width: 15%;
+    justify-content: space-around;
+}
