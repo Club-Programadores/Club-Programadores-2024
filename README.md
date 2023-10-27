@@ -3,4 +3,5 @@
 descripcion
 
 ## NPM Dependencies:
+- Vite
 - React
