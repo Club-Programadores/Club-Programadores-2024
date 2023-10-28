@@ -1,14 +1,15 @@
 import './App.css'
-import HeroBanner from './components/HeroBanner/HeroBanner'
 import Navbar from './components/Navbar/Navbar'
 
 function App() {
   return (
     <>
       <Navbar/>
-      <HeroBanner />
+        <div>
+            SARASAAAA
+        </div>
     </>
   )
 }
 
-export default App
+export default About
