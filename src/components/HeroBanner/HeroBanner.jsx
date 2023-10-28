@@ -1,3 +1,4 @@
+import SignUp from '../buttons/SignUp';
 import './HeroBanner.css'
 
 function HeroBanner(){
@@ -6,7 +7,9 @@ function HeroBanner(){
         <div class="hero-banner">
             <div className="call-to-action">
                 <h1 class="m-3">¡Sumate al Club de Programador@s del CUVL!</h1>
-                <button class="btn btn-outline-success m-3 bg-white">¡Sumate!</button>
+                <div class="btn-container">
+                    <SignUp />
+                </div>
             </div>
         </div>
         </>

@@ -24,3 +24,7 @@ h1{
     text-transform:uppercase;
     text-wrap: wrap;
 }
+
+.btn-container{
+    margin:5%;
+}
