@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap');
+
+
+.hero-banner{
+    height:40vh;
+    background-image: url(/workspaces/Proyectos-CUVL/assets/imgs/heroBanner1.jpg);
+    background-position-y:center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.call-to-action{
+    position:absolute;
+    margin: 50px 25px;
+    background-color: rgba(0,0,0,0.5);
+    width:40%;
+    color:white;
+    box-sizing: content-box;
+}
+
+h1{
+    font-size:1.1rem;
+    font-family:'Montserrat';
+    text-transform:uppercase;
+    text-wrap: wrap;
+}
