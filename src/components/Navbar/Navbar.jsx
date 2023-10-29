@@ -1,10 +1,12 @@
 import SignUp from '../buttons/SignUp/SignUp';
 import Login from '../buttons/Login/Login';
-import './Navbar.css'
+import './Navbar.css';
+import {Link} from 'react-scroll';
 
 function Navbar(){
+
     return (
-        <>
+        <div className='header'>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid">
                 <a className="navbar-brand py-0 me-0" href="#">
@@ -21,7 +23,7 @@ function Navbar(){
                         <a className="nav-link active" aria-current="page" href="#">Inicio</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#">Acerca de</a>
+                        <Link to='about-us' spy={true} offset={1000} duration={500} className='nav-link'>Acerca de</Link>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" href="#">Proyectos</a>
@@ -30,7 +32,7 @@ function Navbar(){
                         <a className="nav-link" href="#">Skills</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#">Contacto</a>
+                        <Link to='contact-us' spy={true} offset={100} duration={500} className='nav-link'>Contacto</Link>
                     </li>
                     </ul>
 
@@ -41,7 +43,7 @@ function Navbar(){
                 </div>
             </div>
         </nav>
-        </>
+        </div>
     )
 }
 
