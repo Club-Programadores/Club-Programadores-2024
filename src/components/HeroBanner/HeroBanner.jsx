@@ -1,4 +1,4 @@
-import SignUp from '../buttons/SignUp';
+import SignUp from '../buttons/SignUp/SignUp';
 import './HeroBanner.css'
 
 function HeroBanner(){
