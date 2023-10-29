@@ -1,4 +1,5 @@
 import SignUp from '../buttons/SignUp/SignUp';
+import Login from '../buttons/Login/Login';
 import './Navbar.css'
 
 function Navbar(){
@@ -35,8 +36,7 @@ function Navbar(){
 
                     <div className="navbar-nav m-ms-auto buttons-container">
                         <SignUp />
-                        {/* <button className="btn btn-outline-success my-2 my-sm-0">Sumate!</button> */}
-                        <button className="btn btn-outline-secondary my-2 my-sm-0">Login</button>
+                        <Login />
                     </div>
                 </div>
             </div>
