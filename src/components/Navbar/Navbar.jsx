@@ -7,7 +7,7 @@ function Navbar(){
 
     return (
         <div className='header'>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
             <div className='container-fluid' id='navbar-container'>
                 <a className="navbar-brand py-0 me-0" href="#">
                     <div className="logo-container">
@@ -23,7 +23,13 @@ function Navbar(){
                         <a className="nav-link active" aria-current="page" href="#">Inicio</a>
                     </li>
                     <li className="nav-item">
-                        <Link to='about-us' spy={true} offset={1000} duration={500} className='nav-link'>Acerca de</Link>
+                        <Link 
+                        to='about-us' 
+                        spy={true} offset={1000} 
+                        duration={500} 
+                        className='nav-link'>
+                            Acerca de
+                        </Link>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" href="#">Proyectos</a>
@@ -32,7 +38,14 @@ function Navbar(){
                         <a className="nav-link" href="#">Skills</a>
                     </li>
                     <li className="nav-item">
-                        <Link to='contact-us' spy={true} offset={100} duration={500} className='nav-link'>Contacto</Link>
+                        <Link 
+                        to='contact-us' 
+                        spy={true} 
+                        offset={100} 
+                        duration={500} 
+                        className='nav-link'>
+                            Contacto
+                        </Link>
                     </li>
                     </ul>
 
