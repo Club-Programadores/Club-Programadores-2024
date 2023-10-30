@@ -1,18 +1,39 @@
-import './App.css'
-import HeroBanner from './components/HeroBanner/HeroBanner'
-import Navbar from './components/Navbar/Navbar'
-import About from './pages/About/About'
-import Contact from './pages/Contact/Contact'
+import {
+  BrowserRouter,
+  Route,
+  Routes, 
+  useLocation
+} from "react-router-dom";
 
-function App() {
-  return (
-    <>
-      <Navbar/>
-      <HeroBanner />
-      <About />
-      <Contact />
-    </>
-  )
+import HomePage from './/pages//Home//HomePage'
+import ParticipantesPage from './/pages//Participantes//ParticipantesPage'
+import ProyectosPage from './/pages//Proyectos//ProyectosPage'
+
+import './App.css'
+
+export default function App() {
+  return(
+      <BrowserRouter>
+        <div>
+          <Routes>
+              <Route path="/" element={<HomePage/>} />
+              <Route path="/participantes" element={<ParticipantesPage/>} />
+              <Route path="/proyectos" element={<ProyectosPage/>} />
+
+              <Route path="*" element={<NotFound/>} />
+          </Routes>
+        </div>
+    </BrowserRouter>
+  );
 }
 
-export default App
+
+
+
+function NotFound() {
+  return (
+    <div>
+        <h2>404</h2>
+    </div>
+  );
+}
