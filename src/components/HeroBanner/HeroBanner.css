@@ -2,7 +2,8 @@
 
 
 .hero-banner{
-    height:40vh;
+    margin-top:75px;
+    height:60vh;
     background-image: url(/workspaces/Proyectos-CUVL/assets/imgs/heroBanner1.jpg);
     background-position-y:center;
     background-size: cover;
@@ -11,7 +12,6 @@
 
 .call-to-action{
     position:absolute;
-    margin: 50px 25px;
     background-color: rgba(0,0,0,0.5);
     width:40%;
     color:white;
