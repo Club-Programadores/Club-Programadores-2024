@@ -8,7 +8,7 @@ function Navbar(){
     return (
         <div className='header'>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <div className="container-fluid">
+            <div className='container-fluid' id='navbar-container'>
                 <a className="navbar-brand py-0 me-0" href="#">
                     <div className="logo-container">
                         <img src="/assets/imgs/brand/Club de Programadors Inverted Color Transparent bg.svg" alt="Club de Programador@es" id="logo"/>
