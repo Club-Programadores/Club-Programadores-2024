@@ -5,6 +5,18 @@ import {Link} from 'react-scroll';
 
 function Navbar(){
 
+    const navLinks = document.querySelectorAll('.nav-link');
+    const collapseElement = document.getElementById('navbar-toggler');
+    function closeCollapse(){
+        if(collapseElement.classList.contains('show')){
+            collapseElement.classList.toggle('show');
+        }
+    }
+
+    navLinks.forEach(navLink => {
+        navLink.addEventListener('click', closeCollapse);
+    });
+
     return (
         <div className='header'>
         <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
