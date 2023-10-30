@@ -37,7 +37,8 @@ function Navbar(){
                     <li className="nav-item">
                         <Link 
                         to='about-us' 
-                        spy={true} offset={1000} 
+                        spy={true} 
+                        offset={-70} 
                         duration={500} 
                         className='nav-link'>
                             Acerca de
@@ -53,7 +54,7 @@ function Navbar(){
                         <Link 
                         to='contact-us' 
                         spy={true} 
-                        offset={100} 
+                        offset={-100} 
                         duration={500} 
                         className='nav-link'>
                             Contacto
