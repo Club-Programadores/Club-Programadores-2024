@@ -20,7 +20,7 @@ export default function Navbar(){
 
     return (
         <div className='header'>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top "id='navbar'>
             <div className='container-fluid' id='navbar-container'>
                 <a className="navbar-brand py-0 me-0" href=".">
                     <div className="logo-container">
@@ -34,6 +34,12 @@ export default function Navbar(){
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                     <li className="nav-item">
                         <a className="nav-link active" aria-current="page" href=".">Inicio</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link active" aria-current="page" href="/about-us">Acerca De</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link active" aria-current="page" href="/contact-us">Contacto</a>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" href="participantes">Participantes</a>
@@ -70,7 +76,7 @@ export function HomePageNavbar(){
 
     return (
         <div className='header'>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top" id='navbar'>
             <div className='container-fluid' id='navbar-container'>
                 <a className="navbar-brand py-0 me-0" href=".">
                     <div className="logo-container">
