@@ -1,0 +1,23 @@
+@media screen and (min-width: 768px) {
+    #navbar-container,
+    #about-us,
+    #contact-us
+    {
+      margin:0 5vw;
+    }
+
+    .hero-banner{
+        padding: 0 20vw;
+    }
+
+    .call-to-action{
+        margin-top: 50px;
+        margin-left: -7%;
+    }
+  }
+
+@media screen and (max-width:767px){
+    .call-to-action{
+        margin: 50px 25px;
+    }
+}
