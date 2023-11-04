@@ -1,4 +1,23 @@
-#about-container{
-    background-color: aqua;
-    height:70vh;
+.square-container{
+    border: 1px solid grey;
+    /* width:30vw;*/
+    height:30vw; 
+}
+
+.circle{
+    border-radius: 50%;
+    border: 1px solid grey;
+    /* width: 100px;
+    height:100px; */
+    width:35%;
+    height:35%;
+    margin: auto;
+    margin-top: -10%;
+    background-color: white;
+}
+
+#about-circle-1>img,
+#about-circle-2>img,
+#about-circle-3>img{
+    width:80%;    
 }
