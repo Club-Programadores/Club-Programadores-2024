@@ -4,7 +4,7 @@
 .hero-banner{
     margin-top:75px;
     height:60vh;
-    background-image: url(/workspaces/Proyectos-CUVL/assets/imgs/heroBanner1.jpg);
+    background-image: url("../../../assets/imgs/heroBanner1.jpg");
     background-position-y:center;
     background-size: cover;
     background-repeat: no-repeat;
