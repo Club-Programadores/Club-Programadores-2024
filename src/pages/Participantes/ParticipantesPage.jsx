@@ -1,5 +1,7 @@
 import Navbar from '../../components/Navbar/Navbar'
 import ParticipantesList from '../../components/ParticipantesList//ParticipantesList'
+import FilterButton from '../../components/FilterButton/filterButtonFile'
+
 import './/ParticipantesStyles.css'
 
 function ParticipantesPage() {
@@ -14,6 +16,10 @@ function ParticipantesPage() {
     <>
       <Navbar/>
       <div className='listContainer'>
+        
+        <div>
+          <FilterButton/>
+        </div>
         <ParticipantesList participantes={participantesArray}/>
       </div>
     </>
