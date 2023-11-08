@@ -1,7 +1,6 @@
 import Navbar from '../../components/Navbar/Navbar'
 import ParticipantesList from '../../components/ParticipantesList//ParticipantesList'
-import FilterButton from '../../components/FilterButton/filterButtonFile'
-
+import SearchBar from '../../components/SearchBar/searchBarFile.jsx'
 import './/ParticipantesStyles.css'
 
 function ParticipantesPage() {
@@ -17,9 +16,7 @@ function ParticipantesPage() {
       <Navbar/>
       <div className='listContainer'>
         
-        <div>
-          <FilterButton/>
-        </div>
+          <SearchBar/>
         <ParticipantesList participantes={participantesArray}/>
       </div>
     </>
