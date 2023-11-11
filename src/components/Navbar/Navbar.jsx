@@ -9,9 +9,7 @@ export default function Navbar(){
     const navLinks = document.querySelectorAll('.nav-link');
     const collapseElement = document.getElementById('navbar-toggler');
     function closeCollapse(){
-        if(collapseElement.classList.contains('show')){
             collapseElement.classList.toggle('show');
-        }
     }
 
     navLinks.forEach(navLink => {
@@ -65,9 +63,7 @@ export function HomePageNavbar(){
     const navLinks = document.querySelectorAll('.nav-link');
     const collapseElement = document.getElementById('navbar-toggler');
     function closeCollapse(){
-        if(collapseElement.classList.contains('show')){
             collapseElement.classList.toggle('show');
-        }
     }
 
     navLinks.forEach(navLink => {
