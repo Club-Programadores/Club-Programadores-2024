@@ -1,4 +1,5 @@
 import Navbar from '../../components/Navbar/Navbar'
+import Footer from '../../components/Footer/Footer'
 import ParticipantesList from '../../components/ParticipantesList//ParticipantesList'
 import './/ParticipantesStyles.css'
 
@@ -16,6 +17,7 @@ function ParticipantesPage() {
       <div className='listContainer'>
         <ParticipantesList participantes={participantesArray}/>
       </div>
+      <Footer />
     </>
   )
 }
