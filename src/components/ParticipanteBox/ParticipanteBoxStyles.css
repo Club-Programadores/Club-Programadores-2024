@@ -1,0 +1,70 @@
+
+
+.participanteBox{
+    display: flex;
+    justify-content: space-around;
+    margin: 10px;
+    padding: 10px;
+    min-height: 150px;
+    min-width: 500px;
+    background-color: gray;
+    border-radius: 20px;
+    border-style: double;
+}
+
+.profilePic{
+    align-self: center;
+    margin: 0 1%;
+}
+
+.profilePic img{
+    height: 100px;
+    width: 100px;
+    border-radius:20%;
+}
+
+.participanteInfo{
+    width: 65%;
+    height: auto;
+    padding: 1% 0;
+    border-style: hidden double hidden hidden;
+    margin-right: 10px;
+}
+
+.participanteInfo h1{
+    font-size: 30px;
+    margin: 0px;
+    color: white;
+}
+
+.participanteInfo hr{
+    margin: 0 50px 5px 0;
+}
+
+.intereses{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 90%;
+    height: auto;
+    border-style: double hidden hidden hidden;
+    padding-top : 10px;
+}
+
+
+.intereses h3{
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.iconsContainer{
+    display: flex;
+    flex-wrap: wrap;
+    grid-auto-flow: column;
+    align-self: center;
+}
+
+.iconsContainer img{
+    width: 40px;
+    height: 40px;
+    margin: 10px;
+}
