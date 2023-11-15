@@ -1,0 +1,11 @@
+.proyectoBox{
+    display: flex;
+    justify-content: space-around;
+    margin: 10px;
+    padding: 10px;
+    min-height: 150px;
+    min-width: 500px;
+    background-color: gray;
+    border-radius: 20px;
+    border-style: double;
+}
