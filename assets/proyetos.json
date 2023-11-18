@@ -1,0 +1,16 @@
+{
+    "proyectos":[
+        {
+            "titulo":"proyecto1",
+            "estado":"finalizado"
+        },
+        {
+            "titulo":"proyecto1",
+            "estado":"nuevo"
+        },
+        {
+            "titulo":"proyecto1",
+            "estado":"en_desarrollo"
+        }
+    ]
+}
