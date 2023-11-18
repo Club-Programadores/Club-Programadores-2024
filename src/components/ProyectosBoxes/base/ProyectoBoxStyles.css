@@ -9,3 +9,15 @@
     border-radius: 20px;
     border-style: double;
 }
+
+.nuevoProyeto{
+    border-color: green;
+}
+
+.proyectoEnDesarrollo{
+    border-color: yellow;
+}
+
+.proyectoFinalizado{
+    border-color: blue;
+}
