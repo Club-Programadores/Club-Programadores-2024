@@ -1,15 +1,17 @@
-import { useRef } from 'react';
+import { useState } from 'react'
 
 import FilterButton from '../FilterButton/filterButtonFile'
 
 import './searchBarStyles.css'
 
-export default function SearchBar(props){
-    const searchIconRef = useRef(null);
-    
+export default function SearchBar(props){    
+    const [value, setValue] = useState('')
+
+    const handleOnClickInput = e => {
+        props.setSearch(value)
+    }
     const handleOnChangeInput = e => {
-        console.log("hola")
-        props.setSearch(e.target.value)
+        setValue(e.target.value)
     }
 
     return (
@@ -17,10 +19,10 @@ export default function SearchBar(props){
             <div className='container'>
                 <input className='searchInput'
                     placeholder='Search'
-                    // onChange={handleOnChangeInput}
-                    />
+                    value={value}
+                    onChange={handleOnChangeInput}/>
                 <button className='searchButton'
-                onClick={handleOnChangeInput}>
+                onClick={handleOnClickInput}>
                     🔍
                 </button>
             </div>
