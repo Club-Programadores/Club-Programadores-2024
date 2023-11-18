@@ -1,37 +1,30 @@
 import { useState } from 'react'
-import { useRef } from 'react';
 
 import FilterButton from '../FilterButton/filterButtonFile'
 
 import './searchBarStyles.css'
 
-export default function SearchBar(props){
-    const searchIconRef = useRef(null);
-    
-    const handleOnChangeInput = e => {
-        props.setSearch(e.target.value)
-    }
+export default function SearchBar(props){    
+    const [value, setValue] = useState('')
 
-    const show = e =>{
-        if(searchIconRef.current.className != 'devicon-safari-line searchIcon  hidden')
-        {
-            searchIconRef.current.className += ' hidden'
-        }
+    const handleOnClickInput = e => {
+        props.setSearch(value)
     }
-    const hide = e =>{
-        if(e.target.value == ''){
-            searchIconRef.current.className = 'devicon-safari-line searchIcon';
-        }
+    const handleOnChangeInput = e => {
+        setValue(e.target.value)
     }
 
     return (
         <div className='searchBar'>
             <div className='container'>
-                <i className='devicon-safari-line searchIcon' ref={searchIconRef}></i>
                 <input className='searchInput'
-                    onChange={handleOnChangeInput}
-                    onFocus={show}
-                    onBlur={hide}/>
+                    placeholder='Search'
+                    value={value}
+                    onChange={handleOnChangeInput}/>
+                <button className='searchButton'
+                onClick={handleOnClickInput}>
+                    🔍
+                </button>
             </div>
             <FilterButton/>
         </div>
