@@ -3,6 +3,7 @@ import HeroBanner from '..//..//components//HeroBanner//HeroBanner'
 import {HomePageNavbar} from '../../components/Navbar/Navbar'
 import About from '../../pages/About/About'
 import Contact from '../../pages/Contact/Contact'
+import Footer from '../../components/Footer/Footer'
 
 export default function Home() {
 
@@ -23,6 +24,7 @@ export default function Home() {
       <HeroBanner />
       <About />
       <Contact />
+      <Footer />
     </>
   )
 }

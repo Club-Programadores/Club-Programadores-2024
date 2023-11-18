@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 import Navbar from '../../components/Navbar/Navbar'
+import Footer from '../../components/Footer/Footer'
 import ProyectosList from '../../components/ProyectosList/proyectosListFile.jsx'
 import SearchBar from '../../components/SearchBar/searchBarFile.jsx'
 
@@ -30,6 +31,7 @@ function ProyectosPage() {
         <SearchBar setSearch={setSearch}/>
         <ProyectosList proyectos={filteredProyectos()}/>
       </div>
+      <Footer />
     </>
   )
 }

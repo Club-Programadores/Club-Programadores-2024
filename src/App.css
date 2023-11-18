@@ -1,7 +1,7 @@
 @media screen and (min-width: 768px) {
     #navbar-container,
     #about-us,
-    #contact-us
+    #contact-container
     {
       margin:0 5vw;
     }
