@@ -5,11 +5,11 @@
             "estado":"finalizado"
         },
         {
-            "titulo":"proyecto1",
+            "titulo":"proyecto2",
             "estado":"nuevo"
         },
         {
-            "titulo":"proyecto1",
+            "titulo":"proyecto3",
             "estado":"en_desarrollo"
         }
     ]
