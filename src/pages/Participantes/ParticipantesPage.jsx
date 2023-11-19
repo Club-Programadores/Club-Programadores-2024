@@ -2,12 +2,16 @@ import { useState } from 'react'
 
 import Navbar from '../../components/Navbar/Navbar'
 import Footer from '../../components/Footer/Footer'
-import ParticipantesList from '../../components/ParticipantesList//ParticipantesList'
 import SearchBar from '../../components/SearchBar/searchBarFile.jsx'
+import InteresesDropdown from '../../components/FiltersDropdown/InteresesDropdown/InteresesDropdownFile.jsx'
+import SkillsDropdown from '../../components/FiltersDropdown/SkillsDropdown/SkillsDropdownFile.jsx'
+import ParticipantesList from '../../components/ParticipantesList//ParticipantesList'
+
+import participantesJson from '../../../assets/miembros.json'
 
 import './/ParticipantesStyles.css'
 
-import participantesJson from '../../../assets/miembros.json'
+
 
 function ParticipantesPage() {
   const [search, setSearch] = useState('')
@@ -26,6 +30,10 @@ function ParticipantesPage() {
       <Navbar/>
       <div className='listContainer'>
         <SearchBar setSearch={setSearch}/>
+        <div className='dropdownFilters'>
+          <InteresesDropdown/>
+          <SkillsDropdown/>
+        </div>
         <ParticipantesList participantes={filteredParticipantes()}/>
       </div>
       <Footer />
