@@ -7,21 +7,18 @@ import SearchBar from '../../components/SearchBar/searchBarFile.jsx'
 
 import './/ParticipantesStyles.css'
 
+import participantesJson from '../../../assets/miembros.json'
+
 function ParticipantesPage() {
   const [search, setSearch] = useState('')
 
-  const participantesArray = [
-    {id:2, nombre:'Maite'},
-    {id:3, nombre:'Veronica'},
-    {id:4, nombre:'Mike'},
-    {id:1, nombre:'Bautista'}
-  ]
+  const participantes = JSON.parse(JSON.stringify(participantesJson)).miembros;
 
   const filteredParticipantes = () =>{
     if(search == ''){
-      return participantesArray; 
+      return participantes; 
     }
-    return participantesArray.filter(x => x.nombre.toLowerCase().startsWith(search.toLowerCase()))
+    return participantes.filter(x => x.nombre.toLowerCase().startsWith(search.toLowerCase()))
   }
 
   return (

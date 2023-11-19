@@ -7,7 +7,7 @@ export default function ParticipantesList(props){
         {
             props.participantes.map((participante)=>{
                 return (
-                    <ParticipanteBox data={participante}/>
+                    <ParticipanteBox key={participante.id} data={participante}/>
                 )
             })
         }
