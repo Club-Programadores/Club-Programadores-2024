@@ -15,6 +15,7 @@ import './/ParticipantesStyles.css'
 
 function ParticipantesPage() {
   const [search, setSearch] = useState('')
+  const [showDropdowns, setShowDropdowns] = useState(false)
 
   const participantes = JSON.parse(JSON.stringify(participantesJson)).miembros;
 
@@ -29,8 +30,8 @@ function ParticipantesPage() {
     <>
       <Navbar/>
       <div className='listContainer'>
-        <SearchBar setSearch={setSearch}/>
-        <div className='dropdownFilters'>
+        <SearchBar setSearch={setSearch} showDropdownsState={showDropdowns} setShowDropdowns={setShowDropdowns}/>
+        <div className={showDropdowns? "":"hidden"}>
           <InteresesDropdown/>
           <SkillsDropdown/>
         </div>

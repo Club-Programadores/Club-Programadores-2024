@@ -14,6 +14,10 @@ export default function SearchBar(props){
         setValue(e.target.value)
     }
 
+    const handleOnClickButton = e =>{
+        props.setShowDropdowns(!props.showDropdownsState)
+    }
+
     return (
         <div className='searchBar'>
             <div className='container'>
@@ -26,7 +30,7 @@ export default function SearchBar(props){
                     🔍
                 </button>
             </div>
-            <FilterButton/>
+            <FilterButton onClick={handleOnClickButton}/>
         </div>
     )
 }
