@@ -51,11 +51,39 @@
                     "nivel":5
                 },
                 {
-                    "nombre":"unity",
+                    "nombre":"ts",
+                    "nivel":5
+                },
+                {
+                    "nombre":"C++",
+                    "nivel":5
+                },
+                {
+                    "nombre":"C#",
+                    "nivel":5
+                },
+                {
+                    "nombre":".net",
+                    "nivel":5
+                },
+                {
+                    "nombre":"vs",
+                    "nivel":5
+                },
+                {
+                    "nombre":"vscode",
+                    "nivel":5
+                },
+                {
+                    "nombre":"microsoftsqlserver",
                     "nivel":5
                 },
                 {
                     "nombre":"blender",
+                    "nivel":5
+                },
+                {
+                    "nombre":"unity",
                     "nivel":5
                 },
                 {
