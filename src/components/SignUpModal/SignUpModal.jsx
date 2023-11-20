@@ -47,16 +47,44 @@ const SignUpModal =({onClose}) => {
                     <div className="form-group">
                         <h3>Tus datos</h3>
                         <label for="nombre">Nombre/s</label>
-                        <input type="text" className="form-control" id="nombre" name="nombres" value={formData.nombres} onChange={handleInputChange}/>
+                        <input 
+                            type="text" 
+                            className="form-control" 
+                            id="nombre" 
+                            name="nombres" 
+                            value={formData.nombres} 
+                            onChange={handleInputChange}
+                            required/>
 
                         <label for="apellido">Apellido/s</label>
-                        <input type="text" className="form-control" id="apellido" name="apellidos" value={formData.apellidos} onChange={handleInputChange}/>
+                        <input 
+                            type="text" 
+                            className="form-control" 
+                            id="apellido" 
+                            name="apellidos" 
+                            value={formData.apellidos} 
+                            onChange={handleInputChange}
+                            required/>
 
                         <label for="email">Email</label>
-                        <input type="email" className="form-control" id="email" name="email" value={formData.email} onChange={handleInputChange}/>
+                        <input 
+                            type="email"
+                            className="form-control" 
+                            id="email" 
+                            name="email" 
+                            value={formData.email} 
+                            onChange={handleInputChange}
+                            required
+                        />
 
                         <label for="bio">Bio</label>
-                        <textarea className="form-control" id="bio" name="bio" value={formData.bio} onChange={handleInputChange} />
+                        <textarea 
+                            className="form-control" 
+                            id="bio" 
+                            name="bio" 
+                            value={formData.bio} 
+                            onChange={handleInputChange} 
+                            />
                     </div>
                     <div className='skills-interests-container'>
                         <div className='form-group'>
@@ -103,34 +131,64 @@ const SignUpModal =({onClose}) => {
                                     checked={formData.skills.includes('NodeJS')}
                                     onChange={(e) => handleCheckboxChange(e, 'skills')}
                                     />
-                                <label className="form-check-label" htmlFor="renodeact">NodeJS</label>
+                                <label className="form-check-label" htmlFor="node">NodeJS</label>
                             </div>
-                        </div>
-
-                        <div className='form-group'>
-                            <h3>Tus Intereses</h3>
                             <div className="form-check">
                                 <input 
                                     type="checkbox" 
                                     className="form-check-input" 
-                                    id="ai" 
-                                    value="AI"
-                                    checked={formData.intereses.includes('AI')}
-                                    onChange={(e) => handleCheckboxChange(e, 'intereses')}
+                                    id="blender" 
+                                    value="Blender"
+                                    checked={formData.skills.includes('Blender')}
+                                    onChange={(e) => handleCheckboxChange(e, 'skills')}
                                     />
-                                <label className="form-check-label" htmlFor="ai">AI</label>
+                                <label className="form-check-label" htmlFor="blender">Blender</label>
                             </div>
                             <div className="form-check">
                                 <input 
                                     type="checkbox" 
-                                    class="form-check-input" 
-                                    id="agile" 
-                                    value="Agile"
-                                    checked={formData.intereses.includes('Agile')}
-                                    onChange={(e) => handleCheckboxChange(e, 'intereses')}
+                                    className="form-check-input" 
+                                    id="godot" 
+                                    value="godot"
+                                    checked={formData.skills.includes('godot')}
+                                    onChange={(e) => handleCheckboxChange(e, 'skills')}
                                     />
-                                <label className="form-check-label" htmlFor="agile">Agile</label>
+                                <label className="form-check-label" htmlFor="godot">godot</label>
                             </div>
+                            <div className="form-check">
+                                <input 
+                                    type="checkbox" 
+                                    className="form-check-input" 
+                                    id="unity" 
+                                    value="unity"
+                                    checked={formData.skills.includes('unity')}
+                                    onChange={(e) => handleCheckboxChange(e, 'skills')}
+                                    />
+                                <label className="form-check-label" htmlFor="unity">unity</label>
+                            </div>       
+                            <div className="form-check">
+                                <input 
+                                    type="checkbox" 
+                                    className="form-check-input" 
+                                    id="sparql" 
+                                    value="sparql"
+                                    checked={formData.skills.includes('sparql')}
+                                    onChange={(e) => handleCheckboxChange(e, 'skills')}
+                                    />
+                                <label className="form-check-label" htmlFor="sparql">SPARQL</label>
+                            </div>                       
+                        </div>
+
+                        <div className='form-group'>
+                            <h3>Tus Intereses</h3>
+                            <label for="intereses">¿Qué te copa?</label>
+                        <textarea 
+                            className="form-control" 
+                            id="intereses" 
+                            name="intereses" 
+                            placeholder='Backend;GameDev;WebDev...'
+                            value={formData.intereses} 
+                            onChange={handleInputChange} />
                         </div>
                     </div>
                     <button className='btn btn-success' type='submit' id='sumame-btn'>¡Sumarme!</button>
