@@ -1,19 +1,13 @@
 import './SignUp.css'
-import SignUpModal from '../../SignUpModal/SignUpModal'
 
 
-function SignUp(){
-    function handleClick() {
-        alert("hiciste click en el boton de sumate");
-        
-
-      }
+const SignUp=({onClick})=>{
     return (
         <>
             <button type="button" 
             className="btn btn-outline-success" 
             id="sumate" 
-            onClick={handleClick}>
+            onClick={onClick}>
                 ¡Sumate!
             </button>
         </>

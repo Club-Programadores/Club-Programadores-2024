@@ -4,7 +4,7 @@ import {Link} from 'react-scroll';
 
 import './Navbar.css';
 
-export default function Navbar(){
+export default function Navbar({onSignUpClick}){
 
     const navLinks = document.querySelectorAll('.nav-link');
     const collapseElement = document.getElementById('navbar-toggler');
@@ -48,7 +48,7 @@ export default function Navbar(){
                     </ul>
 
                     <div className="navbar-nav m-ms-auto buttons-container">
-                        <SignUp />
+                        <SignUp onClick={onSignUpClick}/>
                         <Login />
                     </div>
                 </div>
@@ -58,7 +58,7 @@ export default function Navbar(){
     )
 }
 
-export function HomePageNavbar(){
+export function HomePageNavbar({onSignUpClick}){
 
     const navLinks = document.querySelectorAll('.nav-link');
     const collapseElement = document.getElementById('navbar-toggler');
@@ -124,7 +124,7 @@ export function HomePageNavbar(){
                     </ul>
 
                     <div className="navbar-nav m-ms-auto buttons-container">
-                        <SignUp />
+                        <SignUp onClick={onSignUpClick}/>
                         <Login />
                     </div>
                 </div>
