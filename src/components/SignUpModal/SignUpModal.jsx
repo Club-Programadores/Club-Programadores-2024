@@ -1,5 +1,6 @@
 import './SignUpModal.css'
 import React, { useState } from 'react';
+import miembrosMaster from '../../../assets/miembros.json'
 
 
 
@@ -35,9 +36,26 @@ const SignUpModal =({onClose}) => {
 
       const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('Form Data:', formData);
-        // Add logic to send the form data to the server or perform other actions
+
+
+        const nuevoMiembro = {
+            "nombres":formData.nombres,
+            "apellidos":formData.apellidos,
+            "email":formData.email,
+            "bio":formData.bio,
+            "intereses":formData.intereses.split(';'),
+            "skills":formData.skills
+        }
+
+        console.log(miembrosMaster);
+        console.log(nuevoMiembro);
+
+        miembrosMaster.miembros.push(nuevoMiembro);
+
+        onClose();
       };
+
+
     
     return(
         <div className='modal-container' id='sign-up-modal'>
@@ -54,7 +72,7 @@ const SignUpModal =({onClose}) => {
                             name="nombres" 
                             value={formData.nombres} 
                             onChange={handleInputChange}
-                            required/>
+                            />
 
                         <label for="apellido">Apellido/s</label>
                         <input 
@@ -64,7 +82,7 @@ const SignUpModal =({onClose}) => {
                             name="apellidos" 
                             value={formData.apellidos} 
                             onChange={handleInputChange}
-                            required/>
+                            />
 
                         <label for="email">Email</label>
                         <input 
@@ -74,7 +92,7 @@ const SignUpModal =({onClose}) => {
                             name="email" 
                             value={formData.email} 
                             onChange={handleInputChange}
-                            required
+                            
                         />
 
                         <label for="bio">Bio</label>
