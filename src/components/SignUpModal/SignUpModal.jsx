@@ -133,7 +133,7 @@ const SignUpModal =({onClose}) => {
                             </div>
                         </div>
                     </div>
-                    <button type='submit' id='sumame-btn'>Sumame!</button>
+                    <button className='btn btn-success' type='submit' id='sumame-btn'>¡Sumarme!</button>
                 </form>
             </div>
         </div>
