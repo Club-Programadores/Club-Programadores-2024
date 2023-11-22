@@ -8,11 +8,13 @@ const options = [
     { label: 'Finalizado', value: 'finalizado' },
   ];
 
-export default function skillsDropdown(){
+export default function EstadosDropdown(props){
   const [selectedOption, setSelectedOption] = useState(null);
 
   const handleOnChange = e =>{
-    setSelectedOption(e)
+    console.log(e);
+    setSelectedOption(e);
+    props.setEstadosFilter(e);
  }
 
   return(

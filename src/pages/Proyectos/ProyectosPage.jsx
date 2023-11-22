@@ -12,15 +12,20 @@ import "./ProyectosStyles.css"
 
 function ProyectosPage() {
   const [search, setSearch] = useState('')
+  const [estadosFilter, setEstadosFilter] = useState([])
   const [showDropdowns, setShowDropdowns] = useState(false)
 
-  const proyectos = JSON.parse(JSON.stringify(ProyectosJson)).proyectos;
+  let proyectos = JSON.parse(JSON.stringify(ProyectosJson)).proyectos;
 
   const filteredProyectos = () =>{
-    if(search == ''){
-      return proyectos; 
+    if(search != ''){
+      proyectos = proyectos.filter(proyecto => proyecto.titulo.toLowerCase().startsWith(search.toLowerCase()) )
     }
-    return proyectos.filter(x => x.titulo.toLowerCase().startsWith(search.toLowerCase()))
+    
+    if(estadosFilter.length != 0){
+      proyectos = proyectos.filter(proyecto => estadosFilter.some(estado => estado.value.toLowerCase() == proyecto.estado.toLowerCase()))
+    }
+    return proyectos;
   }
 
   return (
@@ -29,7 +34,7 @@ function ProyectosPage() {
       <div className='listContainer'>
         <SearchBar setSearch={setSearch} showDropdownsState={showDropdowns} setShowDropdowns={setShowDropdowns}/>
         <div className={showDropdowns? "":"hidden"}>
-          <EstadosDropdown/>
+          <EstadosDropdown setEstadosFilter={setEstadosFilter}/>
         </div>
         <ProyectosList proyectos={filteredProyectos()}/>
       </div>

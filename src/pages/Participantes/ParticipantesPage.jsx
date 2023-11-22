@@ -15,15 +15,24 @@ import './/ParticipantesStyles.css'
 
 function ParticipantesPage() {
   const [search, setSearch] = useState('')
+  const [interesesFilter, setInteresesFilter] = useState([])
+  const [skillsFilter, setSkillsFilter] = useState([])
   const [showDropdowns, setShowDropdowns] = useState(false)
 
-  const participantes = JSON.parse(JSON.stringify(participantesJson)).miembros;
+  let participantes = JSON.parse(JSON.stringify(participantesJson)).miembros;
 
   const filteredParticipantes = () =>{
-    if(search == ''){
-      return participantes; 
+    console.log(search)
+    if(search != ''){
+      participantes = participantes.filter(participante => participante.nombre.toLowerCase().startsWith(search.toLowerCase()) )
     }
-    return participantes.filter(x => x.nombre.toLowerCase().startsWith(search.toLowerCase()))
+    if(interesesFilter.length != 0){
+      participantes = participantes.filter(participante => interesesFilter.every(interes => participante.intereses.map(i => i.toLowerCase()).includes(interes.label.toLowerCase())))
+    }
+    if(skillsFilter.length != 0){
+      participantes = participantes.filter(participante => skillsFilter.every(skill => participante.skills.map(i => i.nombre.toLowerCase()).includes(skill.label.toLowerCase())))
+    }
+    return participantes;
   }
 
   return (
@@ -32,8 +41,8 @@ function ParticipantesPage() {
       <div className='listContainer'>
         <SearchBar setSearch={setSearch} showDropdownsState={showDropdowns} setShowDropdowns={setShowDropdowns}/>
         <div className={showDropdowns? "":"hidden"}>
-          <InteresesDropdown/>
-          <SkillsDropdown/>
+          <InteresesDropdown setInteresesFilter={setInteresesFilter}/>
+          <SkillsDropdown setSkillsFilter={setSkillsFilter}/>
         </div>
         <ParticipantesList participantes={filteredParticipantes()}/>
       </div>

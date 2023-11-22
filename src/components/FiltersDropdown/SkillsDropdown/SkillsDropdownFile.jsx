@@ -6,13 +6,16 @@ const options = [
     { label: 'HTML', value: 'html' },
     { label: 'CSS', value: 'css' },
     { label: 'JavaScript', value: 'javascript' },
+    { label: 'C++', value: 'c++' },
+    { label: 'SPARQL', value: 'sparql' },
   ];
 
-export default function skillsDropdown(){
+export default function skillsDropdown(props){
   const [selectedOption, setSelectedOption] = useState(null);
 
   const handleOnChange = e =>{
-    setSelectedOption(e)
+    setSelectedOption(e);
+    props.setSkillsFilter(e);
  }
 
   return(

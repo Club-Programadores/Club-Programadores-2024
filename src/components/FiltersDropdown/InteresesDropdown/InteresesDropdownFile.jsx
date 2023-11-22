@@ -20,12 +20,12 @@ const options = [
     { label: 'Pixel Art', value: 'pixel art'},
   ];
 
-export default function interesesDropdown(){
+export default function interesesDropdown(props){
   const [selectedOption, setSelectedOption] = useState(null);
 
  const handleOnChange = e =>{
-    console.log(e)
-    setSelectedOption(e)
+    setSelectedOption(e);
+    props.setInteresesFilter(e);
  }
 
   return(
