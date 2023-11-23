@@ -22,7 +22,6 @@ function ParticipantesPage() {
   let participantes = JSON.parse(JSON.stringify(participantesJson)).miembros;
 
   const filteredParticipantes = () =>{
-    console.log(search)
     if(search != ''){
       participantes = participantes.filter(participante => participante.nombre.toLowerCase().startsWith(search.toLowerCase()) )
     }
@@ -40,7 +39,7 @@ function ParticipantesPage() {
       <Navbar/>
       <div className='listContainer'>
         <SearchBar setSearch={setSearch} showDropdownsState={showDropdowns} setShowDropdowns={setShowDropdowns}/>
-        <div className={showDropdowns? "":"hidden"}>
+        <div className={showDropdowns? "filter":"filter hidden"}>
           <InteresesDropdown setInteresesFilter={setInteresesFilter}/>
           <SkillsDropdown setSkillsFilter={setSkillsFilter}/>
         </div>

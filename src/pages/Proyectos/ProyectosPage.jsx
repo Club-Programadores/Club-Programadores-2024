@@ -33,7 +33,7 @@ function ProyectosPage() {
       <Navbar/>
       <div className='listContainer'>
         <SearchBar setSearch={setSearch} showDropdownsState={showDropdowns} setShowDropdowns={setShowDropdowns}/>
-        <div className={showDropdowns? "":"hidden"}>
+        <div className={showDropdowns? "filter":"filter hidden"}>
           <EstadosDropdown setEstadosFilter={setEstadosFilter}/>
         </div>
         <ProyectosList proyectos={filteredProyectos()}/>
