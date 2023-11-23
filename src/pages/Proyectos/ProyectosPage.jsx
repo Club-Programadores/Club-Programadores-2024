@@ -4,31 +4,38 @@ import Navbar from '../../components/Navbar/Navbar'
 import Footer from '../../components/Footer/Footer'
 import ProyectosList from '../../components/ProyectosList/proyectosListFile.jsx'
 import SearchBar from '../../components/SearchBar/searchBarFile.jsx'
+import EstadosDropdown from '../../components/FiltersDropdown/EstadoProyectosDropdown/EstadoProyectoDropdownFile.jsx'
+
+import ProyectosJson from '../../../assets/proyetos.json'
 
 import "./ProyectosStyles.css"
 
 function ProyectosPage() {
   const [search, setSearch] = useState('')
+  const [estadosFilter, setEstadosFilter] = useState([])
+  const [showDropdowns, setShowDropdowns] = useState(false)
 
-  const proyectosArray = [
-    {id:1, titulo:'Proyecto 1', estado:'nuevo'},
-    {id:2, titulo:'Proyecto 2', estado:'finalizado'},
-    {id:3, titulo:'Proyecto 3', estado:'en_desarrollo'},
-    {id:4, titulo:'Proyecto 4', estado:'nuevo'}
-  ]
+  let proyectos = JSON.parse(JSON.stringify(ProyectosJson)).proyectos;
 
   const filteredProyectos = () =>{
-    if(search == ''){
-      return proyectosArray; 
+    if(search != ''){
+      proyectos = proyectos.filter(proyecto => proyecto.titulo.toLowerCase().startsWith(search.toLowerCase()) )
     }
-    return proyectosArray.filter(x => x.titulo.toLowerCase().startsWith(search.toLowerCase()))
+    
+    if(estadosFilter.length != 0){
+      proyectos = proyectos.filter(proyecto => estadosFilter.some(estado => estado.value.toLowerCase() == proyecto.estado.toLowerCase()))
+    }
+    return proyectos;
   }
 
   return (
     <>
       <Navbar/>
       <div className='listContainer'>
-        <SearchBar setSearch={setSearch}/>
+        <SearchBar setSearch={setSearch} showDropdownsState={showDropdowns} setShowDropdowns={setShowDropdowns}/>
+        <div className={showDropdowns? "filter":"filter hidden"}>
+          <EstadosDropdown setEstadosFilter={setEstadosFilter}/>
+        </div>
         <ProyectosList proyectos={filteredProyectos()}/>
       </div>
       <Footer />

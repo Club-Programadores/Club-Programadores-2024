@@ -6,16 +6,24 @@ import './searchBarStyles.css'
 
 export default function SearchBar(props){    
     const [value, setValue] = useState('')
+    const [showDropdowns, setShowDropdowns] = useState(false)
 
     const handleOnClickInput = e => {
-        props.setSearch(value)
+        console.log(1);
+        props.setSearch(value);
     }
     const handleOnChangeInput = e => {
-        setValue(e.target.value)
+        setValue(value);
+        setValue(e.target.value);
+    }
+
+    const handleOnClickButton = e =>{
+        props.setShowDropdowns(!props.showDropdownsState);
+        setShowDropdowns(!showDropdowns)
     }
 
     return (
-        <div className='searchBar'>
+        <div className={ showDropdowns? 'searchBarWithDropdown' : 'searchBar'}>
             <div className='container'>
                 <input className='searchInput'
                     placeholder='Search'
@@ -26,7 +34,7 @@ export default function SearchBar(props){
                     🔍
                 </button>
             </div>
-            <FilterButton/>
+            <FilterButton onClick={handleOnClickButton}/>
         </div>
     )
 }

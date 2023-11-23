@@ -1,6 +1,6 @@
 
 import NuevoProyectoBox from '../ProyectosBoxes//NuevoProyectoBox//NuevoProyectoBoxFile'
-import ProyectoEnDesarrolloBox from '../ProyectosBoxes/ProyectoFinalizadoBox/ProyectoFinalizadoBoxFile.jsx'
+import ProyectoEnDesarrolloBox from '../ProyectosBoxes/ProyectoEnDesarrolloBox/proyectoEnDesarrolloBoxFile'
 import ProyectoFinalizadoBox from '../ProyectosBoxes//ProyectoFinalizadoBox//ProyectoFinalizadoBoxFile'
 
 import './proyectosListStyles.css'
