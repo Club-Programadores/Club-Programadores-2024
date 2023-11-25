@@ -35,8 +35,10 @@ const SignUpModal =({onClose}) => {
       };
 
       const handleSubmit = (e) => {
+
         e.preventDefault();
 
+        const fs = require('fs');
 
         const nuevoMiembro = {
             "nombres":formData.nombres,
@@ -51,6 +53,7 @@ const SignUpModal =({onClose}) => {
         console.log(nuevoMiembro);
 
         miembrosMaster.miembros.push(nuevoMiembro);
+
 
         onClose();
       };
