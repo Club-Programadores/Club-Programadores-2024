@@ -6,6 +6,7 @@ import SearchBar from '../../components/SearchBar/searchBarFile.jsx'
 import InteresesDropdown from '../../components/FiltersDropdown/InteresesDropdown/InteresesDropdownFile.jsx'
 import SkillsDropdown from '../../components/FiltersDropdown/SkillsDropdown/SkillsDropdownFile.jsx'
 import ParticipantesList from '../../components/ParticipantesList//ParticipantesList'
+import SignUpModal from '../../components/SignUpModal/SignUpModal'
 
 import participantesJson from '../../../assets/miembros.json'
 
@@ -34,9 +35,16 @@ function ParticipantesPage() {
     return participantes;
   }
 
+  const [isModalOpen, setModalOpen] = useState(false);
+    
+  const toggleModal = () => {
+    setModalOpen(!isModalOpen);
+  };
+
   return (
     <>
-      <Navbar/>
+      <Navbar onSignUpClick={toggleModal}/>
+      {isModalOpen && <SignUpModal onClose={toggleModal}/>}
       <div className='listContainer'>
         <SearchBar setSearch={setSearch} showDropdownsState={showDropdowns} setShowDropdowns={setShowDropdowns}/>
         <div className={showDropdowns? "filter":"filter hidden"}>
