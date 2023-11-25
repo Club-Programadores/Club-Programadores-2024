@@ -1,9 +1,15 @@
 import './SignUp.css'
 
-function SignUp(){
+
+const SignUp=({onClick})=>{
     return (
         <>
-            <button type="button" className="btn btn-outline-success" id="sumate">¡Sumate!</button>
+            <button type="button" 
+            className="btn btn-outline-success" 
+            id="sumate" 
+            onClick={onClick}>
+                ¡Sumate!
+            </button>
         </>
     )
 }
