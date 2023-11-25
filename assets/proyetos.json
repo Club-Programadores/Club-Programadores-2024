@@ -1,0 +1,59 @@
+{
+    "proyectos":[
+        {
+            "id": 1,
+            "titulo":"Club Programadores",
+            "descripcion": "Base de datos de programadores que participan del Club de Programadores del Centro Universitario de Vicente Lopez.",
+            "url_proyecto":"https://github.com/Club-Programadores/Club-Programadores",
+            "url_pagina":"https://github.com",
+            "estado":"en_desarrollo",
+            "skills_buscadas":["BackEnd"]
+        },
+        {
+            "id": 2,
+            "titulo":"Schokoland Bombon Factory",
+            "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut ",
+            "url_proyecto":"https://github.com/Club-Programadores/Chocoland-Bombon_Factory",
+            "url_pagina":"https://schokoland-bombon-factory.netlify.app/",
+            "estado":"finalizado",
+            "skills_buscadas":[]
+        },
+        
+        {
+            "id": 3,
+            "titulo":"Carrito",
+            "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "url_proyecto":"",
+            "url_pagina":"",
+            "estado":"nuevo",
+            "skills_buscadas":["skill 1","skill 2","skill 3"]
+        },
+        {
+            "id": 4,
+            "titulo":"Bubble Pop",
+            "descripcion": "El juego bubble pop es un juego de rompecabezas en el que debes disparar burbujas de colores y agruparlas por tonalidades para hacerlas desaparecer del tablero.",
+            "url_proyecto":"https://github.com/Club-Programadores/Bubble_Pop",
+            "url_pagina":"https://bubble-pop-club.netlify.app/",
+            "estado":"finalizado",
+            "skills_buscadas":[]
+        },
+        {
+            "id": 5,
+            "titulo":"Calculadora IMC",
+            "descripcion": "Una calculadora IMC es una herramienta que te permite conocer tu índice de masa corporal, que es una medida que relaciona tu peso con tu altura. El IMC se usa para estimar si tu peso es adecuado para tu salud, y se clasifica en diferentes categorías, como bajo peso, peso normal, sobrepeso u obesidad.",
+            "url_proyecto":"https://github.com/Club-Programadores/calculadora-IMC",
+            "url_pagina":"https://calculadora-imc-p5.netlify.app/",
+            "estado":"finalizado",
+            "skills_buscadas":[]
+        },
+        {
+            "id": 6,
+            "titulo":"TATETI",
+            "descripcion": "Es un juego muy simple y divertido que se puede jugar con dos personas. El objetivo es formar una línea de tres símbolos iguales (cruces o círculos) en un tablero de 3x3 casillas, antes que el otro jugador lo haga.",
+            "url_proyecto":"https://github.com/NarDevGH/ReactTS-Tic_Tac_Toe",
+            "url_pagina":"https://nardev-tic-tac-toe.netlify.app/",
+            "estado":"finalizado",
+            "skills_buscadas":[]
+        }
+    ]
+}
