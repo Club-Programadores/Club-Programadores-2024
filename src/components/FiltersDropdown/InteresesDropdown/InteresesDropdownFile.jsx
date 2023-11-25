@@ -7,6 +7,7 @@ const options = [
     { label: 'FrontEnd', value: 'frontend' },
     { label: 'BackEnd', value: 'backend' },
     { label: 'GameDev', value: 'gamedev' },
+    { label: 'Teaching', value: 'teaching' },
     { label: 'UI/UX', value: 'ui/ux' },
     { label: 'Quality Assurance', value: 'quality assurance'},
     { label: 'Testing', value: 'testing' },
