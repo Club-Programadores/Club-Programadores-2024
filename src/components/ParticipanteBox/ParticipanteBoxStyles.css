@@ -2,7 +2,7 @@
 
 .participanteBox{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     margin: 10px;
     padding: 10px;
     min-height: 150px;
@@ -13,8 +13,8 @@
 }
 
 .profilePic{
+    margin-right: 1%;
     align-self: center;
-    margin: 0 1%;
 }
 
 .profilePic img{
@@ -24,11 +24,10 @@
 }
 
 .participanteInfo{
-    width: 65%;
+    align-self: center;
+    width: 100%;
     height: auto;
     padding: 1% 0;
-    border-style: hidden double hidden hidden;
-    margin-right: 10px;
 }
 
 .participanteInfo h1{
@@ -44,7 +43,6 @@
 .intereses{
     display: flex;
     flex-wrap: wrap;
-    max-width: 90%;
     height: auto;
     border-style: double hidden hidden hidden;
     padding-top : 10px;
