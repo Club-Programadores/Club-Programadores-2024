@@ -1,6 +1,6 @@
-.participantesList{
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    height: auto;
+.participantesList {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  height: auto;
 }

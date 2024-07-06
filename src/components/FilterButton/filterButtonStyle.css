@@ -1,18 +1,17 @@
-
-.filterButton{
-    height: 40px;
-    width: 40px;
-    background-color: #cecece;
-    border-radius: 100%;
-    display: flex;
-    justify-content: space-around;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px 0 10px 0;
+.filterButton {
+  height: 40px;
+  width: 40px;
+  background-color: #cecece;
+  border-radius: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 0 10px 0;
 }
 
-.filterButton hr{
-    margin: 0;
-    background-color: #000000;
-    height: 2px;
+.filterButton hr {
+  margin: 0;
+  background-color: #000000;
+  height: 2px;
 }

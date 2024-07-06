@@ -1,30 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap");
 
-
-.hero-banner{
-    margin-top:75px;
-    height:60vh;
-    background-image: url("../../../assets/imgs/heroBanner1.jpg");
-    background-position-y:center;
-    background-size: cover;
-    background-repeat: no-repeat;
+.hero-banner {
+  margin-top: 75px;
+  height: 60vh;
+  background-image: url("../../../assets/imgs/heroBanner1.jpg");
+  background-position-y: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
-.call-to-action{
-    position:absolute;
-    background-color: rgba(0,0,0,0.5);
-    width:40%;
-    color:white;
-    box-sizing: content-box;
+.call-to-action {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 40%;
+  color: white;
+  box-sizing: content-box;
 }
 
-h1{
-    font-size:1.1rem;
-    font-family:'Montserrat';
-    text-transform:uppercase;
-    text-wrap: wrap;
+h1 {
+  font-size: 1.1rem;
+  font-family: "Montserrat";
+  text-transform: uppercase;
+  text-wrap: wrap;
 }
 
-.btn-container{
-    margin:5%;
+.btn-container {
+  margin: 5%;
 }
