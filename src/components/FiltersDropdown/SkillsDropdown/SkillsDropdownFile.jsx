@@ -16,7 +16,7 @@ const options = [
   { label: "Sparql", value: "sparql" },
 ];
 
-export default function skillsDropdown(props) {
+export default function SkillsDropdown(props) {
   const [selectedOption, setSelectedOption] = useState(null);
 
   const handleOnChange = (e) => {

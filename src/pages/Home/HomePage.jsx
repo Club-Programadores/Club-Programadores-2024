@@ -1,10 +1,11 @@
 import HeroBanner from "..//..//components//HeroBanner//HeroBanner";
-import { HomePageNavbar } from "../../components/Navbar/Navbar";
+import Navbar from "../../components/Navbar/Navbar";
 import About from "../../pages/About/About";
 import Contact from "../../pages/Contact/Contact";
 import Footer from "../../components/Footer/Footer";
 import React, { useState } from "react";
 import SignUpModal from "../../components/SignUpModal/SignUpModal";
+import SignInModal from "../../components/SignInModal/SignInModal";
 
 export default function Home() {
   window.onload = function () {
@@ -18,16 +19,22 @@ export default function Home() {
     }
   };
 
-  const [isModalOpen, setModalOpen] = useState(false);
+  const [isSignUpOpen, setSignUpOpen] = useState(false);
+  const [isSignInOpen, setSignInOpen] = useState(false);
 
-  const toggleModal = () => {
-    setModalOpen(!isModalOpen);
+  const toggleSignUp = () => {
+    setSignUpOpen(!isSignUpOpen);
   };
+  const toggleSignIn = () => {
+    setSignInOpen(!isSignInOpen);
+  };
+
   return (
     <>
-      <HomePageNavbar onSignUpClick={toggleModal} />
-      {isModalOpen && <SignUpModal onClose={toggleModal} />}
-      <HeroBanner onSignUpClick={toggleModal} />
+      <Navbar onSignUpClick={toggleSignUp} onLoginClick={toggleSignIn} />
+      {isSignUpOpen && <SignUpModal onClose={toggleSignUp} />}
+      {isSignInOpen && <SignInModal onClose={toggleSignIn} />}
+      <HeroBanner onSignUpClick={toggleSignUp} />
       <About />
       <Contact />
       <Footer />

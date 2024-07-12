@@ -29,7 +29,7 @@ const options = [
   { label: "Pixel Art", value: "pixel art" },
 ];
 
-export default function interesesDropdown(props) {
+export default function InteresesDropdown(props) {
   const [selectedOption, setSelectedOption] = useState(null);
 
   const handleOnChange = (e) => {

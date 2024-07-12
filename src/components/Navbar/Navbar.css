@@ -17,3 +17,9 @@
 .nav-link:hover {
   cursor: pointer;
 }
+
+.prevent-select {
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

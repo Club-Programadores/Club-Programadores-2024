@@ -1,6 +1,50 @@
 import "./SignUpModal.css";
 import React, { useState } from "react";
 import miembrosMaster from "../../../assets/miembros.json";
+import Select from "react-select";
+
+const interestsOptions = [
+  { label: "WebDev", value: "webdev" },
+  { label: "FrontEnd", value: "frontend" },
+  { label: "BackEnd", value: "backend" },
+  { label: "GameDev", value: "gamedev" },
+  { label: "Teaching", value: "teaching" },
+  { label: "UI/UX", value: "ui/ux" },
+  { label: "Quality Assurance", value: "quality assurance" },
+  { label: "Testing", value: "testing" },
+  { label: "Networking", value: "networking" },
+  {
+    label: "Functional Oriented Programming",
+    value: "functional oriented programming",
+  },
+  {
+    label: "Object Oriented Programming",
+    value: "object oriented programming",
+  },
+  {
+    label: "Arquitectura de Información",
+    value: "arquitectura de información",
+  },
+  { label: "Knowledge Graphs", value: "knowledge graphs" },
+  { label: "3D Art", value: "3d art" },
+  { label: "2D Art", value: "2d art" },
+  { label: "Pixel Art", value: "pixel art" },
+];
+
+const skillsOptions = [
+  { label: "HTML", value: "html" },
+  { label: "CSS", value: "css" },
+  { label: "JavaScript", value: "javascript" },
+  { label: "Python", value: "python" },
+  { label: "php", value: "php" },
+  { label: "Java", value: "java" },
+  { label: "C++", value: "c++" },
+  { label: "C#", value: "c#" },
+  { label: "React", value: "react" },
+  { label: "MySQL", value: "mysql" },
+  { label: "PostgreSQL", value: "postgresql" },
+  { label: "Sparql", value: "sparql" },
+];
 
 const SignUpModal = ({ onClose }) => {
   const [formData, setFormData] = useState({
@@ -48,7 +92,7 @@ const SignUpModal = ({ onClose }) => {
 
   return (
     <div className="modal modal-container d-flex" id="sign-up-modal">
-      <div className="modal-dialog modal-dialog-centered form-container w-50 modal-lg">
+      <div className="modal-dialog modal-dialog-centered form-container modal-lg">
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title">Registrate</h5>
@@ -113,9 +157,12 @@ const SignUpModal = ({ onClose }) => {
               </section>
 
               <section className="skills-interests-container w-100">
-                <div className="form-group">
-                  <h3>Tus Skills</h3>
-                  {[
+                <div className="form-group mb-3">
+                  <h3>Tus aptitudes</h3>
+                  <label htmlFor="intereses">Skills</label>
+                  <SkillsDropdown />
+
+                  {/* {[
                     "HTML",
                     "JavaScript",
                     "React",
@@ -141,20 +188,27 @@ const SignUpModal = ({ onClose }) => {
                         {skill}
                       </label>
                     </div>
-                  ))}
+                  ))} */}
                 </div>
 
-                <div className="form-group">
-                  <h3>Tus Intereses</h3>
-                  <label htmlFor="intereses">¿Qué te copa?</label>
-                  <textarea
+                <div className="form-group mb-3">
+                  <label htmlFor="intereses">Intereses</label>
+                  <InteresesDropdown />
+
+                  {/* <textarea
                     className="form-control"
                     id="intereses"
                     name="intereses"
                     placeholder="Backend;GameDev;WebDev..."
                     value={formData.intereses}
                     onChange={handleInputChange}
-                  />
+                  /> */}
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="pfp" className="form-label">
+                    Foto de perfil
+                  </label>
+                  <input className="form-control" type="file" id="formFile" />
                 </div>
               </section>
             </div>
@@ -177,5 +231,43 @@ const SignUpModal = ({ onClose }) => {
     </div>
   );
 };
+
+function SkillsDropdown(props) {
+  const [selectedOption, setSelectedOption] = useState(null);
+
+  const handleOnChange = (e) => {
+    setSelectedOption(e);
+    // props.setSkillsFilter(e);
+  };
+
+  return (
+    <Select
+      defaultValue={selectedOption}
+      onChange={handleOnChange}
+      options={skillsOptions}
+      isMulti={true}
+      placeholder="Seleccionar..."
+    />
+  );
+}
+
+function InteresesDropdown(props) {
+  const [selectedOption, setSelectedOption] = useState(null);
+
+  const handleOnChange = (e) => {
+    setSelectedOption(e);
+    // props.setInteresesFilter(e);
+  };
+
+  return (
+    <Select
+      defaultValue={selectedOption}
+      onChange={handleOnChange}
+      options={interestsOptions}
+      isMulti={true}
+      placeholder="Seleccionar..."
+    />
+  );
+}
 
 export default SignUpModal;
