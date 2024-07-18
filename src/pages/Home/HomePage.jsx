@@ -1,11 +1,11 @@
 import HeroBanner from "..//..//components//HeroBanner//HeroBanner";
-import Navbar from "../../components/Navbar/Navbar";
 import About from "../../pages/About/About";
 import Contact from "../../pages/Contact/Contact";
 import Footer from "../../components/Footer/Footer";
 import React, { useState } from "react";
 import SignUpModal from "../../components/SignUpModal/SignUpModal";
 import SignInModal from "../../components/SignInModal/SignInModal";
+import Navbar_User from "../../components/Navbar-User/Navbar_User";
 
 export default function Home() {
   window.onload = function () {
@@ -31,7 +31,7 @@ export default function Home() {
 
   return (
     <>
-      <Navbar onSignUpClick={toggleSignUp} onLoginClick={toggleSignIn} />
+      <Navbar_User onSignUpClick={toggleSignUp} onLoginClick={toggleSignIn} />
       {isSignUpOpen && <SignUpModal onClose={toggleSignUp} />}
       {isSignInOpen && <SignInModal onClose={toggleSignIn} />}
       <HeroBanner onSignUpClick={toggleSignUp} />
