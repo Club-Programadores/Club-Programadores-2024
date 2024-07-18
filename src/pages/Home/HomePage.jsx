@@ -5,6 +5,7 @@ import Footer from "../../components/Footer/Footer";
 import React, { useState } from "react";
 import SignUpModal from "../../components/SignUpModal/SignUpModal";
 import SignInModal from "../../components/SignInModal/SignInModal";
+import Navbar from "../../components/Navbar/Navbar";
 import Navbar_User from "../../components/Navbar-User/Navbar_User";
 
 export default function Home() {
@@ -21,17 +22,23 @@ export default function Home() {
 
   const [isSignUpOpen, setSignUpOpen] = useState(false);
   const [isSignInOpen, setSignInOpen] = useState(false);
+  const [isLogueado, setLogueado] = useState(false);
 
   const toggleSignUp = () => {
     setSignUpOpen(!isSignUpOpen);
   };
   const toggleSignIn = () => {
     setSignInOpen(!isSignInOpen);
+    setLogueado(true)
   };
 
   return (
     <>
-      <Navbar_User onSignUpClick={toggleSignUp} onLoginClick={toggleSignIn} />
+      {isLogueado?
+      <Navbar_User/>
+      :
+      <Navbar onSignUpClick={toggleSignUp} onLoginClick={toggleSignIn} />
+    }
       {isSignUpOpen && <SignUpModal onClose={toggleSignUp} />}
       {isSignInOpen && <SignInModal onClose={toggleSignIn} />}
       <HeroBanner onSignUpClick={toggleSignUp} />
