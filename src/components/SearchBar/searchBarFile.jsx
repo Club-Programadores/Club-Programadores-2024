@@ -1,5 +1,8 @@
 import { useState } from "react";
-import FilterButton from "../FilterButton/filterButtonFile";
+// import FilterButton from "../FilterButton/filterButtonFile";
+import { FaMagnifyingGlass } from "react-icons/fa6";
+import { FaFilter } from "react-icons/fa";
+
 import "./searchBarStyles.css";
 
 export default function SearchBar(props) {
@@ -21,19 +24,36 @@ export default function SearchBar(props) {
   };
 
   return (
-    <div className={showDropdowns ? "searchBarWithDropdown" : "searchBar"}>
-      <div className="container">
-        <input
-          className="searchInput"
-          placeholder="Search"
-          value={value}
-          onChange={handleOnChangeInput}
-        />
-        <button className="searchButton" onClick={handleOnClickInput}>
-          🔍
+    // <div
+    //   className={
+    //     showDropdowns
+    //       ? "searchBarWithDropdown"
+    //       : "searchBar container-lg d-flex"
+    //   }
+    // >
+    <div className="searchBar d-flex container-sm">
+      <input
+        className="searchInput form-control mr-sm-2"
+        placeholder="Buscar"
+        value={value}
+        onChange={handleOnChangeInput}
+      />
+      <div className="searchBarIcons">
+        <button
+          type="button"
+          className="btn btn-light"
+          onClick={handleOnClickInput}
+        >
+          <FaMagnifyingGlass />
+        </button>
+        <button
+          type="button"
+          className="btn btn-light"
+          onClick={handleOnClickButton}
+        >
+          <FaFilter />
         </button>
       </div>
-      <FilterButton onClick={handleOnClickButton} />
     </div>
   );
 }

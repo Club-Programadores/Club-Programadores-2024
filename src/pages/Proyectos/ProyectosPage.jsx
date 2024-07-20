@@ -6,7 +6,7 @@ import SearchBar from "../../components/SearchBar/searchBarFile.jsx";
 import EstadosDropdown from "../../components/FiltersDropdown/EstadoProyectosDropdown/EstadoProyectoDropdownFile.jsx";
 import SignUpModal from "../../components/SignUpModal/SignUpModal";
 import ProyectosJson from "../../../assets/proyetos.json";
-import "./ProyectosStyles.css";
+// import "./ProyectosStyles.css";
 
 function ProyectosPage() {
   const [search, setSearch] = useState("");

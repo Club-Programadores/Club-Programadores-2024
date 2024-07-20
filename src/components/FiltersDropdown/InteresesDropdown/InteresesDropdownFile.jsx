@@ -39,11 +39,12 @@ export default function InteresesDropdown(props) {
 
   return (
     <Select
+      className="filterDropdown"
       defaultValue={selectedOption}
       onChange={handleOnChange}
       options={options}
       isMulti={true}
-      placeholder="Intereses"
+      placeholder="Perfil"
     />
   );
 }

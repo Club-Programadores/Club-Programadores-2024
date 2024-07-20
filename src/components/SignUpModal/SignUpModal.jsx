@@ -157,9 +157,22 @@ const SignUpModal = ({ onClose }) => {
               </section>
 
               <section className="skills-interests-container w-100">
+                <h3>Tus aptitudes</h3>
                 <div className="form-group mb-3">
-                  <h3>Tus aptitudes</h3>
-                  <label htmlFor="intereses">Skills</label>
+                  <label htmlFor="intereses">Perfil</label>
+                  <InteresesDropdown />
+
+                  {/* <textarea
+                    className="form-control"
+                    id="intereses"
+                    name="intereses"
+                    placeholder="Backend;GameDev;WebDev..."
+                    value={formData.intereses}
+                    onChange={handleInputChange}
+                  /> */}
+                </div>
+                <div className="form-group mb-3">
+                  <label htmlFor="intereses">Lenguajes</label>
                   <SkillsDropdown />
 
                   {/* {[
@@ -189,20 +202,6 @@ const SignUpModal = ({ onClose }) => {
                       </label>
                     </div>
                   ))} */}
-                </div>
-
-                <div className="form-group mb-3">
-                  <label htmlFor="intereses">Intereses</label>
-                  <InteresesDropdown />
-
-                  {/* <textarea
-                    className="form-control"
-                    id="intereses"
-                    name="intereses"
-                    placeholder="Backend;GameDev;WebDev..."
-                    value={formData.intereses}
-                    onChange={handleInputChange}
-                  /> */}
                 </div>
                 <div className="mb-3">
                   <label htmlFor="pfp" className="form-label">

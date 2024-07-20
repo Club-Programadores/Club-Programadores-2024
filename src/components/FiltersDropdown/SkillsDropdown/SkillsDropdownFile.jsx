@@ -26,11 +26,12 @@ export default function SkillsDropdown(props) {
 
   return (
     <Select
+      className="filterDropdown"
       defaultValue={selectedOption}
       onChange={handleOnChange}
       options={options}
       isMulti={true}
-      placeholder="Skills"
+      placeholder="Tecnologías"
     />
   );
 }

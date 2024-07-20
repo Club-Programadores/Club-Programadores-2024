@@ -60,9 +60,15 @@ function ParticipantesPage() {
           showDropdownsState={showDropdowns}
           setShowDropdowns={setShowDropdowns}
         />
-        <div className={showDropdowns ? "filter" : "filter hidden"}>
-          <InteresesDropdown setInteresesFilter={setInteresesFilter} />
-          <SkillsDropdown setSkillsFilter={setSkillsFilter} />
+        <div className={showDropdowns ? "filter container-sm" : "hidden"}>
+          <InteresesDropdown
+            className="filterDropdown"
+            setInteresesFilter={setInteresesFilter}
+          />
+          <SkillsDropdown
+            className="filterDropdown"
+            setSkillsFilter={setSkillsFilter}
+          />
         </div>
         <ParticipantesList participantes={filteredParticipantes()} />
       </div>

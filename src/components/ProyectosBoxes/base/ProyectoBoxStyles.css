@@ -2,16 +2,17 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin: 10px;
+  /* margin: 10px; */
   padding: 10px;
-  min-height: 150px;
-  min-width: 500px;
-  background-color: gray;
-  border-radius: 20px;
-  border-style: double;
+  /* min-height: 150px; */
+  /* min-width: 500px; */
+  width: 100%;
+  background-color: #dbe2ef;
+  border-radius: 1em;
+  /* border-style: solid; */
 }
 
-.nuevoProyeto {
+/* .nuevoProyeto {
   border-color: green;
 }
 
@@ -21,7 +22,7 @@
 
 .proyectoFinalizado {
   border-color: blue;
-}
+} */
 
 .proyectoBox .left {
   width: 20%;
@@ -30,7 +31,6 @@
 .proyectoBox .middle {
   height: 100%;
   width: 50%;
-  border-style: hidden double hidden double;
   padding: 0 10px;
 }
 
@@ -38,13 +38,11 @@
   width: 70%;
   margin: 10px 5px 0px 5px;
   padding: 0px 10px;
-  border-style: hidden double hidden hidden;
 }
 
 .info h1 {
   font-size: 20px;
-  font-weight: bold;
-  border-style: hidden hidden double hidden;
+  font-weight: 800;
 }
 
 .info p {
@@ -52,10 +50,9 @@
 }
 
 .right {
+  display: flex;
   width: 30%;
   align-items: center;
-
-  display: flex;
   justify-content: space-between;
   flex-direction: column;
 }
