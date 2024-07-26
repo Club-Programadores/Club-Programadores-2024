@@ -1,14 +1,9 @@
 .participanteBox {
   display: flex;
-  justify-content: space-between;
-  /* margin: 10px; */
   padding: 10px 0;
-  /* min-height: 150px; */
-  /* min-width: 500px; */
-  /* width: 100%; */
+  justify-content: space-between;
   background-color: #dbe2ef;
   border-radius: 1em;
-  /* border-style: double; */
 }
 
 .profilePic {
@@ -47,8 +42,6 @@
   flex-wrap: wrap;
   height: auto;
   gap: 5px;
-  /* border-style: double hidden hidden hidden; */
-  /* padding-top: 10px; */
 }
 
 .intereses h3 {
@@ -72,13 +65,6 @@
   align-items: center;
   flex-wrap: wrap;
   grid-auto-flow: column;
-  /* align-self: center; */
   font-size: 1.7em;
   gap: 4px;
 }
-
-/* .iconsContainer img {
-  width: 40px;
-  height: 40px;
-  margin: 10px;
-} */

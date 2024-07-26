@@ -1,42 +1,39 @@
 import { useState } from "react";
-// import FilterButton from "../FilterButton/filterButtonFile";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { FaFilter } from "react-icons/fa";
-
 import "./searchBarStyles.css";
 
 export default function SearchBar(props) {
   const [value, setValue] = useState("");
   const [showDropdowns, setShowDropdowns] = useState(false);
 
-  const handleOnClickInput = (e) => {
-    console.log(1);
+  const handleOnClickInput = () => {
     props.setSearch(value);
   };
+
   const handleOnChangeInput = (e) => {
-    setValue(value);
     setValue(e.target.value);
   };
 
-  const handleOnClickButton = (e) => {
+  const handleOnClickButton = () => {
     props.setShowDropdowns(!props.showDropdownsState);
     setShowDropdowns(!showDropdowns);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleOnClickInput();
+    }
+  };
+
   return (
-    // <div
-    //   className={
-    //     showDropdowns
-    //       ? "searchBarWithDropdown"
-    //       : "searchBar container-lg d-flex"
-    //   }
-    // >
     <div className="searchBar d-flex container-sm">
       <input
         className="searchInput form-control mr-sm-2"
         placeholder="Buscar"
         value={value}
         onChange={handleOnChangeInput}
+        onKeyDown={handleKeyDown}
       />
       <div className="searchBarIcons">
         <button

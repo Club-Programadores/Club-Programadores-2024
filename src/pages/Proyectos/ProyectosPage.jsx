@@ -1,12 +1,8 @@
 import { useState } from "react";
-import Navbar from "../../components/Navbar/Navbar";
-import Footer from "../../components/Footer/Footer";
 import ProyectosList from "../../components/ProyectosList/proyectosListFile.jsx";
 import SearchBar from "../../components/SearchBar/searchBarFile.jsx";
 import EstadosDropdown from "../../components/FiltersDropdown/EstadoProyectosDropdown/EstadoProyectoDropdownFile.jsx";
-import SignUpModal from "../../components/SignUpModal/SignUpModal";
 import ProyectosJson from "../../../assets/proyetos.json";
-// import "./ProyectosStyles.css";
 
 function ProyectosPage() {
   const [search, setSearch] = useState("");
@@ -33,29 +29,18 @@ function ProyectosPage() {
     return proyectos;
   };
 
-  const [isModalOpen, setModalOpen] = useState(false);
-
-  const toggleModal = () => {
-    setModalOpen(!isModalOpen);
-  };
-
   return (
-    <>
-      <Navbar onSignUpClick={toggleModal} />
-      {isModalOpen && <SignUpModal onClose={toggleModal} />}
-      <div className="listContainer">
-        <SearchBar
-          setSearch={setSearch}
-          showDropdownsState={showDropdowns}
-          setShowDropdowns={setShowDropdowns}
-        />
-        <div className={showDropdowns ? "filter" : "filter hidden"}>
-          <EstadosDropdown setEstadosFilter={setEstadosFilter} />
-        </div>
-        <ProyectosList proyectos={filteredProyectos()} />
+    <div className="listContainer">
+      <SearchBar
+        setSearch={setSearch}
+        showDropdownsState={showDropdowns}
+        setShowDropdowns={setShowDropdowns}
+      />
+      <div className={showDropdowns ? "filter" : "filter hidden"}>
+        <EstadosDropdown setEstadosFilter={setEstadosFilter} />
       </div>
-      <Footer />
-    </>
+      <ProyectosList proyectos={filteredProyectos()} />
+    </div>
   );
 }
 

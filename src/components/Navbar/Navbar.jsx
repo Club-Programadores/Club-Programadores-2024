@@ -1,11 +1,13 @@
 import SignUp from "../buttons/SignUp/SignUp";
 import Login from "../buttons/Login/Login";
+import { useModal } from "../ModalsHandler";
 import { CustomLink } from "../CustomLink";
 import "./Navbar.css";
 
-export default function Navbar({ onSignUpClick, onLoginClick }) {
+export default function Navbar() {
   const navLinks = document.querySelectorAll(".nav-link");
   const collapseElement = document.getElementById("navbar-toggler");
+  const { toggleSignUpA, toggleSignIn } = useModal();
 
   function closeCollapse() {
     collapseElement.classList.toggle("show");
@@ -64,8 +66,8 @@ export default function Navbar({ onSignUpClick, onLoginClick }) {
             </div>
 
             <div className="navbar-nav m-ms-auto buttons-container">
-              <SignUp onClick={onSignUpClick} />
-              <Login onClick={onLoginClick} />
+              <SignUp onClick={toggleSignUpA} />
+              <Login onClick={toggleSignIn} />
             </div>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import React from "react";
+import "./SignUpModals.css";
 
-const SignInModal = ({ onClose }) => {
+const SignUpAModal = ({ onClose, handleLoginRedirect, handleNext }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const nuevoMiembro = {
@@ -22,7 +23,7 @@ const SignInModal = ({ onClose }) => {
       <div className="modal-dialog modal-dialog-centered form-container modal-lg">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title">Iniciar sesión</h5>
+            <h5 className="modal-title">Registrarse</h5>
             <button
               onClick={onClose}
               type="button"
@@ -53,23 +54,31 @@ const SignInModal = ({ onClose }) => {
                     name="password"
                   />
                 </div>
+
+                <div className="mb-3">
+                  <label htmlFor="password">Confirmar constraseña</label>
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="password"
+                    name="password"
+                  />
+                </div>
               </section>
-              <section className="d-flex gap-2">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="flexCheckDefault"
-                />
-                <label className="form-check-label" for="flexCheckDefault">
-                  Mantener la sesión
-                </label>
+              <section className="d-flex justify-content-center">
+                <div onClick={handleLoginRedirect} className="login-redirect">
+                  Ya tengo una cuenta
+                </div>
               </section>
             </div>
 
             <div className="modal-footer d-flex justify-content-center">
-              <button type="submit" className="btn btn-success">
-                Entrar
+              <button
+                onClick={handleNext}
+                type="submit"
+                className="btn btn-success"
+              >
+                Siguiente
               </button>
             </div>
           </form>
@@ -79,4 +88,4 @@ const SignInModal = ({ onClose }) => {
   );
 };
 
-export default SignInModal;
+export default SignUpAModal;

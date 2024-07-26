@@ -16,6 +16,7 @@
   display: flex;
   justify-content: center;
 }
+
 #about-circle-3 {
   background-image: url("../../../assets/005-teamwork.svg");
   background-size: contain;
