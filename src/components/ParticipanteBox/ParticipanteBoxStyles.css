@@ -68,3 +68,9 @@
   font-size: 1.7em;
   gap: 4px;
 }
+
+.iconsContainer img {
+  width: 40px;
+  height: 40px;
+  margin: 10px;
+}

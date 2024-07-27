@@ -13,7 +13,7 @@ export default function ParticipanteBox(participante) {
 
   return (
     <div className="participanteBox container-sm row bg-info.bg-gradient">
-      <div className="d-flex col-12 col-md-8">
+      <div className="d-flex col-12 col-md-6">
         <div className="profilePic">
           <img src={participanteImageUrl()} />
         </div>
@@ -27,11 +27,11 @@ export default function ParticipanteBox(participante) {
           </div>
         </div>
       </div>
-      <div className="tecnologias flex-column col-12 col-md-4">
+      <div className="tecnologias flex-column col-12 col-md-6">
         <h3>TECNOLOGÍAS</h3>
         <div className="iconsContainer">
           {participante.data.skills.map((skill) => {
-            return <div>{skillNameToImageSource(skill.nombre)}</div>;
+            return <img src={skillNameToImageSource(skill.nombre)} />;
           })}
         </div>
       </div>
