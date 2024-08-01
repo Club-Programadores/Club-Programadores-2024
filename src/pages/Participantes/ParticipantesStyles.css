@@ -1,10 +1,18 @@
-.listContainer{
-    margin-top: 100px;
-    padding: 0 10%;
+.listContainer {
+  margin-top: 80px;
+  padding: 0 10%;
 }
 
-.filter{
-    background-color: #555555;
-    border-radius: 0 0 20px 20px;
-    padding: 5px 50px 10px 10px;
+.filter {
+  display: flex;
+  background-color: #dbe2ef;
+  border-radius: 1em;
+  margin-top: 1em;
+  padding: 10px;
+  gap: 0.5em;
+  justify-content: center;
+}
+
+.filterDropdown {
+  flex: 1;
 }

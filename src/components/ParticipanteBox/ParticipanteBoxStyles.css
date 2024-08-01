@@ -1,68 +1,76 @@
-
-
-.participanteBox{
-    display: flex;
-    justify-content: space-between;
-    margin: 10px;
-    padding: 10px;
-    min-height: 150px;
-    min-width: 500px;
-    background-color: gray;
-    border-radius: 20px;
-    border-style: double;
+.participanteBox {
+  display: flex;
+  padding: 10px 0;
+  justify-content: space-between;
+  background-color: #dbe2ef;
+  border-radius: 1em;
 }
 
-.profilePic{
-    margin-right: 1%;
-    align-self: center;
+.profilePic {
+  margin-right: 1em;
+  align-self: center;
 }
 
-.profilePic img{
-    height: 100px;
-    width: 100px;
-    border-radius:20%;
+.profilePic img {
+  height: 100px;
+  width: 100px;
+  border-radius: 20%;
 }
 
-.participanteInfo{
-    align-self: center;
-    width: 100%;
-    height: auto;
-    padding: 1% 0;
+.participanteInfo {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  width: 100%;
+  height: auto;
+  padding: 1% 0;
+  gap: 4px;
 }
 
-.participanteInfo h1{
-    font-size: 30px;
-    margin: 0px;
-    color: white;
+.participanteInfo h1 {
+  font-size: 30px;
+  margin: 0px;
+  color: black;
 }
 
-.participanteInfo hr{
-    margin: 0 50px 5px 0;
+.participanteInfo hr {
+  margin: 0 50px 5px 0;
 }
 
-.intereses{
-    display: flex;
-    flex-wrap: wrap;
-    height: auto;
-    border-style: double hidden hidden hidden;
-    padding-top : 10px;
+.intereses {
+  display: flex;
+  flex-wrap: wrap;
+  height: auto;
+  gap: 5px;
 }
 
-
-.intereses h3{
-    margin-right: 10px;
-    font-size: 20px;
+.intereses h3 {
+  margin-right: 10px;
+  font-size: 20px;
+  color: black;
 }
 
-.iconsContainer{
-    display: flex;
-    flex-wrap: wrap;
-    grid-auto-flow: column;
-    align-self: center;
+.tecnologias {
+  align-items: center;
+  justify-content: center;
 }
 
-.iconsContainer img{
-    width: 40px;
-    height: 40px;
-    margin: 10px;
+.tecnologias h3 {
+  font-size: 20px;
+  margin: 0;
+}
+
+.iconsContainer {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  grid-auto-flow: column;
+  font-size: 1.7em;
+  gap: 4px;
+}
+
+.iconsContainer img {
+  width: 40px;
+  height: 40px;
+  margin: 10px;
 }

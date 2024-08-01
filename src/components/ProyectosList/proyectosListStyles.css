@@ -1,7 +1,7 @@
-
-.proyectosList{
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    height: auto;
+.proyectosList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1em;
+  gap: 1em;
 }

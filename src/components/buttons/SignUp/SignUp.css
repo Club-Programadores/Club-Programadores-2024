@@ -1,7 +1,7 @@
-#sumate{
-    background-color: white;
+#sumate {
+  background-color: white;
 }
 
-#sumate:hover{
-    background-color: var(--bs-success);
+#sumate:hover {
+  background-color: var(--bs-success);
 }
