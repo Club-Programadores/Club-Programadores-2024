@@ -1,6 +1,7 @@
 .participantesList {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  height: auto;
+  align-items: center;
+  margin-top: 1em;
+  gap: 1em;
 }

@@ -1,4 +1,3 @@
-import "./SignUpModal.css";
 import React, { useState } from "react";
 import miembrosMaster from "../../../assets/miembros.json";
 import Select from "react-select";
@@ -46,7 +45,7 @@ const skillsOptions = [
   { label: "Sparql", value: "sparql" },
 ];
 
-const SignUpModal = ({ onClose }) => {
+const SignUpBModal = ({ onClose, handleBack }) => {
   const [formData, setFormData] = useState({
     nombres: "",
     apellidos: "",
@@ -64,15 +63,15 @@ const SignUpModal = ({ onClose }) => {
     });
   };
 
-  const handleCheckboxChange = (e, category) => {
-    const { checked, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [category]: checked
-        ? [...prevData[category], value]
-        : prevData[category].filter((item) => item !== value),
-    }));
-  };
+  // const handleCheckboxChange = (e, category) => {
+  //   const { checked, value } = e.target;
+  //   setFormData((prevData) => ({
+  //     ...prevData,
+  //     [category]: checked
+  //       ? [...prevData[category], value]
+  //       : prevData[category].filter((item) => item !== value),
+  //   }));
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -102,7 +101,7 @@ const SignUpModal = ({ onClose }) => {
               className="btn-close cursor-pointer"
               data-bs-dismiss="modal"
               aria-label="Close"
-            ></button>
+            />
           </div>
           <form onSubmit={handleSubmit}>
             <div className="modal-body d-flex flex-column flex-lg-row gap-4">
@@ -133,19 +132,7 @@ const SignUpModal = ({ onClose }) => {
                 </div>
 
                 <div className="mb-3">
-                  <label htmlFor="email">Email</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                  />
-                </div>
-
-                <div className="mb-3">
-                  <label htmlFor="bio">Bio</label>
+                  <label htmlFor="bio">Información adicional</label>
                   <textarea
                     className="form-control"
                     id="bio"
@@ -157,11 +144,22 @@ const SignUpModal = ({ onClose }) => {
               </section>
 
               <section className="skills-interests-container w-100">
+                <h3>Tus aptitudes</h3>
                 <div className="form-group mb-3">
-                  <h3>Tus aptitudes</h3>
-                  <label htmlFor="intereses">Skills</label>
+                  <label htmlFor="intereses">Perfil</label>
+                  <InteresesDropdown />
+                  {/* <textarea
+                    className="form-control"
+                    id="intereses"
+                    name="intereses"
+                    placeholder="Backend;GameDev;WebDev..."
+                    value={formData.intereses}
+                    onChange={handleInputChange}
+                  /> */}
+                </div>
+                <div className="form-group mb-3">
+                  <label htmlFor="intereses">Lenguajes</label>
                   <SkillsDropdown />
-
                   {/* {[
                     "HTML",
                     "JavaScript",
@@ -190,36 +188,20 @@ const SignUpModal = ({ onClose }) => {
                     </div>
                   ))} */}
                 </div>
-
-                <div className="form-group mb-3">
-                  <label htmlFor="intereses">Intereses</label>
-                  <InteresesDropdown />
-
-                  {/* <textarea
-                    className="form-control"
-                    id="intereses"
-                    name="intereses"
-                    placeholder="Backend;GameDev;WebDev..."
-                    value={formData.intereses}
-                    onChange={handleInputChange}
-                  /> */}
-                </div>
                 <div className="mb-3">
-                  <label htmlFor="pfp" className="form-label">
-                    Foto de perfil
-                  </label>
+                  <label>Foto de perfil</label>
                   <input className="form-control" type="file" id="formFile" />
                 </div>
               </section>
             </div>
-            <div className="modal-footer">
+            <div className="modal-footer d-flex justify-content-center">
               <button
-                onClick={onClose}
+                onClick={handleBack}
                 type="button"
                 className="btn btn-secondary"
                 data-bs-dismiss="modal"
               >
-                Cerrar
+                Atrás
               </button>
               <button type="submit" className="btn btn-success">
                 ¡Sumarme!
@@ -270,4 +252,4 @@ function InteresesDropdown(props) {
   );
 }
 
-export default SignUpModal;
+export default SignUpBModal;
