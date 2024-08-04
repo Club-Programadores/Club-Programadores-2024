@@ -1,21 +1,51 @@
-import React from "react";
+import React,{ useState } from "react";
 
-const SignInModal = ({ onClose }) => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const nuevoMiembro = {
-      nombres: formData.nombres,
-      apellidos: formData.apellidos,
-      email: formData.email,
-      bio: formData.bio,
-      intereses: formData.intereses.split(";"),
-      skills: formData.skills,
-    };
-    console.log(miembrosMaster);
-    console.log(nuevoMiembro);
-    miembrosMaster.miembros.push(nuevoMiembro);
+import "./SignInModal.css"
+
+/*
+BUG: userPass pasa a undefined la primera vez que se hace click en Entrar. 
+De estar bien la contraseña y corregirse el correo no va a permitir ingresar. Se soluciona modificando la contraseña y borrando el cambio.
+*/
+
+const SignInModal = ({loggedInCallback, onClose }) => {
+
+  let userMail;
+  let userPass;
+
+  const testUserMail = "a@b.com"
+  const testUserPass = 1234
+
+  const [mostraUsuarioIncorrectoMsg, setMostarUsuarioIncorrectoMsg] = useState(false);
+
+  const handleLogIn = () => {
+    console.log("Logged In");
+    loggedInCallback();
     onClose();
   };
+
+  const validarDatos = () =>{
+    console.log(userMail +" "+ testUserMail +" "+ userPass +" "+ testUserPass)
+    if(userMail == testUserMail && userPass == testUserPass){
+      setMostarUsuarioIncorrectoMsg(false)
+      handleLogIn()
+    }
+    else{
+      if(!mostraUsuarioIncorrectoMsg){
+        setMostarUsuarioIncorrectoMsg(true)
+      }
+    }
+  }
+    
+  const onClickIngresar = () =>{
+    validarDatos();
+  }
+  
+  const onMailInputChange = (e) =>{
+    userMail = e.target.value;
+  }
+  const onPassInputChange = (e) =>{
+    userPass = e.target.value;
+  }
 
   return (
     <div className="modal modal-container d-flex" id="sign-up-modal">
@@ -23,7 +53,7 @@ const SignInModal = ({ onClose }) => {
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title">Iniciar sesión</h5>
-            <button
+            <button // X Button
               onClick={onClose}
               type="button"
               className="btn-close cursor-pointer"
@@ -31,7 +61,6 @@ const SignInModal = ({ onClose }) => {
               aria-label="Close"
             ></button>
           </div>
-          <form onSubmit={handleSubmit}>
             <div className="modal-body d-flex flex-column">
               <section className="d-flex flex-column">
                 <div className="mb-3">
@@ -41,6 +70,7 @@ const SignInModal = ({ onClose }) => {
                     className="form-control"
                     id="email"
                     name="email"
+                    onChange={onMailInputChange}
                   />
                 </div>
 
@@ -51,6 +81,7 @@ const SignInModal = ({ onClose }) => {
                     className="form-control"
                     id="password"
                     name="password"
+                    onChange={onPassInputChange}
                   />
                 </div>
               </section>
@@ -67,12 +98,19 @@ const SignInModal = ({ onClose }) => {
               </section>
             </div>
 
+            {
+              mostraUsuarioIncorrectoMsg? 
+                <div className="wrong_input">
+                  <p>correo y/o contraseña incorrecta</p>
+                </div>
+                :<div/> // no mostrar cartel
+            }
+
             <div className="modal-footer d-flex justify-content-center">
-              <button type="submit" className="btn btn-success">
+              <button onClick={onClickIngresar} className="btn btn-success">
                 Entrar
               </button>
             </div>
-          </form>
         </div>
       </div>
     </div>

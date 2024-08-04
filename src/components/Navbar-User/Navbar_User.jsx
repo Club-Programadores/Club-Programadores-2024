@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { CustomLink } from "../CustomLink";
 import "./Navbar_User.css";
 
-export default function Navbar_User() {
+export default function Navbar_User({logOutCallback}) {
   const navLinks = document.querySelectorAll(".nav-link");
   const collapseElement = document.getElementById("navbar-toggler");
 
@@ -86,7 +86,7 @@ export default function Navbar_User() {
               <hr/>
             ):<div/>}
             {isShowingUserOptions === true? (
-              <h5>Cerrar Sesion</h5>
+              <h5 onClick={logOutCallback}>Cerrar Sesion</h5>
             ):<div/>}
           </div>
         </div>

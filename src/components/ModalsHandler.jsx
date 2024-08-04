@@ -7,7 +7,7 @@ const ModalContext = createContext();
 
 export const useModal = () => useContext(ModalContext);
 
-export function ModalProvider({ children }) {
+export function ModalProvider({loggedInCallback, children }) {
   const [modalState, setModalState] = useState({
     isSignUpAOpen: false,
     isSignUpBOpen: false,
@@ -53,12 +53,12 @@ export function ModalProvider({ children }) {
       }}
     >
       {children}
-      <ModalsHandler />
+      <ModalsHandler onLogueado={loggedInCallback} />
     </ModalContext.Provider>
   );
 }
 
-function ModalsHandler() {
+function ModalsHandler({onLogueado}) {
   const {
     modalState,
     toggleSignUpA,
@@ -81,7 +81,7 @@ function ModalsHandler() {
       {modalState.isSignUpBOpen && (
         <SignUpBModal onClose={toggleSignUpB} handleBack={handleBack} />
       )}
-      {modalState.isSignInOpen && <SignInModal onClose={toggleSignIn} />}
+      {modalState.isSignInOpen && <SignInModal loggedInCallback={onLogueado} onClose={toggleSignIn} />}
     </>
   );
 }
