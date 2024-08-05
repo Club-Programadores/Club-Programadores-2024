@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Select from "react-select";
 
-const options = [
+export const interestsOptions = [
   { label: "WebDev", value: "webdev" },
   { label: "FrontEnd", value: "frontend" },
   { label: "BackEnd", value: "backend" },
