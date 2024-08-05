@@ -1,49 +1,7 @@
 import React, { useState } from "react";
 import miembrosMaster from "../../../assets/miembros.json";
-import Select from "react-select";
-
-const interestsOptions = [
-  { label: "WebDev", value: "webdev" },
-  { label: "FrontEnd", value: "frontend" },
-  { label: "BackEnd", value: "backend" },
-  { label: "GameDev", value: "gamedev" },
-  { label: "Teaching", value: "teaching" },
-  { label: "UI/UX", value: "ui/ux" },
-  { label: "Quality Assurance", value: "quality assurance" },
-  { label: "Testing", value: "testing" },
-  { label: "Networking", value: "networking" },
-  {
-    label: "Functional Oriented Programming",
-    value: "functional oriented programming",
-  },
-  {
-    label: "Object Oriented Programming",
-    value: "object oriented programming",
-  },
-  {
-    label: "Arquitectura de Información",
-    value: "arquitectura de información",
-  },
-  { label: "Knowledge Graphs", value: "knowledge graphs" },
-  { label: "3D Art", value: "3d art" },
-  { label: "2D Art", value: "2d art" },
-  { label: "Pixel Art", value: "pixel art" },
-];
-
-const skillsOptions = [
-  { label: "HTML", value: "html" },
-  { label: "CSS", value: "css" },
-  { label: "JavaScript", value: "javascript" },
-  { label: "Python", value: "python" },
-  { label: "php", value: "php" },
-  { label: "Java", value: "java" },
-  { label: "C++", value: "c++" },
-  { label: "C#", value: "c#" },
-  { label: "React", value: "react" },
-  { label: "MySQL", value: "mysql" },
-  { label: "PostgreSQL", value: "postgresql" },
-  { label: "Sparql", value: "sparql" },
-];
+import InteresesDropdown from "../FiltersDropdown/InteresesDropdown/InteresesDropdownFile"
+import SkillsDropdown from "../FiltersDropdown/SkillsDropdown/SkillsDropdownFile"
 
 const SignUpBModal = ({ onClose, handleBack }) => {
   const [formData, setFormData] = useState({
@@ -147,46 +105,11 @@ const SignUpBModal = ({ onClose, handleBack }) => {
                 <h3>Tus aptitudes</h3>
                 <div className="form-group mb-3">
                   <label htmlFor="intereses">Perfil</label>
-                  <InteresesDropdown />
-                  {/* <textarea
-                    className="form-control"
-                    id="intereses"
-                    name="intereses"
-                    placeholder="Backend;GameDev;WebDev..."
-                    value={formData.intereses}
-                    onChange={handleInputChange}
-                  /> */}
+                  <InteresesDropdown placeholder="seleccionar..."/>
                 </div>
                 <div className="form-group mb-3">
                   <label htmlFor="intereses">Lenguajes</label>
-                  <SkillsDropdown />
-                  {/* {[
-                    "HTML",
-                    "JavaScript",
-                    "React",
-                    "NodeJS",
-                    "Blender",
-                    "Godot",
-                    "Unity",
-                    "SPARQL",
-                  ].map((skill) => (
-                    <div key={skill} className="form-check">
-                      <input
-                        type="checkbox"
-                        className="form-check-input"
-                        id={skill.toLowerCase()}
-                        value={skill}
-                        checked={formData.skills.includes(skill)}
-                        onChange={(e) => handleCheckboxChange(e, "skills")}
-                      />
-                      <label
-                        className="form-check-label"
-                        htmlFor={skill.toLowerCase()}
-                      >
-                        {skill}
-                      </label>
-                    </div>
-                  ))} */}
+                  <SkillsDropdown placeholder="seleccionar..."/>
                 </div>
                 <div className="mb-3">
                   <label>Foto de perfil</label>
@@ -213,43 +136,5 @@ const SignUpBModal = ({ onClose, handleBack }) => {
     </div>
   );
 };
-
-function SkillsDropdown(props) {
-  const [selectedOption, setSelectedOption] = useState(null);
-
-  const handleOnChange = (e) => {
-    setSelectedOption(e);
-    // props.setSkillsFilter(e);
-  };
-
-  return (
-    <Select
-      defaultValue={selectedOption}
-      onChange={handleOnChange}
-      options={skillsOptions}
-      isMulti={true}
-      placeholder="Seleccionar..."
-    />
-  );
-}
-
-function InteresesDropdown(props) {
-  const [selectedOption, setSelectedOption] = useState(null);
-
-  const handleOnChange = (e) => {
-    setSelectedOption(e);
-    // props.setInteresesFilter(e);
-  };
-
-  return (
-    <Select
-      defaultValue={selectedOption}
-      onChange={handleOnChange}
-      options={interestsOptions}
-      isMulti={true}
-      placeholder="Seleccionar..."
-    />
-  );
-}
 
 export default SignUpBModal;

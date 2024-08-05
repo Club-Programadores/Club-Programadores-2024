@@ -29,12 +29,12 @@ export const interestsOptions = [
   { label: "Pixel Art", value: "pixel art" },
 ];
 
-export default function InteresesDropdown(props) {
+export default function InteresesDropdown({placeholder,setInteresesFilter}) {
   const [selectedOption, setSelectedOption] = useState(null);
 
   const handleOnChange = (e) => {
     setSelectedOption(e);
-    props.setInteresesFilter(e);
+    if(setInteresesFilter != null) setInteresesFilter(e);
   };
 
   return (
@@ -42,9 +42,9 @@ export default function InteresesDropdown(props) {
       className="filterDropdown"
       defaultValue={selectedOption}
       onChange={handleOnChange}
-      options={options}
+      options={interestsOptions}
       isMulti={true}
-      placeholder="Perfil"
+      placeholder={placeholder != null? placeholder : "Perfil"}
     />
   );
 }
