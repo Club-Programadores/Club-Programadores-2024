@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Select from "react-select";
 
-const options = [
+export const skillsOptions = [
   { label: "HTML", value: "html" },
   { label: "CSS", value: "css" },
   { label: "JavaScript", value: "javascript" },
