@@ -7,7 +7,7 @@ const ModalContext = createContext();
 
 export const useModal = () => useContext(ModalContext);
 
-export function ModalProvider({loggedInCallback, children }) {
+export function ModalProvider({signedUpCallback, loggedInCallback, children }) {
   const [modalState, setModalState] = useState({
     isSignUpAOpen: false,
     isSignUpBOpen: false,
@@ -30,9 +30,9 @@ export function ModalProvider({loggedInCallback, children }) {
     toggleSignIn();
   };
 
-  const handleNext = () => {
+  const handleNext = (e) => {
     toggleSignUpA();
-    toggleSignUpB();
+    toggleSignUpB(e);
   };
 
   const handleBack = () => {
@@ -53,12 +53,12 @@ export function ModalProvider({loggedInCallback, children }) {
       }}
     >
       {children}
-      <ModalsHandler onLogueado={loggedInCallback} />
+      <ModalsHandler onSignedUp={signedUpCallback} onLogueado={loggedInCallback} />
     </ModalContext.Provider>
   );
 }
 
-function ModalsHandler({onLogueado}) {
+function ModalsHandler({onSignedUp, onLogueado}) {
   const {
     modalState,
     toggleSignUpA,
@@ -69,17 +69,28 @@ function ModalsHandler({onLogueado}) {
     handleBack,
   } = useModal();
 
+  const [userData, setUserData] = useState({
+    name: "",
+    pass: ""
+  });
+
   return (
     <>
       {modalState.isSignUpAOpen && (
         <SignUpAModal
           onClose={toggleSignUpA}
-          handleNext={handleNext}
+          handleNext={e => {
+            setUserData({
+              name: e.name,
+              pass: e.pass,
+            });
+            handleNext();
+          }}
           handleLoginRedirect={LoginRedirect}
         />
       )}
       {modalState.isSignUpBOpen && (
-        <SignUpBModal onClose={toggleSignUpB} handleBack={handleBack} />
+        <SignUpBModal userData={userData} signedUpCallback={onSignedUp} onClose={toggleSignUpB} handleBack={handleBack} />
       )}
       {modalState.isSignInOpen && <SignInModal loggedInCallback={onLogueado} onClose={toggleSignIn} />}
     </>

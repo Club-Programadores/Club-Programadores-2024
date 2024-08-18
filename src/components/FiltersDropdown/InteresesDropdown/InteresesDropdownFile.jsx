@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Select from "react-select";
 
-const options = [
+export const interestsOptions = [
   { label: "WebDev", value: "webdev" },
   { label: "FrontEnd", value: "frontend" },
   { label: "BackEnd", value: "backend" },
@@ -29,12 +29,13 @@ const options = [
   { label: "Pixel Art", value: "pixel art" },
 ];
 
-export default function InteresesDropdown(props) {
+export default function InteresesDropdown({selectionChangedCallback, placeholder,setInteresesFilter}) {
   const [selectedOption, setSelectedOption] = useState(null);
 
   const handleOnChange = (e) => {
     setSelectedOption(e);
-    props.setInteresesFilter(e);
+    if(setInteresesFilter != null) setInteresesFilter(e);
+    selectionChangedCallback(e);
   };
 
   return (
@@ -42,9 +43,9 @@ export default function InteresesDropdown(props) {
       className="filterDropdown"
       defaultValue={selectedOption}
       onChange={handleOnChange}
-      options={options}
+      options={interestsOptions}
       isMulti={true}
-      placeholder="Perfil"
+      placeholder={placeholder != null? placeholder : "Perfil"}
     />
   );
 }

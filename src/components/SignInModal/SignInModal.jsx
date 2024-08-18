@@ -17,28 +17,29 @@ const SignInModal = ({loggedInCallback, onClose }) => {
 
   const [mostraUsuarioIncorrectoMsg, setMostarUsuarioIncorrectoMsg] = useState(false);
 
-  const handleLogIn = () => {
-    console.log("Logged In");
-    loggedInCallback();
-    onClose();
-  };
-
-  const validarDatos = () =>{
-    console.log(userMail +" "+ testUserMail +" "+ userPass +" "+ testUserPass)
+  const correoYContraseñaValido = () =>{
     if(userMail == testUserMail && userPass == testUserPass){
-      setMostarUsuarioIncorrectoMsg(false)
-      handleLogIn()
+      return true
     }
     else{
+      return false
+    }
+  }
+
+  const handleSubmit = (e) => {
+    if(correoYContraseñaValido() == false){
       if(!mostraUsuarioIncorrectoMsg){
         setMostarUsuarioIncorrectoMsg(true)
       }
     }
-  }
-    
-  const onClickIngresar = () =>{
-    validarDatos();
-  }
+    else{
+      e.preventDefault();
+  
+      loggedInCallback();
+      onClose();
+      console.log("Logged In");
+    }
+  };
   
   const onMailInputChange = (e) =>{
     userMail = e.target.value;
@@ -61,6 +62,7 @@ const SignInModal = ({loggedInCallback, onClose }) => {
               aria-label="Close"
             ></button>
           </div>
+          <form onSubmit={handleSubmit}>
             <div className="modal-body d-flex flex-column">
               <section className="d-flex flex-column">
                 <div className="mb-3">
@@ -107,10 +109,11 @@ const SignInModal = ({loggedInCallback, onClose }) => {
             }
 
             <div className="modal-footer d-flex justify-content-center">
-              <button onClick={onClickIngresar} className="btn btn-success">
+              <button type="submit" className="btn btn-success">
                 Entrar
               </button>
             </div>
+          </form>
         </div>
       </div>
     </div>
