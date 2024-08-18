@@ -17,6 +17,9 @@ export default function App() {
   const onIniciarSesion = () => {
     setLogueado(true)
   }
+  const onRegistrarse = () => {
+    setLogueado(true)
+  }
   
   const onCerrarSesion = () => {
     setLogueado(false)
@@ -25,7 +28,7 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <ModalProvider loggedInCallback={onIniciarSesion}>
+      <ModalProvider signedUpCallback={onRegistrarse} loggedInCallback={onIniciarSesion}>
         {isLogueado?
           <Navbar_User logOutCallback={onCerrarSesion}/> : <Navbar />
         }

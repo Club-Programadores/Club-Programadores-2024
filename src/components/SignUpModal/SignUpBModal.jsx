@@ -3,11 +3,12 @@ import miembrosMaster from "../../../assets/miembros.json";
 import InteresesDropdown from "../FiltersDropdown/InteresesDropdown/InteresesDropdownFile"
 import SkillsDropdown from "../FiltersDropdown/SkillsDropdown/SkillsDropdownFile"
 
-const SignUpBModal = ({ onClose, handleBack }) => {
+const SignUpBModal = ({userData, signedUpCallback, onClose, handleBack }) => {
   const [formData, setFormData] = useState({
+    email: userData.name,
+    pass: userData.pass,
     nombres: "",
     apellidos: "",
-    email: "",
     bio: "",
     skills: [],
     intereses: [],
@@ -21,29 +22,42 @@ const SignUpBModal = ({ onClose, handleBack }) => {
     });
   };
 
-  // const handleCheckboxChange = (e, category) => {
-  //   const { checked, value } = e.target;
-  //   setFormData((prevData) => ({
-  //     ...prevData,
-  //     [category]: checked
-  //       ? [...prevData[category], value]
-  //       : prevData[category].filter((item) => item !== value),
-  //   }));
-  // };
+  const handlePerfilChange = e =>{
+    setFormData({
+      email: formData.email,
+      pass: formData.pass,
+      nombres: formData.nombres,
+      apellidos: formData.apellidos,
+      bio: formData.bio,
+      skills: e,
+      intereses: formData.itereses,
+    });
+  }
+  const handleSkillsChange = e =>{
+    setFormData({
+      email: formData.email,
+      pass: formData.pass,
+      nombres: formData.nombres,
+      apellidos: formData.apellidos,
+      bio: formData.bio,
+      skills: formData.skills,
+      intereses: e,
+    });
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(formData);
     const nuevoMiembro = {
       nombres: formData.nombres,
       apellidos: formData.apellidos,
       email: formData.email,
       bio: formData.bio,
-      intereses: formData.intereses.split(";"),
+      intereses: formData.intereses,
       skills: formData.skills,
     };
-    console.log(miembrosMaster);
-    console.log(nuevoMiembro);
     miembrosMaster.miembros.push(nuevoMiembro);
+    signedUpCallback();
     onClose();
   };
 
@@ -105,11 +119,11 @@ const SignUpBModal = ({ onClose, handleBack }) => {
                 <h3>Tus aptitudes</h3>
                 <div className="form-group mb-3">
                   <label htmlFor="intereses">Perfil</label>
-                  <InteresesDropdown placeholder="seleccionar..."/>
+                  <InteresesDropdown selectionChangedCallback={e => handlePerfilChange(e.map(x => x.value))} placeholder="seleccionar..."/>
                 </div>
                 <div className="form-group mb-3">
                   <label htmlFor="intereses">Lenguajes</label>
-                  <SkillsDropdown placeholder="seleccionar..."/>
+                  <SkillsDropdown selectionChangedCallback={e => handleSkillsChange(e.map(x => x.value))} placeholder="seleccionar..."/>
                 </div>
                 <div className="mb-3">
                   <label>Foto de perfil</label>
