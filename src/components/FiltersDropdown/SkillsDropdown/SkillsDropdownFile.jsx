@@ -16,12 +16,13 @@ export const skillsOptions = [
   { label: "Sparql", value: "sparql" },
 ];
 
-export default function SkillsDropdown({placeholder,setSkillsFilter}) {
+export default function SkillsDropdown({selectionChangedCallback, placeholder,setSkillsFilter}) {
   const [selectedOption, setSelectedOption] = useState(null);
 
   const handleOnChange = (e) => {
     setSelectedOption(e);
     if(setSkillsFilter != null) setSkillsFilter(e);
+    selectionChangedCallback(e);
   };
 
   return (
