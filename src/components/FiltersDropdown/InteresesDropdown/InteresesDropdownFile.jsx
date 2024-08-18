@@ -29,12 +29,13 @@ export const interestsOptions = [
   { label: "Pixel Art", value: "pixel art" },
 ];
 
-export default function InteresesDropdown({placeholder,setInteresesFilter}) {
+export default function InteresesDropdown({selectionChangedCallback, placeholder,setInteresesFilter}) {
   const [selectedOption, setSelectedOption] = useState(null);
 
   const handleOnChange = (e) => {
     setSelectedOption(e);
     if(setInteresesFilter != null) setInteresesFilter(e);
+    selectionChangedCallback(e);
   };
 
   return (
