@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { CustomLink } from "../CustomLink";
 import "./Navbar_User.css";
 
-export default function Navbar_User({logOutCallback}) {
+export default function Navbar_User({ logOutCallback }) {
   const navLinks = document.querySelectorAll(".nav-link");
   const collapseElement = document.getElementById("navbar-toggler");
 
@@ -16,11 +16,10 @@ export default function Navbar_User({logOutCallback}) {
     navLink.addEventListener("click", closeCollapse);
   });
 
-  function toggleUserOptionsMenu(){
-    if(isShowingUserOptions){
+  function toggleUserOptionsMenu() {
+    if (isShowingUserOptions) {
       setShowingUserOptions(false);
-    }
-    else{
+    } else {
       setShowingUserOptions(true);
     }
   }
@@ -73,21 +72,25 @@ export default function Navbar_User({logOutCallback}) {
               </CustomLink>
             </div>
 
-            <div className="navbar-nav m-ms-auto buttons-container user" onClick={toggleUserOptionsMenu}>
-              <h4>Nombre Apellido</h4>
-              <img src="https://static.vecteezy.com/system/resources/previews/004/511/281/original/default-avatar-photo-placeholder-profile-picture-vector.jpg"/>
+            <div
+              className="navbar-nav m-ms-auto buttons-container prevent-select user"
+              onClick={toggleUserOptionsMenu}
+            >
+              <p>Nombre Apellido</p>
+              <img src="https://static.vecteezy.com/system/resources/previews/004/511/281/original/default-avatar-photo-placeholder-profile-picture-vector.jpg" />
             </div>
           </div>
-          <div className="user_options user_options-background">
-            {isShowingUserOptions === true? (
-              <h5>Modificar Usuario</h5>
-            ):<div/>}
-            {isShowingUserOptions === true? (
-              <hr/>
-            ):<div/>}
-            {isShowingUserOptions === true? (
-              <h5 onClick={logOutCallback}>Cerrar Sesion</h5>
-            ):<div/>}
+
+          <div className="user_options prevent-select">
+            {isShowingUserOptions ? (
+              <>
+                <p>Modificar Usuario</p>
+                <hr />
+                <p onClick={logOutCallback}>Cerrar Sesion</p>
+              </>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </nav>

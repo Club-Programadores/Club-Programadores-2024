@@ -11,27 +11,30 @@ import { useState } from "react";
 import "./App.css";
 
 export default function App() {
-
   const [isLogueado, setLogueado] = useState(false);
 
   const onIniciarSesion = () => {
-    setLogueado(true)
-  }
+    setLogueado(true);
+  };
   const onRegistrarse = () => {
-    setLogueado(true)
-  }
-  
-  const onCerrarSesion = () => {
-    setLogueado(false)
-  }
+    setLogueado(true);
+  };
 
+  const onCerrarSesion = () => {
+    setLogueado(false);
+  };
 
   return (
     <BrowserRouter>
-      <ModalProvider signedUpCallback={onRegistrarse} loggedInCallback={onIniciarSesion}>
-        {isLogueado?
-          <Navbar_User logOutCallback={onCerrarSesion}/> : <Navbar />
-        }
+      <ModalProvider
+        signedUpCallback={onRegistrarse}
+        loggedInCallback={onIniciarSesion}
+      >
+        {isLogueado ? (
+          <Navbar_User logOutCallback={onCerrarSesion} />
+        ) : (
+          <Navbar />
+        )}
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about-us" element={<HomePage />} />
@@ -41,7 +44,7 @@ export default function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
-      </ModalProvider> 
+      </ModalProvider>
     </BrowserRouter>
   );
 }
