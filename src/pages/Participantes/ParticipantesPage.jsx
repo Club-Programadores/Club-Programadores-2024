@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchBar from "../../components/SearchBar/searchBarFile.jsx";
 import InteresesDropdown from "../../components/FiltersDropdown/InteresesDropdown/InteresesDropdownFile.jsx";
 import SkillsDropdown from "../../components/FiltersDropdown/SkillsDropdown/SkillsDropdownFile.jsx";
@@ -11,9 +11,45 @@ function ParticipantesPage() {
   const [interesesFilter, setInteresesFilter] = useState([]);
   const [skillsFilter, setSkillsFilter] = useState([]);
   const [showDropdowns, setShowDropdowns] = useState(false);
+  const [participantes, setParticipantes] = useState([])
 
-  let participantes = JSON.parse(JSON.stringify(participantesJson)).miembros;
+  let usuarios;
+  
+  function usuarios2Participantes(usuariosJson){
+    let participantes = [];
+    usuariosJson.forEach(usuario => {
+      let participante = {
+        "id":usuario.id,
+        "nombre": usuario.nombre,
+        "apellido": usuario.apellido,
+        "bio":usuario.informacion,
+        "imageUrl": usuario.image,
+        "intereses":usuario.perfiles,
+        "skills": Object.keys(usuario.lenguaje_nivel).map(x => {
+          return{
+            "nombre": x,
+            "nivel": 1
+          }
+        })
+      }
+      participantes.push(participante)
+    });
+    return participantes;
+  }
 
+  useEffect(()=>{
+    async function getData(){
+      let response = await fetch("http://127.0.0.1:5000/usuarios")
+      if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+      }
+      let responseData = await response.json();
+      usuarios = responseData.usuarios;
+      setParticipantes(usuarios2Participantes(usuarios))
+    }
+    getData();
+  },[])
+  
   const filteredParticipantes = () => {
     if (search != "") {
       participantes = participantes.filter((participante) =>
