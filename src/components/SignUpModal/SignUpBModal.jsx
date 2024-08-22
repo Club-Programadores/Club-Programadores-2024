@@ -57,7 +57,13 @@ const SignUpBModal = ({userData, signedUpCallback, onClose, handleBack }) => {
       skills: formData.skills,
     };
     miembrosMaster.miembros.push(nuevoMiembro);
-    signedUpCallback();
+
+    const datosUsuario = {
+      nombre: `${formData.nombres} ${formData.apellidos}`,
+      email: formData.email
+    }
+    signedUpCallback(datosUsuario);
+
     onClose();
   };
 

@@ -35,9 +35,13 @@ const SignInModal = ({loggedInCallback, onClose }) => {
     else{
       e.preventDefault();
   
-      loggedInCallback();
+      const datosUsuario = {
+        nombre: userMail,
+        email: userMail
+      }
+      loggedInCallback(datosUsuario);
+
       onClose();
-      console.log("Logged In");
     }
   };
   

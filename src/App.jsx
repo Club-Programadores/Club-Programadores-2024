@@ -14,15 +14,33 @@ export default function App() {
 
   const [isLogueado, setLogueado] = useState(false);
 
-  const onIniciarSesion = () => {
+  const [usuario, setUsuario] = useState({
+    nombre: "",
+    email: ""
+  });
+
+  const onIniciarSesion = (datosUsuario) => {
+    setUsuario({
+      nombre: datosUsuario.nombre,
+      email: datosUsuario.mail,
+    })
     setLogueado(true)
   }
-  const onRegistrarse = () => {
+  const onRegistrarse = (datosUsuario) => {
+    setUsuario({
+      nombre: datosUsuario.nombre,
+      email: datosUsuario.mail,
+    })
     setLogueado(true)
   }
   
-  const onCerrarSesion = () => {
+  const cerrarSesion = () => {
+    setUsuario({
+      nombre: "",
+      email: ""
+    })
     setLogueado(false)
+    console.log(2)
   }
 
 
@@ -30,7 +48,7 @@ export default function App() {
     <BrowserRouter>
       <ModalProvider signedUpCallback={onRegistrarse} loggedInCallback={onIniciarSesion}>
         {isLogueado?
-          <Navbar_User logOutCallback={onCerrarSesion}/> : <Navbar />
+          <Navbar_User logOutCallback={cerrarSesion} datosUsuario={usuario}/> : <Navbar />
         }
         <Routes>
           <Route path="/" element={<HomePage />} />
