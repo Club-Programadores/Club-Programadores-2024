@@ -7,7 +7,7 @@ import "./Navbar.css";
 export default function Navbar() {
   const navLinks = document.querySelectorAll(".nav-link");
   const collapseElement = document.getElementById("navbar-toggler");
-  const { toggleSignUpA, toggleSignIn } = useModal();
+  const { toggleRegistration, toggleSignIn } = useModal();
 
   function closeCollapse() {
     collapseElement.classList.toggle("show");
@@ -66,7 +66,7 @@ export default function Navbar() {
             </div>
 
             <div className="navbar-nav m-ms-auto buttons-container">
-              <SignUp onClick={toggleSignUpA} />
+              <SignUp onClick={toggleRegistration} />
               <Login onClick={toggleSignIn} />
             </div>
           </div>

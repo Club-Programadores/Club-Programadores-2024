@@ -1,4 +1,3 @@
-import SkillBox from "../../Intereses/interes";
 import "../base/ProyectoBoxStyles.css";
 import "./NuevoProyectoBoxStyles.css";
 import { MdInfoOutline } from "react-icons/md";

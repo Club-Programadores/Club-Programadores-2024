@@ -5,7 +5,6 @@ import "./Navbar_User.css";
 export default function Navbar_User({ logOutCallback }) {
   const navLinks = document.querySelectorAll(".nav-link");
   const collapseElement = document.getElementById("navbar-toggler");
-
   const [isShowingUserOptions, setShowingUserOptions] = useState(false);
 
   function closeCollapse() {

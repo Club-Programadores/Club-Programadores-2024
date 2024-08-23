@@ -3,7 +3,7 @@ import { useModal } from "../ModalsHandler";
 import "./HeroBanner.css";
 
 function HeroBanner() {
-  const { toggleSignUpA } = useModal();
+  const { toggleRegistration } = useModal();
 
   return (
     <>
@@ -11,7 +11,7 @@ function HeroBanner() {
         <div className="call-to-action">
           <h1 className="m-3">¡Sumate al Club de Programador@s del CUVL!</h1>
           <div className="btn-container">
-            <SignUp onClick={toggleSignUpA} />
+            <SignUp onClick={toggleRegistration} />
           </div>
         </div>
       </div>

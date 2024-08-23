@@ -3,8 +3,9 @@
   z-index: 1100;
 }
 
-.modal-body {
+.step1 {
   padding: 1em 2em;
+  min-width: 400px;
 }
 
 .login-redirect:hover {
@@ -12,11 +13,11 @@
   color: darkgray;
 }
 
-.wrong_input{
+.wrong_input {
   background-color: #ff0000be;
   text-align: center;
 }
 
-.wrong_input p{
+.wrong_input p {
   margin: 0;
 }

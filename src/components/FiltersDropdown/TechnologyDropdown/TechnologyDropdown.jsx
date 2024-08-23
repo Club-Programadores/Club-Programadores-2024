@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Select from "react-select";
 
-export const skillsOptions = [
+export const technologyOptions = [
   { label: "HTML", value: "html" },
   { label: "CSS", value: "css" },
   { label: "JavaScript", value: "javascript" },
@@ -16,12 +16,16 @@ export const skillsOptions = [
   { label: "Sparql", value: "sparql" },
 ];
 
-export default function SkillsDropdown({selectionChangedCallback, placeholder,setSkillsFilter}) {
+export default function TechnologyDropdown({
+  selectionChangedCallback,
+  placeholder,
+  setTechnologysFilter,
+}) {
   const [selectedOption, setSelectedOption] = useState(null);
 
   const handleOnChange = (e) => {
     setSelectedOption(e);
-    if(setSkillsFilter != null) setSkillsFilter(e);
+    if (setTechnologysFilter != null) setTechnologysFilter(e);
     selectionChangedCallback(e);
   };
 
@@ -30,9 +34,9 @@ export default function SkillsDropdown({selectionChangedCallback, placeholder,se
       className="filterDropdown"
       defaultValue={selectedOption}
       onChange={handleOnChange}
-      options={skillsOptions}
+      options={technologysOptions}
       isMulti={true}
-      placeholder= {placeholder != null? placeholder : "Tecnologías"}
+      placeholder={placeholder != null ? placeholder : "Tecnologías"}
     />
   );
 }

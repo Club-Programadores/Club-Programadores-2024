@@ -1,16 +1,19 @@
 import React, { useState, createContext, useContext } from "react";
-import SignInModal from "./SignInModal/SignInModal";
-import SignUpAModal from "./SignUpModal/SignUpAModal";
-import SignUpBModal from "./SignUpModal/SignUpBModal";
+import RegistrationModal from "./SignUpModal/RegistrationModal.jsx";
+import SignInModal from "./SignInModal/SignInModal.jsx";
 
 const ModalContext = createContext();
 
 export const useModal = () => useContext(ModalContext);
 
-export function ModalProvider({signedUpCallback, loggedInCallback, children }) {
+export function ModalProvider({
+  children,
+  onIniciarSesion,
+  onRegistrarse,
+  onCerrarSesion,
+}) {
   const [modalState, setModalState] = useState({
-    isSignUpAOpen: false,
-    isSignUpBOpen: false,
+    isRegistrationOpen: false,
     isSignInOpen: false,
   });
 
@@ -21,78 +24,49 @@ export function ModalProvider({signedUpCallback, loggedInCallback, children }) {
     }));
   };
 
-  const toggleSignUpA = () => toggleModal("isSignUpAOpen");
-  const toggleSignUpB = () => toggleModal("isSignUpBOpen");
+  const toggleRegistration = () => toggleModal("isRegistrationOpen");
   const toggleSignIn = () => toggleModal("isSignInOpen");
-
-  const LoginRedirect = () => {
-    toggleSignUpA();
-    toggleSignIn();
-  };
-
-  const handleNext = (e) => {
-    toggleSignUpA();
-    toggleSignUpB(e);
-  };
-
-  const handleBack = () => {
-    toggleSignUpB();
-    toggleSignUpA();
-  };
 
   return (
     <ModalContext.Provider
       value={{
         modalState,
-        toggleSignUpA,
-        toggleSignUpB,
+        toggleRegistration,
         toggleSignIn,
-        LoginRedirect,
-        handleNext,
-        handleBack,
+        onIniciarSesion,
+        onRegistrarse,
+        onCerrarSesion,
       }}
     >
       {children}
-      <ModalsHandler onSignedUp={signedUpCallback} onLogueado={loggedInCallback} />
+      <ModalsHandler />
     </ModalContext.Provider>
   );
 }
 
-function ModalsHandler({onSignedUp, onLogueado}) {
+function ModalsHandler() {
   const {
     modalState,
-    toggleSignUpA,
-    toggleSignUpB,
+    toggleRegistration,
     toggleSignIn,
-    LoginRedirect,
-    handleNext,
-    handleBack,
+    onIniciarSesion,
+    onRegistrarse,
   } = useModal();
-
-  const [userData, setUserData] = useState({
-    name: "",
-    pass: ""
-  });
 
   return (
     <>
-      {modalState.isSignUpAOpen && (
-        <SignUpAModal
-          onClose={toggleSignUpA}
-          handleNext={e => {
-            setUserData({
-              name: e.name,
-              pass: e.pass,
-            });
-            handleNext();
-          }}
-          handleLoginRedirect={LoginRedirect}
+      {modalState.isRegistrationOpen && (
+        <RegistrationModal
+          signedUpCallback={onRegistrarse}
+          onClose={toggleRegistration}
         />
       )}
-      {modalState.isSignUpBOpen && (
-        <SignUpBModal userData={userData} signedUpCallback={onSignedUp} onClose={toggleSignUpB} handleBack={handleBack} />
+      {modalState.isSignInOpen && (
+        <SignInModal
+          loggedInCallback={onIniciarSesion}
+          onClose={toggleSignIn}
+        />
       )}
-      {modalState.isSignInOpen && <SignInModal loggedInCallback={onLogueado} onClose={toggleSignIn} />}
     </>
   );
 }

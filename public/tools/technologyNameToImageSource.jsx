@@ -1,7 +1,7 @@
-export default function skillNameToImageSource(nombreSkill) {
-  nombreSkill = nombreSkill.toLowerCase();
+export default function technologyNameToImageSource(technologyName) {
+  technologyName = technologyName.toLowerCase();
 
-  switch (nombreSkill) {
+  switch (technologyName) {
     case "html":
       return "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original-wordmark.svg";
     case "css":
@@ -68,78 +68,78 @@ export default function skillNameToImageSource(nombreSkill) {
       return "https://www.pngrepo.com/download/374091/sparql.png";
   }
 
-  if (nombreSkill == "js" || nombreSkill == "javascript") {
+  if (technologyName == "js" || technologyName == "javascript") {
     return "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg";
   }
-  if (nombreSkill == "c++" || nombreSkill == "cplusplus") {
+  if (technologyName == "c++" || technologyName == "cplusplus") {
     return "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-line.svg";
   }
-  if (nombreSkill == "c#" || nombreSkill == "csharp") {
+  if (technologyName == "c#" || technologyName == "csharp") {
     return "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-line.svg";
   }
-  if (nombreSkill == "three" || nombreSkill == "threejs") {
+  if (technologyName == "three" || technologyName == "threejs") {
     return "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg";
   }
-  if (nombreSkill == ".net" || nombreSkill == "dotnet") {
+  if (technologyName == ".net" || technologyName == "dotnet") {
     return "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg";
   }
   if (
-    nombreSkill == "tailwinds" ||
-    nombreSkill == "tailwinds" ||
-    nombreSkill == "tailwindscss"
+    technologyName == "tailwind" ||
+    technologyName == "tailwind" ||
+    technologyName == "tailwindcss"
   ) {
     return "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg";
   }
   if (
-    nombreSkill == "ts" ||
-    nombreSkill == "type_script" ||
-    nombreSkill == "typescript" ||
-    nombreSkill == "type script"
+    technologyName == "ts" ||
+    technologyName == "type_script" ||
+    technologyName == "typescript" ||
+    technologyName == "type script"
   ) {
     return "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg";
   }
 
   if (
-    nombreSkill == "vscode" ||
-    nombreSkill == "visual studio code" ||
-    nombreSkill == "visual_studio_code" ||
-    nombreSkill == "vsc"
+    technologyName == "vscode" ||
+    technologyName == "visual studio code" ||
+    technologyName == "visual_studio_code" ||
+    technologyName == "vsc"
   ) {
     return "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg";
   }
   if (
-    nombreSkill == "vs" ||
-    nombreSkill == "visual studio" ||
-    nombreSkill == "visual_studio"
+    technologyName == "vs" ||
+    technologyName == "visual studio" ||
+    technologyName == "visual_studio"
   ) {
     return "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/visualstudio/visualstudio-plain.svg";
   }
   if (
-    nombreSkill == "microsoftsqlserver" ||
-    nombreSkill == "microsoft_sql_server" ||
-    nombreSkill == "microsoft sql server"
+    technologyName == "microsoftsqlserver" ||
+    technologyName == "microsoft_sql_server" ||
+    technologyName == "microsoft sql server"
   ) {
     return "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain-wordmark.svg";
   }
 
   if (
-    nombreSkill == "unrealengine" ||
-    nombreSkill == "unreal engine" ||
-    nombreSkill == "unreal"
+    technologyName == "unrealengine" ||
+    technologyName == "unreal engine" ||
+    technologyName == "unreal"
   ) {
     return "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unrealengine/unrealengine-original.svg";
   }
   if (
-    nombreSkill == "unityengine" ||
-    nombreSkill == "unity engine" ||
-    nombreSkill == "unity"
+    technologyName == "unityengine" ||
+    technologyName == "unity engine" ||
+    technologyName == "unity"
   ) {
     return "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg";
   }
   if (
-    nombreSkill == "godot" ||
-    nombreSkill == "godot engine" ||
-    nombreSkill == "godot_engine"
+    technologyName == "godot" ||
+    technologyName == "godot engine" ||
+    technologyName == "godot_engine"
   ) {
     return "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/godot/godot-original.svg";
   }

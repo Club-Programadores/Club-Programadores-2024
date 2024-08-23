@@ -1,5 +1,4 @@
-import Interes from "..//Intereses//interes";
-import skillNameToImageSource from "../../../public/tools/SkillNameToImageSource";
+import technologyNameToImageSource from "../../../public/tools/technologyNameToImageSource";
 import "./ParticipanteBoxStyles.css";
 
 export default function ParticipanteBox(participante) {
@@ -7,8 +6,7 @@ export default function ParticipanteBox(participante) {
     if (participante.data.imageUrl != "") {
       return participante.data.imageUrl;
     }
-    //Default participante image
-    return "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png";
+    return "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"; //Foto de perfil default
   };
 
   return (
@@ -19,10 +17,9 @@ export default function ParticipanteBox(participante) {
         </div>
         <div className="participanteInfo">
           <h1>{participante.data.nombre}</h1>
-          <div className="intereses">
-            {/* <h3>Perfil:</h3> */}
-            {participante.data.intereses.map((interes) => {
-              return <Interes data={interes.toUpperCase()}></Interes>;
+          <div className="profiles">
+            {participante.data.profiles.map((interes) => {
+              return <p data={interes.toUpperCase()}></p>;
             })}
           </div>
         </div>
@@ -30,8 +27,8 @@ export default function ParticipanteBox(participante) {
       <div className="tecnologias flex-column col-12 col-md-6">
         <h3>TECNOLOGÍAS</h3>
         <div className="iconsContainer">
-          {participante.data.skills.map((skill) => {
-            return <img src={skillNameToImageSource(skill.nombre)} />;
+          {participante.data.technology.map((technology) => {
+            return <img src={technologyNameToImageSource(technology.nombre)} />;
           })}
         </div>
       </div>

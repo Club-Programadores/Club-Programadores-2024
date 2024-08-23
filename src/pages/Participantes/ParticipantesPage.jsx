@@ -1,7 +1,7 @@
 import { useState } from "react";
 import SearchBar from "../../components/SearchBar/searchBarFile.jsx";
-import InteresesDropdown from "../../components/FiltersDropdown/InteresesDropdown/InteresesDropdownFile.jsx";
-import SkillsDropdown from "../../components/FiltersDropdown/SkillsDropdown/SkillsDropdownFile.jsx";
+import InteresesDropdown from "../../components/FiltersDropdown/PerfilesDropdown/PerfilesDropdownFile.jsx";
+import SkillsDropdown from "../../components/FiltersDropdown/TechnologyDropdown/TechnologyDropdown.jsx";
 import ParticipantesList from "../../components/ParticipantesList//ParticipantesList";
 import participantesJson from "../../../assets/miembros.json";
 import ".//ParticipantesStyles.css";

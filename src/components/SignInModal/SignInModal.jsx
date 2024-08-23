@@ -1,52 +1,31 @@
-import React,{ useState } from "react";
+import React, { useState } from "react";
+import "./SignInModal.css";
 
-import "./SignInModal.css"
+const SignInModal = ({ loggedInCallback, onClose }) => {
+  const [userMail, setUserMail] = useState("");
+  const [userPass, setUserPass] = useState("");
+  const [showIncorrectUserMsg, setShowIncorrectUserMsg] = useState(false);
 
-/*
-BUG: userPass pasa a undefined la primera vez que se hace click en Entrar. 
-De estar bien la contraseña y corregirse el correo no va a permitir ingresar. Se soluciona modificando la contraseña y borrando el cambio.
-*/
+  const testUserMail = "a@b.com";
+  const testUserPass = "1234";
 
-const SignInModal = ({loggedInCallback, onClose }) => {
-
-  let userMail;
-  let userPass;
-
-  const testUserMail = "a@b.com"
-  const testUserPass = 1234
-
-  const [mostraUsuarioIncorrectoMsg, setMostarUsuarioIncorrectoMsg] = useState(false);
-
-  const correoYContraseñaValido = () =>{
-    if(userMail == testUserMail && userPass == testUserPass){
-      return true
-    }
-    else{
-      return false
-    }
-  }
+  const isCredentialsValid = () => {
+    return userMail === testUserMail && userPass === testUserPass;
+  };
 
   const handleSubmit = (e) => {
-    if(correoYContraseñaValido() == false){
-      if(!mostraUsuarioIncorrectoMsg){
-        setMostarUsuarioIncorrectoMsg(true)
+    e.preventDefault();
+
+    if (!isCredentialsValid()) {
+      setShowIncorrectUserMsg(true);
+    } else {
+      if (typeof loggedInCallback === "function") {
+        loggedInCallback();
       }
-    }
-    else{
-      e.preventDefault();
-  
-      loggedInCallback();
       onClose();
       console.log("Logged In");
     }
   };
-  
-  const onMailInputChange = (e) =>{
-    userMail = e.target.value;
-  }
-  const onPassInputChange = (e) =>{
-    userPass = e.target.value;
-  }
 
   return (
     <div className="modal modal-container d-flex" id="sign-up-modal">
@@ -54,13 +33,13 @@ const SignInModal = ({loggedInCallback, onClose }) => {
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title">Iniciar sesión</h5>
-            <button // X Button
+            <button
               onClick={onClose}
               type="button"
               className="btn-close cursor-pointer"
               data-bs-dismiss="modal"
               aria-label="Close"
-            ></button>
+            />
           </div>
           <form onSubmit={handleSubmit}>
             <div className="modal-body d-flex flex-column">
@@ -72,18 +51,20 @@ const SignInModal = ({loggedInCallback, onClose }) => {
                     className="form-control"
                     id="email"
                     name="email"
-                    onChange={onMailInputChange}
+                    value={userMail}
+                    onChange={(e) => setUserMail(e.target.value)}
                   />
                 </div>
 
                 <div className="mb-3">
-                  <label htmlFor="password">Constraseña</label>
+                  <label htmlFor="password">Contraseña</label>
                   <input
                     type="password"
                     className="form-control"
                     id="password"
                     name="password"
-                    onChange={onPassInputChange}
+                    value={userPass}
+                    onChange={(e) => setUserPass(e.target.value)}
                   />
                 </div>
               </section>
@@ -94,19 +75,17 @@ const SignInModal = ({loggedInCallback, onClose }) => {
                   value=""
                   id="flexCheckDefault"
                 />
-                <label className="form-check-label" for="flexCheckDefault">
+                <label className="form-check-label" htmlFor="flexCheckDefault">
                   Mantener la sesión
                 </label>
               </section>
             </div>
 
-            {
-              mostraUsuarioIncorrectoMsg? 
-                <div className="wrong_input">
-                  <p>correo y/o contraseña incorrecta</p>
-                </div>
-                :<div/> // no mostrar cartel
-            }
+            {showIncorrectUserMsg && (
+              <div class="login-error alert alert-danger" role="alert">
+                Correo y/o contraseña incorrecta
+              </div>
+            )}
 
             <div className="modal-footer d-flex justify-content-center">
               <button type="submit" className="btn btn-success">
