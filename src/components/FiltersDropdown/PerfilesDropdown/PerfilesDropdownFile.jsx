@@ -39,7 +39,7 @@ export default function PerfilesDropdown({
   const handleOnChange = (e) => {
     setSelectedOption(e);
     if (setProfilesFilter != null) setProfilesFilter(e);
-    selectionChangedCallback(e);
+    // selectionChangedCallback(e);
   };
 
   return (
@@ -47,7 +47,7 @@ export default function PerfilesDropdown({
       className="filterDropdown"
       defaultValue={selectedOption}
       onChange={handleOnChange}
-      options={profileOptions}
+      options={profilesOptions}
       isMulti={true}
       placeholder={placeholder != null ? placeholder : "Perfil"}
     />

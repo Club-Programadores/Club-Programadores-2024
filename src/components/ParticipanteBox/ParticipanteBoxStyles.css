@@ -41,13 +41,22 @@
   display: flex;
   flex-wrap: wrap;
   height: auto;
-  gap: 5px;
+  gap: 8px;
+  padding: 0px;
 }
 
-.profiles h3 {
-  margin-right: 10px;
-  font-size: 20px;
-  color: black;
+.profiles p {
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  color: white;
+  background-color: #3f72af;
+  font-size: 12px;
+  font-weight: 500;
+  /* margin: 5px 10px; */
+  margin: 0;
+  text-align: center;
+  padding: 4px 8px;
 }
 
 .tecnologias {
@@ -73,22 +82,4 @@
   width: 40px;
   height: 40px;
   margin: 10px;
-}
-
-.profilesContainer {
-  max-width: fit-content;
-  border-radius: 10px;
-  background-color: #3f72af;
-  color: white;
-  /* margin: 0 5px 5px 0; */
-  padding: 0px;
-  justify-content: center;
-  align-items: center;
-}
-
-.profilesContainer p {
-  padding: 0px;
-  font-size: 12px;
-  margin: 5px 10px;
-  text-align: center;
 }

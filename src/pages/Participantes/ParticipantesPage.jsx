@@ -1,15 +1,15 @@
 import { useState } from "react";
 import SearchBar from "../../components/SearchBar/searchBarFile.jsx";
-import InteresesDropdown from "../../components/FiltersDropdown/PerfilesDropdown/PerfilesDropdownFile.jsx";
-import SkillsDropdown from "../../components/FiltersDropdown/TechnologyDropdown/TechnologyDropdown.jsx";
+import PerfilesDropdown from "../../components/FiltersDropdown/PerfilesDropdown/PerfilesDropdownFile.jsx";
+import TechnologyDropdown from "../../components/FiltersDropdown/TechnologyDropdown/TechnologyDropdown.jsx";
 import ParticipantesList from "../../components/ParticipantesList//ParticipantesList";
 import participantesJson from "../../../assets/miembros.json";
 import ".//ParticipantesStyles.css";
 
 function ParticipantesPage() {
   const [search, setSearch] = useState("");
-  const [interesesFilter, setInteresesFilter] = useState([]);
-  const [skillsFilter, setSkillsFilter] = useState([]);
+  const [profilesFilter, setProfilesFilter] = useState([]);
+  const [technologyFilter, setTechnologyFilter] = useState([]);
   const [showDropdowns, setShowDropdowns] = useState(false);
 
   let participantes = JSON.parse(JSON.stringify(participantesJson)).miembros;
@@ -20,21 +20,21 @@ function ParticipantesPage() {
         participante.nombre.toLowerCase().startsWith(search.toLowerCase())
       );
     }
-    if (interesesFilter.length != 0) {
+    if (profilesFilter.length != 0) {
       participantes = participantes.filter((participante) =>
-        interesesFilter.every((interes) =>
-          participante.intereses
+        profilesFilter.every((profile) =>
+          participante.profiles
             .map((i) => i.toLowerCase())
-            .includes(interes.label.toLowerCase())
+            .includes(profile.label.toLowerCase())
         )
       );
     }
-    if (skillsFilter.length != 0) {
+    if (technologyFilter.length != 0) {
       participantes = participantes.filter((participante) =>
-        skillsFilter.every((skill) =>
-          participante.skills
+        technologyFilter.every((technology) =>
+          participante.technology
             .map((i) => i.nombre.toLowerCase())
-            .includes(skill.label.toLowerCase())
+            .includes(technology.label.toLowerCase())
         )
       );
     }
@@ -49,13 +49,13 @@ function ParticipantesPage() {
         setShowDropdowns={setShowDropdowns}
       />
       <div className={showDropdowns ? "filter container-sm" : "hidden"}>
-        <InteresesDropdown
+        <PerfilesDropdown
           className="filterDropdown"
-          setInteresesFilter={setInteresesFilter}
+          setProfilesFilter={setProfilesFilter}
         />
-        <SkillsDropdown
+        <TechnologyDropdown
           className="filterDropdown"
-          setSkillsFilter={setSkillsFilter}
+          setTechnologyFilter={setTechnologyFilter}
         />
       </div>
       <ParticipantesList participantes={filteredParticipantes()} />

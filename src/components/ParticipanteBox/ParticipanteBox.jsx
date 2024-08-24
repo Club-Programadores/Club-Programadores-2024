@@ -18,8 +18,8 @@ export default function ParticipanteBox(participante) {
         <div className="participanteInfo">
           <h1>{participante.data.nombre}</h1>
           <div className="profiles">
-            {participante.data.profiles.map((interes) => {
-              return <p data={interes.toUpperCase()}></p>;
+            {participante.data.profiles.map((profiles) => {
+              return <p>{profiles.toUpperCase()}</p>;
             })}
           </div>
         </div>

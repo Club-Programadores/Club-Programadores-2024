@@ -19,14 +19,14 @@ export const technologyOptions = [
 export default function TechnologyDropdown({
   selectionChangedCallback,
   placeholder,
-  setTechnologysFilter,
+  setTechnologyFilter,
 }) {
   const [selectedOption, setSelectedOption] = useState(null);
 
   const handleOnChange = (e) => {
     setSelectedOption(e);
-    if (setTechnologysFilter != null) setTechnologysFilter(e);
-    selectionChangedCallback(e);
+    if (setTechnologyFilter != null) setTechnologyFilter(e);
+    // selectionChangedCallback(e);
   };
 
   return (
@@ -34,7 +34,7 @@ export default function TechnologyDropdown({
       className="filterDropdown"
       defaultValue={selectedOption}
       onChange={handleOnChange}
-      options={technologysOptions}
+      options={technologyOptions}
       isMulti={true}
       placeholder={placeholder != null ? placeholder : "Tecnologías"}
     />
