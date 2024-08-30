@@ -70,7 +70,7 @@ function ModalsHandler({onSignedUp, onLogueado}) {
   } = useModal();
 
   const [userData, setUserData] = useState({
-    name: "",
+    email: "",
     pass: ""
   });
 
@@ -80,8 +80,9 @@ function ModalsHandler({onSignedUp, onLogueado}) {
         <SignUpAModal
           onClose={toggleSignUpA}
           handleNext={e => {
+            console.log(e)
             setUserData({
-              name: e.name,
+              email: e.email,
               pass: e.pass,
             });
             handleNext();

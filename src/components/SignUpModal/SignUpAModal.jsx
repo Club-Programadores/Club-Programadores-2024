@@ -1,37 +1,72 @@
-import React,{ useState } from "react";
+import React,{useCallback, useEffect, useState } from "react";
 import "./SignUpModals.css";
 
 const SignUpAModal = ({ onClose, handleLoginRedirect, handleNext }) => {
-
-  let userMail;
-  let userPass;
-  let userPass2;
-
+  const url = 'http://127.0.0.1:5000/usuarios';
+  
   const [mostraRegistroRechazadoMsg, setMostrarRegistroRechazadoMsg] = useState(false);
   const [registroRechazadoMsg, setRegistroRechazadoMsg] = useState("");
+  const [correoYaRegistrado, setCorreoYaRegistrado] = useState(false);
+
+  const [userEmailInput, setUserEmailInput] = useState("");
+  const [userPassInput, setUserPassInput] = useState("");
+  const [userPass2Input, setUserPass2Input] = useState("");
+  let tempUserEmailInput = userEmailInput;
+  let tempUserPassInput = userPassInput;
+  let tempUserPass2Input = userPass2Input;
+
 
   const correoYContraseñaValida = () =>{
     var re = /\S+@\S+\.\S+/;
-    if(!userMail){
+    if(!userEmailInput){
       setRegistroRechazadoMsg("El correo no puede estar vacio!");
       return false;
     }
-    else if(!re.test(userMail)){
-      setRegistroRechazadoMsg("Correo incorrecto!");
+    else if(!re.test(userEmailInput)){
+      setRegistroRechazadoMsg("Formato del Correo incorrecto!");
       return false;
     }
-    else if(!userPass){
+    else if(!userPassInput){
       setRegistroRechazadoMsg("La contraseña no puede estar vacia!");
       return false;
     }
-    else if(userPass !== userPass2){
+    else if(userPassInput !== userPass2Input){
       setRegistroRechazadoMsg("Las contraseñas no coinciden!");
+      return false;
+    }
+    else if(correoYaRegistrado){
+      setRegistroRechazadoMsg("El correo ingresado ya esta en uso!!");
       return false;
     }
 
     return true;
   }
 
+  const fetchData = useCallback(async () => { 
+    try{   
+      const apiUrl = url+`?email=${tempUserEmailInput}`;
+      const  response = await fetch(apiUrl);
+
+      const responseData = await response.json();
+      if(responseData.mensaje == 'Usuario no encontrado'){
+        setCorreoYaRegistrado(false)
+      }
+      else{
+        setCorreoYaRegistrado(true)
+      }
+    }
+    catch(error){
+      // console.log(error)
+    }
+
+    setUserEmailInput(tempUserEmailInput);
+    setUserPassInput(tempUserPassInput);
+    setUserPass2Input(tempUserPass2Input);
+  })
+  
+  useEffect(()=>{
+    fetchData();
+  }, [url, fetchData])
 
   const handleSubmit = (e) => {
     if(correoYContraseñaValida() == false){
@@ -42,19 +77,22 @@ const SignUpAModal = ({ onClose, handleLoginRedirect, handleNext }) => {
     }
 
     handleNext({
-      name: userMail,
-      pass: userPass
+      email: userEmailInput,
+      pass: userPassInput
     })
   };
 
   const onMailInputChange = (e) =>{
-    userMail = e.target.value;
+    tempUserEmailInput = e.target.value;
+    fetchData();
   }
   const onPassInputChange = (e) =>{
-    userPass = e.target.value;
+    tempUserPassInput = e.target.value;
+    fetchData();
   }
   const onPass2InputChange = (e) =>{
-    userPass2 = e.target.value;
+    tempUserPass2Input = e.target.value;
+    fetchData();
   }
 
   return (

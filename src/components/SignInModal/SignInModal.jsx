@@ -1,55 +1,81 @@
-import React,{ useState } from "react";
+import React,{useCallback, useEffect, useState } from "react";
 
 import "./SignInModal.css"
 
-/*
-BUG: userPass pasa a undefined la primera vez que se hace click en Entrar. 
-De estar bien la contraseña y corregirse el correo no va a permitir ingresar. Se soluciona modificando la contraseña y borrando el cambio.
-*/
-
 const SignInModal = ({loggedInCallback, onClose }) => {
-
-  let userMail;
-  let userPass;
-
-  const testUserMail = "a@b.com"
-  const testUserPass = 1234
+  const url = 'http://127.0.0.1:5000/usuarios';
 
   const [mostraUsuarioIncorrectoMsg, setMostarUsuarioIncorrectoMsg] = useState(false);
+  const [userEmailInput, setUserEmailInput] = useState("");
+  const [userPassInput, setUserPassInput] = useState("");
+  
+  const [datosUsuario, setDatosUsuario] = useState({
+    nombre: "",
+    email: ""
+  });
 
-  const correoYContraseñaValido = () =>{
-    if(userMail == testUserMail && userPass == testUserPass){
-      return true
+  const [datosLoginValidos, setDatosLoginValidos] = useState(false);
+  let tempUserEmailInput = userEmailInput;
+  let tempUserPassInput = userPassInput;
+
+  const fetchData = useCallback(async () => { 
+    try{   
+
+      const apiUrl = url+`?email=${tempUserEmailInput}`;
+      const  response = await fetch(apiUrl);
+
+      const responseData = await response.json();
+      const userData = await responseData.usuarios[0];
+
+      console.log(2)
+      console.log(`${userData.password} != ${tempUserPassInput}`)
+      if(userData.password != tempUserPassInput){
+        setDatosLoginValidos(false);
+      }
+      else{
+        setDatosUsuario({
+          nombre: `${userData.nombre} ${userData.apellido}`,
+          email: userData.email
+        })
+        
+        setDatosLoginValidos(true);
+      }
     }
-    else{
-      return false
+    catch(error){
+      console.log(error)
     }
-  }
+
+    setUserEmailInput(tempUserEmailInput);
+    setUserPassInput(tempUserPassInput);
+  })
+  
+  useEffect(()=>{
+    fetchData();
+  }, [url, fetchData])
 
   const handleSubmit = (e) => {
-    if(correoYContraseñaValido() == false){
+    console.log(datosLoginValidos)
+    if(datosLoginValidos){
+      loggedInCallback(datosUsuario);
+  
+      onClose();
+    }
+    else{
       if(!mostraUsuarioIncorrectoMsg){
         setMostarUsuarioIncorrectoMsg(true)
       }
     }
-    else{
-      e.preventDefault();
-  
-      const datosUsuario = {
-        nombre: userMail,
-        email: userMail
-      }
-      loggedInCallback(datosUsuario);
-
-      onClose();
-    }
   };
   
   const onMailInputChange = (e) =>{
-    userMail = e.target.value;
+    tempUserEmailInput = e.target.value;
+    // setUserEmailInput(e.target.value);
+    fetchData();
   }
   const onPassInputChange = (e) =>{
-    userPass = e.target.value;
+    tempUserPassInput = e.target.value;
+    // setUserPassInput(e.target.value);
+    fetchData();
   }
 
   return (
@@ -66,7 +92,6 @@ const SignInModal = ({loggedInCallback, onClose }) => {
               aria-label="Close"
             ></button>
           </div>
-          <form onSubmit={handleSubmit}>
             <div className="modal-body d-flex flex-column">
               <section className="d-flex flex-column">
                 <div className="mb-3">
@@ -113,11 +138,10 @@ const SignInModal = ({loggedInCallback, onClose }) => {
             }
 
             <div className="modal-footer d-flex justify-content-center">
-              <button type="submit" className="btn btn-success">
+              <button onClick={handleSubmit} className="btn btn-success">
                 Entrar
               </button>
             </div>
-          </form>
         </div>
       </div>
     </div>

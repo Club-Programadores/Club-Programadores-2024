@@ -4,8 +4,10 @@ import InteresesDropdown from "../FiltersDropdown/InteresesDropdown/InteresesDro
 import SkillsDropdown from "../FiltersDropdown/SkillsDropdown/SkillsDropdownFile"
 
 const SignUpBModal = ({userData, signedUpCallback, onClose, handleBack }) => {
+  const url = 'http://127.0.0.1:5000/registrar';
+
   const [formData, setFormData] = useState({
-    email: userData.name,
+    email: userData.email,
     pass: userData.pass,
     nombres: "",
     apellidos: "",
@@ -29,8 +31,8 @@ const SignUpBModal = ({userData, signedUpCallback, onClose, handleBack }) => {
       nombres: formData.nombres,
       apellidos: formData.apellidos,
       bio: formData.bio,
-      skills: e,
-      intereses: formData.itereses,
+      skills: formData.skills,
+      intereses: e,
     });
   }
   const handleSkillsChange = e =>{
@@ -40,23 +42,38 @@ const SignUpBModal = ({userData, signedUpCallback, onClose, handleBack }) => {
       nombres: formData.nombres,
       apellidos: formData.apellidos,
       bio: formData.bio,
-      skills: formData.skills,
-      intereses: e,
+      skills: e,
+      intereses: formData.intereses,
     });
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
-    const nuevoMiembro = {
-      nombres: formData.nombres,
-      apellidos: formData.apellidos,
-      email: formData.email,
-      bio: formData.bio,
-      intereses: formData.intereses,
-      skills: formData.skills,
+    
+    console.log(formData)
+    const nuevoMiembro = { 
+      "nombre": formData.nombres,
+      "apellido": formData.apellidos,
+      "email": formData.email,
+      "password": formData.pass,
+      "informacion_adicional": formData.bio,
+      "imagen": "url",
+      "perfiles": formData.intereses,
+      "lenguajes": formData.skills.map(x => {
+        x = x.toLowerCase();
+        return {x: 1}
+      })
     };
-    miembrosMaster.miembros.push(nuevoMiembro);
+
+    console.log(nuevoMiembro)
+
+    fetch(url,{
+      method: "POST",
+      body: JSON.stringify(nuevoMiembro),
+      headers: {
+      "Content-Type": "application/json",
+      "Accept": "*/*"
+      }});
 
     const datosUsuario = {
       nombre: `${formData.nombres} ${formData.apellidos}`,

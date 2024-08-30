@@ -3,7 +3,6 @@ import SearchBar from "../../components/SearchBar/searchBarFile.jsx";
 import InteresesDropdown from "../../components/FiltersDropdown/InteresesDropdown/InteresesDropdownFile.jsx";
 import SkillsDropdown from "../../components/FiltersDropdown/SkillsDropdown/SkillsDropdownFile.jsx";
 import ParticipantesList from "../../components/ParticipantesList//ParticipantesList";
-import participantesJson from "../../../assets/miembros.json";
 import ".//ParticipantesStyles.css";
 
 function ParticipantesPage() {
@@ -13,10 +12,10 @@ function ParticipantesPage() {
   const [showDropdowns, setShowDropdowns] = useState(false);
   const [participantes, setParticipantes] = useState([])
 
-  let usuarios;
+  let tempParticipantes = participantes;
   
   function usuarios2Participantes(usuariosJson){
-    let participantes = [];
+    let lista = [];
     usuariosJson.forEach(usuario => {
       let participante = {
         "id":usuario.id,
@@ -27,34 +26,34 @@ function ParticipantesPage() {
         "intereses":usuario.perfiles,
         "skills": Object.keys(usuario.lenguaje_nivel).map(x => {
           return{
-            "nombre": x,
+            "nombre": x.toLowerCase(),
             "nivel": 1
           }
         })
       }
-      participantes.push(participante)
+      lista.push(participante)
     });
-    return participantes;
+    return lista;
   }
 
   useEffect(()=>{
     async function getData(){
-      let response = await fetch("http://127.0.0.1:5000/usuarios")
+      const response = await fetch("http://127.0.0.1:5000/usuarios")
       if (!response.ok) {
         throw new Error(`Response status: ${response.status}`);
       }
-      let responseData = await response.json();
-      usuarios = responseData.usuarios;
-      setParticipantes(usuarios2Participantes(usuarios))
+      const responseData = await response.json();
+      const usuarios = responseData.usuarios;
+      setParticipantes(usuarios2Participantes(usuarios));
     }
     getData();
   },[])
   
   const filteredParticipantes = () => {
     if (search != "") {
-      participantes = participantes.filter((participante) =>
+      setParticipantes(participantes.filter((participante) =>
         participante.nombre.toLowerCase().startsWith(search.toLowerCase())
-      );
+      ));
     }
     if (interesesFilter.length != 0) {
       participantes = participantes.filter((participante) =>
