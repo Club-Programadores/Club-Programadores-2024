@@ -1,41 +1,57 @@
-import {
-  BrowserRouter,
-  Route,
-  Routes, 
-  useLocation
-} from "react-router-dom";
-
-import HomePage from './/pages//Home//HomePage'
-import ParticipantesPage from './/pages//Participantes//ParticipantesPage'
-import ProyectosPage from './/pages//Proyectos//ProyectosPage'
-
-import './App.css'
+import React, { useState, useCallback } from "react";
+import { ModalProvider } from "./components/ModalsHandler";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { LandingPage } from "./pages/LandingPage";
+import ParticipantesPage from "./pages/ParticipantesPage";
+import ProyectosPage from "./pages/ProyectosPage";
+import { Navbar } from "./components/Navbar";
+import { Footer } from "./components/Footer";
+import "./globals.css";
 
 export default function App() {
-  return(
-      <BrowserRouter>
-        <div>
-          <Routes>
-              <Route path="/" element={<HomePage/>} />
-              <Route path="/about-us" element={<HomePage/>} />
-              <Route path="/contact-us" element={<HomePage/>} />
-              <Route path="/participantes" element={<ParticipantesPage/>} />
-              <Route path="/proyectos" element={<ProyectosPage/>} />
+  const [isLogged, setLogged] = useState(true);
 
-              <Route path="*" element={<NotFound/>} />
-          </Routes>
-        </div>
+  const onIniciarSesion = useCallback(() => {
+    setLogged(true);
+    console.log("Usuario logueado");
+  }, []);
+
+  const onRegistrarse = useCallback(() => {
+    setLogged(true);
+    console.log("Usuario registrado");
+  }, []);
+
+  const onCerrarSesion = useCallback(() => {
+    setLogged(false);
+    console.log("Sesión cerrada");
+  }, []);
+
+  return (
+    <BrowserRouter>
+      <ModalProvider
+        onIniciarSesion={onIniciarSesion}
+        onRegistrarse={onRegistrarse}
+        onCerrarSesion={onCerrarSesion}
+      >
+        <Navbar isLogged={isLogged} logOutCallback={onCerrarSesion} />
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/about-us" element={<LandingPage />} />
+          <Route path="/contact-us" element={<LandingPage />} />
+          <Route path="/participantes" element={<ParticipantesPage />} />
+          <Route path="/proyectos" element={<ProyectosPage />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+        <Footer />
+      </ModalProvider>
     </BrowserRouter>
   );
 }
 
-
-
-
 function NotFound() {
   return (
-    <div>
-        <h2>404</h2>
+    <div className="justify-center text-center mt-12">
+      <h1 className="text-7xl py-[20%]">404</h1>
     </div>
   );
 }

@@ -1,51 +1,60 @@
-import Interes from '..//Intereses//interes'
-import skillNameToImageSource from  '../../../public/tools/SkillNameToImageSource'
+import { Card, CardContent } from "@/components/ui/card";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import techNameToImage from "../../../public/tools/techNameToImage";
 
-import './ParticipanteBoxStyles.css'
+export default function ParticipanteBox({ data }) {
+  const participanteImageUrl =
+    data.imageUrl ||
+    "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png";
 
-export default function ParticipanteBox(participante){
-
-
-    const participanteImageUrl = () =>{
-        if(participante.data.imageUrl != ''){
-            return participante.data.imageUrl;
-        }
-        //Default participante image
-        return "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png";
-    }
-
-    return (
-        <div className='participanteBox container row'>
-            <div className='col-12 col-md-8' style={{display: 'flex'}}>
-                <div className='profilePic'>
-                    <img src={participanteImageUrl()}/>
-                </div>
-                <div className='participanteInfo'>
-                    <h1>{participante.data.nombre}</h1>
-                    <div className='intereses'>
-                        <h3>Intereses:</h3>
-                        {
-                            participante.data.intereses.map((interes)=>{
-                                return(
-                                    <Interes data={interes.toUpperCase()}></Interes>
-                                )
-                            })
-                        }
-                    </div>
-                </div>
+  return (
+    <Card className="overflow-hidden mb-6 hover:shadow-lg transition-shadow duration-300 h-full flex flex-col">
+      <CardContent className="p-0 flex flex-col h-full">
+        <div className="flex-grow flex flex-col md:flex-row">
+          <div className="md:w-1/3 bg-gradient-to-br from-purple-500 to-indigo-600 p-6 text-white flex flex-col justify-center items-center">
+            <Avatar className="w-24 h-24 mx-auto mb-4 ring-4 ring-white">
+              <AvatarImage src={participanteImageUrl} alt={data.nombre} />
+            </Avatar>
+            <h2 className="text-2xl font-bold text-center mb-2">
+              {data.nombre}
+            </h2>
+            <div className="flex flex-wrap justify-center gap-2">
+              {data.profiles.map((profile) => (
+                <span
+                  key={profile}
+                  className="px-2 py-1 bg-white bg-opacity-20 rounded-full text-xs font-semibold"
+                >
+                  {profile.toUpperCase()}
+                </span>
+              ))}
             </div>
-            <div className='col-12 col-md-4' style={{paddingTop : '10px'}}>
-                <h3 style={{fontSize:'20px', margin:'0px'}}>SKILLS</h3>
-                <div className='iconsContainer'>
-                    {
-                        participante.data.skills.map((skill)=>{
-                            return(
-                                <img src={skillNameToImageSource(skill.nombre)}/>
-                            )
-                        })
-                    }
+          </div>
+          <div className="md:w-2/3 p-6 flex flex-col">
+            <h3 className="text-lg font-semibold mb-4 text-gray-700">
+              TECNOLOGÍAS
+            </h3>
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4 flex-grow">
+              {data.technology.map((tech) => (
+                <div
+                  key={tech.nombre}
+                  className="flex flex-col items-center group"
+                >
+                  <div className="w-12 h-12 flex items-center justify-center bg-gray-100 rounded-full p-2 group-hover:bg-gray-200 transition-colors duration-200">
+                    <img
+                      src={techNameToImage(tech.nombre)}
+                      alt={tech.nombre}
+                      className="w-8 h-8 object-contain"
+                    />
+                  </div>
+                  <span className="text-xs mt-2 text-center text-gray-600 group-hover:text-gray-900 transition-colors duration-200">
+                    {tech.nombre}
+                  </span>
                 </div>
+              ))}
             </div>
+          </div>
         </div>
-    )
+      </CardContent>
+    </Card>
+  );
 }

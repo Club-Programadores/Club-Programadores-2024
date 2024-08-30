@@ -1,31 +1,47 @@
+import { motion } from "framer-motion";
+import NuevoProyectoBox from "../ProyectosBoxes/NuevoProyectoBox/NuevoProyectoBoxFile";
+import ProyectoEnDesarrolloBox from "../ProyectosBoxes/ProyectoEnDesarrolloBox/proyectoEnDesarrolloBoxFile";
+import ProyectoFinalizadoBox from "../ProyectosBoxes/ProyectoFinalizadoBox/ProyectoFinalizadoBoxFile";
 
-import NuevoProyectoBox from '../ProyectosBoxes//NuevoProyectoBox//NuevoProyectoBoxFile'
-import ProyectoEnDesarrolloBox from '../ProyectosBoxes/ProyectoEnDesarrolloBox/proyectoEnDesarrolloBoxFile'
-import ProyectoFinalizadoBox from '../ProyectosBoxes//ProyectoFinalizadoBox//ProyectoFinalizadoBoxFile'
+const container = {
+  hidden: { opacity: 1, scale: 0 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      delayChildren: 0.3,
+      staggerChildren: 0.2,
+    },
+  },
+};
 
-import './proyectosListStyles.css'
+const item = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+  },
+};
 
-export default function ProyectosList(props){
-    return(
-        <div className="proyectosList">
-        {
-            props.proyectos.map((proyecto)=>{
-                switch(proyecto.estado){
-                    case 'nuevo':
-                        return (
-                            <NuevoProyectoBox key={proyecto.id} data={proyecto}/>
-                        )
-                    case 'en_desarrollo':
-                        return (
-                            <ProyectoEnDesarrolloBox key={proyecto.id} data={proyecto}/>
-                        )
-                    case 'finalizado':
-                        return (
-                            <ProyectoFinalizadoBox key={proyecto.id} data={proyecto}/>
-                        )
-                }
-            })
-        }
-        </div>
-    )
+export default function ProyectosList({ proyectos }) {
+  return (
+    <motion.div
+      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+      variants={container}
+      initial="hidden"
+      animate="visible"
+    >
+      {proyectos.map((proyecto) => (
+        <motion.div key={proyecto.id} variants={item}>
+          {proyecto.estado === "nuevo" && <NuevoProyectoBox data={proyecto} />}
+          {proyecto.estado === "en_desarrollo" && (
+            <ProyectoEnDesarrolloBox data={proyecto} />
+          )}
+          {proyecto.estado === "finalizado" && (
+            <ProyectoFinalizadoBox data={proyecto} />
+          )}
+        </motion.div>
+      ))}
+    </motion.div>
+  );
 }
