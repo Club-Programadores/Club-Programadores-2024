@@ -1,30 +1,28 @@
 import React, { useState, useCallback } from "react";
 import { ModalProvider } from "./components/ModalsHandler";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import HomePage from "./pages/Home/HomePage";
-import ParticipantesPage from "./pages/Participantes/ParticipantesPage";
-import ProyectosPage from "./pages/Proyectos/ProyectosPage";
-import Navbar from "./components/Navbar/Navbar";
-import Navbar_User from "./components/Navbar-User/Navbar_User";
-import Footer from "./components/Footer/Footer";
-
-import "./App.css";
+import { LandingPage } from "./pages/LandingPage";
+import ParticipantesPage from "./pages/ParticipantesPage";
+import ProyectosPage from "./pages/ProyectosPage";
+import { Navbar } from "./components/Navbar";
+import { Footer } from "./components/Footer";
+import "./globals.css";
 
 export default function App() {
-  const [isLogueado, setLogueado] = useState(false);
+  const [isLogged, setLogged] = useState(true);
 
   const onIniciarSesion = useCallback(() => {
-    setLogueado(true);
+    setLogged(true);
     console.log("Usuario logueado");
   }, []);
 
   const onRegistrarse = useCallback(() => {
-    setLogueado(true);
+    setLogged(true);
     console.log("Usuario registrado");
   }, []);
 
   const onCerrarSesion = useCallback(() => {
-    setLogueado(false);
+    setLogged(false);
     console.log("Sesión cerrada");
   }, []);
 
@@ -35,15 +33,11 @@ export default function App() {
         onRegistrarse={onRegistrarse}
         onCerrarSesion={onCerrarSesion}
       >
-        {isLogueado ? (
-          <Navbar_User logOutCallback={onCerrarSesion} />
-        ) : (
-          <Navbar />
-        )}
+        <Navbar isLogged={isLogged} logOutCallback={onCerrarSesion} />
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/about-us" element={<HomePage />} />
-          <Route path="/contact-us" element={<HomePage />} />
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/about-us" element={<LandingPage />} />
+          <Route path="/contact-us" element={<LandingPage />} />
           <Route path="/participantes" element={<ParticipantesPage />} />
           <Route path="/proyectos" element={<ProyectosPage />} />
           <Route path="*" element={<NotFound />} />
@@ -56,8 +50,8 @@ export default function App() {
 
 function NotFound() {
   return (
-    <div>
-      <h1>404</h1>
+    <div className="justify-center text-center mt-12">
+      <h1 className="text-7xl py-[20%]">404</h1>
     </div>
   );
 }
