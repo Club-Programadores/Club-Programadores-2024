@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { LandingPage } from "./pages/LandingPage";
 import ParticipantesPage from "./pages/ParticipantesPage";
 import ProyectosPage from "./pages/ProyectosPage";
+import { SettingsPage } from "./pages/SettingsPage";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import "./globals.css";
