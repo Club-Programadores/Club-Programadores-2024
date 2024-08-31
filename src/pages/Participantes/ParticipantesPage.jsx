@@ -3,6 +3,7 @@ import SearchBar from "../../components/SearchBar/searchBarFile.jsx";
 import InteresesDropdown from "../../components/FiltersDropdown/InteresesDropdown/InteresesDropdownFile.jsx";
 import SkillsDropdown from "../../components/FiltersDropdown/SkillsDropdown/SkillsDropdownFile.jsx";
 import ParticipantesList from "../../components/ParticipantesList//ParticipantesList";
+import Secrets from "../../../private/secrets.json"
 import ".//ParticipantesStyles.css";
 
 function ParticipantesPage() {
@@ -38,7 +39,7 @@ function ParticipantesPage() {
 
   useEffect(()=>{
     async function getData(){
-      const response = await fetch("http://127.0.0.1:5000/usuarios")
+      const response = await fetch(`${Secrets.ApiUrl}/usuarios`)
       if (!response.ok) {
         throw new Error(`Response status: ${response.status}`);
       }

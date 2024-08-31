@@ -1,8 +1,10 @@
 import React,{useCallback, useEffect, useState } from "react";
+import Secrets from "../../../private/secrets.json"
+
 import "./SignUpModals.css";
 
 const SignUpAModal = ({ onClose, handleLoginRedirect, handleNext }) => {
-  const url = 'http://127.0.0.1:5000/usuarios';
+  const apiUrl = `${Secrets.ApiUrl}/usuarios`;
   
   const [mostraRegistroRechazadoMsg, setMostrarRegistroRechazadoMsg] = useState(false);
   const [registroRechazadoMsg, setRegistroRechazadoMsg] = useState("");
@@ -44,8 +46,8 @@ const SignUpAModal = ({ onClose, handleLoginRedirect, handleNext }) => {
 
   const fetchData = useCallback(async () => { 
     try{   
-      const apiUrl = url+`?email=${tempUserEmailInput}`;
-      const  response = await fetch(apiUrl);
+      const apiCallUrl = apiUrl+`?email=${tempUserEmailInput}`;
+      const  response = await fetch(apiCallUrl);
 
       const responseData = await response.json();
       if(responseData.mensaje == 'Usuario no encontrado'){
@@ -66,7 +68,7 @@ const SignUpAModal = ({ onClose, handleLoginRedirect, handleNext }) => {
   
   useEffect(()=>{
     fetchData();
-  }, [url, fetchData])
+  }, [apiUrl, fetchData])
 
   const handleSubmit = (e) => {
     if(correoYContraseñaValida() == false){

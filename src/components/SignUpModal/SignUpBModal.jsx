@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import miembrosMaster from "../../../assets/miembros.json";
 import InteresesDropdown from "../FiltersDropdown/InteresesDropdown/InteresesDropdownFile"
 import SkillsDropdown from "../FiltersDropdown/SkillsDropdown/SkillsDropdownFile"
+import Secrets from "../../../private/secrets.json"
 
 const SignUpBModal = ({userData, signedUpCallback, onClose, handleBack }) => {
-  const url = 'http://127.0.0.1:5000/registrar';
+  const apiCallUrl = `${Secrets.ApiUrl}/registrar`;
 
   const [formData, setFormData] = useState({
     email: userData.email,
@@ -67,7 +67,7 @@ const SignUpBModal = ({userData, signedUpCallback, onClose, handleBack }) => {
 
     console.log(nuevoMiembro)
 
-    fetch(url,{
+    fetch(apiCallUrl,{
       method: "POST",
       body: JSON.stringify(nuevoMiembro),
       headers: {

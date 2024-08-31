@@ -1,9 +1,10 @@
 import React,{useCallback, useEffect, useState } from "react";
+import Secrets from "../../../private/secrets.json"
 
 import "./SignInModal.css"
 
 const SignInModal = ({loggedInCallback, onClose }) => {
-  const url = 'http://127.0.0.1:5000/usuarios';
+  const apiUrl = `${Secrets.ApiUrl}/usuarios`
 
   const [mostraUsuarioIncorrectoMsg, setMostarUsuarioIncorrectoMsg] = useState(false);
   const [userEmailInput, setUserEmailInput] = useState("");
@@ -21,8 +22,8 @@ const SignInModal = ({loggedInCallback, onClose }) => {
   const fetchData = useCallback(async () => { 
     try{   
 
-      const apiUrl = url+`?email=${tempUserEmailInput}`;
-      const  response = await fetch(apiUrl);
+      const apiCallUrl = `${apiUrl}?email=${tempUserEmailInput}`;
+      const  response = await fetch(apiCallUrl);
 
       const responseData = await response.json();
       const userData = await responseData.usuarios[0];
@@ -51,7 +52,7 @@ const SignInModal = ({loggedInCallback, onClose }) => {
   
   useEffect(()=>{
     fetchData();
-  }, [url, fetchData])
+  }, [apiUrl, fetchData])
 
   const handleSubmit = (e) => {
     console.log(datosLoginValidos)

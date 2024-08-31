@@ -11,7 +11,6 @@ import { useState } from "react";
 import "./App.css";
 
 export default function App() {
-
   const [isLogueado, setLogueado] = useState(false);
 
   const [usuario, setUsuario] = useState({
