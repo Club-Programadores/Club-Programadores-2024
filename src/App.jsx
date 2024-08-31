@@ -1,72 +1,73 @@
+import React, { useState, useCallback } from "react";
 import { ModalProvider } from "./components/ModalsHandler";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import HomePage from ".//pages//Home//HomePage";
-import ParticipantesPage from ".//pages//Participantes//ParticipantesPage";
-import ProyectosPage from ".//pages//Proyectos//ProyectosPage";
-import Navbar from "./components/Navbar/Navbar";
-import Navbar_User from "./components/Navbar-User/Navbar_User";
-import Footer from "./components/Footer/Footer";
-import { useState } from "react";
-
-import "./App.css";
+import { LandingPage } from "./pages/LandingPage";
+import ParticipantesPage from "./pages/ParticipantesPage";
+import ProyectosPage from "./pages/ProyectosPage";
+import { SettingsPage } from "./pages/SettingsPage";
+import { Navbar } from "./components/Navbar";
+import { Footer } from "./components/Footer";
+import "./globals.css";
 
 export default function App() {
-  const [isLogueado, setLogueado] = useState(false);
+  const [isLogged, setLogged] = useState(false);
 
   const [usuario, setUsuario] = useState({
     nombre: "",
     email: ""
   });
 
-  const onIniciarSesion = (datosUsuario) => {
+  const onIniciarSesion = useCallback((datosUsuario) => {
     setUsuario({
       nombre: datosUsuario.nombre,
       email: datosUsuario.mail,
     })
-    setLogueado(true)
-  }
-  const onRegistrarse = (datosUsuario) => {
-    setUsuario({
-      nombre: datosUsuario.nombre,
-      email: datosUsuario.mail,
-    })
-    setLogueado(true)
-  }
+    setLogged(true);
+  }, []);
   
-  const cerrarSesion = () => {
+  const onRegistrarse = useCallback((datosUsuario) => {
+    setUsuario({
+      nombre: datosUsuario.nombre,
+      email: datosUsuario.mail,
+    })
+    setLogged(true);
+  }, []);
+
+  const onCerrarSesion = useCallback(() => {
     setUsuario({
       nombre: "",
       email: ""
     })
-    setLogueado(false)
-    console.log(2)
-  }
-
+    setLogged(false);
+  }, []);
 
   return (
     <BrowserRouter>
-      <ModalProvider signedUpCallback={onRegistrarse} loggedInCallback={onIniciarSesion}>
-        {isLogueado?
-          <Navbar_User logOutCallback={cerrarSesion} datosUsuario={usuario}/> : <Navbar />
-        }
+      {/* <ModalProvider signedUpCallback={onRegistrarse} loggedInCallback={onIniciarSesion}></ModalProvider> */}
+      <ModalProvider
+        onIniciarSesion={onIniciarSesion}
+        onRegistrarse={onRegistrarse}
+        onCerrarSesion={onCerrarSesion}
+      >
+        <Navbar isLogged={isLogged} datosUsuario={usuario} logOutCallback={onCerrarSesion} />
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/about-us" element={<HomePage />} />
-          <Route path="/contact-us" element={<HomePage />} />
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/about-us" element={<LandingPage />} />
+          <Route path="/contact-us" element={<LandingPage />} />
           <Route path="/participantes" element={<ParticipantesPage />} />
           <Route path="/proyectos" element={<ProyectosPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
-      </ModalProvider> 
+      </ModalProvider>
     </BrowserRouter>
   );
 }
 
 function NotFound() {
   return (
-    <div>
-      <hB>404</hB>
+    <div className="justify-center text-center mt-12">
+      <h1 className="text-7xl py-[20%]">404</h1>
     </div>
   );
 }
