@@ -56,7 +56,7 @@ function ParticipantesPage() {
       ));
     }
     if (interesesFilter.length != 0) {
-      participantes = participantes.filter((participante) =>
+      tempParticipantes = participantes.filter((participante) =>
         interesesFilter.every((interes) =>
           participante.intereses
             .map((i) => i.toLowerCase())
@@ -65,7 +65,7 @@ function ParticipantesPage() {
       );
     }
     if (skillsFilter.length != 0) {
-      participantes = participantes.filter((participante) =>
+      tempParticipantes = participantes.filter((participante) =>
         skillsFilter.every((skill) =>
           participante.skills
             .map((i) => i.nombre.toLowerCase())
@@ -73,7 +73,7 @@ function ParticipantesPage() {
         )
       );
     }
-    return participantes;
+    return tempParticipantes;
   };
 
   return (
