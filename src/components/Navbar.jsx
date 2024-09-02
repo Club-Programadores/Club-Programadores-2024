@@ -77,7 +77,7 @@ export const Navbar = ({ isLogged, datosUsuario, logOutCallback }) => {
                       <Avatar className="flex mx-auto md:-mr-4 ring-4 ring-white">
                         <AvatarImage
                           className="select-none"
-                          src="https://static.vecteezy.com/system/resources/previews/004/511/281/original/default-avatar-photo-placeholder-profile-picture-vector.jpg"
+                          src={datosUsuario.imagen}
                           alt="Foto de perfil"
                         />
                       </Avatar>

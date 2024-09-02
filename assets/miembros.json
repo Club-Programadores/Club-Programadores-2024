@@ -4,22 +4,22 @@
       "id": 1,
       "nombre": "Diego",
       "apellido": "Bruno",
-      "email": "email@email.com",
-      "password": "unapassword",
-      "bio": "una bio pero de Diego...",
-      "imageUrl": "https://avatars.githubusercontent.com/u/24198690?v=4",
-      "profiles": ["WebDev", "BackEnd", "Teaching"],
-      "technology": [
+      "email": "diego.bruno@gmail.com",
+      "password": "12345678",
+      "informacion_adicional": "una bio pero de Diego...",
+      "imagen": "https://avatars.githubusercontent.com/u/24198690?v=4",
+      "perfiles": ["WebDev", "BackEnd", "Teaching"],
+      "lenguajes": [
         {
-          "nombre": "HTML",
+          "nombre": "html",
           "nivel": 5
         },
         {
-          "nombre": "CSS",
+          "nombre": "css",
           "nivel": 5
         },
         {
-          "nombre": "Javascript",
+          "nombre": "js",
           "nivel": 5
         },
         {
@@ -41,82 +41,38 @@
       ]
     },
     {
-      "id": 2,
-      "nombre": "Abigail",
-      "apellido": "",
-      "email": "email@email.com",
-      "password": "unapassword",
-      "bio": "una bio pero de Maite...",
-      "imageUrl": "",
-      "profiles": ["WebDev", "Teaching"],
-      "technology": [
+      "id": 7,
+      "nombre": "Romina",
+      "apellido": "Aldrovandi",
+      "email": "romina.aldrovandi@gmail.com",
+      "password": "12345678",
+      "informacion_adicional": "una bio...",
+      "imagen": "https://avatars.githubusercontent.com/u/113916711?v=4",
+      "perfiles": ["WebDev", "BackEnd"],
+      "lenguajes": [
         {
-          "nombre": "HTML",
+          "nombre": "html",
           "nivel": 5
         },
         {
-          "nombre": "CSS",
+          "nombre": "css",
           "nivel": 5
         },
         {
-          "nombre": "Javascript",
+          "nombre": "js",
           "nivel": 5
         },
         {
-          "nombre": "React",
-          "nivel": 3
-        },
-        {
-          "nombre": "git",
-          "nivel": 3
-        },
-        {
-          "nombre": "github",
-          "nivel": 3
-        },
-        {
-          "nombre": "vscode",
-          "nivel": 3
-        }
-      ]
-    },
-    {
-      "id": 3,
-      "nombre": "Maite",
-      "apellido": "Arakaki",
-      "email": "email@email.com",
-      "password": "unapassword",
-      "bio": "una bio pero de Maite...",
-      "imageUrl": "https://avatars.githubusercontent.com/u/67213065?v=4",
-      "profiles": ["Networking", "Knowledge Graphs", "Arq. de Información"],
-      "technology": [
-        {
-          "nombre": "HTML",
+          "nombre": "react",
           "nivel": 5
         },
         {
-          "nombre": "CSS",
+          "nombre": "python",
           "nivel": 5
         },
         {
-          "nombre": "Javascript",
+          "nombre": "flask",
           "nivel": 5
-        },
-        {
-          "nombre": "Java",
-          "nivel": 3
-        },
-        {
-          "nombre": "git",
-          "nivel": 3
-        },
-        {
-          "nombre": "github",
-          "nivel": 3
-        },
-        {
-          "nombre": "SPARQL",
-          "nivel": 3
         },
         {
           "nombre": "vscode",
@@ -128,22 +84,22 @@
       "id": 4,
       "nombre": "Bautista",
       "apellido": "Mateo",
-      "email": "email@email.com",
-      "password": "unapassword",
-      "bio": "una bio pero de Bautista...",
-      "imageUrl": "https://vignette.wikia.nocookie.net/flcl/images/f/f3/CantiChar.png/revision/latest/scale-to-width-down/185?cb=20180519071333",
-      "profiles": ["OOP", "GameDev", "BackEnd", "WebDev"],
-      "technology": [
+      "email": "bautista.mateo@gmail.com",
+      "password": "12345678",
+      "informacion_adicional": "una bio pero de Bautista...",
+      "imagen": "https://vignette.wikia.nocookie.net/flcl/images/f/f3/CantiChar.png/revision/latest/scale-to-width-down/185?cb=20180519071333",
+      "perfiles": ["OOP", "GameDev", "BackEnd", "WebDev"],
+      "lenguajes": [
         {
-          "nombre": "HTML",
+          "nombre": "html",
           "nivel": 5
         },
         {
-          "nombre": "CSS",
+          "nombre": "css",
           "nivel": 5
         },
         {
-          "nombre": "Javascript",
+          "nombre": "js",
           "nivel": 5
         },
         {
@@ -155,11 +111,11 @@
           "nivel": 5
         },
         {
-          "nombre": "C#",
+          "nombre": "c#",
           "nivel": 5
         },
         {
-          "nombre": ".net",
+          "nombre": "dotnet",
           "nivel": 5
         },
         {
@@ -189,157 +145,77 @@
       ]
     },
     {
-      "id": 5,
-      "nombre": "Miguel",
-      "apellido": "",
-      "email": "email@email.com",
-      "password": "unapassword",
-      "bio": "una bio...",
-      "imageUrl": "https://avatars.githubusercontent.com/u/132763454?v=4",
-      "profiles": ["WebDev", "BackEnd"],
-      "technology": [
+      "id": 8,
+      "nombre": "Pablo",
+      "apellido": "Estigarribia",
+      "email": "pablo.estigarribia@gmail.com",
+      "password": "12345678",
+      "informacion_adicional": "una bio...",
+      "imagen": "https://i.pinimg.com/564x/2d/73/a5/2d73a5772fd426fca71d8792af9b058d.jpg",
+      "perfiles": ["WebDev", "Frontend"],
+      "lenguajes": [
         {
-          "nombre": "HTML",
+          "nombre": "html",
           "nivel": 5
         },
         {
-          "nombre": "CSS",
+          "nombre": "css",
           "nivel": 5
         },
         {
-          "nombre": "Javascript",
+          "nombre": "js",
           "nivel": 5
         },
         {
-          "nombre": "git",
-          "nivel": 5
-        },
-        {
-          "nombre": "github",
-          "nivel": 5
-        },
-        {
-          "nombre": "vscode",
-          "nivel": 3
-        }
-      ]
-    },
-    {
-      "id": 6,
-      "nombre": "Veronica",
-      "apellido": "",
-      "email": "email@email.com",
-      "password": "unapassword",
-      "bio": "una bio...",
-      "imageUrl": "https://avatars.githubusercontent.com/u/73730459?v=4",
-      "profiles": ["WebDev", "BackEnd"],
-      "technology": [
-        {
-          "nombre": "HTML",
-          "nivel": 5
-        },
-        {
-          "nombre": "CSS",
-          "nivel": 5
-        },
-        {
-          "nombre": "Javascript",
-          "nivel": 5
-        },
-        {
-          "nombre": "Java",
-          "nivel": 5
-        },
-        {
-          "nombre": "mysql",
-          "nivel": 5
-        },
-        {
-          "nombre": "postgresql",
-          "nivel": 5
-        },
-        {
-          "nombre": "php",
-          "nivel": 5
-        },
-        {
-          "nombre": "mongodb",
+          "nombre": "react",
           "nivel": 5
         },
         {
           "nombre": "git",
-          "nivel": 5
+          "nivel": "3"
         },
         {
           "nombre": "github",
-          "nivel": 5
+          "nivel": "3"
         },
         {
-          "nombre": "python",
-          "nivel": 5
-        },
-        {
-          "nombre": "vscode",
-          "nivel": 3
-        }
-      ]
-    },
-    {
-      "id": 7,
-      "nombre": "Romina",
-      "apellido": "",
-      "email": "email@email.com",
-      "password": "unapassword",
-      "bio": "una bio...",
-      "imageUrl": "https://avatars.githubusercontent.com/u/113916711?v=4",
-      "profiles": ["WebDev", "BackEnd"],
-      "technology": [
-        {
-          "nombre": "HTML",
-          "nivel": 5
-        },
-        {
-          "nombre": "CSS",
-          "nivel": 5
-        },
-        {
-          "nombre": "Javascript",
-          "nivel": 5
-        },
-        {
-          "nombre": "React",
-          "nivel": 5
+          "nombre": "shadcn/ui",
+          "nivel": "5"
         },
         {
           "nombre": "vscode",
           "nivel": 3
+        },
+        {
+          "nombre": "tailwind",
+          "nivel": "5"
         }
       ]
     },
     {
       "id": 8,
-      "nombre": "Pablo",
-      "apellido": "",
-      "email": "email@email.com",
-      "password": "unapassword",
-      "bio": "una bio...",
-      "imageUrl": "https://i.pinimg.com/564x/2d/73/a5/2d73a5772fd426fca71d8792af9b058d.jpg",
-      "profiles": ["WebDev", "Frontend"],
-      "technology": [
+      "nombre": "Fede",
+      "apellido": "Tasso",
+      "email": "fede.tasso@gmail.com",
+      "password": "12345678",
+      "informacion_adicional": "una bio...",
+      "imagen": "https://i.pinimg.com/564x/2d/73/a5/2d73a5772fd426fca71d8792af9b058d.jpg",
+      "perfiles": ["WebDev", "Frontend"],
+      "lenguajes": [
         {
-          "nombre": "HTML",
+          "nombre": "html",
           "nivel": 5
         },
         {
-          "nombre": "CSS",
+          "nombre": "css",
           "nivel": 5
         },
         {
-          "nombre": "Javascript",
+          "nombre": "js",
           "nivel": 5
         },
         {
-          "nombre": "React",
+          "nombre": "react",
           "nivel": 5
         },
         {

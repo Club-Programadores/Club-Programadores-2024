@@ -49,7 +49,6 @@ function ParticipantesPage() {
       const responseData = await response.json();
       const usuarios = responseData.usuarios;
       setParticipantes(usuarios2Participantes(usuarios));
-      console.log(usuarios);
     }
     getData();
   },[])

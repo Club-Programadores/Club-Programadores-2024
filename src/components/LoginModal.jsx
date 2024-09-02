@@ -22,6 +22,7 @@ const LoginModal = ({ loggedInCallback, onClose }) => {
 
   const [datosUsuario, setDatosUsuario] = useState({
     nombre: "",
+    imagen: "",
     email: ""
   });
 
@@ -36,14 +37,15 @@ const LoginModal = ({ loggedInCallback, onClose }) => {
       const responseData = await response.json();
       const responseUserData = await responseData.usuarios[0];
 
-      console.log(`${responseUserData.password} != ${userPass}`)
       if(responseUserData.password != userPass){
         setUserCredentialsAreValid(false);
       }
       else{
+        console.log(responseUserData.image)
         setDatosUsuario({
           nombre: `${responseUserData.nombre} ${responseUserData.apellido}`,
-          email: responseUserData.email
+          imagen: `${responseUserData.image}`,
+          email: `${responseUserData.email}`
         })
         
         setUserCredentialsAreValid(true);

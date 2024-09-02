@@ -14,12 +14,14 @@ export default function App() {
 
   const [usuario, setUsuario] = useState({
     nombre: "",
+    imagen: "",
     email: ""
   });
 
   const onIniciarSesion = useCallback((datosUsuario) => {
     setUsuario({
       nombre: datosUsuario.nombre,
+      imagen: datosUsuario.imagen,
       email: datosUsuario.mail,
     })
     setLogged(true);
@@ -28,6 +30,7 @@ export default function App() {
   const onRegistrarse = useCallback((datosUsuario) => {
     setUsuario({
       nombre: datosUsuario.nombre,
+      imagen: datosUsuario.imagen,
       email: datosUsuario.mail,
     })
     setLogged(true);
@@ -36,6 +39,7 @@ export default function App() {
   const onCerrarSesion = useCallback(() => {
     setUsuario({
       nombre: "",
+      imagen: "",
       email: ""
     })
     setLogged(false);

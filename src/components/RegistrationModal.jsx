@@ -27,6 +27,7 @@ const RegistrationModal = ({ signedUpCallback, onClose }) => {
 
   const [step, setStep] = useState(1);
 
+
   const handleSubmit = (formData) => {
     setTimeout(() => {
       const nuevoMiembro = { 
@@ -35,7 +36,7 @@ const RegistrationModal = ({ signedUpCallback, onClose }) => {
         "email": formData.email,
         "password": formData.password,
         "informacion_adicional": formData.bio,
-        "imagen": "url",
+        "imagen": "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png",
         "perfiles": formData.profile,
         "lenguajes": formData.technology.map(x => {
           x = x.toLowerCase();
@@ -55,8 +56,9 @@ const RegistrationModal = ({ signedUpCallback, onClose }) => {
       }});
 
       const datosUsuario = {
-        nombre: `${formData.nombres} ${formData.apellidos}`,
-        email: formData.email
+        nombre: `${formData.firstName} ${formData.lastName}`,
+        imagen: nuevoMiembro.imagen,
+        email: nuevoMiembro.email
       }
       signedUpCallback(datosUsuario);
       

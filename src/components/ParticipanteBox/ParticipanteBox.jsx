@@ -3,6 +3,7 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import techNameToImage from "../../../public/tools/techNameToImage";
 
 export default function ParticipanteBox({ data }) {
+
   const participanteImageUrl =
     data.imageUrl ||
     "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png";
