@@ -36,7 +36,7 @@ export const LandingPage = () => {
         </section>
 
         <section className="mb-12" id="about-us">
-          <h2 className="text-2xl sm:text-3xl font-semibold text-center mb-8" ñ>
+          <h2 className="text-2xl sm:text-3xl font-semibold text-center mb-8">
             El Club de Programadores es un espacio para compartir, practicar y
             colaborar
           </h2>
@@ -50,7 +50,7 @@ export const LandingPage = () => {
             miembros y dar seguimiento a los proyectos.
           </p>
 
-          <seccion className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          <section className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             <Card className="text-center">
               <CardContent className="pt-6">
                 <img
@@ -85,7 +85,7 @@ export const LandingPage = () => {
                 </h3>
               </CardContent>
             </Card>
-          </seccion>
+          </section>
         </section>
 
         <section className="mb-12" id="program-details">
