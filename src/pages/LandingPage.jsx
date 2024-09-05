@@ -54,7 +54,7 @@ export const LandingPage = () => {
             <Card className="text-center">
               <CardContent className="pt-6">
                 <img
-                  src="public\imgs\002-profile.svg"
+                  src="imgs\002-profile.svg"
                   alt="Perfil"
                   className="mx-auto mb-4 w-32"
                 />
@@ -64,7 +64,7 @@ export const LandingPage = () => {
             <Card className="text-center">
               <CardContent className="pt-6">
                 <img
-                  src="public\imgs\004-competence.svg"
+                  src="imgs\004-competence.svg"
                   alt="Skills"
                   className="mx-auto mb-4 w-32"
                 />
@@ -76,7 +76,7 @@ export const LandingPage = () => {
             <Card className="text-center">
               <CardContent className="pt-6">
                 <img
-                  src="public\imgs\005-teamwork.svg"
+                  src="imgs\005-teamwork.svg"
                   alt="Conectar"
                   className="mx-auto mb-4 w-32"
                 />
