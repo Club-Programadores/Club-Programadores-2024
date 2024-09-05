@@ -41,6 +41,7 @@ export default function App() {
           <Route path="/contact-us" element={<LandingPage />} />
           <Route path="/participantes" element={<ParticipantesPage />} />
           <Route path="/proyectos" element={<ProyectosPage />} />
+          <Route path="/settings" element={<SettingsPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />

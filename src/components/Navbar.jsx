@@ -77,7 +77,7 @@ export const Navbar = ({ isLogged, logOutCallback }) => {
                       <Avatar className="flex mx-auto md:-mr-4 ring-4 ring-white">
                         <AvatarImage
                           className="select-none"
-                          src="https://static.vecteezy.com/system/resources/previews/004/511/281/original/default-avatar-photo-placeholder-profile-picture-vector.jpg"
+                          src="https://i.pinimg.com/564x/2d/73/a5/2d73a5772fd426fca71d8792af9b058d.jpg"
                           alt="Foto de perfil"
                         />
                       </Avatar>
@@ -90,17 +90,10 @@ export const Navbar = ({ isLogged, logOutCallback }) => {
 
                     <MenuItem className="cursor-pointer">
                       <User className="cursor-pointer mr-2 h-4 w-4" />
-                      <span>Editar perfil</span>
+                      <span>
+                        <CustomLink to="/settings">Editar perfil</CustomLink>
+                      </span>
                     </MenuItem>
-
-                    <Separator />
-
-                    <MenuItem className="cursor-pointer">
-                      <Edit className="cursor-pointer mr-2 h-4 w-4" />
-                      <span>Editar proyectos</span>
-                    </MenuItem>
-
-                    <Separator />
 
                     <MenuItem className="cursor-pointer">
                       <LogOut className="cursor-pointer mr-2 h-4 w-4" />
