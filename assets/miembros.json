@@ -10,34 +10,13 @@
       "imageUrl": "https://avatars.githubusercontent.com/u/24198690?v=4",
       "profiles": ["WebDev", "BackEnd", "Teaching"],
       "technology": [
-        {
-          "nombre": "HTML",
-          "nivel": 5
-        },
-        {
-          "nombre": "CSS",
-          "nivel": 5
-        },
-        {
-          "nombre": "Javascript",
-          "nivel": 5
-        },
-        {
-          "nombre": "git",
-          "nivel": 3
-        },
-        {
-          "nombre": "github",
-          "nivel": 3
-        },
-        {
-          "nombre": "mysql",
-          "nivel": 3
-        },
-        {
-          "nombre": "vscode",
-          "nivel": 3
-        }
+        "HTML",
+        "CSS",
+        "Javascript",
+        "git",
+        "github",
+        "mysql",
+        "vscode"
       ]
     },
     {
@@ -50,34 +29,13 @@
       "imageUrl": "",
       "profiles": ["WebDev", "Teaching"],
       "technology": [
-        {
-          "nombre": "HTML",
-          "nivel": 5
-        },
-        {
-          "nombre": "CSS",
-          "nivel": 5
-        },
-        {
-          "nombre": "Javascript",
-          "nivel": 5
-        },
-        {
-          "nombre": "React",
-          "nivel": 3
-        },
-        {
-          "nombre": "git",
-          "nivel": 3
-        },
-        {
-          "nombre": "github",
-          "nivel": 3
-        },
-        {
-          "nombre": "vscode",
-          "nivel": 3
-        }
+        "HTML",
+        "CSS",
+        "Javascript",
+        "React",
+        "git",
+        "github",
+        "vscode"
       ]
     },
     {
@@ -90,38 +48,14 @@
       "imageUrl": "https://avatars.githubusercontent.com/u/67213065?v=4",
       "profiles": ["Networking", "Knowledge Graphs", "Arq. de Información"],
       "technology": [
-        {
-          "nombre": "HTML",
-          "nivel": 5
-        },
-        {
-          "nombre": "CSS",
-          "nivel": 5
-        },
-        {
-          "nombre": "Javascript",
-          "nivel": 5
-        },
-        {
-          "nombre": "Java",
-          "nivel": 3
-        },
-        {
-          "nombre": "git",
-          "nivel": 3
-        },
-        {
-          "nombre": "github",
-          "nivel": 3
-        },
-        {
-          "nombre": "SPARQL",
-          "nivel": 3
-        },
-        {
-          "nombre": "vscode",
-          "nivel": 3
-        }
+        "HTML",
+        "CSS",
+        "Javascript",
+        "Java",
+        "git",
+        "github",
+        "SPARQL",
+        "vscode"
       ]
     },
     {
@@ -134,58 +68,19 @@
       "imageUrl": "https://vignette.wikia.nocookie.net/flcl/images/f/f3/CantiChar.png/revision/latest/scale-to-width-down/185?cb=20180519071333",
       "profiles": ["OOP", "GameDev", "BackEnd", "WebDev"],
       "technology": [
-        {
-          "nombre": "HTML",
-          "nivel": 5
-        },
-        {
-          "nombre": "CSS",
-          "nivel": 5
-        },
-        {
-          "nombre": "Javascript",
-          "nivel": 5
-        },
-        {
-          "nombre": "ts",
-          "nivel": 5
-        },
-        {
-          "nombre": "react",
-          "nivel": 5
-        },
-        {
-          "nombre": "C#",
-          "nivel": 5
-        },
-        {
-          "nombre": ".net",
-          "nivel": 5
-        },
-        {
-          "nombre": "vs",
-          "nivel": 5
-        },
-        {
-          "nombre": "vscode",
-          "nivel": 5
-        },
-        {
-          "nombre": "sqlserver",
-          "nivel": 5
-        },
-        {
-          "nombre": "blender",
-          "nivel": 5
-        },
-        {
-          "nombre": "unity",
-          "nivel": 5
-        },
-        {
-          "nombre": "godot",
-          "nivel": 3
-        }
+        "HTML",
+        "CSS",
+        "Javascript",
+        "ts",
+        "react",
+        "C#",
+        ".net",
+        "vs",
+        "vscode",
+        "sqlserver",
+        "blender",
+        "unity",
+        "godot"
       ]
     },
     {
@@ -197,32 +92,7 @@
       "bio": "una bio...",
       "imageUrl": "https://avatars.githubusercontent.com/u/132763454?v=4",
       "profiles": ["WebDev", "BackEnd"],
-      "technology": [
-        {
-          "nombre": "HTML",
-          "nivel": 5
-        },
-        {
-          "nombre": "CSS",
-          "nivel": 5
-        },
-        {
-          "nombre": "Javascript",
-          "nivel": 5
-        },
-        {
-          "nombre": "git",
-          "nivel": 5
-        },
-        {
-          "nombre": "github",
-          "nivel": 5
-        },
-        {
-          "nombre": "vscode",
-          "nivel": 3
-        }
-      ]
+      "technology": ["HTML", "CSS", "Javascript", "git", "github", "vscode"]
     },
     {
       "id": 6,
@@ -234,54 +104,18 @@
       "imageUrl": "https://avatars.githubusercontent.com/u/73730459?v=4",
       "profiles": ["WebDev", "BackEnd"],
       "technology": [
-        {
-          "nombre": "HTML",
-          "nivel": 5
-        },
-        {
-          "nombre": "CSS",
-          "nivel": 5
-        },
-        {
-          "nombre": "Javascript",
-          "nivel": 5
-        },
-        {
-          "nombre": "Java",
-          "nivel": 5
-        },
-        {
-          "nombre": "mysql",
-          "nivel": 5
-        },
-        {
-          "nombre": "postgresql",
-          "nivel": 5
-        },
-        {
-          "nombre": "php",
-          "nivel": 5
-        },
-        {
-          "nombre": "mongodb",
-          "nivel": 5
-        },
-        {
-          "nombre": "git",
-          "nivel": 5
-        },
-        {
-          "nombre": "github",
-          "nivel": 5
-        },
-        {
-          "nombre": "python",
-          "nivel": 5
-        },
-        {
-          "nombre": "vscode",
-          "nivel": 3
-        }
+        "HTML",
+        "CSS",
+        "Javascript",
+        "Java",
+        "mysql",
+        "postgresql",
+        "php",
+        "mongodb",
+        "git",
+        "github",
+        "python",
+        "vscode"
       ]
     },
     {
@@ -293,28 +127,7 @@
       "bio": "una bio...",
       "imageUrl": "https://avatars.githubusercontent.com/u/113916711?v=4",
       "profiles": ["WebDev", "BackEnd"],
-      "technology": [
-        {
-          "nombre": "HTML",
-          "nivel": 5
-        },
-        {
-          "nombre": "CSS",
-          "nivel": 5
-        },
-        {
-          "nombre": "Javascript",
-          "nivel": 5
-        },
-        {
-          "nombre": "React",
-          "nivel": 5
-        },
-        {
-          "nombre": "vscode",
-          "nivel": 3
-        }
-      ]
+      "technology": ["HTML", "CSS", "Javascript", "React", "vscode"]
     },
     {
       "id": 8,
@@ -326,42 +139,15 @@
       "imageUrl": "https://i.pinimg.com/564x/2d/73/a5/2d73a5772fd426fca71d8792af9b058d.jpg",
       "profiles": ["WebDev", "Frontend"],
       "technology": [
-        {
-          "nombre": "HTML",
-          "nivel": 5
-        },
-        {
-          "nombre": "CSS",
-          "nivel": 5
-        },
-        {
-          "nombre": "Javascript",
-          "nivel": 5
-        },
-        {
-          "nombre": "React",
-          "nivel": 5
-        },
-        {
-          "nombre": "git",
-          "nivel": "3"
-        },
-        {
-          "nombre": "github",
-          "nivel": "3"
-        },
-        {
-          "nombre": "shadcn/ui",
-          "nivel": "5"
-        },
-        {
-          "nombre": "vscode",
-          "nivel": 3
-        },
-        {
-          "nombre": "tailwind",
-          "nivel": "5"
-        }
+        "HTML",
+        "CSS",
+        "Javascript",
+        "React",
+        "git",
+        "github",
+        "shadcn/ui",
+        "vscode",
+        "tailwind"
       ]
     }
   ]

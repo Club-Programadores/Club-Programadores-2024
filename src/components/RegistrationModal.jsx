@@ -1,22 +1,23 @@
 import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { userValidationSchema } from "../validationSchema";
-import { profilesOptions } from "./FiltersDropdown/PerfilesDropdown";
-import { technologyOptions } from "./FiltersDropdown/TechnologyDropdown";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
+import aptitudes from "../../assets/aptitudes.json";
 import Select from "react-select";
 
 const RegistrationModal = ({ signedUpCallback, onClose }) => {
   const [step, setStep] = useState(1);
+  const profilesOptions = aptitudes.profilesOptions;
+  const technologyOptions = aptitudes.technologyOptions;
 
   const handleSubmit = (values) => {
     setTimeout(() => {

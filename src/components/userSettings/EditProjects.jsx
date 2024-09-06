@@ -1,9 +1,10 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { projectValidationSchema } from "@/validationSchema";
+import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { technologyOptions } from "../FiltersDropdown/TechnologyDropdown";
-import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
 import {
   Card,
   CardContent,
@@ -12,183 +13,128 @@ import {
   CardDescription,
   CardFooter,
 } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import Select from "react-select";
 import {
   Select as ShadSelect,
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import Select from "react-select";
 import proyectosJson from "../../../assets/proyectos.json";
-import { projectValidationSchema } from "@/validationSchema";
+import aptitudesJson from "../../../assets/aptitudes.json";
 
 export const EditProjects = () => {
-  const projects = JSON.parse(JSON.stringify(proyectosJson)).proyectos;
-  const currentProject = projects.find((project) => project.id === 1);
-  const normalizeString = (str) => str.toLowerCase().replace(/\s+/g, "");
+  const projects = proyectosJson.proyectos;
+  const currentProject = projects.find((project) => project.id === 1); // <- Cambiar id para probar editar cualquier proyecto
+  const { technologyOptions } = aptitudesJson;
 
-  const initialTechnologyValues = technologyOptions.filter((option) =>
-    currentProject.tecnologías.some(
-      (tech) => normalizeString(tech) === normalizeString(option.value)
-    )
-  );
+  const initialValues = {
+    titulo: currentProject.titulo,
+    descripcion: currentProject.descripcion,
+    url_proyecto: currentProject.url_proyecto,
+    url_pagina: currentProject.url_pagina,
+    estado: currentProject.estado,
+    tecnologías: currentProject.tecnologías.map((tech) => tech.toLowerCase()),
+  };
 
   const handleSubmit = (values) => {
-    setTimeout(() => {
-      console.log(JSON.stringify(values, null, 2));
-    }, 400);
+    console.log(JSON.stringify(values, null, 2));
   };
 
   return (
     <Card>
       <Formik
-        initialValues={{
-          titulo: currentProject.titulo,
-          descripcion: currentProject.descripcion,
-          url_proyecto: currentProject.url_proyecto,
-          url_pagina: currentProject.url_pagina,
-          estado: currentProject.estado,
-          tecnologías: currentProject.tecnologías,
-        }}
+        initialValues={initialValues}
         validationSchema={projectValidationSchema}
         onSubmit={handleSubmit}
       >
-        {({ isSubmitting, setFieldValue }) => (
-          <>
+        {({ isSubmitting, setFieldValue, values }) => (
+          <Form>
             <CardHeader>
               <CardTitle>Proyectos</CardTitle>
               <CardDescription>
                 Edita tus proyectos o añade uno nuevo.
               </CardDescription>
             </CardHeader>
-            <Form>
-              <CardContent className="space-y-2">
-                <div>
-                  <h3 className="pt-2 text-lg font-semibold">
-                    Proyecto actual
-                  </h3>
-
-                  <Label htmlFor="titulo">Título</Label>
-                  <Field
-                    as={Input}
-                    type="text"
-                    id="titulo"
-                    name="titulo"
-                    className="w-full"
-                  />
-                  <ErrorMessage
-                    name="titulo"
-                    component="p"
-                    className="text-red-500 text-sm"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="descripcion">Descripción</Label>
-                  <Field
-                    as={Textarea}
-                    type="text"
-                    id="descripcion"
-                    name="descripcion"
-                    className="w-full"
-                  />
-                  <ErrorMessage
-                    name="descripcion"
-                    component="p"
-                    className="text-red-500 text-sm"
-                  />
-                </div>
-
-                <div>
-                  <Label htmlFor="url_proyecto">URL de repositorio</Label>
-                  <Field
-                    as={Input}
-                    type="text"
-                    id="url_proyecto"
-                    name="url_proyecto"
-                    className="w-full"
-                  />
-                  <ErrorMessage
-                    name="url_proyecto"
-                    component="p"
-                    className="text-red-500 text-sm"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="url_pagina">URL de la página</Label>
-                  <Field
-                    as={Input}
-                    type="text"
-                    id="url_pagina"
-                    name="url_pagina"
-                    className="w-full"
-                  />
-                  <ErrorMessage
-                    name="url_pagina"
-                    component="p"
-                    className="text-red-500 text-sm"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="technology">Tecnologías</Label>
-                  <Select
-                    isMulti
-                    name="technology"
-                    options={technologyOptions}
-                    className="w-full"
-                    value={initialTechnologyValues}
-                    onChange={(selectedOptions) =>
-                      setFieldValue(
-                        "tecnologías",
-                        selectedOptions.map((option) => option.value)
-                      )
-                    }
-                  />
-                  <ErrorMessage
-                    name="technology"
-                    component="p"
-                    className="text-red-500 text-sm"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="estado">Estado</Label>
-                  <Field
-                    as={ShadSelect}
-                    id="estado"
-                    name="estado"
-                    className="w-full"
-                  />
-                  <ShadSelect
-                    onValueChange={(value) => setFieldValue("estado", value)}
-                    defaultValue={currentProject.estado}
-                  >
-                    <SelectTrigger className="w-[180px]">
-                      <SelectValue placeholder="Selecciona el estado" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectItem value="nuevo">Nuevo</SelectItem>
-                        <SelectItem value="en_desarrollo">
-                          En desarrollo
-                        </SelectItem>
-                        <SelectItem value="finalizado">Finalizado</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </ShadSelect>
-                </div>
-              </CardContent>
-              <CardFooter className="mt-0">
-                <Button type="submit" disabled={isSubmitting}>
-                  Guardar
-                </Button>
-              </CardFooter>
-            </Form>
-          </>
+            <CardContent className="space-y-2">
+              <h3 className="pt-2 text-lg font-semibold">Proyecto actual</h3>
+              <FormField label="Título" name="titulo" />
+              <FormField label="Descripción" name="descripcion" as={Textarea} />
+              <FormField label="URL de repositorio" name="url_proyecto" />
+              <FormField label="URL de la página" name="url_pagina" />
+              <SelectField
+                label="Tecnologías"
+                name="tecnologías"
+                options={technologyOptions}
+                setFieldValue={setFieldValue}
+                values={values}
+              />
+              <div>
+                <Label htmlFor="estado">Estado</Label>
+                <ShadSelect
+                  onValueChange={(value) => setFieldValue("estado", value)}
+                  defaultValue={currentProject.estado}
+                >
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Selecciona el estado" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="nuevo">Nuevo</SelectItem>
+                      <SelectItem value="en_desarrollo">
+                        En desarrollo
+                      </SelectItem>
+                      <SelectItem value="finalizado">Finalizado</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </ShadSelect>
+                <ErrorMessage
+                  name="estado"
+                  component="p"
+                  className="text-red-500 text-sm"
+                />
+              </div>
+            </CardContent>
+            <CardFooter className="mt-0">
+              <Button type="submit" disabled={isSubmitting}>
+                Guardar
+              </Button>
+            </CardFooter>
+          </Form>
         )}
       </Formik>
     </Card>
   );
 };
+
+const FormField = ({ label, name, as = Input, ...props }) => (
+  <div>
+    <Label htmlFor={name}>{label}</Label>
+    <Field as={as} id={name} name={name} className="w-full" {...props} />
+    <ErrorMessage name={name} component="p" className="text-red-500 text-sm" />
+  </div>
+);
+
+const SelectField = ({ label, name, options, ...props }) => (
+  <div>
+    <Label htmlFor={name}>{label}</Label>
+    <Select
+      isMulti
+      name={name}
+      options={options}
+      className="w-full"
+      value={options.filter((option) =>
+        props.values[name].includes(option.value)
+      )}
+      onChange={(selectedOptions) =>
+        props.setFieldValue(
+          name,
+          selectedOptions.map((option) => option.value)
+        )
+      }
+    />
+    <ErrorMessage name={name} component="p" className="text-red-500 text-sm" />
+  </div>
+);
