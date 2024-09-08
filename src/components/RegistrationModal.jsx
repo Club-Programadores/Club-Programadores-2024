@@ -162,8 +162,9 @@ const RegistrationModal = ({ signedUpCallback, onClose }) => {
                         <Select
                           isMulti
                           name="profile"
-                          options={profilesOptions}
                           className="w-full"
+                          placeholder="Seleccionar"
+                          options={profilesOptions}
                           onChange={(selectedOptions) =>
                             setFieldValue(
                               "profile",
@@ -182,8 +183,9 @@ const RegistrationModal = ({ signedUpCallback, onClose }) => {
                         <Select
                           isMulti
                           name="technology"
-                          options={technologyOptions}
                           className="w-full"
+                          placeholder="Seleccionar"
+                          options={technologyOptions}
                           onChange={(selectedOptions) =>
                             setFieldValue(
                               "technology",

@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import techNameToImage from "../../../public/tools/techNameToImage";
+import techNameToImage from "../../public/tools/techNameToImage";
 
 export default function ParticipanteBox({ data }) {
   const participanteImageUrl =

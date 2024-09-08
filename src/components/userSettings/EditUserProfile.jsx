@@ -73,14 +73,14 @@ export const EditUserProfile = () => {
                 as={Textarea}
               />
               <h3 className="pt-2 text-lg font-semibold">Aptitudes</h3>
-              <SelectField
+              <SelectDropdown
                 label="Perfil"
                 name="profile"
                 options={profilesOptions}
                 setFieldValue={setFieldValue}
                 values={values}
               />
-              <SelectField
+              <SelectDropdown
                 label="Tecnologías"
                 name="technology"
                 options={technologyOptions}
@@ -108,7 +108,7 @@ const FormField = ({ label, name, as = Input, ...props }) => (
   </div>
 );
 
-const SelectField = ({ label, name, options, ...props }) => (
+const SelectDropdown = ({ label, name, options, ...props }) => (
   <div>
     <Label htmlFor={name}>{label}</Label>
     <Select
@@ -116,6 +116,7 @@ const SelectField = ({ label, name, options, ...props }) => (
       name={name}
       options={options}
       className="w-full"
+      placeholder="Seleccionar"
       value={options.filter((option) =>
         props.values[name].includes(option.value)
       )}
