@@ -1,20 +1,43 @@
+"use client";
+
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Search, ChevronDown, ChevronUp } from "lucide-react";
-import ProyectosList from "../components/ProyectosList/proyectosListFile";
-import EstadosDropdown from "../components/FiltersDropdown/EstadoDropdown";
+import ProyectoBox from "@/components/ProyectoBox";
+import EstadosDropdown from "@/components/FiltersDropdown/EstadoDropdown";
 import ProyectosJson from "../../assets/proyectos.json";
 
-function ProyectosPage() {
+const container = {
+  hidden: { opacity: 1, scale: 0 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      delayChildren: 0.3,
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const item = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+  },
+};
+
+export default function ProyectosPage() {
   const [search, setSearch] = useState("");
   const [estadosFilter, setEstadosFilter] = useState([]);
   const [showDropdowns, setShowDropdowns] = useState(false);
 
-  let proyectos = JSON.parse(JSON.stringify(ProyectosJson)).proyectos;
-
   const filteredProyectos = () => {
+    let proyectos = [...ProyectosJson.proyectos];
+
     if (search !== "") {
       proyectos = proyectos.filter((proyecto) =>
         proyecto.titulo.toLowerCase().startsWith(search.toLowerCase())
@@ -71,9 +94,18 @@ function ProyectosPage() {
           )}
         </CardContent>
       </Card>
-      <ProyectosList proyectos={filteredProyectos()} />
+      <motion.div
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        variants={container}
+        initial="hidden"
+        animate="visible"
+      >
+        {filteredProyectos().map((proyecto) => (
+          <motion.div key={proyecto.id} variants={item}>
+            <ProyectoBox data={proyecto} />
+          </motion.div>
+        ))}
+      </motion.div>
     </div>
   );
 }
-
-export default ProyectosPage;

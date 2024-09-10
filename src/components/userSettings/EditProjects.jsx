@@ -1,6 +1,6 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { projectValidationSchema } from "@/validationSchema";
+import { projectValidation } from "@/validationSchema";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -47,7 +47,7 @@ export const EditProjects = () => {
     <Card>
       <Formik
         initialValues={initialValues}
-        validationSchema={projectValidationSchema}
+        validationSchema={projectValidation}
         onSubmit={handleSubmit}
       >
         {({ isSubmitting, setFieldValue, values }) => (

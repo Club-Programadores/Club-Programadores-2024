@@ -5,6 +5,7 @@ import { LandingPage } from "./pages/LandingPage";
 import ParticipantesPage from "./pages/ParticipantesPage";
 import ProyectosPage from "./pages/ProyectosPage";
 import { SettingsPage } from "./pages/SettingsPage";
+import { PasswordChange } from "./pages/PasswordChange";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import "./globals.css";
@@ -42,6 +43,10 @@ export default function App() {
           <Route path="/participantes" element={<ParticipantesPage />} />
           <Route path="/proyectos" element={<ProyectosPage />} />
           <Route path="/settings" element={<SettingsPage />} />
+          <Route
+            path="/settings/change-password"
+            element={<PasswordChange />}
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
