@@ -1,6 +1,6 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { userValidationSchema } from "@/validationSchema";
+import { userValidation } from "@/validationSchema";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,6 +16,7 @@ import {
 import Select from "react-select";
 import participantesJson from "../../../assets/miembros.json";
 import aptitudesJson from "../../../assets/aptitudes.json";
+import { CustomLink } from "../CustomLink";
 
 export const EditUserProfile = () => {
   const users = participantesJson.miembros;
@@ -26,8 +27,6 @@ export const EditUserProfile = () => {
     firstName: currentUser.nombre,
     lastName: currentUser.apellido,
     email: currentUser.email,
-    password: currentUser.password,
-    confirmPassword: currentUser.password,
     bio: currentUser.bio,
     profile: currentUser.profiles.map((profile) => profile.toLowerCase()),
     technology: currentUser.technology.map((tech) => tech.toLowerCase()),
@@ -41,7 +40,7 @@ export const EditUserProfile = () => {
     <Card>
       <Formik
         initialValues={initialValues}
-        validationSchema={userValidationSchema}
+        validationSchema={userValidation}
         onSubmit={handleSubmit}
       >
         {({ isSubmitting, setFieldValue, values }) => (
@@ -56,12 +55,6 @@ export const EditUserProfile = () => {
               <FormField label="Nombre" name="firstName" />
               <FormField label="Apellido" name="lastName" />
               <FormField label="Email" name="email" type="email" />
-              <FormField label="Contraseña" name="password" type="password" />
-              <FormField
-                label="Confirmar contraseña"
-                name="confirmPassword"
-                type="password"
-              />
               <FormField
                 label="Foto de perfil"
                 name="profilePicture"
@@ -88,10 +81,16 @@ export const EditUserProfile = () => {
                 values={values}
               />
             </CardContent>
-            <CardFooter className="mt-0">
+
+            <CardFooter>
               <Button type="submit" disabled={isSubmitting}>
                 Guardar
               </Button>
+              <CustomLink to="./change-password">
+                <Button className="mx-4 px-0" variant="link">
+                  Cambiar contraseña
+                </Button>
+              </CustomLink>
             </CardFooter>
           </Form>
         )}

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { userValidationSchema } from "../validationSchema";
+import { fullUserValidation } from "../validationSchema";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -47,7 +47,7 @@ const RegistrationModal = ({ signedUpCallback, onClose }) => {
             profile: [],
             technology: [],
           }}
-          validationSchema={userValidationSchema}
+          validationSchema={fullUserValidation}
           onSubmit={handleSubmit}
         >
           {({ isSubmitting, setFieldValue, validateForm }) => (
