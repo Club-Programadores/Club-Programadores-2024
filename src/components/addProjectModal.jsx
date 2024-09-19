@@ -6,76 +6,77 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardFooter,
-} from "@/components/ui/card";
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import {
-  Select as ShadSelect,
+  Select,
   SelectContent,
   SelectGroup,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../ui/select";
-import Select from "react-select";
-import proyectosJson from "../../../assets/proyectos.json";
-import aptitudesJson from "../../../assets/aptitudes.json";
+} from "@/components/ui/select";
+import { PlusCircle } from "lucide-react";
+import ReactSelect from "react-select";
 
-export const EditProjects = () => {
-  const projects = proyectosJson.proyectos;
-  const currentProject = projects.find((project) => project.id === 1); // <- Cambiar id para probar editar cualquier proyecto
-  const { technologyOptions } = aptitudesJson;
+const newProjectInitialValues = {
+  titulo: "",
+  descripcion: "",
+  url_proyecto: "",
+  url_pagina: "",
+  tecnologías: [],
+  estado: "nuevo",
+};
 
-  const initialValues = {
-    titulo: currentProject.titulo,
-    descripcion: currentProject.descripcion,
-    url_proyecto: currentProject.url_proyecto,
-    url_pagina: currentProject.url_pagina,
-    estado: currentProject.estado,
-    tecnologías: currentProject.tecnologías.map((tech) => tech.toLowerCase()),
-  };
-
-  const handleSubmit = (values) => {
-    console.log(JSON.stringify(values, null, 2));
-  };
-
+export const AddProjectModal = ({ onAddProject, technologyOptions }) => {
   return (
-    <Card>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={projectValidation}
-        onSubmit={handleSubmit}
-      >
-        {({ isSubmitting, setFieldValue, values }) => (
-          <Form>
-            <CardHeader>
-              <CardTitle>Proyectos</CardTitle>
-              <CardDescription>
-                Edita tus proyectos o añade uno nuevo.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <h3 className="pt-2 text-lg font-semibold">Proyecto actual</h3>
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button className="w-full mt-4">
+          <PlusCircle className="mr-2 h-4 w-4" />
+          Añadir Nuevo Proyecto
+        </Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Añadir Nuevo Proyecto</DialogTitle>
+          <DialogDescription>
+            Completa los detalles del nuevo proyecto.
+          </DialogDescription>
+        </DialogHeader>
+        <Formik
+          initialValues={newProjectInitialValues}
+          validationSchema={projectValidation}
+          onSubmit={(newProject, { setSubmitting, resetForm }) => {
+            onAddProject(newProject);
+            setSubmitting(false);
+            resetForm();
+            console.log(JSON.stringify(newProject, null, 2));
+          }}
+        >
+          {({ isSubmitting, setFieldValue }) => (
+            <Form className="space-y-4">
               <FormField label="Título" name="titulo" />
               <FormField label="Descripción" name="descripcion" as={Textarea} />
               <FormField label="URL de repositorio" name="url_proyecto" />
               <FormField label="URL de la página" name="url_pagina" />
               <SelectField
-                label="Tecnologías"
+                label="Tecnologías usadas"
                 name="tecnologías"
                 options={technologyOptions}
                 setFieldValue={setFieldValue}
-                values={values}
               />
               <div>
                 <Label htmlFor="estado">Estado</Label>
-                <ShadSelect
+                <Select
                   onValueChange={(value) => setFieldValue("estado", value)}
-                  defaultValue={currentProject.estado}
+                  defaultValue="nuevo"
                 >
                   <SelectTrigger className="w-full">
                     <SelectValue placeholder="Selecciona el estado" />
@@ -89,47 +90,51 @@ export const EditProjects = () => {
                       <SelectItem value="finalizado">Finalizado</SelectItem>
                     </SelectGroup>
                   </SelectContent>
-                </ShadSelect>
+                </Select>
                 <ErrorMessage
                   name="estado"
                   component="p"
                   className="text-red-500 text-sm"
                 />
               </div>
-            </CardContent>
-            <CardFooter className="mt-0">
-              <Button type="submit" disabled={isSubmitting}>
-                Guardar
-              </Button>
-            </CardFooter>
-          </Form>
-        )}
-      </Formik>
-    </Card>
+              <DialogFooter>
+                <Button type="submit" disabled={isSubmitting}>
+                  Añadir Proyecto
+                </Button>
+              </DialogFooter>
+            </Form>
+          )}
+        </Formik>
+      </DialogContent>
+    </Dialog>
   );
 };
 
 const FormField = ({ label, name, as = Input, ...props }) => (
   <div>
     <Label htmlFor={name}>{label}</Label>
-    <Field as={as} id={name} name={name} className="w-full" {...props} />
+    <Field
+      as={as}
+      id={name}
+      name={name}
+      className="w-full focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+      {...props}
+    />
     <ErrorMessage name={name} component="p" className="text-red-500 text-sm" />
   </div>
 );
 
-const SelectField = ({ label, name, options, ...props }) => (
+const SelectField = ({ label, name, options, setFieldValue }) => (
   <div>
     <Label htmlFor={name}>{label}</Label>
-    <Select
+    <ReactSelect
       isMulti
       name={name}
       options={options}
       className="w-full"
-      value={options.filter((option) =>
-        props.values[name].includes(option.value)
-      )}
+      classNamePrefix="react-select"
       onChange={(selectedOptions) =>
-        props.setFieldValue(
+        setFieldValue(
           name,
           selectedOptions.map((option) => option.value)
         )
