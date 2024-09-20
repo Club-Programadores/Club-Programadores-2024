@@ -17,7 +17,7 @@ import { CustomLink } from "../components/CustomLink";
 
 export const PasswordChange = () => {
   const users = participantesJson.miembros;
-  const currentUser = users.find((user) => user.id === 8); // <- Cambiar id para probar editar cualquier usuario
+  const currentUser = users.find((user) => user.id === 8);
 
   const initialValues = {
     password: "",
@@ -29,8 +29,8 @@ export const PasswordChange = () => {
   };
 
   return (
-    <div className="flex container justify-center py-12 bg-gray-100">
-      <Card>
+    <div className="flex items-center justify-center bg-gray-100 flex-grow">
+      <Card className="w-full max-w-sm m-4">
         <Formik
           initialValues={initialValues}
           validationSchema={passwordValidation}
@@ -57,7 +57,7 @@ export const PasswordChange = () => {
                 <Button type="submit" disabled={isSubmitting}>
                   Guardar
                 </Button>
-                <CustomLink to="../settings">
+                <CustomLink to="../editar-perfil">
                   <Button className="mx-4 px-0" variant="link">
                     Volver
                   </Button>

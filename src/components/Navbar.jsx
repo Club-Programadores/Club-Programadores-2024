@@ -15,9 +15,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 export const Navbar = ({ isLogged, logOutCallback }) => {
-  const { toggleRegistration, toggleLogin } = useModal();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const { toggleRegistration, toggleLogin } = useModal();
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
@@ -44,7 +43,7 @@ export const Navbar = ({ isLogged, logOutCallback }) => {
               Inicio
             </CustomLink>
             <CustomLink
-              to="/contact-us"
+              to="/contactanos"
               className="cursor-pointer select-none text-gray-600 hover:text-purple-600"
             >
               Contacto
@@ -88,16 +87,29 @@ export const Navbar = ({ isLogged, logOutCallback }) => {
 
                     <Separator />
 
-                    <MenuItem className="cursor-pointer">
-                      <User className="cursor-pointer mr-2 h-4 w-4" />
-                      <span>
-                        <CustomLink to="/settings">Editar perfil</CustomLink>
-                      </span>
+                    <MenuItem>
+                      <CustomLink
+                        to="/editar-perfil"
+                        className="flex items-center w-full"
+                      >
+                        <User className="mr-2 h-4 w-4" />
+                        <span>Editar perfil</span>
+                      </CustomLink>
                     </MenuItem>
 
-                    <MenuItem className="cursor-pointer">
-                      <LogOut className="cursor-pointer mr-2 h-4 w-4" />
-                      <span onClick={logOutCallback}>Cerrar sesión</span>
+                    <MenuItem>
+                      <CustomLink
+                        to="/editar-proyectos"
+                        className="flex items-center w-full"
+                      >
+                        <Edit className="mr-2 h-4 w-4" />
+                        <span>Editar proyectos</span>
+                      </CustomLink>
+                    </MenuItem>
+
+                    <MenuItem onClick={logOutCallback}>
+                      <LogOut className="mr-2 h-4 w-4" />
+                      <span>Cerrar sesión</span>
                     </MenuItem>
                   </MenuContent>
                 </div>
@@ -134,7 +146,7 @@ export const Navbar = ({ isLogged, logOutCallback }) => {
               Inicio
             </CustomLink>
             <CustomLink
-              to="/contact-us"
+              to="/contactanos"
               className="block cursor-pointer select-none text-gray-600 active:text-purple-600"
             >
               Contacto
@@ -152,10 +164,9 @@ export const Navbar = ({ isLogged, logOutCallback }) => {
               Proyectos
             </CustomLink>
             {isLogged ? (
-              <></>
+              <></> // (vacío)
             ) : (
               <>
-                {" "}
                 <span
                   onClick={toggleRegistration}
                   className="block cursor-pointer select-none text-gray-600 active:text-purple-600"

@@ -7,7 +7,7 @@ export const CustomLink = ({ to, children, smooth, ...props }) => {
   const location = useLocation();
 
   const handleClick = (e) => {
-    if (to === "/about-us" || to === "/contact-us") {
+    if (to === "/contactanos") {
       navigate("/");
       setTimeout(() => {
         scroller.scrollTo(to.slice(1));
@@ -21,10 +21,7 @@ export const CustomLink = ({ to, children, smooth, ...props }) => {
     }
   };
 
-  if (
-    (to === "/about-us" || to === "/contact-us") &&
-    location.pathname === "/"
-  ) {
+  if (to === "/contactanos" && location.pathname === "/") {
     return (
       <ScrollLink to={to.slice(1)} smooth={smooth} {...props}>
         {children}

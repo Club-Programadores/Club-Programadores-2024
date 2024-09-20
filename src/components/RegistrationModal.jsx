@@ -43,6 +43,7 @@ const RegistrationModal = ({ signedUpCallback, onClose }) => {
             confirmPassword: "",
             firstName: "",
             lastName: "",
+            github: "",
             bio: "",
             profile: [],
             technology: [],
@@ -139,6 +140,23 @@ const RegistrationModal = ({ signedUpCallback, onClose }) => {
                         />
                       </div>
                       <div>
+                        <Label htmlFor="profilePicture">GitHub</Label>
+                        <Input
+                          type="text"
+                          id="github"
+                          placeholder="https://github.com/usuario"
+                          className="w-full"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="profilePicture">Foto de perfil</Label>
+                        <Input
+                          type="file"
+                          id="profilePicture"
+                          className="w-full"
+                        />
+                      </div>
+                      <div>
                         <Label htmlFor="bio">Información adicional</Label>
                         <Field
                           as={Textarea}
@@ -197,14 +215,6 @@ const RegistrationModal = ({ signedUpCallback, onClose }) => {
                           name="technology"
                           component="p"
                           className="text-red-500 text-sm"
-                        />
-                      </div>
-                      <div>
-                        <Label htmlFor="profilePicture">Foto de perfil</Label>
-                        <Input
-                          type="file"
-                          id="profilePicture"
-                          className="w-full"
                         />
                       </div>
                     </div>
