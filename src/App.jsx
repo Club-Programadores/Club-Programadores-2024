@@ -45,8 +45,8 @@ export default function App() {
               <Route path="/participantes" element={<ParticipantesPage />} />
               <Route path="/proyectos" element={<ProyectosPage />} />
               <Route path="/editar-perfil" element={<EditUserProfile />} />
-              <Route path="/editar-proyectos" element={<EditProjects />} />
               <Route path="/editar-perfil/clave" element={<PasswordChange />} />
+              <Route path="/editar-proyectos" element={<EditProjects />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>

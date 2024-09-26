@@ -25,7 +25,7 @@ export const Navbar = ({ isLogged, logOutCallback }) => {
         <div className="flex justify-between items-center">
           <CustomLink
             to="/"
-            className="LEFT-item flex-1  flex justify-start cursor-pointer select-none items-center"
+            className="animated-responsive flex-1 flex justify-start cursor-pointer select-none items-center"
           >
             <span className="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center text-white font-mono tracking-tighter font-black text-xl mr-2">
               {"</>"}
@@ -35,7 +35,7 @@ export const Navbar = ({ isLogged, logOutCallback }) => {
             </h1>
           </CustomLink>
 
-          <nav className="MID-item flex-1 justify-center  hidden lg:flex space-x-4">
+          <nav className="animated-responsive flex-1 justify-center hidden lg:flex space-x-4">
             <CustomLink
               to="/"
               className="cursor-pointer select-none text-gray-600 hover:text-purple-600"
@@ -64,7 +64,7 @@ export const Navbar = ({ isLogged, logOutCallback }) => {
           {isLogged ? (
             <>
               <DropdownMenu>
-                <div className="RIGHT-item flex flex-1 lg:w-fit w-full justify-center md:justify-end md:mr-7 lg:mr-0">
+                <div className="animated-responsive flex flex-1 lg:w-fit w-full justify-center md:justify-end md:mr-7 lg:mr-0">
                   <MenuTrigger
                     asChild
                     className="flex cursor-pointer items-center px-2 w-fit gap-2 rounded-lg text-nowrap text-gray-600 hover:bg-purple-100"
@@ -116,12 +116,12 @@ export const Navbar = ({ isLogged, logOutCallback }) => {
               </DropdownMenu>
             </>
           ) : (
-            <div className="RIGHT-item justify-end flex-1  hidden lg:flex space-x-2">
+            <div className="animated-responsive justify-end flex-1 hidden lg:flex space-x-2">
               <RegisterButton onClick={toggleRegistration} outline={true} />
               <LoginButton onClick={toggleLogin} outline={true} />
             </div>
           )}
-          <div className="flex flex-1 md:flex-none lg:flex-1 w-fit justify-end lg:hidden">
+          <div className="animated-responsive flex flex-1 md:flex-none lg:flex-1 w-fit justify-end lg:hidden">
             <Button
               variant="ghost"
               size="icon"
