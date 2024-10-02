@@ -4,10 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Search, ChevronUp, ChevronDown } from "lucide-react";
 import ParticipantesList from "../components/ParticipantesList/ParticipantesList";
-import participantesJson from "../../assets/miembros.json";
 import PerfilesDropdown from "@/components/FiltersDropdown/PerfilesDropdown";
 import TechnologyDropdown from "@/components/FiltersDropdown/TechnologyDropdown";
-import Secrets from "@/../private/secrets.json"
+import ParticipantesController from "@/../public/dbService/participantesController"
 
 function ParticipantesPage() {
   const [search, setSearch] = useState("");
@@ -42,13 +41,14 @@ function ParticipantesPage() {
 
   useEffect(()=>{
     async function getData(){
-      const response = await fetch(`${Secrets.ApiUrl}/usuarios`)
-      if (!response.ok) {
-        throw new Error(`Response status: ${response.status}`);
+      let participantes;
+      try{
+        participantes = await ParticipantesController.asyncGetAllParticipantes();
       }
-      const responseData = await response.json();
-      const usuarios = responseData.usuarios;
-      setParticipantes(usuarios2Participantes(usuarios));
+      catch(e){
+        console.log(e)
+      }
+      setParticipantes(participantes);
     }
     getData();
   },[])

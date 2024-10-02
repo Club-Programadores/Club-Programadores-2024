@@ -14,8 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import Select from "react-select";
-
-import Secrets from "@/../private/secrets.json"
+import ParticipantesController from "@/../public/dbService/participantesController"
 
 /*
 TODO: Validar que el correo ingresado no este ya en uso
@@ -23,37 +22,13 @@ Arreglar NavBar nombre
 */
 
 const RegistrationModal = ({ signedUpCallback, onClose }) => {
-  const apiCallUrl = `${Secrets.ApiUrl}/registrar`;
 
   const [step, setStep] = useState(1);
 
-
   const handleSubmit = (formData) => {
     setTimeout(() => {
-      const nuevoMiembro = { 
-        "nombre": formData.firstName,
-        "apellido": formData.lastName,
-        "email": formData.email,
-        "password": formData.password,
-        "informacion_adicional": formData.bio,
-        "imagen": "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png",
-        "perfiles": formData.profile,
-        "lenguajes": formData.technology.map(x => {
-          x = x.toLowerCase();
-          return {
-            'nombre': x,
-            'nivel': 1
-          }
-        })
-      };
-
-      fetch(apiCallUrl,{
-      method: "POST",
-      body: JSON.stringify(nuevoMiembro),
-      headers: {
-      "Content-Type": "application/json",
-      "Accept": "*/*"
-      }});
+      
+      ParticipantesController.registrarParticipante(formData);
 
       const datosUsuario = {
         nombre: `${formData.firstName} ${formData.lastName}`,

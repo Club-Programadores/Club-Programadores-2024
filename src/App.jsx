@@ -11,6 +11,7 @@ import "./globals.css";
 
 export default function App() {
   const [isLogged, setLogged] = useState(false);
+  const [token, setToken] = useState('');
 
   const [usuario, setUsuario] = useState({
     nombre: "",
