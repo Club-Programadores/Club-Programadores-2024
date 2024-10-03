@@ -1,9 +1,8 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import techNameToImage from "../../../public/tools/techNameToImage";
+import techNameToImage from "../../public/tools/techNameToImage";
 
 export default function ParticipanteBox({ data }) {
-
   const participanteImageUrl =
     data.imageUrl ||
     "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png";
@@ -36,19 +35,16 @@ export default function ParticipanteBox({ data }) {
             </h3>
             <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4 flex-grow">
               {data.technology.map((tech) => (
-                <div
-                  key={tech.nombre}
-                  className="flex flex-col items-center group"
-                >
+                <div key={tech} className="flex flex-col items-center group">
                   <div className="w-12 h-12 flex items-center justify-center bg-gray-100 rounded-full p-2 group-hover:bg-gray-200 transition-colors duration-200">
                     <img
-                      src={techNameToImage(tech.nombre)}
-                      alt={tech.nombre}
+                      src={techNameToImage(tech)}
+                      alt={tech}
                       className="w-8 h-8 object-contain"
                     />
                   </div>
                   <span className="text-xs mt-2 text-center text-gray-600 group-hover:text-gray-900 transition-colors duration-200">
-                    {tech.nombre}
+                    {tech}
                   </span>
                 </div>
               ))}

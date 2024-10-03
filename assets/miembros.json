@@ -5,39 +5,19 @@
       "nombre": "Diego",
       "apellido": "Bruno",
       "email": "email@email.com",
+      "github": "https://github.com/",
       "password": "unapassword",
-      "bio": "una bio pero de Maite...",
+      "bio": "una bio pero de Diego...",
       "imageUrl": "https://avatars.githubusercontent.com/u/24198690?v=4",
-      "intereses": ["WebDev", "BackEnd", "Teaching"],
-      "skills": [
-        {
-          "nombre": "HTML",
-          "nivel": 5
-        },
-        {
-          "nombre": "CSS",
-          "nivel": 5
-        },
-        {
-          "nombre": "Javascript",
-          "nivel": 5
-        },
-        {
-          "nombre": "git",
-          "nivel": 3
-        },
-        {
-          "nombre": "github",
-          "nivel": 3
-        },
-        {
-          "nombre": "mysql",
-          "nivel": 3
-        },
-        {
-          "nombre": "vscode",
-          "nivel": 3
-        }
+      "profiles": ["WebDev", "BackEnd", "Teaching"],
+      "technology": [
+        "HTML",
+        "CSS",
+        "Javascript",
+        "git",
+        "github",
+        "mysql",
+        "vscode"
       ]
     },
     {
@@ -45,39 +25,19 @@
       "nombre": "Abigail",
       "apellido": "",
       "email": "email@email.com",
+      "github": "https://github.com/",
       "password": "unapassword",
       "bio": "una bio pero de Maite...",
-      "imageUrl": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/271deea8-e28c-41a3-aaf5-2913f5f48be6/de7834s-6515bd40-8b2c-4dc6-a843-5ac1a95a8b55.jpg/v1/fill/w_300,h_300,q_75,strp/default_user_icon_4_by_karmaanddestiny_de7834s-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MzAwIiwicGF0aCI6IlwvZlwvMjcxZGVlYTgtZTI4Yy00MWEzLWFhZjUtMjkxM2Y1ZjQ4YmU2XC9kZTc4MzRzLTY1MTViZDQwLThiMmMtNGRjNi1hODQzLTVhYzFhOTVhOGI1NS5qcGciLCJ3aWR0aCI6Ijw9MzAwIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.W7L0Rf_YqFzX9yxDfKtIMFnnRFdjwCHxi7xeIISAHNM",
-      "intereses": ["WebDev", "Teaching"],
-      "skills": [
-        {
-          "nombre": "HTML",
-          "nivel": 5
-        },
-        {
-          "nombre": "CSS",
-          "nivel": 5
-        },
-        {
-          "nombre": "Javascript",
-          "nivel": 5
-        },
-        {
-          "nombre": "React",
-          "nivel": 3
-        },
-        {
-          "nombre": "git",
-          "nivel": 3
-        },
-        {
-          "nombre": "github",
-          "nivel": 3
-        },
-        {
-          "nombre": "vscode",
-          "nivel": 3
-        }
+      "imageUrl": "",
+      "profiles": ["WebDev", "Teaching"],
+      "technology": [
+        "HTML",
+        "CSS",
+        "Javascript",
+        "React",
+        "git",
+        "github",
+        "vscode"
       ]
     },
     {
@@ -85,47 +45,20 @@
       "nombre": "Maite",
       "apellido": "Arakaki",
       "email": "email@email.com",
+      "github": "https://github.com/",
       "password": "unapassword",
       "bio": "una bio pero de Maite...",
       "imageUrl": "https://avatars.githubusercontent.com/u/67213065?v=4",
-      "intereses": [
-        "Networking",
-        "Knowledge Graphs",
-        "Arquitectura de Información"
-      ],
-      "skills": [
-        {
-          "nombre": "HTML",
-          "nivel": 5
-        },
-        {
-          "nombre": "CSS",
-          "nivel": 5
-        },
-        {
-          "nombre": "Javascript",
-          "nivel": 5
-        },
-        {
-          "nombre": "Java",
-          "nivel": 3
-        },
-        {
-          "nombre": "git",
-          "nivel": 3
-        },
-        {
-          "nombre": "github",
-          "nivel": 3
-        },
-        {
-          "nombre": "SPARQL",
-          "nivel": 3
-        },
-        {
-          "nombre": "vscode",
-          "nivel": 3
-        }
+      "profiles": ["Networking", "Knowledge Graphs", "Arq. de Información"],
+      "technology": [
+        "HTML",
+        "CSS",
+        "Javascript",
+        "Java",
+        "git",
+        "github",
+        "SPARQL",
+        "vscode"
       ]
     },
     {
@@ -133,68 +66,25 @@
       "nombre": "Bautista",
       "apellido": "Mateo",
       "email": "email@email.com",
+      "github": "https://github.com/NarDevGH",
       "password": "unapassword",
       "bio": "una bio pero de Bautista...",
       "imageUrl": "https://vignette.wikia.nocookie.net/flcl/images/f/f3/CantiChar.png/revision/latest/scale-to-width-down/185?cb=20180519071333",
-      "intereses": [
-        "Object Oriented Programming",
-        "GameDev",
-        "BackEnd",
-        "WebDev"
-      ],
-      "skills": [
-        {
-          "nombre": "HTML",
-          "nivel": 5
-        },
-        {
-          "nombre": "CSS",
-          "nivel": 5
-        },
-        {
-          "nombre": "Javascript",
-          "nivel": 5
-        },
-        {
-          "nombre": "ts",
-          "nivel": 5
-        },
-        {
-          "nombre": "react",
-          "nivel": 5
-        },
-        {
-          "nombre": "C#",
-          "nivel": 5
-        },
-        {
-          "nombre": ".net",
-          "nivel": 5
-        },
-        {
-          "nombre": "vs",
-          "nivel": 5
-        },
-        {
-          "nombre": "vscode",
-          "nivel": 5
-        },
-        {
-          "nombre": "microsoftsqlserver",
-          "nivel": 5
-        },
-        {
-          "nombre": "blender",
-          "nivel": 5
-        },
-        {
-          "nombre": "unity",
-          "nivel": 5
-        },
-        {
-          "nombre": "godot",
-          "nivel": 3
-        }
+      "profiles": ["OOP", "GameDev", "BackEnd", "WebDev"],
+      "technology": [
+        "HTML",
+        "CSS",
+        "Javascript",
+        "ts",
+        "react",
+        "C#",
+        ".net",
+        "vs",
+        "vscode",
+        "sqlserver",
+        "blender",
+        "unity",
+        "godot"
       ]
     },
     {
@@ -202,36 +92,12 @@
       "nombre": "Miguel",
       "apellido": "",
       "email": "email@email.com",
+      "github": "https://github.com/",
       "password": "unapassword",
       "bio": "una bio...",
       "imageUrl": "https://avatars.githubusercontent.com/u/132763454?v=4",
-      "intereses": ["WebDev", "BackEnd"],
-      "skills": [
-        {
-          "nombre": "HTML",
-          "nivel": 5
-        },
-        {
-          "nombre": "CSS",
-          "nivel": 5
-        },
-        {
-          "nombre": "Javascript",
-          "nivel": 5
-        },
-        {
-          "nombre": "git",
-          "nivel": 5
-        },
-        {
-          "nombre": "github",
-          "nivel": 5
-        },
-        {
-          "nombre": "vscode",
-          "nivel": 3
-        }
-      ]
+      "profiles": ["WebDev", "BackEnd"],
+      "technology": ["HTML", "CSS", "Javascript", "git", "github", "vscode"]
     },
     {
       "id": 6,
@@ -241,56 +107,20 @@
       "password": "unapassword",
       "bio": "una bio...",
       "imageUrl": "https://avatars.githubusercontent.com/u/73730459?v=4",
-      "intereses": ["WebDev", "BackEnd"],
-      "skills": [
-        {
-          "nombre": "HTML",
-          "nivel": 5
-        },
-        {
-          "nombre": "CSS",
-          "nivel": 5
-        },
-        {
-          "nombre": "Javascript",
-          "nivel": 5
-        },
-        {
-          "nombre": "Java",
-          "nivel": 5
-        },
-        {
-          "nombre": "mysql",
-          "nivel": 5
-        },
-        {
-          "nombre": "postgresql",
-          "nivel": 5
-        },
-        {
-          "nombre": "php",
-          "nivel": 5
-        },
-        {
-          "nombre": "mongodb",
-          "nivel": 5
-        },
-        {
-          "nombre": "git",
-          "nivel": 5
-        },
-        {
-          "nombre": "github",
-          "nivel": 5
-        },
-        {
-          "nombre": "python",
-          "nivel": 5
-        },
-        {
-          "nombre": "vscode",
-          "nivel": 3
-        }
+      "profiles": ["WebDev", "BackEnd"],
+      "technology": [
+        "HTML",
+        "CSS",
+        "Javascript",
+        "Java",
+        "mysql",
+        "postgresql",
+        "php",
+        "mongodb",
+        "git",
+        "github",
+        "python",
+        "vscode"
       ]
     },
     {
@@ -298,31 +128,33 @@
       "nombre": "Romina",
       "apellido": "",
       "email": "email@email.com",
+      "github": "https://github.com/",
       "password": "unapassword",
       "bio": "una bio...",
       "imageUrl": "https://avatars.githubusercontent.com/u/113916711?v=4",
-      "intereses": ["WebDev", "BackEnd"],
-      "skills": [
-        {
-          "nombre": "HTML",
-          "nivel": 5
-        },
-        {
-          "nombre": "CSS",
-          "nivel": 5
-        },
-        {
-          "nombre": "Javascript",
-          "nivel": 5
-        },
-        {
-          "nombre": "React",
-          "nivel": 5
-        },
-        {
-          "nombre": "vscode",
-          "nivel": 3
-        }
+      "profiles": ["WebDev", "BackEnd"],
+      "technology": ["HTML", "CSS", "Javascript", "React", "vscode"]
+    },
+    {
+      "id": 8,
+      "nombre": "Pablo",
+      "apellido": "Estigarribia",
+      "email": "email@email.com",
+      "github": "https://github.com/4kPablo",
+      "password": "unapassword",
+      "bio": "una bio...",
+      "imageUrl": "https://i.pinimg.com/564x/2d/73/a5/2d73a5772fd426fca71d8792af9b058d.jpg",
+      "profiles": ["WebDev", "Frontend"],
+      "technology": [
+        "HTML",
+        "CSS",
+        "Javascript",
+        "React",
+        "git",
+        "github",
+        "shadcn/ui",
+        "vscode",
+        "tailwind"
       ]
     }
   ]
