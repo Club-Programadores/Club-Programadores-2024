@@ -4,240 +4,157 @@
       "id": 1,
       "nombre": "Diego",
       "apellido": "Bruno",
-      "email": "diego.bruno@gmail.com",
-      "password": "12345678",
-      "informacion_adicional": "una bio pero de Diego...",
-      "imagen": "https://avatars.githubusercontent.com/u/24198690?v=4",
-      "perfiles": ["WebDev", "BackEnd", "Teaching"],
-      "lenguajes": [
-        {
-          "nombre": "html",
-          "nivel": 5
-        },
-        {
-          "nombre": "css",
-          "nivel": 5
-        },
-        {
-          "nombre": "js",
-          "nivel": 5
-        },
-        {
-          "nombre": "git",
-          "nivel": 3
-        },
-        {
-          "nombre": "github",
-          "nivel": 3
-        },
-        {
-          "nombre": "mysql",
-          "nivel": 3
-        },
-        {
-          "nombre": "vscode",
-          "nivel": 3
-        }
+      "email": "email@email.com",
+      "github": "https://github.com/",
+      "password": "unapassword",
+      "bio": "una bio pero de Diego...",
+      "imageUrl": "https://avatars.githubusercontent.com/u/24198690?v=4",
+      "profiles": ["WebDev", "BackEnd", "Teaching"],
+      "technology": [
+        "HTML",
+        "CSS",
+        "Javascript",
+        "git",
+        "github",
+        "mysql",
+        "vscode"
       ]
     },
     {
-      "id": 7,
-      "nombre": "Romina",
-      "apellido": "Aldrovandi",
-      "email": "romina.aldrovandi@gmail.com",
-      "password": "12345678",
-      "informacion_adicional": "una bio...",
-      "imagen": "https://avatars.githubusercontent.com/u/113916711?v=4",
-      "perfiles": ["WebDev", "BackEnd"],
-      "lenguajes": [
-        {
-          "nombre": "html",
-          "nivel": 5
-        },
-        {
-          "nombre": "css",
-          "nivel": 5
-        },
-        {
-          "nombre": "js",
-          "nivel": 5
-        },
-        {
-          "nombre": "react",
-          "nivel": 5
-        },
-        {
-          "nombre": "python",
-          "nivel": 5
-        },
-        {
-          "nombre": "flask",
-          "nivel": 5
-        },
-        {
-          "nombre": "vscode",
-          "nivel": 3
-        }
+      "id": 2,
+      "nombre": "Abigail",
+      "apellido": "",
+      "email": "email@email.com",
+      "github": "https://github.com/",
+      "password": "unapassword",
+      "bio": "una bio pero de Maite...",
+      "imageUrl": "",
+      "profiles": ["WebDev", "Teaching"],
+      "technology": [
+        "HTML",
+        "CSS",
+        "Javascript",
+        "React",
+        "git",
+        "github",
+        "vscode"
+      ]
+    },
+    {
+      "id": 3,
+      "nombre": "Maite",
+      "apellido": "Arakaki",
+      "email": "email@email.com",
+      "github": "https://github.com/",
+      "password": "unapassword",
+      "bio": "una bio pero de Maite...",
+      "imageUrl": "https://avatars.githubusercontent.com/u/67213065?v=4",
+      "profiles": ["Networking", "Knowledge Graphs", "Arq. de Información"],
+      "technology": [
+        "HTML",
+        "CSS",
+        "Javascript",
+        "Java",
+        "git",
+        "github",
+        "SPARQL",
+        "vscode"
       ]
     },
     {
       "id": 4,
       "nombre": "Bautista",
       "apellido": "Mateo",
-      "email": "bautista.mateo@gmail.com",
-      "password": "12345678",
-      "informacion_adicional": "una bio pero de Bautista...",
-      "imagen": "https://vignette.wikia.nocookie.net/flcl/images/f/f3/CantiChar.png/revision/latest/scale-to-width-down/185?cb=20180519071333",
-      "perfiles": ["OOP", "GameDev", "BackEnd", "WebDev"],
-      "lenguajes": [
-        {
-          "nombre": "html",
-          "nivel": 5
-        },
-        {
-          "nombre": "css",
-          "nivel": 5
-        },
-        {
-          "nombre": "js",
-          "nivel": 5
-        },
-        {
-          "nombre": "ts",
-          "nivel": 5
-        },
-        {
-          "nombre": "react",
-          "nivel": 5
-        },
-        {
-          "nombre": "c#",
-          "nivel": 5
-        },
-        {
-          "nombre": "dotnet",
-          "nivel": 5
-        },
-        {
-          "nombre": "vs",
-          "nivel": 5
-        },
-        {
-          "nombre": "vscode",
-          "nivel": 5
-        },
-        {
-          "nombre": "sqlserver",
-          "nivel": 5
-        },
-        {
-          "nombre": "blender",
-          "nivel": 5
-        },
-        {
-          "nombre": "unity",
-          "nivel": 5
-        },
-        {
-          "nombre": "godot",
-          "nivel": 3
-        }
+      "email": "email@email.com",
+      "github": "https://github.com/NarDevGH",
+      "password": "unapassword",
+      "bio": "una bio pero de Bautista...",
+      "imageUrl": "https://vignette.wikia.nocookie.net/flcl/images/f/f3/CantiChar.png/revision/latest/scale-to-width-down/185?cb=20180519071333",
+      "profiles": ["OOP", "GameDev", "BackEnd", "WebDev"],
+      "technology": [
+        "HTML",
+        "CSS",
+        "Javascript",
+        "ts",
+        "react",
+        "C#",
+        ".net",
+        "vs",
+        "vscode",
+        "sqlserver",
+        "blender",
+        "unity",
+        "godot"
       ]
+    },
+    {
+      "id": 5,
+      "nombre": "Miguel",
+      "apellido": "",
+      "email": "email@email.com",
+      "github": "https://github.com/",
+      "password": "unapassword",
+      "bio": "una bio...",
+      "imageUrl": "https://avatars.githubusercontent.com/u/132763454?v=4",
+      "profiles": ["WebDev", "BackEnd"],
+      "technology": ["HTML", "CSS", "Javascript", "git", "github", "vscode"]
+    },
+    {
+      "id": 6,
+      "nombre": "Veronica",
+      "apellido": "",
+      "email": "email@email.com",
+      "password": "unapassword",
+      "bio": "una bio...",
+      "imageUrl": "https://avatars.githubusercontent.com/u/73730459?v=4",
+      "profiles": ["WebDev", "BackEnd"],
+      "technology": [
+        "HTML",
+        "CSS",
+        "Javascript",
+        "Java",
+        "mysql",
+        "postgresql",
+        "php",
+        "mongodb",
+        "git",
+        "github",
+        "python",
+        "vscode"
+      ]
+    },
+    {
+      "id": 7,
+      "nombre": "Romina",
+      "apellido": "",
+      "email": "email@email.com",
+      "github": "https://github.com/",
+      "password": "unapassword",
+      "bio": "una bio...",
+      "imageUrl": "https://avatars.githubusercontent.com/u/113916711?v=4",
+      "profiles": ["WebDev", "BackEnd"],
+      "technology": ["HTML", "CSS", "Javascript", "React", "vscode"]
     },
     {
       "id": 8,
       "nombre": "Pablo",
       "apellido": "Estigarribia",
-      "email": "pablo.estigarribia@gmail.com",
-      "password": "12345678",
-      "informacion_adicional": "una bio...",
-      "imagen": "https://i.pinimg.com/564x/2d/73/a5/2d73a5772fd426fca71d8792af9b058d.jpg",
-      "perfiles": ["WebDev", "Frontend"],
-      "lenguajes": [
-        {
-          "nombre": "html",
-          "nivel": 5
-        },
-        {
-          "nombre": "css",
-          "nivel": 5
-        },
-        {
-          "nombre": "js",
-          "nivel": 5
-        },
-        {
-          "nombre": "react",
-          "nivel": 5
-        },
-        {
-          "nombre": "git",
-          "nivel": "3"
-        },
-        {
-          "nombre": "github",
-          "nivel": "3"
-        },
-        {
-          "nombre": "shadcn/ui",
-          "nivel": "5"
-        },
-        {
-          "nombre": "vscode",
-          "nivel": 3
-        },
-        {
-          "nombre": "tailwind",
-          "nivel": "5"
-        }
-      ]
-    },
-    {
-      "id": 8,
-      "nombre": "Fede",
-      "apellido": "Tasso",
-      "email": "fede.tasso@gmail.com",
-      "password": "12345678",
-      "informacion_adicional": "una bio...",
-      "imagen": "https://i.pinimg.com/564x/2d/73/a5/2d73a5772fd426fca71d8792af9b058d.jpg",
-      "perfiles": ["WebDev", "Frontend"],
-      "lenguajes": [
-        {
-          "nombre": "html",
-          "nivel": 5
-        },
-        {
-          "nombre": "css",
-          "nivel": 5
-        },
-        {
-          "nombre": "js",
-          "nivel": 5
-        },
-        {
-          "nombre": "react",
-          "nivel": 5
-        },
-        {
-          "nombre": "git",
-          "nivel": "3"
-        },
-        {
-          "nombre": "github",
-          "nivel": "3"
-        },
-        {
-          "nombre": "shadcn/ui",
-          "nivel": "5"
-        },
-        {
-          "nombre": "vscode",
-          "nivel": 3
-        },
-        {
-          "nombre": "tailwind",
-          "nivel": "5"
-        }
+      "email": "email@email.com",
+      "github": "https://github.com/4kPablo",
+      "password": "unapassword",
+      "bio": "una bio...",
+      "imageUrl": "https://i.pinimg.com/564x/2d/73/a5/2d73a5772fd426fca71d8792af9b058d.jpg",
+      "profiles": ["WebDev", "Frontend"],
+      "technology": [
+        "HTML",
+        "CSS",
+        "Javascript",
+        "React",
+        "git",
+        "github",
+        "shadcn/ui",
+        "vscode",
+        "tailwind"
       ]
     }
   ]

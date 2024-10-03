@@ -11,17 +11,12 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-import Secrets from "@/../private/secrets.json"
 import ParticipantesController from "@/../public/dbService/participantesController"
 
 
 const LoginModal = ({ loggedInCallback, onClose }) => {
   const [userMail, setUserMail] = useState("");
   const [userPass, setUserPass] = useState("");
-  const [loginInput, setLoginInput] = useState({
-    mail: '',
-    password: ''
-  });
   const [userCredentialsAreValid, setUserCredentialsAreValid] = useState(false);
   const [showIncorrectUserMsg, setShowIncorrectUserMsg] = useState(false);
 
@@ -31,10 +26,13 @@ const LoginModal = ({ loggedInCallback, onClose }) => {
     email: ""
   });
 
-  const apiUrl = `${Secrets.ApiUrl}/usuarios`
-
   const fetchData = useCallback(async () => { 
     try{   
+
+      const loginInput = {
+        email: userMail,
+        pass: userPass
+      }
 
       const responseUserData = await ParticipantesController.asyncLoginParticipante(loginInput);
 
@@ -59,7 +57,7 @@ const LoginModal = ({ loggedInCallback, onClose }) => {
   
   useEffect(()=>{
     fetchData();
-  }, [apiUrl, fetchData])
+  }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault();

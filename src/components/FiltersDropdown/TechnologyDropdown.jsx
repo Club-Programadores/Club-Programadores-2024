@@ -1,44 +1,31 @@
-import { useState } from "react";
-import Select from "react-select";
-
-export const technologyOptions = [
-  { label: "HTML", value: "html" },
-  { label: "CSS", value: "css" },
-  { label: "JavaScript", value: "javascript" },
-  { label: "Python", value: "python" },
-  { label: "php", value: "php" },
-  { label: "Java", value: "java" },
-  { label: "C++", value: "c++" },
-  { label: "C#", value: "c#" },
-  { label: "React", value: "react" },
-  { label: "MySQL", value: "mysql" },
-  { label: "PostgreSQL", value: "postgresql" },
-  { label: "Sparql", value: "sparql" },
-  { label: "Git", value: "git" },
-  { label: "Tailwind", value: "tailwind" },
-];
+import { useState } from "react"
+import Select from "react-select"
+import aptitudesJson from "../../../assets/aptitudes.json"
 
 export default function TechnologyDropdown({
   selectionChangedCallback,
-  placeholder,
   setTechnologyFilter,
 }) {
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState(null)
+  const technologyOptions = aptitudesJson.technologyOptions
 
   const handleOnChange = (e) => {
-    setSelectedOption(e);
-    if (setTechnologyFilter != null) setTechnologyFilter(e);
-    // selectionChangedCallback(e);
-  };
+    setSelectedOption(e)
+    if (setTechnologyFilter) setTechnologyFilter(e)
+    if (selectionChangedCallback) selectionChangedCallback(e)
+  }
 
   return (
     <Select
       className="filterDropdown"
-      defaultValue={selectedOption}
-      onChange={handleOnChange}
+      placeholder="Tecnologías"
+      value={selectedOption}
       options={technologyOptions}
+      onChange={handleOnChange}
       isMulti={true}
-      placeholder={placeholder != null ? placeholder : "Tecnologías"}
     />
-  );
+  )
 }
+
+// Este dropdown sólo es usado en los filtros de <<ParticipantesPage>>.
+// <<RegistrationModal>>, <<EditUserProfile>> y <<EditProjects>> usan dropdowns propios.

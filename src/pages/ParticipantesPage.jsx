@@ -1,43 +1,42 @@
+'use client'
+
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion"
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Search, ChevronUp, ChevronDown } from "lucide-react";
-import ParticipantesList from "../components/ParticipantesList/ParticipantesList";
+import ParticipanteBox from "@/components/ParticipanteBox"
 import PerfilesDropdown from "@/components/FiltersDropdown/PerfilesDropdown";
 import TechnologyDropdown from "@/components/FiltersDropdown/TechnologyDropdown";
 import ParticipantesController from "@/../public/dbService/participantesController"
 
-function ParticipantesPage() {
+const container = {
+  hidden: { opacity: 1, scale: 0 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      delayChildren: 0.3,
+      staggerChildren: 0.2,
+    },
+  },
+}
+
+const item = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+  },
+}
+
+export default function ParticipantesPage() {
   const [search, setSearch] = useState("");
   const [profilesFilter, setProfilesFilter] = useState([]);
   const [technologyFilter, setTechnologyFilter] = useState([]);
   const [showDropdowns, setShowDropdowns] = useState(false);
   const [participantes, setParticipantes] = useState([])
-
-  let tempParticipantes = participantes;
-
-  function usuarios2Participantes(usuariosJson){
-    let lista = [];
-    usuariosJson.forEach(usuario => {
-      let participante = {
-        "id":usuario.id,
-        "nombre": usuario.nombre,
-        "apellido": usuario.apellido,
-        "bio":usuario.informacion,
-        "imageUrl": usuario.image,
-        "profiles":usuario.perfiles,
-        "technology": Object.keys(usuario.lenguaje_nivel).map(x => {
-          return{
-            "nombre": x.toLowerCase(),
-            "nivel": 1
-          }
-        })
-      }
-      lista.push(participante)
-    });
-    return lista;
-  }
 
   useEffect(()=>{
     async function getData(){
@@ -54,31 +53,32 @@ function ParticipantesPage() {
   },[])
 
   const filteredParticipantes = () => {
+    let res = participantes;
     if (search !== "") {
-      tempParticipantes = participantes.filter((participante) =>
+      res = res.filter((participante) =>
         participante.nombre.toLowerCase().startsWith(search.toLowerCase())
-      );
+      )
     }
     if (profilesFilter.length !== 0) {
-      tempParticipantes = participantes.filter((participante) =>
+      res = res.filter((participante) =>
         profilesFilter.every((profile) =>
-          participante.profiles
-            .map((i) => i.toLowerCase())
-            .includes(profile.label.toLowerCase())
+          participante.profiles.some((p) =>
+            p.toLowerCase().includes(profile.value.toLowerCase())
+          )
         )
-      );
+      )
     }
     if (technologyFilter.length !== 0) {
-      tempParticipantes = participantes.filter((participante) =>
+      res = res.filter((participante) =>
         technologyFilter.every((technology) =>
-          participante.technology
-            .map((i) => i.nombre.toLowerCase())
-            .includes(technology.label.toLowerCase())
+          participante.technology.some((tech) =>
+            tech.toLowerCase().includes(technology.value.toLowerCase())
+          )
         )
-      );
+      )
     }
-    return tempParticipantes;
-  };
+    return res
+  }
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -126,9 +126,18 @@ function ParticipantesPage() {
           )}
         </CardContent>
       </Card>
-      <ParticipantesList participantes={filteredParticipantes()} />
+      <motion.div
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        variants={container}
+        initial="hidden"
+        animate="visible"
+      >
+        {filteredParticipantes().map((participante) => (
+          <motion.div key={participante.id} variants={item}>
+            <ParticipanteBox data={participante} />
+          </motion.div>
+        ))}
+      </motion.div>
     </div>
-  );
+  )
 }
-
-export default ParticipantesPage;

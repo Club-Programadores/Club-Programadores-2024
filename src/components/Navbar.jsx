@@ -26,7 +26,7 @@ export const Navbar = ({ isLogged, datosUsuario, logOutCallback }) => {
         <div className="flex justify-between items-center">
           <CustomLink
             to="/"
-            className="LEFT-item flex-1  flex justify-start cursor-pointer select-none items-center"
+            className="animated-responsive flex-1 flex justify-start cursor-pointer select-none items-center"
           >
             <span className="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center text-white font-mono tracking-tighter font-black text-xl mr-2">
               {"</>"}
@@ -36,7 +36,7 @@ export const Navbar = ({ isLogged, datosUsuario, logOutCallback }) => {
             </h1>
           </CustomLink>
 
-          <nav className="MID-item flex-1 justify-center  hidden lg:flex space-x-4">
+          <nav className="animated-responsive flex-1 justify-center hidden lg:flex space-x-4">
             <CustomLink
               to="/"
               className="cursor-pointer select-none text-gray-600 hover:text-purple-600"
@@ -44,7 +44,7 @@ export const Navbar = ({ isLogged, datosUsuario, logOutCallback }) => {
               Inicio
             </CustomLink>
             <CustomLink
-              to="/contact-us"
+              to="/contactanos"
               className="cursor-pointer select-none text-gray-600 hover:text-purple-600"
             >
               Contacto
@@ -65,7 +65,7 @@ export const Navbar = ({ isLogged, datosUsuario, logOutCallback }) => {
           {isLogged ? (
             <>
               <DropdownMenu>
-                <div className="RIGHT-item flex flex-1 lg:w-fit w-full justify-center md:justify-end md:mr-7 lg:mr-0">
+                <div className="animated-responsive flex flex-1 lg:w-fit w-full justify-center md:justify-end md:mr-7 lg:mr-0">
                   <MenuTrigger
                     asChild
                     className="flex cursor-pointer items-center px-2 w-fit gap-2 rounded-lg text-nowrap text-gray-600 hover:bg-purple-100"
@@ -88,35 +88,41 @@ export const Navbar = ({ isLogged, datosUsuario, logOutCallback }) => {
 
                     <Separator />
 
-                    <MenuItem className="cursor-pointer">
-                      <User className="cursor-pointer mr-2 h-4 w-4" />
-                      <span>Editar perfil</span>
+                    <MenuItem>
+                      <CustomLink
+                        to="/editar-perfil"
+                        className="flex items-center w-full"
+                      >
+                        <User className="mr-2 h-4 w-4" />
+                        <span>Editar perfil</span>
+                      </CustomLink>
                     </MenuItem>
 
-                    <Separator />
-
-                    <MenuItem className="cursor-pointer">
-                      <Edit className="cursor-pointer mr-2 h-4 w-4" />
-                      <span>Editar proyectos</span>
+                    <MenuItem>
+                      <CustomLink
+                        to="/editar-proyectos"
+                        className="flex items-center w-full"
+                      >
+                        <Edit className="mr-2 h-4 w-4" />
+                        <span>Editar proyectos</span>
+                      </CustomLink>
                     </MenuItem>
 
-                    <Separator />
-
-                    <MenuItem className="cursor-pointer">
-                      <LogOut className="cursor-pointer mr-2 h-4 w-4" />
-                      <span onClick={logOutCallback}>Cerrar sesión</span>
+                    <MenuItem onClick={logOutCallback}>
+                      <LogOut className="mr-2 h-4 w-4" />
+                      <span>Cerrar sesión</span>
                     </MenuItem>
                   </MenuContent>
                 </div>
               </DropdownMenu>
             </>
           ) : (
-            <div className="RIGHT-item justify-end flex-1  hidden lg:flex space-x-2">
+            <div className="animated-responsive justify-end flex-1 hidden lg:flex space-x-2">
               <RegisterButton onClick={toggleRegistration} outline={true} />
               <LoginButton onClick={toggleLogin} outline={true} />
             </div>
           )}
-          <div className="flex flex-1 md:flex-none lg:flex-1 w-fit justify-end lg:hidden">
+          <div className="animated-responsive flex flex-1 md:flex-none lg:flex-1 w-fit justify-end lg:hidden">
             <Button
               variant="ghost"
               size="icon"
@@ -141,7 +147,7 @@ export const Navbar = ({ isLogged, datosUsuario, logOutCallback }) => {
               Inicio
             </CustomLink>
             <CustomLink
-              to="/contact-us"
+              to="/contactanos"
               className="block cursor-pointer select-none text-gray-600 active:text-purple-600"
             >
               Contacto
@@ -159,10 +165,9 @@ export const Navbar = ({ isLogged, datosUsuario, logOutCallback }) => {
               Proyectos
             </CustomLink>
             {isLogged ? (
-              <></>
+              <></> // (vacío)
             ) : (
               <>
-                {" "}
                 <span
                   onClick={toggleRegistration}
                   className="block cursor-pointer select-none text-gray-600 active:text-purple-600"

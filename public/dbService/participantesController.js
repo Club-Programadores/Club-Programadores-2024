@@ -51,7 +51,7 @@ export default class ParticipantesController{
       return participanteBack2Front(participante);
   }
 
-  static asyncLoginParticipante = async function (datosUsuario){
+  static asyncLoginParticipante = async function (loginInput){
     let resultado = {
       datosValidos: false,
       informacionParticipante: {}
@@ -59,7 +59,7 @@ export default class ParticipantesController{
 
     let respose;
     try{
-      respose = ParticipantesDBContext.LoginUsuario(datosUsuario);
+      respose = ParticipantesDBContext.LoginUsuario(loginInput);
     }
     catch(e){
      resultado.estado = e;

@@ -1,29 +1,23 @@
 import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { validationSchema } from "../validationSchema";
-import { profilesOptions } from "./FiltersDropdown/PerfilesDropdown";
-import { technologyOptions } from "./FiltersDropdown/TechnologyDropdown";
+import { fullUserValidation } from "../validationSchema";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
+import aptitudes from "../../assets/aptitudes.json";
 import Select from "react-select";
-import ParticipantesController from "@/../public/dbService/participantesController"
-
-/*
-TODO: Validar que el correo ingresado no este ya en uso
-Arreglar NavBar nombre
-*/
 
 const RegistrationModal = ({ signedUpCallback, onClose }) => {
-
   const [step, setStep] = useState(1);
+  const profilesOptions = aptitudes.profilesOptions;
+  const technologyOptions = aptitudes.technologyOptions;
 
   const handleSubmit = (formData) => {
     setTimeout(() => {
@@ -54,11 +48,12 @@ const RegistrationModal = ({ signedUpCallback, onClose }) => {
             confirmPassword: "",
             firstName: "",
             lastName: "",
+            github: "",
             bio: "",
             profile: [],
             technology: [],
           }}
-          validationSchema={validationSchema}
+          validationSchema={fullUserValidation}
           onSubmit={handleSubmit}
         >
           {({ isSubmitting, setFieldValue, validateForm }) => (
@@ -150,6 +145,23 @@ const RegistrationModal = ({ signedUpCallback, onClose }) => {
                         />
                       </div>
                       <div>
+                        <Label htmlFor="profilePicture">GitHub</Label>
+                        <Input
+                          type="text"
+                          id="github"
+                          placeholder="https://github.com/usuario"
+                          className="w-full"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="profilePicture">Foto de perfil</Label>
+                        <Input
+                          type="file"
+                          id="profilePicture"
+                          className="w-full"
+                        />
+                      </div>
+                      <div>
                         <Label htmlFor="bio">Información adicional</Label>
                         <Field
                           as={Textarea}
@@ -173,8 +185,9 @@ const RegistrationModal = ({ signedUpCallback, onClose }) => {
                         <Select
                           isMulti
                           name="profile"
-                          options={profilesOptions}
                           className="w-full"
+                          placeholder="Seleccionar"
+                          options={profilesOptions}
                           onChange={(selectedOptions) =>
                             setFieldValue(
                               "profile",
@@ -193,8 +206,9 @@ const RegistrationModal = ({ signedUpCallback, onClose }) => {
                         <Select
                           isMulti
                           name="technology"
-                          options={technologyOptions}
                           className="w-full"
+                          placeholder="Seleccionar"
+                          options={technologyOptions}
                           onChange={(selectedOptions) =>
                             setFieldValue(
                               "technology",
@@ -206,14 +220,6 @@ const RegistrationModal = ({ signedUpCallback, onClose }) => {
                           name="technology"
                           component="p"
                           className="text-red-500 text-sm"
-                        />
-                      </div>
-                      <div>
-                        <Label htmlFor="profilePicture">Foto de perfil</Label>
-                        <Input
-                          type="file"
-                          id="profilePicture"
-                          className="w-full"
                         />
                       </div>
                     </div>

@@ -17,8 +17,8 @@ export const LandingPage = () => {
   const { toggleRegistration } = useModal();
 
   return (
-    <div className="min-h-screen bg-white">
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="flex items-center justify-center flex-grow">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <section className="relative select-none h-[400px] mb-12">
           <img
             src="/imgs/heroBanner1.jpg"
@@ -54,7 +54,7 @@ export const LandingPage = () => {
             <Card className="text-center">
               <CardContent className="pt-6">
                 <img
-                  src="public\imgs\002-profile.svg"
+                  src="imgs\002-profile.svg"
                   alt="Perfil"
                   className="mx-auto mb-4 w-32"
                 />
@@ -64,7 +64,7 @@ export const LandingPage = () => {
             <Card className="text-center">
               <CardContent className="pt-6">
                 <img
-                  src="public\imgs\004-competence.svg"
+                  src="imgs\004-competence.svg"
                   alt="Skills"
                   className="mx-auto mb-4 w-32"
                 />
@@ -76,7 +76,7 @@ export const LandingPage = () => {
             <Card className="text-center">
               <CardContent className="pt-6">
                 <img
-                  src="public\imgs\005-teamwork.svg"
+                  src="imgs\005-teamwork.svg"
                   alt="Conectar"
                   className="mx-auto mb-4 w-32"
                 />
@@ -166,7 +166,7 @@ export const LandingPage = () => {
           </div>
         </section>
 
-        <section className="bg-gray-100 mt-12 p-8 rounded-lg" id="contact-us">
+        <section className="bg-gray-100 mt-12 p-8 rounded-lg" id="contactanos">
           <h2 className="text-2xl font-semibold mb-6 text-center">
             CONTÁCTANOS
           </h2>
@@ -205,7 +205,7 @@ export const LandingPage = () => {
             </Button>
           </form>
         </section>
-      </main>
+      </div>
     </div>
   );
 };

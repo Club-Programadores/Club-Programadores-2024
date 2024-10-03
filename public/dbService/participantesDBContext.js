@@ -1,6 +1,5 @@
 
 import Secrets from "@/../private/secrets.json"
-import { get } from "react-scroll/modules/mixins/scroller";
 
 export default class ParticipantesDBContext {
 
@@ -27,9 +26,9 @@ export default class ParticipantesDBContext {
     return response;
   }
 
-  static asyncLoginUsuario = async function (datosUsuario) {
-    const userMail = datosUsuario.mail;
-    const hashPass = datosUsuario.pass.toHash();
+  static asyncLoginUsuario = async function (loginInput) {
+    const userMail = loginInput.email;
+    const hashPass = loginInput.pass.toHash();
     const apiCallUrl = `${Secrets.ApiUrl}/login?mail:${userMail},pass:${hashPass}`;
 
     const response = await fetch(apiCallUrl)
