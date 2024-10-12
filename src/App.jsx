@@ -13,37 +13,36 @@ import { EditProjects } from "./pages/EditProjects";
 
 export default function App() {
   const [isLogged, setLogged] = useState(false);
-  const [token, setToken] = useState('');
+  const [tokenSesion, setTokenSesion] = useState('');
 
   const [usuario, setUsuario] = useState({
     nombre: "",
     imagen: "",
-    email: ""
   });
 
-  const onIniciarSesion = useCallback((datosUsuario) => {
+  const onIniciarSesion = useCallback((datosUsuario,token) => {
+    setTokenSesion(token)
     setUsuario({
       nombre: datosUsuario.nombre,
       imagen: datosUsuario.imagen,
-      email: datosUsuario.mail,
     })
     setLogged(true);
   }, []);
   
-  const onRegistrarse = useCallback((datosUsuario) => {
+  const onRegistrarse = useCallback((datosUsuario,token) => {
+    setTokenSesion(token)
     setUsuario({
       nombre: datosUsuario.nombre,
       imagen: datosUsuario.imagen,
-      email: datosUsuario.mail,
     })
     setLogged(true);
   }, []);
 
   const onCerrarSesion = useCallback(() => {
+    setTokenSesion("")
     setUsuario({
       nombre: "",
       imagen: "",
-      email: ""
     })
     setLogged(false);
   }, []);

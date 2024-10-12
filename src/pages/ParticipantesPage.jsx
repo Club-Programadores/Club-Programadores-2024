@@ -9,7 +9,7 @@ import { Search, ChevronUp, ChevronDown } from "lucide-react";
 import ParticipanteBox from "@/components/ParticipanteBox"
 import PerfilesDropdown from "@/components/FiltersDropdown/PerfilesDropdown";
 import TechnologyDropdown from "@/components/FiltersDropdown/TechnologyDropdown";
-import ParticipantesController from "@/../public/dbService/participantesController"
+import ParticipantesController from "@/dbService/participantesController"
 
 const container = {
   hidden: { opacity: 1, scale: 0 },
@@ -42,7 +42,7 @@ export default function ParticipantesPage() {
     async function getData(){
       let participantes;
       try{
-        participantes = await ParticipantesController.asyncGetAllParticipantes();
+        participantes = await ParticipantesController.asyncGetAllParticipantes();        
       }
       catch(e){
         console.log(e)

@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -11,7 +11,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-import ParticipantesController from "@/../public/dbService/participantesController"
+import ParticipantesController from "@/dbService/participantesController"
 
 
 const LoginModal = ({ loggedInCallback, onClose }) => {
@@ -20,55 +20,52 @@ const LoginModal = ({ loggedInCallback, onClose }) => {
   const [userCredentialsAreValid, setUserCredentialsAreValid] = useState(false);
   const [showIncorrectUserMsg, setShowIncorrectUserMsg] = useState(false);
 
+  const [tokenSesion, setTokenSesion] = useState("");
   const [datosUsuario, setDatosUsuario] = useState({
     nombre: "",
     imagen: "",
-    email: ""
   });
 
-  const fetchData = useCallback(async () => { 
-    try{   
+  // const fetchData = useCallback(async () => {
+  //   const loginInput = {
+  //     email: userMail,
+  //     pass: userPass
+  //   }
+  //   try {
+  //     const response = await ParticipantesController.asyncLoginParticipante(loginInput);
+  //     setDatosUsuario({
+  //       nombre: `${response.informacionParticipante.nombre}`,
+  //       imagen: `${response.informacionParticipante.image}`,
+  //     })
+  //     setTokenSesion(response.tokenSesion)
+  //     setUserCredentialsAreValid(true);
+  //   }
+  //   catch {
+  //     setUserCredentialsAreValid(false);
+  //   }
+  // })
 
-      const loginInput = {
-        email: userMail,
-        pass: userPass
-      }
-
-      const responseUserData = await ParticipantesController.asyncLoginParticipante(loginInput);
-
-      if(responseUserData.password != userPass){
-        setUserCredentialsAreValid(false);
-      }
-      else{
-        console.log(responseUserData.image)
-        setDatosUsuario({
-          nombre: `${responseUserData.nombre} ${responseUserData.apellido}`,
-          imagen: `${responseUserData.image}`,
-          email: `${responseUserData.email}`
-        })
-        
-        setUserCredentialsAreValid(true);
-      }
-    }
-    catch(error){
-      console.log(error)
-    }
-  })
-  
-  useEffect(()=>{
-    fetchData();
-  }, [])
+  // useEffect(() => {
+  //   fetchData();
+  // })
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(1);
+    const loginInput = {
+      email: userMail,
+      pass: userPass
+    }
+    const resultadoLogin = ParticipantesController.loginParticipante(loginInput);
+    console.log(resultadoLogin);
 
-    if (!userCredentialsAreValid) {
-      setShowIncorrectUserMsg(true);
-    } else {
-      if (typeof loggedInCallback === "function") {
-        loggedInCallback(datosUsuario);
-      }
+    if (resultadoLogin.datosValidos) {
+      console.log(2);
+      loggedInCallback(resultadoLogin.informacionParticipante, resultadoLogin.tokenSesion);
       onClose();
+    } {
+      console.log(3);
+      setShowIncorrectUserMsg(true);
     }
   };
 

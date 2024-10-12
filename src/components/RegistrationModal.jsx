@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { fullUserValidation } from "../validationSchema";
 import { Textarea } from "@/components/ui/textarea";
@@ -14,25 +14,67 @@ import {
 import aptitudes from "../../assets/aptitudes.json";
 import Select from "react-select";
 
+import ParticipantesController from "@/dbService/participantesController"
+import { File } from "lucide-react";
+
 const RegistrationModal = ({ signedUpCallback, onClose }) => {
   const [step, setStep] = useState(1);
+  const [apiRegisterRequest, setApiRegisterRequest] = useState({
+    state: false,
+    registerData: {}
+  });
+
   const profilesOptions = aptitudes.profilesOptions;
   const technologyOptions = aptitudes.technologyOptions;
 
-  const handleSubmit = (formData) => {
-    setTimeout(() => {
-      
-      ParticipantesController.registrarParticipante(formData);
+  useEffect(() => {
+    async function asyncFunction() {
 
-      const datosUsuario = {
-        nombre: `${formData.firstName} ${formData.lastName}`,
-        imagen: nuevoMiembro.imagen,
-        email: nuevoMiembro.email
+      try {
+
+        console.log("test3");
+        const resultadoRegistro = await ParticipantesController.asyncRegistrarParticipante(apiRegisterRequest.registerData);
+        console.log(resultadoRegistro);
+        //Si el registro es exitoso, accede al endpoint de login para conseguir token de sesión.
+        if (resultadoRegistro.registroExitoso) {
+          const loginInput = {
+            email: apiRegisterRequest.registerData.email,
+            pass: apiRegisterRequest.registerData.password
+          }
+          const resultadoLogin = await ParticipantesController.asyncLoginParticipante(loginInput);
+          console.log(resultadoLogin);
+          if (resultadoLogin.datosValidos) {
+            signedUpCallback(response.informacionParticipante, resultado.tokenSesion);
+          }
+        }
+        else {
+          //manejar error al registrar usuario 
+        }
+
       }
-      signedUpCallback(datosUsuario);
-      
+      catch (e) {
+        console.log(e);
+      }
+
+      console.log(resultado.detalle);
+    }
+
+    if(apiRegisterRequest.state === true){
+    setTimeout(() => {
+      console.log("tes2");
+      asyncFunction();
       onClose();
     }, 400);
+    }
+    console.log("test");
+  })
+
+  const handleSubmit = (formData) => {
+    console.log(formData);
+    setApiRegisterRequest({
+      state: true,
+      registerData: formData
+    })
   };
 
   return (
@@ -50,6 +92,7 @@ const RegistrationModal = ({ signedUpCallback, onClose }) => {
             lastName: "",
             github: "",
             bio: "",
+            image: null,
             profile: [],
             technology: [],
           }}
@@ -57,7 +100,7 @@ const RegistrationModal = ({ signedUpCallback, onClose }) => {
           onSubmit={handleSubmit}
         >
           {({ isSubmitting, setFieldValue, validateForm }) => (
-            <Form className="space-y-4">
+            <Form className="space-y-4" enctype="multipart/form-data" method="post">
               {step === 1 && (
                 <div className="space-y-4">
                   <div>
@@ -145,20 +188,33 @@ const RegistrationModal = ({ signedUpCallback, onClose }) => {
                         />
                       </div>
                       <div>
-                        <Label htmlFor="profilePicture">GitHub</Label>
-                        <Input
+                        <Label htmlFor="github">GitHub</Label>
+                        <Field
+                          as={Input}
                           type="text"
                           id="github"
-                          placeholder="https://github.com/usuario"
+                          name="github"
                           className="w-full"
+                          placeholder="https://github.com/usuario"
+                        />
+                        <ErrorMessage
+                          name="github"
+                          component="p"
+                          className="text-red-500 text-sm"
                         />
                       </div>
                       <div>
-                        <Label htmlFor="profilePicture">Foto de perfil</Label>
-                        <Input
+                        <Label htmlFor="image">Foto de perfil</Label>
+                        <Field
                           type="file"
-                          id="profilePicture"
+                          id="image"
+                          name="image"
                           className="w-full"
+                        />
+                        <ErrorMessage
+                          name="image"
+                          component="p"
+                          className="text-red-500 text-sm"
                         />
                       </div>
                       <div>
