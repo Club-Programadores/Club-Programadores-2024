@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+"use client";
+
+import React, { useState, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik";
 import { projectValidation } from "@/validationSchema";
+import { AddProjectModal } from "../components/addProjectModal";
+import { Save, Trash2 } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,7 +15,6 @@ import {
   CardHeader,
   CardTitle,
   CardDescription,
-  CardFooter,
 } from "@/components/ui/card";
 import {
   Accordion,
@@ -27,15 +30,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Save, Trash2 } from "lucide-react";
-import ReactSelect from "react-select";
 import proyectosJson from "../../assets/proyectos.json";
 import aptitudesJson from "../../assets/aptitudes.json";
-import { AddProjectModal } from "../components/addProjectModal";
+import ReactSelect from "react-select";
+import * as Yup from "yup";
 
 export const EditProjects = () => {
   const [projects, setProjects] = useState(proyectosJson.proyectos);
   const { technologyOptions } = aptitudesJson;
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
   const handleSubmit = (values, { setSubmitting }) => {
     setProjects(values.projects);
@@ -49,6 +52,7 @@ export const EditProjects = () => {
 
   const handleAddProject = (newProject) => {
     setProjects([...projects, { ...newProject, id: Date.now() }]);
+    setIsAddModalOpen(false);
   };
 
   return (
@@ -62,11 +66,13 @@ export const EditProjects = () => {
         </CardHeader>
         <Formik
           initialValues={initialValues}
-          validationSchema={projectValidation}
+          validationSchema={Yup.object({
+            projects: Yup.array().of(projectValidation),
+          })}
           onSubmit={handleSubmit}
           enableReinitialize
         >
-          {({ values, isSubmitting, setFieldValue, handleSubmit }) => (
+          {({ values, isSubmitting, setFieldValue, handleSubmit, dirty }) => (
             <Form>
               <CardContent>
                 <FieldArray name="projects">
@@ -144,7 +150,7 @@ export const EditProjects = () => {
                                   <Button
                                     type="button"
                                     variant="link"
-                                    disabled={isSubmitting}
+                                    disabled={isSubmitting || !dirty}
                                     onClick={() => {
                                       console.log(
                                         JSON.stringify(project, null, 2)
@@ -173,6 +179,8 @@ export const EditProjects = () => {
                       <AddProjectModal
                         onAddProject={handleAddProject}
                         technologyOptions={technologyOptions}
+                        isOpen={isAddModalOpen}
+                        setIsOpen={setIsAddModalOpen}
                       />
                     </>
                   )}
