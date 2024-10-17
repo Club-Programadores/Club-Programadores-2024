@@ -1,7 +1,5 @@
-'use client'
-
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion"
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -10,6 +8,7 @@ import ParticipanteBox from "@/components/ParticipanteBox"
 import PerfilesDropdown from "@/components/FiltersDropdown/PerfilesDropdown";
 import TechnologyDropdown from "@/components/FiltersDropdown/TechnologyDropdown";
 import ParticipantesController from "@/dbService/participantesController"
+import UserProfileModal from "@/components/UserProfileModal";
 
 const container = {
   hidden: { opacity: 1, scale: 0 },
@@ -21,7 +20,7 @@ const container = {
       staggerChildren: 0.2,
     },
   },
-}
+};
 
 const item = {
   hidden: { y: 20, opacity: 0 },
@@ -29,7 +28,7 @@ const item = {
     y: 0,
     opacity: 1,
   },
-}
+};
 
 export default function ParticipantesPage() {
   const [search, setSearch] = useState("");
@@ -37,6 +36,7 @@ export default function ParticipantesPage() {
   const [technologyFilter, setTechnologyFilter] = useState([]);
   const [showDropdowns, setShowDropdowns] = useState(false);
   const [participantes, setParticipantes] = useState([])
+  const [selectedUser, setSelectedUser] = useState(null);
 
   useEffect(()=>{
     async function getData(){
@@ -57,7 +57,7 @@ export default function ParticipantesPage() {
     if (search !== "") {
       res = res.filter((participante) =>
         participante.nombre.toLowerCase().startsWith(search.toLowerCase())
-      )
+      );
     }
     if (profilesFilter.length !== 0) {
       res = res.filter((participante) =>
@@ -66,7 +66,7 @@ export default function ParticipantesPage() {
             p.toLowerCase().includes(profile.value.toLowerCase())
           )
         )
-      )
+      );
     }
     if (technologyFilter.length !== 0) {
       res = res.filter((participante) =>
@@ -75,10 +75,14 @@ export default function ParticipantesPage() {
             tech.toLowerCase().includes(technology.value.toLowerCase())
           )
         )
-      )
+      );
     }
     return res
   }
+
+  const handleUserClick = (user) => {
+    setSelectedUser(user);
+  };
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -133,11 +137,20 @@ export default function ParticipantesPage() {
         animate="visible"
       >
         {filteredParticipantes().map((participante) => (
-          <motion.div key={participante.id} variants={item}>
+          <motion.div
+            key={participante.id}
+            variants={item}
+            onClick={() => handleUserClick(participante)}
+          >
             <ParticipanteBox data={participante} />
           </motion.div>
         ))}
       </motion.div>
+      <UserProfileModal
+        isOpen={!!selectedUser}
+        onClose={() => setSelectedUser(null)}
+        user={selectedUser}
+      />
     </div>
-  )
+  );
 }
