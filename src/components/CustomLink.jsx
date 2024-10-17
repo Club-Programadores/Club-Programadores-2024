@@ -7,6 +7,8 @@ export const CustomLink = ({
   children,
   smooth = true,
   duration = 500,
+  className,
+  onClick,
   ...props
 }) => {
   const navigate = useNavigate();
@@ -30,6 +32,9 @@ export const CustomLink = ({
         smooth: true,
       });
     }
+    if (onClick) {
+      onClick();
+    }
   };
 
   if (to === "/contactanos" && location.pathname === "/") {
@@ -38,6 +43,7 @@ export const CustomLink = ({
         to="contactanos"
         smooth={smooth}
         duration={duration}
+        className={className}
         {...props}
       >
         {children}
@@ -46,7 +52,7 @@ export const CustomLink = ({
   }
 
   return (
-    <RouterLink to={to} onClick={handleClick} {...props}>
+    <RouterLink to={to} onClick={handleClick} className={className} {...props}>
       {children}
     </RouterLink>
   );
