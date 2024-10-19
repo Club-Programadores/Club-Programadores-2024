@@ -8,7 +8,10 @@ export default function ParticipanteBox({ data }) {
     "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png";
 
   return (
-    <Card className="overflow-hidden mb-6 hover:shadow-lg transition-shadow duration-300 h-full flex flex-col">
+    <Card
+      className="overflow-hidden mb-6 hover:shadow-lg transition-shadow duration-300 h-full flex flex-col cursor-pointer"
+      title="Click para ver perfil"
+    >
       <CardContent className="p-0 flex flex-col h-full">
         <div className="flex-grow flex flex-col md:flex-row">
           <div className="md:w-1/3 bg-gradient-to-br from-purple-500 to-indigo-600 p-6 text-white flex flex-col justify-center items-center">
@@ -36,7 +39,7 @@ export default function ParticipanteBox({ data }) {
             <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4 flex-grow">
               {data.technology.map((tech) => (
                 <div key={tech} className="flex flex-col items-center group">
-                  <div className="w-12 h-12 flex items-center justify-center bg-gray-100 rounded-full p-2 group-hover:bg-gray-200 transition-colors duration-200">
+                  <div className="w-12 h-12 flex items-center justify-center bg-gray-100 rounded-full p-2">
                     <img
                       src={techNameToImage(tech)}
                       alt={tech}

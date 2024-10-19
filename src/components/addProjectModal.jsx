@@ -34,11 +34,16 @@ const newProjectInitialValues = {
   estado: "nuevo",
 };
 
-export const AddProjectModal = ({ onAddProject, technologyOptions }) => {
+export const AddProjectModal = ({
+  onAddProject,
+  technologyOptions,
+  isOpen,
+  setIsOpen,
+}) => {
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button className="w-full mt-4">
+        <Button className="w-full mt-4" onClick={() => setIsOpen(true)}>
           <PlusCircle className="mr-2 h-4 w-4" />
           Añadir Nuevo Proyecto
         </Button>
@@ -57,6 +62,7 @@ export const AddProjectModal = ({ onAddProject, technologyOptions }) => {
             onAddProject(newProject);
             setSubmitting(false);
             resetForm();
+            setIsOpen(false);
             console.log(JSON.stringify(newProject, null, 2));
           }}
         >
@@ -98,7 +104,11 @@ export const AddProjectModal = ({ onAddProject, technologyOptions }) => {
                 />
               </div>
               <DialogFooter>
-                <Button type="submit" disabled={isSubmitting}>
+                <Button
+                  type="submit"
+                  className="mx-auto"
+                  disabled={isSubmitting}
+                >
                   Añadir Proyecto
                 </Button>
               </DialogFooter>

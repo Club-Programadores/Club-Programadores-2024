@@ -1,15 +1,14 @@
-'use client'
-
-import { useState } from "react"
-import { motion } from "framer-motion"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Search, ChevronUp, ChevronDown } from "lucide-react"
-import ParticipanteBox from "@/components/ParticipanteBox"
-import PerfilesDropdown from "@/components/FiltersDropdown/PerfilesDropdown"
-import TechnologyDropdown from "@/components/FiltersDropdown/TechnologyDropdown"
-import participantesJson from "../../assets/miembros.json"
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Search, ChevronUp, ChevronDown } from "lucide-react";
+import ParticipanteBox from "@/components/ParticipanteBox";
+import PerfilesDropdown from "@/components/FiltersDropdown/PerfilesDropdown";
+import TechnologyDropdown from "@/components/FiltersDropdown/TechnologyDropdown";
+import UserProfileModal from "@/components/UserProfileModal";
+import participantesJson from "../../assets/miembros.json";
 
 const container = {
   hidden: { opacity: 1, scale: 0 },
@@ -21,7 +20,7 @@ const container = {
       staggerChildren: 0.2,
     },
   },
-}
+};
 
 const item = {
   hidden: { y: 20, opacity: 0 },
@@ -29,21 +28,22 @@ const item = {
     y: 0,
     opacity: 1,
   },
-}
+};
 
 export default function ParticipantesPage() {
-  const [search, setSearch] = useState("")
-  const [profilesFilter, setProfilesFilter] = useState([])
-  const [technologyFilter, setTechnologyFilter] = useState([])
-  const [showDropdowns, setShowDropdowns] = useState(false)
+  const [search, setSearch] = useState("");
+  const [profilesFilter, setProfilesFilter] = useState([]);
+  const [technologyFilter, setTechnologyFilter] = useState([]);
+  const [showDropdowns, setShowDropdowns] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
 
   const filteredParticipantes = () => {
-    let participantes = [...participantesJson.miembros]
+    let participantes = [...participantesJson.miembros];
 
     if (search !== "") {
       participantes = participantes.filter((participante) =>
         participante.nombre.toLowerCase().startsWith(search.toLowerCase())
-      )
+      );
     }
     if (profilesFilter.length !== 0) {
       participantes = participantes.filter((participante) =>
@@ -52,7 +52,7 @@ export default function ParticipantesPage() {
             p.toLowerCase().includes(profile.value.toLowerCase())
           )
         )
-      )
+      );
     }
     if (technologyFilter.length !== 0) {
       participantes = participantes.filter((participante) =>
@@ -61,10 +61,14 @@ export default function ParticipantesPage() {
             tech.toLowerCase().includes(technology.value.toLowerCase())
           )
         )
-      )
+      );
     }
-    return participantes
-  }
+    return participantes;
+  };
+
+  const handleUserClick = (user) => {
+    setSelectedUser(user);
+  };
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -119,11 +123,20 @@ export default function ParticipantesPage() {
         animate="visible"
       >
         {filteredParticipantes().map((participante) => (
-          <motion.div key={participante.id} variants={item}>
+          <motion.div
+            key={participante.id}
+            variants={item}
+            onClick={() => handleUserClick(participante)}
+          >
             <ParticipanteBox data={participante} />
           </motion.div>
         ))}
       </motion.div>
+      <UserProfileModal
+        isOpen={!!selectedUser}
+        onClose={() => setSelectedUser(null)}
+        user={selectedUser}
+      />
     </div>
-  )
+  );
 }
