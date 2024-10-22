@@ -4,7 +4,6 @@ import Secrets from "@/../private/secrets.json"
 export default class ParticipantesDBContext {
 
   static loginUsuario = function (loginInput) {
-    console.log(loginInput);
     const response = fetch(`${Secrets.ApiUrl}/login`, {
       method: 'POST',
       headers: {
@@ -42,43 +41,40 @@ export default class ParticipantesDBContext {
     return response;
   }
 
-  static asyncLoginUsuario = async function (loginInput) {
+  static asyncLoginUsuario = async function (formData) {
     const response = await fetch(`${Secrets.ApiUrl}/login`, {
       method: 'POST',
       headers: {
-        "Content-Type": "application/json",
         "Accept": "*/*"
       },
-      body: {
-        email: loginInput.email,
-        password: loginInput.pass
-      }
+      body: formData
     })
 
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
 
-    const responseJson = response => response.json();
+    const responseJson = response.json();
     return responseJson;
   }
 
   static asyncRegistrarUsuario = async function (formData) {
-    console.log(formData);
     const response = await fetch(`${Secrets.ApiUrl}/registrar`, {
       method: 'POST',
       headers: {
-        // ,'Access-Control-Allow-Origin':'*',
-        // 'Access-Control-Allow-Methods':'POST,PATCH,OPTIONS'
+        "Accept": "*/*"
       },
       body: formData
-    }).then(response => response.json())
-    console.log(response);
+    });
+
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
-
-    return response;
+    
+    
+    const responseJson = response.json();
+    console.log(responseJson);
+    return responseJson;
   }
 
   static asyncGetAllParticipantes = async function () {

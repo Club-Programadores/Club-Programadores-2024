@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect  } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { fullUserValidation } from "../validationSchema";
 import { Textarea } from "@/components/ui/textarea";
@@ -13,67 +13,83 @@ import {
 } from "@/components/ui/dialog";
 import aptitudes from "../../assets/aptitudes.json";
 import Select from "react-select";
+import { BarLoader } from "react-spinners";
 
 import ParticipantesController from "@/dbService/participantesController"
-import { File } from "lucide-react";
 
 const RegistrationModal = ({ signedUpCallback, onClose }) => {
-  const [step, setStep] = useState(1);
-  const [apiRegisterRequest, setApiRegisterRequest] = useState({
-    state: false,
-    registerData: {}
-  });
-
   const profilesOptions = aptitudes.profilesOptions;
   const technologyOptions = aptitudes.technologyOptions;
+  const registrationTimeOut = 100000;
+  const loadingCSSOverride = {
+    display: "block",
+    margin: "0 auto",
+    borderColor: "red",
+  };
+  
+  const [step, setStep] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [loadingColor, setLoadingColor] = useState( "#9333ea")
+  const [fotoDePerfil_Base64, setFotoDePerfil_Base64] = useState("");
+
+  const [requestRegister, setRequestRegister] = useState({
+    state: false,
+    data: {}
+  });
 
   useEffect(() => {
-    async function asyncFunction() {
-
+    async function asyncFunction(apiResponseTimeout) {
       try {
-
-        console.log("test3");
-        const resultadoRegistro = await ParticipantesController.asyncRegistrarParticipante(apiRegisterRequest.registerData);
-        console.log(resultadoRegistro);
-        //Si el registro es exitoso, accede al endpoint de login para conseguir token de sesión.
+        const resultadoRegistro = await ParticipantesController.asyncRegistrarParticipante(requestRegister.data);
         if (resultadoRegistro.registroExitoso) {
-          const loginInput = {
-            email: apiRegisterRequest.registerData.email,
-            pass: apiRegisterRequest.registerData.password
-          }
-          const resultadoLogin = await ParticipantesController.asyncLoginParticipante(loginInput);
-          console.log(resultadoLogin);
-          if (resultadoLogin.datosValidos) {
-            signedUpCallback(response.informacionParticipante, resultado.tokenSesion);
-          }
+          signedUpCallback(resultadoRegistro.datosUsuario, resultadoRegistro.tokenSesion);
         }
         else {
-          //manejar error al registrar usuario 
+          alert("Error:"+resultadoRegistro.detalle);
         }
-
       }
       catch (e) {
         console.log(e);
       }
+      finally{
+        //Reset Login Request
+        clearTimeout(apiResponseTimeout)
+        setRequestRegister({
+          state: false,
+          data: {}
+        })
+        onClose();
+      }
 
-      console.log(resultado.detalle);
     }
 
-    if(apiRegisterRequest.state === true){
-    setTimeout(() => {
-      console.log("tes2");
-      asyncFunction();
-      onClose();
-    }, 400);
+    if(requestRegister.state === true){
+      setLoading(true)
+      const apiResponseTimeout = setTimeout(() => {
+        alert("Error: Timeout Registro")
+        setLoading(false)
+      }, registrationTimeOut);
+
+      //Call Api.
+      asyncFunction(apiResponseTimeout);
     }
-    console.log("test");
-  })
+  }, [requestRegister])
 
   const handleSubmit = (formData) => {
-    console.log(formData);
-    setApiRegisterRequest({
+    setRequestRegister({
       state: true,
-      registerData: formData
+      data: {
+        email: formData.email,
+        password: formData.password,
+        confirmPassword: formData.confirmPassword,
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        github: formData.github,
+        bio: formData.bio,
+        image: fotoDePerfil_Base64,
+        profile: formData.profile,
+        technology: formData.technology,
+      }
     })
   };
 
@@ -105,7 +121,7 @@ const RegistrationModal = ({ signedUpCallback, onClose }) => {
           onSubmit={handleSubmit}
         >
           {({ isSubmitting, setFieldValue, validateForm }) => (
-            <Form className="space-y-4" enctype="multipart/form-data" method="post">
+            <Form className="space-y-4" method="post" encType="multipart/form-data">
               {step === 1 && (
                 <div className="space-y-4">
                   <div>
@@ -211,16 +227,27 @@ const RegistrationModal = ({ signedUpCallback, onClose }) => {
                       <div>
                         <Label htmlFor="image">Foto de perfil</Label>
                         <Field
+                          as={Input}
                           type="file"
                           id="image"
                           name="image"
                           className="w-full"
+                          onChange={(event) => {
+                            const reader = new FileReader();
+                            reader.onload = (event) => {
+                              const imgData = event.target.result;
+                              setFotoDePerfil_Base64(imgData);
+                            }
+                            const imgSelected = event.target.files[0]
+                            reader.readAsDataURL(imgSelected)
+                          }}
                         />
                         <ErrorMessage
                           name="image"
                           component="p"
                           className="text-red-500 text-sm"
                         />
+                        <img src={`${fotoDePerfil_Base64}`}/>
                       </div>
                       <div>
                         <Label htmlFor="bio">Información adicional</Label>

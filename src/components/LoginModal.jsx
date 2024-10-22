@@ -12,61 +12,78 @@ import {
 } from "@/components/ui/dialog";
 
 import ParticipantesController from "@/dbService/participantesController"
+import { BarLoader } from "react-spinners";
 
 
 const LoginModal = ({ loggedInCallback, onClose }) => {
-  const [userMail, setUserMail] = useState("");
-  const [userPass, setUserPass] = useState("");
-  const [userCredentialsAreValid, setUserCredentialsAreValid] = useState(false);
   const [showIncorrectUserMsg, setShowIncorrectUserMsg] = useState(false);
-
-  const [tokenSesion, setTokenSesion] = useState("");
-  const [datosUsuario, setDatosUsuario] = useState({
-    nombre: "",
-    imagen: "",
+  const [loginRequest, setLoginRequest] = useState({
+    state: false,
+    input: {
+      email: "",
+      password: ""
+    }
   });
 
-  // const fetchData = useCallback(async () => {
-  //   const loginInput = {
-  //     email: userMail,
-  //     pass: userPass
-  //   }
-  //   try {
-  //     const response = await ParticipantesController.asyncLoginParticipante(loginInput);
-  //     setDatosUsuario({
-  //       nombre: `${response.informacionParticipante.nombre}`,
-  //       imagen: `${response.informacionParticipante.image}`,
-  //     })
-  //     setTokenSesion(response.tokenSesion)
-  //     setUserCredentialsAreValid(true);
-  //   }
-  //   catch {
-  //     setUserCredentialsAreValid(false);
-  //   }
-  // })
+  const [loading, setLoading] = useState(false);
+  const [loadingColor, setLoadingColor] = useState("#9333ea")
+  const loginTimeOutTime = 30000;
+  const loadingCSSOverride = {
+    display: "block",
+    margin: "0 auto",
+    borderColor: "red",
+  };
 
-  // useEffect(() => {
-  //   fetchData();
-  // })
+  useEffect(() => {
+    async function asyncFunction(logingTimeout) {
+      try {
+        const response = await ParticipantesController.asyncLoginParticipante(loginRequest.input);
+        if (response.datosValidos) {
+          loggedInCallback(response.datosUsuario, response.tokenSesion);
+          onClose();
+        }
+        else{
+          setShowIncorrectUserMsg(true);
+        }
+      }
+      catch (e) {
+        console.log(e);
+      }
+      finally {
+        //Reset Login Request
+        clearTimeout(logingTimeout);
+        setLoginRequest({
+          state: false,
+          input: {
+            email: "",
+            password: ""
+          }
+        });
+      }
+    }
+
+
+    if (loginRequest.state == true) {
+      setLoading(true);
+      const logingTimeout = setTimeout(() => {
+        alert("Error: Timeout Login")
+        setLoading(false);
+      }, loginTimeOutTime)
+
+      //Call API.
+      asyncFunction(logingTimeout);
+    }
+  }, [loginRequest])
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(1);
-    const loginInput = {
-      email: userMail,
-      pass: userPass
-    }
-    const resultadoLogin = ParticipantesController.loginParticipante(loginInput);
-    console.log(resultadoLogin);
-
-    if (resultadoLogin.datosValidos) {
-      console.log(2);
-      loggedInCallback(resultadoLogin.informacionParticipante, resultadoLogin.tokenSesion);
-      onClose();
-    } {
-      console.log(3);
-      setShowIncorrectUserMsg(true);
-    }
+    setLoginRequest({
+      state: true,
+      input: {
+        email: e.target.email.value,
+        password: e.target.password.value
+      }
+    });
   };
 
   return (
@@ -89,8 +106,6 @@ const LoginModal = ({ loggedInCallback, onClose }) => {
                 className="w-full"
                 id="email"
                 name="email"
-                value={userMail}
-                onChange={(e) => setUserMail(e.target.value)}
               />
             </div>
             <div>
@@ -101,7 +116,6 @@ const LoginModal = ({ loggedInCallback, onClose }) => {
                 id="password"
                 name="password"
                 className="w-full"
-                onChange={(e) => setUserPass(e.target.value)}
               />
             </div>
           </div>

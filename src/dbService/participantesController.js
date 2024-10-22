@@ -74,19 +74,22 @@ export default class ParticipantesController {
       detalle: '',
       tokenSesion: '',
       datosValidos: false,
-      informacionParticipante: {}
+      datosUsuario: {}
     }
 
+    const backFormData = new FormData();
+    backFormData.append("email", loginInput.email);
+    backFormData.append("password", loginInput.password);
+
     try {
-      const response = await ParticipantesDBContext.asyncLoginUsuario(loginInput);
-      console.log(response)
+      const response = await ParticipantesDBContext.asyncLoginUsuario(backFormData);
 
       resultado.detalle = response.mensaje;
       resultado.datosValidos = true;
       resultado.tokenSesion = response.token;
-      resultado.informacionParticipante = {
+      resultado.datosUsuario = {
         nombre: `${response.datos.nombre} ${response.datos.apellido}`,
-        imagen: response.datos.imagen,
+        imagen: response.datos.imagenBase64,
       }
     }
     catch (e) {
@@ -101,39 +104,30 @@ export default class ParticipantesController {
   static asyncRegistrarParticipante = async function (formData) {
     let resultado = {
       detalle: '',
+      tokenSesion: '',
       registroExitoso: false,
       datosUsuario: {}
     }
-    console.log(formData)
+
     const backFormData = new FormData();
     backFormData.append("email", formData.email);
-    backFormData.append("image", formData.image);//
+    backFormData.append("image", formData.image);
     backFormData.append("nombre", formData.firstName);
     backFormData.append("apellido", formData.lastName);
     backFormData.append("password", formData.password);
     backFormData.append("informacion_adicional", formData.bio);
     backFormData.append("perfiles", formData.profile);
     backFormData.append("tecnologias", formData.technology);
-
-    // const backFormData = {
-    //   email: formData.email,
-    //   image: formData.profilePicture,
-    //   nombre: formData.firstName,
-    //   apellido: formData.lastName,
-    //   password: formData.password,
-    //   informacion_adicional: formData.bio,
-    //   perfiles: formData.profile,
-    //   tecnologias: formData.technology
-    // }
-
+    
     try {
       const response = await ParticipantesDBContext.asyncRegistrarUsuario(backFormData);
-      console.log(response)
+
       resultado.detalle = response.mensaje;
       resultado.registroExitoso = true;
+      resultado.tokenSesion = response.token;
       resultado.datosUsuario = {
         nombre: `${formData.firstName} ${formData.lastName}`,
-        image: formData.image,
+        imagen: formData.image,
       }
     }
     catch (e) {
