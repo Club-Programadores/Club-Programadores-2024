@@ -2,9 +2,6 @@ import React from "react";
 import { Link as RouterLink, useNavigate, useLocation } from "react-router-dom";
 import { Link as ScrollLink, scroller, animateScroll } from "react-scroll";
 
-<<<<<<< HEAD
-export const CustomLink = ({ to, children, smooth, ...props }) => {
-=======
 export const CustomLink = ({
   to,
   children,
@@ -14,7 +11,6 @@ export const CustomLink = ({
   onClick,
   ...props
 }) => {
->>>>>>> 314eb0e (Modal de perfil de usuario agregado, bugfixes varios)
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -38,9 +34,6 @@ export const CustomLink = ({
 
   if (to === "/contactanos" && location.pathname === "/") {
     return (
-<<<<<<< HEAD
-      <ScrollLink to={to.slice(1)} smooth={smooth} {...props}>
-=======
       <ScrollLink
         to="contactanos"
         smooth={smooth}
@@ -48,7 +41,6 @@ export const CustomLink = ({
         className={className}
         {...props}
       >
->>>>>>> 314eb0e (Modal de perfil de usuario agregado, bugfixes varios)
         {children}
       </ScrollLink>
     );
