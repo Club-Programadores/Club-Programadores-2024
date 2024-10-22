@@ -75,7 +75,11 @@ const LoginModal = ({ loggedInCallback, onClose }) => {
         <DialogHeader>
           <DialogTitle>Iniciar sesión</DialogTitle>
         </DialogHeader>
-
+        {
+          loading ?
+            <BarLoader color={loadingColor} loading={loading} cssOverride={loadingCSSOverride} size={150} aria-label="Loading Spinner" data-testid="loader" />
+            : <></>
+        }
         <form onSubmit={handleSubmit}>
           <div className="space-y-4">
             <div>

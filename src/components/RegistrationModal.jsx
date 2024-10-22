@@ -83,6 +83,11 @@ const RegistrationModal = ({ signedUpCallback, onClose }) => {
         <DialogHeader>
           <DialogTitle>Registrarse</DialogTitle>
         </DialogHeader>
+        { 
+          loading?
+            <BarLoader color={loadingColor} loading={loading} cssOverride={loadingCSSOverride} size={150} aria-label="Loading Spinner" data-testid="loader"/>
+          : <></>
+        }
         <Formik
           initialValues={{
             email: "",
