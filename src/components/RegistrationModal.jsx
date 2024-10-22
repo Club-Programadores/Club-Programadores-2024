@@ -53,6 +53,7 @@ const RegistrationModal = ({ signedUpCallback, onClose }) => {
       }
       finally{
         //Reset Login Request
+        setLoading(false);
         clearTimeout(apiResponseTimeout)
         setRequestRegister({
           state: false,

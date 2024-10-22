@@ -51,6 +51,7 @@ const LoginModal = ({ loggedInCallback, onClose }) => {
       }
       finally {
         //Reset Login Request
+        setLoading(false);
         clearTimeout(logingTimeout);
         setLoginRequest({
           state: false,
