@@ -6,6 +6,7 @@ export const Footer = () => {
       <div className="flex flex-col gap-1 sm:flex-row max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left items-center justify-center text-gray-500">
         <a
           href="https://www.vicentelopez.gov.ar/centrouniversitariovl/novedades/club-de-desarrolladores-presencial-"
+          className="hover:underline underline-offset-4"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -14,6 +15,7 @@ export const Footer = () => {
         <p className="hidden sm:flex sm:px-2">|</p>
         <a
           href="https://www.vicentelopez.gov.ar/centrouniversitariovl"
+          className="hover:underline underline-offset-4"
           target="_blank"
           rel="noopener noreferrer"
         >

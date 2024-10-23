@@ -31,7 +31,7 @@ export const LandingPage = () => {
               transition={{ duration: 0.4 }}
               className="text-center"
             >
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+              <h2 className="text-3xl sm:text-4xl tracking-wide font-bold text-white mb-4">
                 ¡SUMATE AL CLUB DE PROGRAMADOR@S!
               </h2>
             </motion.div>
@@ -46,7 +46,7 @@ export const LandingPage = () => {
         </section>
 
         <section className="mb-12" id="about-us">
-          <h2 className="text-2xl sm:text-3xl font-semibold text-center mb-8">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8">
             El Club de Programadores es un espacio para compartir, practicar y
             colaborar
           </h2>
