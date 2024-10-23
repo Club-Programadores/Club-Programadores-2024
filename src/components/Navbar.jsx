@@ -37,7 +37,7 @@ export const Navbar = ({ isLogged, datosUsuario, logOutCallback }) => {
             className="animated-responsive flex-1 flex justify-start cursor-pointer select-none items-center"
             onClick={handleItemClick}
           >
-            <span className="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center text-white font-mono tracking-tighter font-black text-xl mr-2">
+            <span className="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center text-white font-[Monospace] tracking-tighter font-black text-xl mr-2">
               {"</>"}
             </span>
             <h1 className="font-semibold text-purple-600 hidden md:block">

@@ -7,7 +7,7 @@
       "url_proyecto": "https://github.com/Club-Programadores/HUB_ClubProg/",
       "url_pagina": "#",
       "estado": "en_desarrollo",
-      "tecnologías": ["HTML", "React"]
+      "tecnologias": ["HTML", "CSS", "React"]
     },
     {
       "id": 2,
@@ -16,9 +16,8 @@
       "url_proyecto": "https://github.com/Club-Programadores/Chocoland-Bombon_Factory",
       "url_pagina": "https://schokoland-bombon-factory.netlify.app/",
       "estado": "finalizado",
-      "tecnologías": ["HTML"]
+      "tecnologias": ["HTML", "CSS", "JavaScript"]
     },
-
     {
       "id": 3,
       "titulo": "E-commerce",
@@ -26,7 +25,7 @@
       "url_proyecto": "",
       "url_pagina": "",
       "estado": "nuevo",
-      "tecnologías": ["HTML", "CSS", "Javascript"]
+      "tecnologias": []
     },
     {
       "id": 4,
@@ -35,7 +34,7 @@
       "url_proyecto": "https://github.com/Club-Programadores/Bubble_Pop",
       "url_pagina": "https://bubble-pop-club.netlify.app/",
       "estado": "finalizado",
-      "tecnologías": ["HTML"]
+      "tecnologias": ["JavaScript"]
     },
     {
       "id": 5,
@@ -44,7 +43,7 @@
       "url_proyecto": "https://github.com/Club-Programadores/calculadora-IMC",
       "url_pagina": "https://calculadora-imc-p5.netlify.app/",
       "estado": "finalizado",
-      "tecnologías": ["HTML"]
+      "tecnologias": ["HTML", "CSS", "JavaScript"]
     },
     {
       "id": 6,
@@ -53,7 +52,7 @@
       "url_proyecto": "https://github.com/NarDevGH/ReactTS-Tic_Tac_Toe",
       "url_pagina": "https://nardev-tic-tac-toe.netlify.app/",
       "estado": "finalizado",
-      "tecnologías": ["HTML"]
+      "tecnologias": ["TypeScript"]
     }
   ]
 }
