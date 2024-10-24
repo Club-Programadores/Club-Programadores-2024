@@ -66,7 +66,7 @@ export const EditUserProfile = () => {
                   name="profilePicture"
                   type="file"
                 />
-
+                <img src={`${profilePicture}`} width={profilePicture?"150":"0"} height={profilePicture?"150":"0"}/>
                 <FormField
                   label="Información adicional"
                   name="bio"

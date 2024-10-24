@@ -248,7 +248,7 @@ const RegistrationModal = ({ signedUpCallback, onClose }) => {
                           component="p"
                           className="text-red-500 text-sm"
                         />
-                        <img src={`${fotoDePerfil_Base64}`}/>
+                        <img src={`${fotoDePerfil_Base64}`} width={fotoDePerfil_Base64?"150":"0"} height={fotoDePerfil_Base64?"150":"0"}/>
                       </div>
                       <div>
                         <Label htmlFor="bio">Información adicional</Label>
