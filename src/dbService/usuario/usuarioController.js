@@ -1,9 +1,11 @@
-import ParticipantesDBContext from './participantesDBContext.js'
+import ParticipantesDBContext from './usuarioDBContext'
 
 
 export default class ParticipantesController {
 
-  static loginParticipante = function (loginInput) {
+// synchronous
+
+  static loginUsuario = function (loginInput) {
     let resultado = {
       detalle: '',
       tokenSesion: '',
@@ -32,7 +34,7 @@ export default class ParticipantesController {
     }
   }
 
-  static registrarParticipante = function (formData) {
+  static registrarUsuario = function (formData) {
     let resultado = {
       detalle: '',
       registroExitoso: false,
@@ -69,7 +71,48 @@ export default class ParticipantesController {
     }
   }
 
-  static asyncLoginParticipante = async function (loginInput) {
+  static getUsuario = function (token) {
+    let resultado = {
+      data: {},
+      detalle: "",
+      exitoso: false
+    }
+    try{
+      const response = ParticipantesDBContext.getUsuario(token);
+      resultado.exitoso = true;
+      resultado.data = response.datos;
+      resultado.detalle = response.mensaje;
+    }
+    catch(e){
+      resultado.detalle = e;
+    }
+    finally{
+      return resultado;
+    }
+  }
+
+  static updateUsuario = function (token, data) {
+    let resultado = {
+      detalle: "",
+      exitoso: false
+    }
+
+    try{
+      const response = ParticipantesDBContext.updateUsuario(token,data);
+      resultado.exitoso = true;
+      resultado.detalle = response.mensaje;
+    }
+    catch(e){
+
+    }
+    finally{
+      return resultado;
+    }
+  }
+
+// asynchronous
+
+  static asyncLoginUsuario = async function (loginInput) {
     let resultado = {
       detalle: '',
       tokenSesion: '',
@@ -101,7 +144,7 @@ export default class ParticipantesController {
     }
   }
 
-  static asyncRegistrarParticipante = async function (formData) {
+  static asyncRegistrarUsuario = async function (formData) {
     let resultado = {
       detalle: '',
       tokenSesion: '',
@@ -114,11 +157,12 @@ export default class ParticipantesController {
     backFormData.append("image", formData.image);
     backFormData.append("nombre", formData.firstName);
     backFormData.append("apellido", formData.lastName);
+    backFormData.append("github", formData.github);
     backFormData.append("password", formData.password);
     backFormData.append("informacion_adicional", formData.bio);
-    backFormData.append("perfiles", formData.profile);
-    backFormData.append("tecnologias", formData.technology);
-    
+    backFormData.append("perfiles[]", formData.profile);
+    backFormData.append("tecnologias[]", formData.technology);
+
     try {
       const response = await ParticipantesDBContext.asyncRegistrarUsuario(backFormData);
 
@@ -138,41 +182,53 @@ export default class ParticipantesController {
     }
   }
 
-  static asyncGetAllParticipantes = async function () {
-
-    const participantes = await ParticipantesDBContext.asyncGetAllParticipantes();
-
-    return participantesBack2Front(participantes);
+  static asyncGetUsuario = async function (token) {
+    let resultado = {
+      data: {},
+      detalle: "",
+      exitoso: false
+    }
+    try{
+      const response = await ParticipantesDBContext.asyncGetUsuario(token);
+      resultado.exitoso = true;
+      resultado.data = response.datos;
+      resultado.detalle = response.mensaje;
+    }
+    catch(e){
+      resultado.detalle = e;
+    }
+    finally{
+      return resultado;
+    }
   }
 
-  static asyncGetParticipante = async function (token, id) {
-    const participantes = await AsyncGetAllParticipantes(token);
-    const participante = participantes.find(x => x.id = id)
-    return participanteBack2Front(participante);
+  static asyncUpdateUsuario = async function (token, formData) {
+    let resultado = {
+      detalle: "",
+      exitoso: false
+    }
+
+    const backFormData = new FormData();
+    backFormData.append("nombre", formData.firstName);
+    backFormData.append("apellido", formData.lastName);
+    backFormData.append("email", formData.email);
+    backFormData.append("image", formData.image);
+    backFormData.append("github", formData.github);
+    backFormData.append("informacion_adicional", formData.bio);
+    backFormData.append("perfiles[]", formData.profile);
+    backFormData.append("tecnologias[]", formData.technology);
+
+    try{
+      const response = await ParticipantesDBContext.asyncUpdateUsuario(token,backFormData);
+      resultado.exitoso = true;
+      resultado.detalle = response.mensaje;
+    }
+    catch(e){
+
+    }
+    finally{
+      return resultado;
+    }
   }
-
-
-}
-
-const participantesBack2Front = function (listaParticipantesBack) {
-  let listaParticipantesFront = [];
-  listaParticipantesBack.forEach(participanteBack => {
-    listaParticipantesFront.push(participanteBack2Front(participanteBack))
-  });
-  return listaParticipantesFront;
-}
-
-const participanteBack2Front = function (participanteBack) {
-  const participanteFront = {
-    "id": participanteBack.id,
-    "nombre": participanteBack.nombre,
-    "apellido": participanteBack.apellido,
-    "bio": participanteBack.informacion,
-    "imageUrl": participanteBack.image,
-    "profiles": participanteBack.perfiles,
-    "technology": participanteBack.tecnologias
-  }
-
-  return participanteFront;
 }
 

@@ -7,7 +7,7 @@ import { Search, ChevronUp, ChevronDown } from "lucide-react";
 import ParticipanteBox from "@/components/ParticipanteBox"
 import PerfilesDropdown from "@/components/FiltersDropdown/PerfilesDropdown";
 import TechnologyDropdown from "@/components/FiltersDropdown/TechnologyDropdown";
-import ParticipantesController from "@/dbService/participantesController"
+import ParticipantesController from "@/dbService/participantes/participantesController"
 import UserProfileModal from "@/components/UserProfileModal";
 
 const container = {

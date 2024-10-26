@@ -38,6 +38,13 @@ export default function App() {
     setLogged(true);
   }, []);
 
+  const onEditUserProfile = useCallback((datosUsuario) => {
+    setUsuario({
+      nombre: datosUsuario.nombre,
+      imagen: datosUsuario.imagen,
+    })
+  }, []);
+
   const onCerrarSesion = useCallback(() => {
     setTokenSesion("")
     setUsuario({
@@ -62,7 +69,7 @@ export default function App() {
               <Route path="/contactanos" element={<LandingPage />} />
               <Route path="/participantes" element={<ParticipantesPage />} />
               <Route path="/proyectos" element={<ProyectosPage />} />
-              <Route path="/editar-perfil" element={<EditUserProfile />} />
+              <Route path="/editar-perfil" element={<EditUserProfile tokenSesion={tokenSesion} onEditUserProfile={onEditUserProfile}/>} />
               <Route path="/editar-perfil/clave" element={<PasswordChange />} />
               <Route path="/editar-proyectos" element={<EditProjects />} />
               <Route path="*" element={<NotFound />} />

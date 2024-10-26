@@ -15,7 +15,7 @@ import aptitudes from "../../assets/aptitudes.json";
 import Select from "react-select";
 import { BarLoader } from "react-spinners";
 
-import ParticipantesController from "@/dbService/participantesController"
+import ParticipantesController from "@/dbService/usuario/usuarioController"
 
 const RegistrationModal = ({ signedUpCallback, onClose }) => {
   const profilesOptions = aptitudes.profilesOptions;
@@ -40,7 +40,7 @@ const RegistrationModal = ({ signedUpCallback, onClose }) => {
   useEffect(() => {
     async function asyncFunction(apiResponseTimeout) {
       try {
-        const resultadoRegistro = await ParticipantesController.asyncRegistrarParticipante(requestRegister.data);
+        const resultadoRegistro = await ParticipantesController.asyncRegistrarUsuario(requestRegister.data);
         if (resultadoRegistro.registroExitoso) {
           signedUpCallback(resultadoRegistro.datosUsuario, resultadoRegistro.tokenSesion);
         }
