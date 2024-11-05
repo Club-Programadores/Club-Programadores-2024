@@ -15,7 +15,7 @@ import aptitudes from "../../assets/aptitudes.json";
 import Select from "react-select";
 import { BarLoader } from "react-spinners";
 
-import ParticipantesController from "@/dbService/participantesController"
+import ParticipantesController from "@/dbService/usuario/usuarioController"
 
 const RegistrationModal = ({ signedUpCallback, onClose }) => {
   const profilesOptions = aptitudes.profilesOptions;
@@ -40,7 +40,7 @@ const RegistrationModal = ({ signedUpCallback, onClose }) => {
   useEffect(() => {
     async function asyncFunction(apiResponseTimeout) {
       try {
-        const resultadoRegistro = await ParticipantesController.asyncRegistrarParticipante(requestRegister.data);
+        const resultadoRegistro = await ParticipantesController.asyncRegistrarUsuario(requestRegister.data);
         if (resultadoRegistro.registroExitoso) {
           signedUpCallback(resultadoRegistro.datosUsuario, resultadoRegistro.tokenSesion);
         }
@@ -53,6 +53,7 @@ const RegistrationModal = ({ signedUpCallback, onClose }) => {
       }
       finally{
         //Reset Login Request
+        setLoading(false);
         clearTimeout(apiResponseTimeout)
         setRequestRegister({
           state: false,
@@ -247,7 +248,7 @@ const RegistrationModal = ({ signedUpCallback, onClose }) => {
                           component="p"
                           className="text-red-500 text-sm"
                         />
-                        <img src={`${fotoDePerfil_Base64}`}/>
+                        <img src={`${fotoDePerfil_Base64}`} width={fotoDePerfil_Base64?"150":"0"} height={fotoDePerfil_Base64?"150":"0"}/>
                       </div>
                       <div>
                         <Label htmlFor="bio">Información adicional</Label>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { userValidation } from "@/validationSchema";
 import { Textarea } from "@/components/ui/textarea";
@@ -14,34 +14,120 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import Select from "react-select";
-import participantesJson from "../../assets/miembros.json";
 import aptitudesJson from "../../assets/aptitudes.json";
 import { CustomLink } from "../components/CustomLink";
 
-export const EditUserProfile = () => {
-  const users = participantesJson.miembros;
-  const currentUser = users.find((user) => user.id === 8); // <- Cambiar id para probar editar cualquier usuario
+import ParticipantesController from "@/dbService/usuario/usuarioController"
+
+export const EditUserProfile = ({tokenSesion, onEditUserProfile}) => {
   const { profilesOptions, technologyOptions } = aptitudesJson;
+  const [profilePicture, setProfilePicture] = useState("");
+  const [updateUserDataRequest, setUpdateUserDataRequest] = useState({
+    requested: false,
+    data: {}
+  });
+  const [initialValues, setInitialValues] = useState({
+    fetched: false,
+    object: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      github: "",
+      bio: "",
+      profilePicture: "",
+      profile: ['a'],
+      technology: ['a']
+    }
+  })
 
-  const initialValues = {
-    firstName: currentUser.nombre,
-    lastName: currentUser.apellido,
-    email: currentUser.email,
-    github: currentUser.github,
-    bio: currentUser.bio,
-    profile: currentUser.profiles.map((profile) => profile.toLowerCase()),
-    technology: currentUser.technology.map((tech) => tech.toLowerCase()),
-  };
 
-  const handleSubmit = (values) => {
-    console.log(JSON.stringify(values, null, 2));
+
+  useEffect(() => {
+
+    async function getUserData() {
+      let dataUsuario = initialValues.object;
+      try {
+        const resultado = await ParticipantesController.asyncGetUsuario(tokenSesion); 
+        dataUsuario = {
+          firstName: resultado.data.nombre,
+          lastName: resultado.data.apellido,
+          email: resultado.data.email,
+          github: resultado.data.url_github,
+          bio: resultado.data.informacion,
+          profile: resultado.data.profiles? resultado.data.profiles.map((profile) => profile.toLowerCase()): [],
+          technology: resultado.data.technology? resultado.data.technology.map((tech) => tech.toLowerCase()): [],
+        }
+        setProfilePicture(resultado.data.imagen)
+      }
+      catch (e) {
+        console.log(e);
+      }
+      finally {
+        setInitialValues({
+          fetched: true,
+          object: dataUsuario
+        })
+      }
+    }
+
+    async function updateUserData() {
+      try {
+        const resultado = await ParticipantesController.asyncUpdateUsuario(tokenSesion, updateUserDataRequest.data);
+        if(resultado.exitoso){
+          alert("Informacion actualizada exitosamente!");
+          //Actualizar Perfil navbar.
+          onEditUserProfile({
+            nombre: updateUserDataRequest.data.firstName+" "+updateUserDataRequest.data.lastName,
+            imagen: updateUserDataRequest.data.image
+          })
+        }
+        else{
+          alert("Error: "+resultado.detalle);
+        }
+      }
+      catch (e) {
+        console.log(e);
+      }
+      finally {
+        setUpdateUserDataRequest({
+          requested: false,
+          data: {}
+        })
+      }
+    }
+
+    if (!initialValues.fetched) {
+      getUserData();
+    }
+    
+    if (updateUserDataRequest.requested) {
+      updateUserData();
+    }
+
+  }, [[], updateUserDataRequest]) // Primero un array vacio para que se ejecute el useEffect la primera vez que carga.
+
+  const handleSubmit = (formData) => {
+    setUpdateUserDataRequest({
+      requested: true,
+      data: {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        github: formData.github,
+        bio: formData.bio,
+        image: profilePicture,
+        profile: formData.profile,
+        technology: formData.technology,
+      }
+    })
   };
 
   return (
     <div className="flex items-center justify-center bg-gray-100 flex-grow">
       <Card className="w-full max-w-xl m-4">
         <Formik
-          initialValues={initialValues}
+          enableReinitialize={true}
+          initialValues={initialValues.object}
           validationSchema={userValidation}
           onSubmit={handleSubmit}
         >
@@ -59,14 +145,23 @@ export const EditUserProfile = () => {
                   <FormField label="Apellido" name="lastName" />
                 </div>
 
-                <FormField label="Email" name="email" type="email" />
+                <FormField label="Email" name="email" type="email" disabled="true"/>
                 <FormField label="GitHub" name="github" />
                 <FormField
                   label="Foto de perfil"
                   name="profilePicture"
                   type="file"
+                  onChange={(event) => {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                      const imgData = event.target.result;
+                      setProfilePicture(imgData);
+                    }
+                    const imgSelected = event.target.files[0]
+                    reader.readAsDataURL(imgSelected)
+                  }}
                 />
-
+                <img src={`${profilePicture}`} width={profilePicture?"150":"0"} height={profilePicture?"150":"0"}/>
                 <FormField
                   label="Información adicional"
                   name="bio"

@@ -1,16 +1,15 @@
-import { Button } from "@/components/ui/button";
-import { RegisterButton } from "@/components/Buttons";
 import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import { RegisterButton } from "@/components/Buttons";
 import { useModal } from "@/components/ModalsHandler";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+import { Input } from "@/components/ui/input";
 import {
   CalendarIcon,
   UserIcon,
-  FileQuestionIcon,
   CheckCircleIcon,
   MapPinIcon,
-  ClockIcon,
 } from "lucide-react";
 
 export const LandingPage = () => {
@@ -25,13 +24,24 @@ export const LandingPage = () => {
             alt="Estudiantes programando"
             className="w-full h-full object-cover rounded-lg"
           />
-          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-lg">
-            <div className="text-center">
+          <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center rounded-lg">
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+              className="text-center"
+            >
               <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
                 ¡SUMATE AL CLUB DE PROGRAMADOR@S!
               </h2>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+            >
               <RegisterButton onClick={toggleRegistration} />
-            </div>
+            </motion.div>
           </div>
         </section>
 

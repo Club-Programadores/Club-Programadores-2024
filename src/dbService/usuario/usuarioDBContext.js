@@ -3,6 +3,8 @@ import Secrets from "@/../private/secrets.json"
 
 export default class ParticipantesDBContext {
 
+// synchronous
+
   static loginUsuario = function (loginInput) {
     const response = fetch(`${Secrets.ApiUrl}/login`, {
       method: 'POST',
@@ -41,6 +43,43 @@ export default class ParticipantesDBContext {
     return response;
   }
 
+  static getUsuario = function (token) {
+    const response = fetch(`${Secrets.ApiUrl}/usuario`, {
+      method: 'GET',
+      headers: {
+        "Accept": "*/*",
+        "Authorization": token
+      }
+    })
+
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+
+    const responseJson = response.json();
+    return responseJson;
+  }
+
+  static updateUsuario = function (token,formData) {
+    const response = fetch(`${Secrets.ApiUrl}/usuario`, {
+      method: 'PUT',
+      headers: {
+        "Accept": "*/*",
+        "Authorization": token
+      },
+      body: formData
+    })
+
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+
+    const responseJson = response.json();
+    return responseJson;
+  }
+
+// asynchronous
+
   static asyncLoginUsuario = async function (formData) {
     const response = await fetch(`${Secrets.ApiUrl}/login`, {
       method: 'POST',
@@ -73,38 +112,42 @@ export default class ParticipantesDBContext {
     
     
     const responseJson = response.json();
-    console.log(responseJson);
     return responseJson;
   }
 
-  static asyncGetAllParticipantes = async function () {
-    const response = await fetch(`${Secrets.ApiUrl}/usuarios`)
+  static asyncGetUsuario = async function (token) {
+    const response = await fetch(`${Secrets.ApiUrl}/usuario`, {
+      method: 'GET',
+      headers: {
+        "Accept": "*/*",
+        "Authorization": token
+      }
+    })
 
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
 
-    const responseData = await response.json();
-    return responseData.usuarios;
+    const responseJson = response.json();
+    return responseJson;
   }
 
-  static asyncGetParticipante = async function (token, id) {
-    throw Error('Not Implemented')
-  }
+  static asyncUpdateUsuario = async function (token,formData) {
+    const response = await fetch(`${Secrets.ApiUrl}/usuario`, {
+      method: 'PUT',
+      headers: {
+        "Accept": "*/*",
+        "Authorization": token
+      },
+      body: formData
+    })
 
-  static asyncGetUsuarioParticipante = async function (token, id) {
-    throw Error('Not Implemented')
-  }
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
 
-  static AsyncGetInformacionParticipante = async function (token, id) {
-    throw Error('Not Implemented')
-  }
-
-  static AsyncGetPerfilParticipante = async function (token, id) {
-    throw Error('Not Implemented')
-  }
-  static AsyncGetTecnologiasParticipante = async function (token, id) {
-    throw Error('Not Implemented')
+    const responseJson = response.json();
+    return responseJson;
   }
 }
 

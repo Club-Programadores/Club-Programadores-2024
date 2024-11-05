@@ -11,7 +11,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-import ParticipantesController from "@/dbService/participantesController"
+import ParticipantesController from "@/dbService/usuario/usuarioController"
 import { BarLoader } from "react-spinners";
 
 
@@ -37,7 +37,7 @@ const LoginModal = ({ loggedInCallback, onClose }) => {
   useEffect(() => {
     async function asyncFunction(logingTimeout) {
       try {
-        const response = await ParticipantesController.asyncLoginParticipante(loginRequest.input);
+        const response = await ParticipantesController.asyncLoginUsuario(loginRequest.input);
         if (response.datosValidos) {
           loggedInCallback(response.datosUsuario, response.tokenSesion);
           onClose();
@@ -51,6 +51,7 @@ const LoginModal = ({ loggedInCallback, onClose }) => {
       }
       finally {
         //Reset Login Request
+        setLoading(false);
         clearTimeout(logingTimeout);
         setLoginRequest({
           state: false,
