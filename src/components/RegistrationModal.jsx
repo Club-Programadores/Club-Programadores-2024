@@ -27,7 +27,7 @@ const RegistrationModal = ({ signedUpCallback, onClose }) => {
     borderColor: "red",
   };
   
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(0);
   const [loading, setLoading] = useState(false);
   const [loadingColor, setLoadingColor] = useState( "#9333ea")
   const [fotoDePerfil_Base64, setFotoDePerfil_Base64] = useState("");
@@ -107,6 +107,7 @@ const RegistrationModal = ({ signedUpCallback, onClose }) => {
         }
         <Formik
           initialValues={{
+            codigo: "",
             email: "",
             password: "",
             confirmPassword: "",
@@ -123,6 +124,25 @@ const RegistrationModal = ({ signedUpCallback, onClose }) => {
         >
           {({ isSubmitting, setFieldValue, validateForm }) => (
             <Form className="space-y-4" method="post" encType="multipart/form-data">
+              {step === 0 && (
+                <div className="space-y-4">
+                  <div>
+                    <Label htmlFor="codigo">Codigo de Autorización</Label>
+                    <Field
+                      as={Input}
+                      type="text"
+                      id="codigo"
+                      name="codigo"
+                      className="w-full"
+                    />
+                    <ErrorMessage
+                      name="codigo"
+                      component="p"
+                      className="text-red-500 text-sm"
+                    />
+                  </div>
+                </div>
+              )}
               {step === 1 && (
                 <div className="space-y-4">
                   <div>
@@ -316,6 +336,26 @@ const RegistrationModal = ({ signedUpCallback, onClose }) => {
                 </div>
               )}
               <div className="flex justify-center space-x-2">
+                {step === 0 && (
+                  <Button
+                    type="button"
+                    onClick={async () => {
+                      const stepErrors = await validateForm();
+                      const step0Fields = [
+                        "codigo"
+                      ];
+                      const hasStep0Errors = step0Fields.some(
+                        (field) => stepErrors[field]
+                      );
+
+                      if (!hasStep0Errors) {
+                        setStep(1);
+                      }
+                    }}
+                  >
+                    Siguiente
+                  </Button>
+                )}
                 {step === 1 && (
                   <Button
                     type="button"

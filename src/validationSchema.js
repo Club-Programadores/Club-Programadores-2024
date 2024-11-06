@@ -1,6 +1,14 @@
 import * as Yup from "yup";
+import Secrets from "@/../private/secrets.json"
 
 export const fullUserValidation = Yup.object({
+  codigo: Yup.string()
+    .required("Campo obligatorio")
+    .test(
+      "codigo",
+      (d) => `El codigo no es valido`,
+      (value) => value == Secrets.REGISTRATION_AUTORIZATION_CODE,
+    ),
   email: Yup.string()
     .email("Correo electrónico inválido")
     .required("El correo electrónico es obligatorio"),
