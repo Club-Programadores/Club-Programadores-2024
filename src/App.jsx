@@ -65,8 +65,8 @@ export default function App() {
           <Navbar isLogged={isLogged} datosUsuario={usuario} logOutCallback={onCerrarSesion} />
           <main className="flex flex-grow">
             <Routes>
-              <Route path="/" element={<LandingPage />} />
-              <Route path="/contactanos" element={<LandingPage />} />
+              <Route path="/" element={<LandingPage isLogged={isLogged} />} />
+              <Route path="/contactanos" element={<LandingPage isLogged={isLogged} />} />
               <Route path="/participantes" element={<ParticipantesPage />} />
               <Route path="/proyectos" element={<ProyectosPage />} />
               <Route path="/editar-perfil" element={<EditUserProfile tokenSesion={tokenSesion} onEditUserProfile={onEditUserProfile}/>} />

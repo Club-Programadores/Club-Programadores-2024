@@ -12,7 +12,7 @@ import {
   MapPinIcon,
 } from "lucide-react";
 
-export const LandingPage = () => {
+export const LandingPage = ({isLogged}) => {
   const { toggleRegistration } = useModal();
 
   return (
@@ -35,13 +35,15 @@ export const LandingPage = () => {
                 ¡SUMATE AL CLUB DE PROGRAMADOR@S!
               </h2>
             </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.2 }}
-            >
-              <RegisterButton onClick={toggleRegistration} />
-            </motion.div>
+            {isLogged? <></>:
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.2 }}
+              >
+                <RegisterButton onClick={toggleRegistration} />
+              </motion.div>
+            }
           </div>
         </section>
 
