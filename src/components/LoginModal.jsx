@@ -10,6 +10,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { CustomLink } from "@/components/CustomLink";
 
 import ParticipantesController from "@/dbService/usuario/usuarioController"
 import { BarLoader } from "react-spinners";
@@ -132,6 +133,11 @@ const LoginModal = ({ loggedInCallback, onClose }) => {
             <Button type="submit">Entrar</Button>
           </div>
         </form>
+        <CustomLink to="./recuperar-contra">
+          <Button className="mx-4 px-0" variant="link" onClick={() => {onClose()}}>
+            Olvide mi contraseña
+          </Button>
+        </CustomLink>
       </DialogContent>
     </Dialog>
   );
