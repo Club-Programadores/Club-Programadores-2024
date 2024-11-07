@@ -91,14 +91,37 @@ export default class ParticipantesController {
     }
   }
 
-  static updateUsuario = function (token, data) {
+  static updateUsuario = function (correo) {
+    let resultado = {
+      detalle: "",
+      exitoso: false
+    }
+
+    const formData = {
+      email: correo
+    }
+
+    try{
+      const response = ParticipantesDBContext.updateUsuario(formData);
+      resultado.exitoso = true;
+      resultado.detalle = response.mensaje;
+    }
+    catch(e){
+
+    }
+    finally{
+      return resultado;
+    }
+  }
+
+  static recuperarPass = function (correo){
     let resultado = {
       detalle: "",
       exitoso: false
     }
 
     try{
-      const response = ParticipantesDBContext.updateUsuario(token,data);
+      const response = ParticipantesDBContext.recuperarPass(token,data);
       resultado.exitoso = true;
       resultado.detalle = response.mensaje;
     }

@@ -10,6 +10,7 @@ import { Footer } from "./components/Footer";
 import "./globals.css";
 import { EditUserProfile } from "./pages/EditUserProfile";
 import { EditProjects } from "./pages/EditProjects";
+import { RecuperarPassPage } from "./pages/RecuperarPassPage";
 
 export default function App() {
   const [isLogged, setLogged] = useState(false);
@@ -72,6 +73,7 @@ export default function App() {
               <Route path="/editar-perfil" element={<EditUserProfile tokenSesion={tokenSesion} onEditUserProfile={onEditUserProfile}/>} />
               <Route path="/editar-perfil/clave" element={<PasswordChange />} />
               <Route path="/editar-proyectos" element={<EditProjects />} />
+              <Route path="/recuperar-contra" element={<RecuperarPassPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
