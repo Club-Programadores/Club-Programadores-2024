@@ -1,23 +1,26 @@
 import React, { useState, useCallback } from "react";
-import { ModalProvider } from "./components/ModalsHandler";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { LandingPage } from "./pages/LandingPage";
+import Cookies from "js-cookie";
+
 import ParticipantesPage from "./pages/ParticipantesPage";
 import ProyectosPage from "./pages/ProyectosPage";
+import { LandingPage } from "./pages/LandingPage";
 import { PasswordChange } from "./pages/PasswordChange";
+import { ModalProvider } from "./components/ModalsHandler";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
-import "./globals.css";
 import { EditUserProfile } from "./pages/EditUserProfile";
 import { EditProjects } from "./pages/EditProjects";
 
+import "./globals.css";
+
 export default function App() {
-  const [isLogged, setLogged] = useState(false);
-  const [tokenSesion, setTokenSesion] = useState('');
+  const [isLogged, setLogged] = useState(Cookies.get("usuario_token")?true:false);
+  const [tokenSesion, setTokenSesion] = useState(Cookies.get("usuario_token"));
 
   const [usuario, setUsuario] = useState({
-    nombre: "",
-    imagen: "",
+    nombre: Cookies.get("usuario_nombre"),
+    imagen: localStorage.getItem('usuario_imagen'),
   });
 
   const onIniciarSesion = useCallback((datosUsuario,token) => {
@@ -26,6 +29,11 @@ export default function App() {
       nombre: datosUsuario.nombre,
       imagen: datosUsuario.imagen,
     })
+
+    Cookies.set('usuario_nombre', datosUsuario.nombre);
+    Cookies.set('usuario_token', token);
+    localStorage.setItem('usuario_imagen', datosUsuario.imagen);
+
     setLogged(true);
   }, []);
   
@@ -35,6 +43,11 @@ export default function App() {
       nombre: datosUsuario.nombre,
       imagen: datosUsuario.imagen,
     })
+
+    Cookies.set('usuario_nombre', datosUsuario.nombre);
+    Cookies.set('usuario_token', token);
+    localStorage.setItem('usuario_imagen', datosUsuario.imagen);
+
     setLogged(true);
   }, []);
 
@@ -43,6 +56,9 @@ export default function App() {
       nombre: datosUsuario.nombre,
       imagen: datosUsuario.imagen,
     })
+
+    Cookies.set('usuario_nombre', datosUsuario.nombre);
+    localStorage.setItem('usuario_imagen', datosUsuario.imagen);
   }, []);
 
   const onCerrarSesion = useCallback(() => {
@@ -51,6 +67,11 @@ export default function App() {
       nombre: "",
       imagen: "",
     })
+
+    Cookies.set('usuario_nombre', "");
+    Cookies.set('usuario_token', "");
+    localStorage.setItem('usuario_imagen', "");
+
     setLogged(false);
   }, []);
 
