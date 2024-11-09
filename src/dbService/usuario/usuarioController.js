@@ -110,6 +110,29 @@ export default class ParticipantesController {
     }
   }
 
+  static changePassword = function (token,password){
+    let resultado = {
+      detalle: "",
+      exitoso: false
+    }
+
+    const formData = {
+      password: password 
+    }
+
+    try{
+      const response = ParticipantesDBContext.updatePassword(token,formData);
+      resultado.exitoso = true;
+      resultado.detalle = response.mensaje;
+    }
+    catch(e){
+
+    }
+    finally{
+      return resultado;
+    }
+  } 
+
 // asynchronous
 
   static asyncLoginUsuario = async function (loginInput) {
@@ -230,5 +253,28 @@ export default class ParticipantesController {
       return resultado;
     }
   }
+
+  static asyncChangePassword = async function (token,password){
+    let resultado = {
+      detalle: "",
+      exitoso: false
+    }
+
+    const formData = {
+      password: password 
+    }
+
+    try{
+      const response = await ParticipantesDBContext.asyncUpdatePassword(token,formData);
+      resultado.exitoso = true;
+      resultado.detalle = response.mensaje;
+    }
+    catch(e){
+
+    }
+    finally{
+      return resultado;
+    }
+  } 
 }
 

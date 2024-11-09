@@ -78,6 +78,24 @@ export default class ParticipantesDBContext {
     return responseJson;
   }
 
+  static changePassword = function (token,formData){
+    const response = fetch(`${Secrets.ApiUrl}/usuario`, {
+      method: 'PUT',
+      headers: {
+        "Accept": "*/*",
+        "Authorization": token
+      },
+      body: formData
+    })
+
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+
+    const responseJson = response.json();
+    return responseJson;
+  }
+
 // asynchronous
 
   static asyncLoginUsuario = async function (formData) {
@@ -133,6 +151,24 @@ export default class ParticipantesDBContext {
   }
 
   static asyncUpdateUsuario = async function (token,formData) {
+    const response = await fetch(`${Secrets.ApiUrl}/usuario`, {
+      method: 'PUT',
+      headers: {
+        "Accept": "*/*",
+        "Authorization": token
+      },
+      body: formData
+    })
+
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+
+    const responseJson = response.json();
+    return responseJson;
+  }
+
+  static asyncChangePassword = async function (token,formData){
     const response = await fetch(`${Secrets.ApiUrl}/usuario`, {
       method: 'PUT',
       headers: {
