@@ -12,8 +12,19 @@ import {
   MapPinIcon,
 } from "lucide-react";
 
+import MailSender from "@/services/mailsender"
+
 export const LandingPage = ({isLogged}) => {
   const { toggleRegistration } = useModal();
+
+  const handleSubmitContactanos = function(e){
+    const mailSubject = "Contactanos de "+e.name;
+    const mailBody = e.mensaje;
+    const mailTo = e.mail;
+
+    const resultado = MailSender.sendMail(mailSubject,mailBody,mailTo);
+    alert(resultado.detalle)
+  }
 
   return (
     <div className="flex items-center justify-center flex-grow">
@@ -182,7 +193,7 @@ export const LandingPage = ({isLogged}) => {
           <h2 className="text-2xl font-semibold mb-6 text-center">
             CONTÁCTANOS
           </h2>
-          <form className="max-w-md mx-auto">
+          <form className="max-w-md mx-auto" handleSubmit={handleSubmitContactanos}>
             <div className="mb-4">
               <Input
                 placeholder="Nombre"

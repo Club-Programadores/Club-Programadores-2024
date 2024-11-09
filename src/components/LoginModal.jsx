@@ -11,7 +11,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-import ParticipantesController from "@/dbService/usuario/usuarioController"
+import ParticipantesController from "@/services/dbService/usuario/usuarioController"
 import { BarLoader } from "react-spinners";
 
 

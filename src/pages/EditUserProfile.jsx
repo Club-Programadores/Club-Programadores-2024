@@ -17,7 +17,7 @@ import Select from "react-select";
 import aptitudesJson from "../../assets/aptitudes.json";
 import { CustomLink } from "../components/CustomLink";
 
-import ParticipantesController from "@/dbService/usuario/usuarioController"
+import ParticipantesController from "@/services/dbService/usuario/usuarioController"
 
 export const EditUserProfile = ({tokenSesion, onEditUserProfile}) => {
   const { profilesOptions, technologyOptions } = aptitudesJson;

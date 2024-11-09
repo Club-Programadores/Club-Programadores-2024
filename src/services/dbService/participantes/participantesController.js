@@ -1,4 +1,4 @@
-import ParticipantesDBContext from '../participantes/participantesDBContext'
+import ParticipantesDBContext from './participantesDBContext'
 
 
 export default class ParticipantesController {

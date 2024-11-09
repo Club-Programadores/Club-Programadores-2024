@@ -15,7 +15,7 @@ import aptitudes from "../../assets/aptitudes.json";
 import Select from "react-select";
 import { BarLoader } from "react-spinners";
 
-import ParticipantesController from "@/dbService/usuario/usuarioController"
+import ParticipantesController from "@/services/dbService/usuario/usuarioController"
 
 const RegistrationModal = ({ signedUpCallback, onClose }) => {
   const profilesOptions = aptitudes.profilesOptions;
