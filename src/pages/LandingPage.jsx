@@ -25,7 +25,7 @@ export const LandingPage = ({isLogged}) => {
     const mailBody = formData.mensaje.value;
 
     MailSender.receiveTextMail(fromName,fromMail,mailBody);
-    Alert("Correo Enviado!")
+    alert("Correo Enviado!")
   }
 
   return (
