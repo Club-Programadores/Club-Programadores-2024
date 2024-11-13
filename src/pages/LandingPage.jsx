@@ -12,18 +12,20 @@ import {
   MapPinIcon,
 } from "lucide-react";
 
-import MailSender from "@/services/mailsender"
+import MailSender from "@/services/mailsender/mailsender"
 
 export const LandingPage = ({isLogged}) => {
   const { toggleRegistration } = useModal();
 
-  const handleSubmitContactanos = function(e){
-    const mailSubject = "Contactanos de "+e.name;
-    const mailBody = e.mensaje;
-    const mailTo = e.mail;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = e.target;
+    const fromName = formData.name.value;
+    const fromMail = formData.mail.value;
+    const mailBody = formData.mensaje.value;
 
-    const resultado = MailSender.sendMail(mailSubject,mailBody,mailTo);
-    alert(resultado.detalle)
+    MailSender.receiveTextMail(fromName,fromMail,mailBody);
+    Alert("Correo Enviado!")
   }
 
   return (
@@ -193,7 +195,7 @@ export const LandingPage = ({isLogged}) => {
           <h2 className="text-2xl font-semibold mb-6 text-center">
             CONTÁCTANOS
           </h2>
-          <form className="max-w-md mx-auto" handleSubmit={handleSubmitContactanos}>
+          <form className="max-w-md mx-auto" onSubmit={handleSubmit}>
             <div className="mb-4">
               <Input
                 placeholder="Nombre"

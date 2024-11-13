@@ -1,52 +1,66 @@
-import nodemailer from 'nodemailer';
+import emailjs from '@emailjs/browser';
 import Secrets from "@/../private/secrets.json"
 
 export default class MailSender{
-    static transporter;
 
-    constructor(){
-        // Create a transporter object
-        transporter = nodemailer.createTransport({
-            // host: 'live.smtp.mailtrap.io',
-            // port: 587,
-            // secure: false, // use SSL
-            // auth: {
-            //   user: '1a2b3c4d5e6f7g',
-            //   pass: '1a2b3c4d5e6f7g',
-            // }
-            host: Secrets.MailSender.host,
-            port: Secrets.MailSender.port,
-            secure: false, // use SSL
-            auth: {
-            user: Secrets.MailSender.user,
-            pass: Secrets.MailSender.pass,
-            }
-        });
-    }
-
-    static sendMail = function (subject, text, to) {
+    static receiveTextMail = function (fromName, fromMail, message) {
         let resultado = {
             detalle: '',
             exitoso: false,
         }
 
-        // Configure the mailoptions object
-        const mailOptions = {
-            from: Secrets.MailSender.mail,
-            to: to,
-            subject: subject,
-            text: text
-        };        
+        const templateParams = {
+            user_name: fromName,
+            user_email: fromMail,
+            message: message
+        }  
 
-        // Send the email
-        transporter.sendMail(mailOptions, function(error, info){
-            if (error) {
-                resultado.detalle = 'Error:', error;
-            } else {
+        const emailJSOptions = {
+            publicKey: Secrets.EmailJS.publicKey
+        }
+
+        // receive the email
+        emailjs.send(Secrets.EmailJS.serviceId, Secrets.EmailJS.templateId, templateParams, emailJSOptions).then(
+            (response) => {
                 resultado.exitoso = true;
-                resultado.detalle = 'Email sent:', info.response; 
-            }
-        });
+                resultado.detalle= response.status + response.text;
+            },
+            (error) => {
+                resultado.detalle= error;
+            },
+          );
+
+        return resultado;
+    }
+
+    static asyncReceiveTextMail = async function (fromName, fromMail, message) {
+        let resultado = {
+            detalle: '',
+            exitoso: false,
+        }
+
+        const templateParams = {
+            user_name: fromName,
+            user_email: fromMail,
+            message: message
+        }  
+
+        const emailJSOptions = {
+            publicKey: Secrets.EmailJS.publicKey
+        }
+
+        // receive the email
+        await emailjs.send(Secrets.EmailJS.serviceId, Secrets.EmailJS.templateId, templateParams, emailJSOptions).then(
+            (response) => {
+                resultado.exitoso = true;
+                resultado.detalle= response.status + response.text;
+            },
+            (error) => {
+                resultado.detalle= error;
+            },
+            );
+
+        return resultado;
     }
 
 }
