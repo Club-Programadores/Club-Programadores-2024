@@ -78,8 +78,9 @@ export default class ParticipantesDBContext {
     return responseJson;
   }
 
-  static changePassword = function (token,formData){
-    const response = fetch(`${Secrets.ApiUrl}/usuario`, {
+  static updateUserPassword = function (token,formData) {
+    console.log(token)
+    const response = fetch(`${Secrets.ApiUrl}/actualizar_password`, {
       method: 'PUT',
       headers: {
         "Accept": "*/*",
@@ -96,6 +97,23 @@ export default class ParticipantesDBContext {
     return responseJson;
   }
 
+  static recuperarPass = function (formData){
+    const response = fetch(`${Secrets.ApiUrl}/recuperar_password`, {
+      method: 'POST',
+      headers: {
+        "Accept": "*/*",
+      },
+      body: formData
+    })
+
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+
+    const responseJson = response.json();
+    return responseJson;
+  }
+  
 // asynchronous
 
   static asyncLoginUsuario = async function (formData) {
@@ -168,8 +186,9 @@ export default class ParticipantesDBContext {
     return responseJson;
   }
 
-  static asyncChangePassword = async function (token,formData){
-    const response = await fetch(`${Secrets.ApiUrl}/usuario`, {
+  static asyncUpdateUserPassword = async function (token,formData) {
+    console.log(token)
+    const response = await fetch(`${Secrets.ApiUrl}/actualizar_password`, {
       method: 'PUT',
       headers: {
         "Accept": "*/*",

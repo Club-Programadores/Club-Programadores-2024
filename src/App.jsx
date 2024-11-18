@@ -5,12 +5,13 @@ import Cookies from "js-cookie";
 import ParticipantesPage from "./pages/ParticipantesPage";
 import ProyectosPage from "./pages/ProyectosPage";
 import { LandingPage } from "./pages/LandingPage";
-import { PasswordChange } from "./pages/PasswordChange";
 import { ModalProvider } from "./components/ModalsHandler";
+import { ChangeUserPassPage } from "./pages/ChangeUserPassPage";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { EditUserProfile } from "./pages/EditUserProfile";
 import { EditProjects } from "./pages/EditProjects";
+import { RecuperarPassPage } from "./pages/RecuperarPassPage";
 
 import "./globals.css";
 
@@ -91,8 +92,9 @@ export default function App() {
               <Route path="/participantes" element={<ParticipantesPage />} />
               <Route path="/proyectos" element={<ProyectosPage />} />
               <Route path="/editar-perfil" element={<EditUserProfile tokenSesion={tokenSesion} onEditUserProfile={onEditUserProfile}/>} />
-              <Route path="/editar-perfil/clave" element={<PasswordChange />} />
+              <Route path="/editar-perfil/clave" element={<ChangeUserPassPage tokenSesion={tokenSesion}/>} />
               <Route path="/editar-proyectos" element={<EditProjects />} />
+              <Route path="/recuperar-contra" element={<RecuperarPassPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>

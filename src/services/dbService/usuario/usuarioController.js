@@ -91,14 +91,60 @@ export default class ParticipantesController {
     }
   }
 
-  static updateUsuario = function (token, data) {
+  static updateUsuario = function (correo) {
+    let resultado = {
+      detalle: "",
+      exitoso: false
+    }
+
+    const formData = {
+      email: correo
+    }
+
+    try{
+      const response = ParticipantesDBContext.updateUsuario(formData);
+      resultado.exitoso = true;
+      resultado.detalle = response.mensaje;
+    }
+    catch(e){
+
+    }
+    finally{
+      return resultado;
+    }
+  }
+
+  static updateUserPassword = function (token,newPass){
+    let resultado = {
+      detalle: "",
+      exitoso: false
+    }
+
+    const formData = {
+      password: newPass
+    }
+
+    try{
+      const response = ParticipantesDBContext.updatePass(token,formData);
+      resultado.exitoso = true;
+      resultado.detalle = response.mensaje;
+    }
+    catch(e){
+
+    }
+    finally{
+      return resultado;
+    }
+  }
+
+  static recuperarPass = function (correo){
     let resultado = {
       detalle: "",
       exitoso: false
     }
 
     try{
-      const response = ParticipantesDBContext.updateUsuario(token,data);
+      const response = ParticipantesDBContext.recuperarPass(token,data);
       resultado.exitoso = true;
       resultado.detalle = response.mensaje;
     }
@@ -247,7 +293,29 @@ export default class ParticipantesController {
       resultado.detalle = response.mensaje;
     }
     catch(e){
+      resultado.detalle = e;
+    }
+    finally{
+      return resultado;
+    }
+  }
 
+  static asyncUpdateUserPassword = async function (token,newPass){
+    let resultado = {
+      detalle: "",
+      exitoso: false
+    }
+
+    const backFormData = new FormData();
+    backFormData.append("password", newPass);
+
+    try{
+      const response = await ParticipantesDBContext.asyncUpdateUserPassword(token,backFormData);
+      resultado.exitoso = true;
+      resultado.detalle = response.mensaje;
+    }
+    catch(e){
+      resultado.detalle = e;
     }
     finally{
       return resultado;

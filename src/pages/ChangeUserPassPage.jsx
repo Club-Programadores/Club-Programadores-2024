@@ -16,9 +16,11 @@ import { CustomLink } from "../components/CustomLink";
 import ParticipantesController from "@/services/dbService/usuario/usuarioController"
 
 
-export const PasswordChange = () => {
-  const [changePasswordRequest, setChangePasswordRequest] = useState({
-    state: false,
+import ParticipantesController from "@/dbService/usuario/usuarioController"
+
+export const ChangeUserPassPage = ({tokenSesion}) => {
+  const [updatePasswordRequest, setUpdatePasswordRequest] = useState({
+    requested: false,
     newPass: ""
   });
 
@@ -28,34 +30,33 @@ export const PasswordChange = () => {
   };
 
   useEffect(() => {
-    async function changePassword(){
-      let mensajeResultado
+    async function actualizarContraseña(){
       try{
-        const resultado = await ParticipantesController.asyncChangePassword(changePasswordRequest.newPass)
-        mensajeResultado = resultado.detalle;
+        const resultado = await ParticipantesController.asyncUpdateUserPassword(tokenSesion,updatePasswordRequest.newPass)
+        alert(resultado.detalle)
       }
       catch(e){
-        mensajeResultado = e.message;
+        alert("Error al actualizar la contraseña.")
       }
       finally{
-        alert(mensajeResultado)
-        setChangePasswordRequest({
-          state: false,
+        setUpdatePasswordRequest({
+          requested: false,
           newPass: ""
-        });
+        })    
       }
+
     }
 
-    if(changePasswordRequest.state){
-      changePassword();
+    if(updatePasswordRequest.requested){
+      actualizarContraseña();
     }
 
-  }, changePasswordRequest);
+  },[updatePasswordRequest])
 
-  const handleSubmit = (e) => {
-    setChangePasswordRequest({
-      state: true,
-      newPass: e.password
+  const handleSubmit = (newPass) => {
+    setUpdatePasswordRequest({
+      requested: true,
+      newPass: newPass.password
     })
   };
 
