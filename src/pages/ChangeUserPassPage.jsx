@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { passwordValidation } from "@/validationSchema";
 import { Button } from "@/components/ui/button";
@@ -12,20 +12,50 @@ import {
   CardDescription,
   CardFooter,
 } from "@/components/ui/card";
-import participantesJson from "../../assets/miembros.json";
 import { CustomLink } from "../components/CustomLink";
 
-export const PasswordChange = () => {
-  const users = participantesJson.miembros;
-  const currentUser = users.find((user) => user.id === 8);
+import ParticipantesController from "@/dbService/usuario/usuarioController"
+
+export const ChangeUserPassPage = ({tokenSesion}) => {
+  const [updatePasswordRequest, setUpdatePasswordRequest] = useState({
+    requested: false,
+    newPass: ""
+  });
 
   const initialValues = {
     password: "",
     confirmPassword: "",
   };
 
-  const handleSubmit = (values) => {
-    console.log(JSON.stringify(values, null, 2));
+  useEffect(() => {
+    async function actualizarContraseña(){
+      try{
+        const resultado = await ParticipantesController.asyncUpdateUserPassword(tokenSesion,updatePasswordRequest.newPass)
+        alert(resultado.detalle)
+      }
+      catch(e){
+        alert("Error al actualizar la contraseña.")
+      }
+      finally{
+        setUpdatePasswordRequest({
+          requested: false,
+          newPass: ""
+        })    
+      }
+
+    }
+
+    if(updatePasswordRequest.requested){
+      actualizarContraseña();
+    }
+
+  },[updatePasswordRequest])
+
+  const handleSubmit = (newPass) => {
+    setUpdatePasswordRequest({
+      requested: true,
+      newPass: newPass.password
+    })
   };
 
   return (
