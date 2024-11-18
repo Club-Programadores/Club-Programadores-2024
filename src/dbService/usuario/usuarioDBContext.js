@@ -97,7 +97,7 @@ export default class ParticipantesDBContext {
     return responseJson;
   }
 
-  static recuperarPass = function (formData){
+  static retrieveUserPass = function (formData){
     const response = fetch(`${Secrets.ApiUrl}/recuperar_password`, {
       method: 'POST',
       headers: {

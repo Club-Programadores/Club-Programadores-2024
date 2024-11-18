@@ -137,19 +137,22 @@ export default class ParticipantesController {
     }
   }
 
-  static recuperarPass = function (correo){
+  static retrieveUserPass = function (correo){
     let resultado = {
       detalle: "",
       exitoso: false
     }
 
+    const backFormData = new FormData();
+    backFormData.append("email", correo);
+
     try{
-      const response = ParticipantesDBContext.recuperarPass(token,data);
+      const response = ParticipantesDBContext.retrieveUserPass(token,backFormData);
       resultado.exitoso = true;
       resultado.detalle = response.mensaje;
     }
     catch(e){
-
+      resultado.detalle = e;
     }
     finally{
       return resultado;
