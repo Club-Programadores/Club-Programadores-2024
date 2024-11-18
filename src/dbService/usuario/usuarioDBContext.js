@@ -204,5 +204,22 @@ export default class ParticipantesDBContext {
     const responseJson = response.json();
     return responseJson;
   }
+
+  static asyncRetrieveUserPass = async function (formData){
+    const response = await fetch(`${Secrets.ApiUrl}/recuperar_password`, {
+      method: 'POST',
+      headers: {
+        "Accept": "*/*",
+      },
+      body: formData
+    })
+
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+
+    const responseJson = response.json();
+    return responseJson;
+  }
 }
 

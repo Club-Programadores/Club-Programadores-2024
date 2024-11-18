@@ -6,11 +6,45 @@ import ParticipantesController from "@/dbService/usuario/usuarioController"
 
 
 export const RecuperarPassPage = () => {
+  const [retrievePasswordRequest, setRetrievePasswordRequest] = useState({
+    requested: false,
+    email: ""
+  });
+
+  useEffect(() => {
+    async function retrievePassword(){
+      try{
+        const resultado = await ParticipantesController.asyncRetrieveUserPass(retrievePasswordRequest.email)
+        if(resultado.exitoso){
+          alert("Correo enviado, abralo para continuar con la recuperación de contraseña.");
+        }
+        else{
+          alert(resultado.detalle)
+        }
+      }
+      catch(e){
+        alert("Error al actualizar la contraseña.")
+      }
+      finally{
+        setRetrievePasswordRequest({
+          requested: false,
+          newPass: ""
+        })    
+      }
+    }
+
+    if(retrievePasswordRequest.requested){
+      retrievePassword();
+    }
+  }, [retrievePasswordRequest])
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    ParticipantesController.recuperarPass(e.email)
-    alert("Correo enviado, abralo para continuar con la recuperación de contraseña.");
+    const email = e.target.email.value;
+    setRetrievePasswordRequest({
+      requested: true,
+      email: email
+    })
   };
 
   return (
