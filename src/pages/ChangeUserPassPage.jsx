@@ -15,9 +15,6 @@ import {
 import { CustomLink } from "../components/CustomLink";
 import ParticipantesController from "@/services/dbService/usuario/usuarioController"
 
-
-import ParticipantesController from "@/dbService/usuario/usuarioController"
-
 export const ChangeUserPassPage = ({tokenSesion}) => {
   const [updatePasswordRequest, setUpdatePasswordRequest] = useState({
     requested: false,
