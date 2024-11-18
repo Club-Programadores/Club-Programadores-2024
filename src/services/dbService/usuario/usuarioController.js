@@ -238,8 +238,8 @@ export default class ParticipantesController {
     backFormData.append("image", formData.image);
     backFormData.append("github", formData.github);
     backFormData.append("informacion_adicional", formData.bio);
-    backFormData.append("perfiles[]", formData.profile);
-    backFormData.append("tecnologias[]", formData.technology);
+    backFormData.append("perfiles", formData.profile);
+    backFormData.append("tecnologias", formData.technology);
 
     try{
       const response = await ParticipantesDBContext.asyncUpdateUsuario(token,backFormData);
