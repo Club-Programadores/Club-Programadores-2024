@@ -1,7 +1,6 @@
-"use client";
-
 import { useState } from "react";
 import { motion } from "framer-motion";
+import Masonry from "react-masonry-css";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -17,7 +16,7 @@ const container = {
     scale: 1,
     transition: {
       delayChildren: 0.3,
-      staggerChildren: 0.2,
+      staggerChildren: 0.1,
     },
   },
 };
@@ -53,6 +52,12 @@ export default function ProyectosPage() {
       );
     }
     return proyectos;
+  };
+
+  const breakpointColumnsObj = {
+    default: 3,
+    1100: 2,
+    700: 1,
   };
 
   return (
@@ -94,17 +99,18 @@ export default function ProyectosPage() {
           )}
         </CardContent>
       </Card>
-      <motion.div
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-        variants={container}
-        initial="hidden"
-        animate="visible"
-      >
-        {filteredProyectos().map((proyecto) => (
-          <motion.div key={proyecto.id} variants={item}>
-            <ProyectoBox data={proyecto} />
-          </motion.div>
-        ))}
+      <motion.div variants={container} initial="hidden" animate="visible">
+        <Masonry
+          breakpointCols={breakpointColumnsObj}
+          className="flex w-auto -ml-6"
+          columnClassName="pl-6 bg-clip-padding"
+        >
+          {filteredProyectos().map((proyecto) => (
+            <motion.div key={proyecto.id} variants={item} className="mb-6">
+              <ProyectoBox data={proyecto} />
+            </motion.div>
+          ))}
+        </Masonry>
       </motion.div>
     </div>
   );
