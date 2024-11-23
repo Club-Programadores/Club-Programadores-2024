@@ -5,8 +5,11 @@
       "titulo": "Club Programadores",
       "descripcion": "Base de datos de programadores que participan del Club de Programadores del Centro Universitario de Vicente López. ¡Es lo que estás viendo ahora!",
       "url_proyecto": "https://github.com/Club-Programadores/HUB_ClubProg/",
-      "url_pagina": "#",
+      "url_pagina": "http://club-desarrolladores.site/",
       "estado": "en_desarrollo",
+      "abierto": "true",
+      "participantes": ["Bautista", "Federico", "Pablo"],
+      "admins": ["Bautista", "Federico", "Pablo"],
       "tecnologias": ["HTML", "CSS", "React"]
     },
     {
@@ -16,6 +19,9 @@
       "url_proyecto": "https://github.com/Club-Programadores/Chocoland-Bombon_Factory",
       "url_pagina": "https://schokoland-bombon-factory.netlify.app/",
       "estado": "finalizado",
+      "abierto": "false",
+      "participantes": ["Bautista"],
+      "admins": ["Bautista", "Federico", "Pablo"],
       "tecnologias": ["HTML", "CSS", "JavaScript"]
     },
     {
@@ -25,6 +31,9 @@
       "url_proyecto": "",
       "url_pagina": "",
       "estado": "nuevo",
+      "abierto": "true",
+      "participantes": ["Pablo"],
+      "admins": ["Pablo"],
       "tecnologias": []
     },
     {
@@ -34,6 +43,9 @@
       "url_proyecto": "https://github.com/Club-Programadores/Bubble_Pop",
       "url_pagina": "https://bubble-pop-club.netlify.app/",
       "estado": "finalizado",
+      "abierto": "true",
+      "participantes": ["Bautista", "Ricardo"],
+      "admins": ["Bautista"],
       "tecnologias": ["JavaScript"]
     },
     {
@@ -43,6 +55,9 @@
       "url_proyecto": "https://github.com/Club-Programadores/calculadora-IMC",
       "url_pagina": "https://calculadora-imc-p5.netlify.app/",
       "estado": "finalizado",
+      "abierto": "false",
+      "participantes": ["Roberto"],
+      "admins": ["Roberto"],
       "tecnologias": ["HTML", "CSS", "JavaScript"]
     },
     {
@@ -52,7 +67,46 @@
       "url_proyecto": "https://github.com/NarDevGH/ReactTS-Tic_Tac_Toe",
       "url_pagina": "https://nardev-tic-tac-toe.netlify.app/",
       "estado": "finalizado",
+      "abierto": "false",
+      "participantes": ["Bautista"],
+      "admins": ["Bautista"],
       "tecnologias": ["TypeScript"]
+    },
+    {
+      "id": 7,
+      "titulo": "Historiarte con Ale",
+      "descripcion": "Es una landing page que muestra los talleres que tiene disponibles una profesora de historia. Está cerca de terminarse.",
+      "url_proyecto": "https://github.com/4kPablo/historiarte-con-ale",
+      "url_pagina": "https://historiarte-con-ale.vercel.app/",
+      "estado": "en_desarrollo",
+      "abierto": "false",
+      "participantes": ["Pablo"],
+      "admins": ["Pablo"],
+      "tecnologias": ["HTML", "CSS", "React", "Shadcn/ui", "Firebase"]
+    },
+    {
+      "id": 8,
+      "titulo": "Battle Llamas",
+      "descripcion": "Es un e-commerce hecho en ReactJS y con Tailwind. Contiene textos e imágenes hechos por IA. Fue el integrador del módulo frontend de Nucba.",
+      "url_proyecto": "https://github.com/4kPablo/battle-llamas",
+      "url_pagina": "https://battle-llamas.vercel.app/",
+      "estado": "finalizado",
+      "abierto": "false",
+      "participantes": ["Pablo"],
+      "admins": ["Pablo"],
+      "tecnologias": ["HTML", "CSS", "React", "Tailwind"]
+    },
+    {
+      "id": 9,
+      "titulo": "Youtube clon",
+      "descripcion": "Es un clon de Youtube mobile que busca verse exactamente igual que la página original, pixel por pixel.",
+      "url_proyecto": "https://github.com/4kPablo/youtube-clon",
+      "url_pagina": "https://youtube-clonn.vercel.app/",
+      "estado": "en_desarrollo",
+      "abierto": "false",
+      "participantes": ["Pablo"],
+      "admins": ["Pablo"],
+      "tecnologias": ["HTML", "CSS", "React", "Tailwind"]
     }
   ]
 }
