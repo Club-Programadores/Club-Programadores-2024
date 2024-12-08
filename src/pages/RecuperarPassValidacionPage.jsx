@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import ParticipantesController from "@/dbService/usuario/usuarioController"
 
 
-export const RecuperarPassPage = () => {
+export const RecuperarPassValidacionPage = () => {
   const [retrievePasswordRequest, setRetrievePasswordRequest] = useState({
     requested: false,
     email: ""

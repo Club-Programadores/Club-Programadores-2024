@@ -221,5 +221,22 @@ export default class ParticipantesDBContext {
     const responseJson = response.json();
     return responseJson;
   }
+
+  static asyncCheckRetrieveUserPassToken = async function (token){
+    const response = await fetch(`${Secrets.ApiUrl}/valdidar_token_recuperar_password`, {
+      method: 'GET',
+      headers: {
+        "Accept": "*/*",
+        "token": "token"
+      }
+    })
+
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+
+    const responseJson = response.json();
+    return responseJson;
+  }
 }
 

@@ -323,5 +323,24 @@ export default class ParticipantesController {
       return resultado;
     }
   }
+
+  static asyncCheckRetrieveUserPassToken = async function (correo){
+    let resultado = {
+      detalle: "",
+      exitoso: false
+    }
+
+    try{
+      const response = await ParticipantesDBContext.asyncRetrieveUserPass(backFormData);
+      resultado.exitoso = true;
+      resultado.detalle = response.mensaje;
+    }
+    catch(e){
+      resultado.detalle = e;
+    }
+    finally{
+      return resultado;
+    }
+  }
 }
 
