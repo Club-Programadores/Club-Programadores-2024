@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { passwordValidation } from "@/validationSchema";
 import { Button } from "@/components/ui/button";
@@ -12,20 +12,51 @@ import {
   CardDescription,
   CardFooter,
 } from "@/components/ui/card";
-import participantesJson from "../../assets/miembros.json";
 import { CustomLink } from "../components/CustomLink";
+import ParticipantesController from "@/services/dbService/usuario/usuarioController"
+
 
 export const PasswordChange = () => {
-  const users = participantesJson.miembros;
-  const currentUser = users.find((user) => user.id === 8);
+  const [changePasswordRequest, setChangePasswordRequest] = useState({
+    state: false,
+    newPass: ""
+  });
 
   const initialValues = {
     password: "",
     confirmPassword: "",
   };
 
-  const handleSubmit = (values) => {
-    console.log(JSON.stringify(values, null, 2));
+  useEffect(() => {
+    async function changePassword(){
+      let mensajeResultado
+      try{
+        const resultado = await ParticipantesController.asyncChangePassword(changePasswordRequest.newPass)
+        mensajeResultado = resultado.detalle;
+      }
+      catch(e){
+        mensajeResultado = e.message;
+      }
+      finally{
+        alert(mensajeResultado)
+        setChangePasswordRequest({
+          state: false,
+          newPass: ""
+        });
+      }
+    }
+
+    if(changePasswordRequest.state){
+      changePassword();
+    }
+
+  }, changePasswordRequest);
+
+  const handleSubmit = (e) => {
+    setChangePasswordRequest({
+      state: true,
+      newPass: e.password
+    })
   };
 
   return (

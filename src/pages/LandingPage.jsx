@@ -12,8 +12,21 @@ import {
   MapPinIcon,
 } from "lucide-react";
 
-export const LandingPage = () => {
+import MailSender from "@/services/mailsender/mailsender"
+
+export const LandingPage = ({isLogged}) => {
   const { toggleRegistration } = useModal();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = e.target;
+    const fromName = formData.name.value;
+    const fromMail = formData.mail.value;
+    const mailBody = formData.mensaje.value;
+
+    MailSender.receiveTextMail(fromName,fromMail,mailBody);
+    alert("Correo Enviado!")
+  }
 
   return (
     <div className="flex items-center justify-center flex-grow">
@@ -35,13 +48,15 @@ export const LandingPage = () => {
                 ¡SUMATE AL CLUB DE PROGRAMADOR@S!
               </h2>
             </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.2 }}
-            >
-              <RegisterButton onClick={toggleRegistration} />
-            </motion.div>
+            {isLogged? <></>:
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.2 }}
+              >
+                <RegisterButton onClick={toggleRegistration} />
+              </motion.div>
+            }
           </div>
         </section>
 
@@ -180,7 +195,7 @@ export const LandingPage = () => {
           <h2 className="text-2xl font-semibold mb-6 text-center">
             CONTÁCTANOS
           </h2>
-          <form className="max-w-md mx-auto">
+          <form className="max-w-md mx-auto" onSubmit={handleSubmit}>
             <div className="mb-4">
               <Input
                 placeholder="Nombre"

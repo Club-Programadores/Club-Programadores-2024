@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -11,30 +11,80 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
+import ParticipantesController from "@/services/dbService/usuario/usuarioController"
+import { BarLoader } from "react-spinners";
+
+
 const LoginModal = ({ loggedInCallback, onClose }) => {
-  const [userMail, setUserMail] = useState("");
-  const [userPass, setUserPass] = useState("");
   const [showIncorrectUserMsg, setShowIncorrectUserMsg] = useState(false);
+  const [loginRequest, setLoginRequest] = useState({
+    state: false,
+    input: {
+      email: "",
+      password: ""
+    }
+  });
 
-  const testUserMail = "a@b.com";
-  const testUserPass = "1234";
-
-  const isCredentialsValid = () => {
-    return userMail === testUserMail && userPass === testUserPass;
+  const [loading, setLoading] = useState(false);
+  const [loadingColor, setLoadingColor] = useState("#9333ea")
+  const loginTimeOutTime = 30000;
+  const loadingCSSOverride = {
+    display: "block",
+    margin: "0 auto",
+    borderColor: "red",
   };
+
+  useEffect(() => {
+    async function asyncFunction(logingTimeout) {
+      try {
+        const response = await ParticipantesController.asyncLoginUsuario(loginRequest.input);
+        if (response.datosValidos) {
+          loggedInCallback(response.datosUsuario, response.tokenSesion);
+          onClose();
+        }
+        else{
+          setShowIncorrectUserMsg(true);
+        }
+      }
+      catch (e) {
+        console.log(e);
+      }
+      finally {
+        //Reset Login Request
+        setLoading(false);
+        clearTimeout(logingTimeout);
+        setLoginRequest({
+          state: false,
+          input: {
+            email: "",
+            password: ""
+          }
+        });
+      }
+    }
+
+
+    if (loginRequest.state == true) {
+      setLoading(true);
+      const logingTimeout = setTimeout(() => {
+        alert("Error: Timeout Login")
+        setLoading(false);
+      }, loginTimeOutTime)
+
+      //Call API.
+      asyncFunction(logingTimeout);
+    }
+  }, [loginRequest])
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (!isCredentialsValid()) {
-      setShowIncorrectUserMsg(true);
-    } else {
-      if (typeof loggedInCallback === "function") {
-        loggedInCallback();
+    setLoginRequest({
+      state: true,
+      input: {
+        email: e.target.email.value,
+        password: e.target.password.value
       }
-      onClose();
-      console.log("Logged In");
-    }
+    });
   };
 
   return (
@@ -43,7 +93,11 @@ const LoginModal = ({ loggedInCallback, onClose }) => {
         <DialogHeader>
           <DialogTitle>Iniciar sesión</DialogTitle>
         </DialogHeader>
-
+        {
+          loading ?
+            <BarLoader color={loadingColor} loading={loading} cssOverride={loadingCSSOverride} size={150} aria-label="Loading Spinner" data-testid="loader" />
+            : <></>
+        }
         <form onSubmit={handleSubmit}>
           <div className="space-y-4">
             <div>
@@ -53,8 +107,6 @@ const LoginModal = ({ loggedInCallback, onClose }) => {
                 className="w-full"
                 id="email"
                 name="email"
-                value={userMail}
-                onChange={(e) => setUserMail(e.target.value)}
               />
             </div>
             <div>
@@ -65,7 +117,6 @@ const LoginModal = ({ loggedInCallback, onClose }) => {
                 id="password"
                 name="password"
                 className="w-full"
-                onChange={(e) => setUserPass(e.target.value)}
               />
             </div>
           </div>

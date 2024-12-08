@@ -1,14 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Search, ChevronUp, ChevronDown } from "lucide-react";
-import ParticipanteBox from "@/components/ParticipanteBox";
+import ParticipanteBox from "@/components/ParticipanteBox"
 import PerfilesDropdown from "@/components/FiltersDropdown/PerfilesDropdown";
 import TechnologyDropdown from "@/components/FiltersDropdown/TechnologyDropdown";
+import ParticipantesController from "@/services/dbService/participantes/participantesController"
 import UserProfileModal from "@/components/UserProfileModal";
-import participantesJson from "../../assets/miembros.json";
 
 const container = {
   hidden: { opacity: 1, scale: 0 },
@@ -35,18 +35,32 @@ export default function ParticipantesPage() {
   const [profilesFilter, setProfilesFilter] = useState([]);
   const [technologyFilter, setTechnologyFilter] = useState([]);
   const [showDropdowns, setShowDropdowns] = useState(false);
+  const [participantes, setParticipantes] = useState([])
   const [selectedUser, setSelectedUser] = useState(null);
 
-  const filteredParticipantes = () => {
-    let participantes = [...participantesJson.miembros];
+  useEffect(()=>{
+    async function getData(){
+      let participantes;
+      try{
+        participantes = await ParticipantesController.asyncGetAllParticipantes();        
+      }
+      catch(e){
+        console.log(e)
+      }
+      setParticipantes(participantes);
+    }
+    getData();
+  },[])
 
+  const filteredParticipantes = () => {
+    let res = participantes;
     if (search !== "") {
-      participantes = participantes.filter((participante) =>
+      res = res.filter((participante) =>
         participante.nombre.toLowerCase().startsWith(search.toLowerCase())
       );
     }
     if (profilesFilter.length !== 0) {
-      participantes = participantes.filter((participante) =>
+      res = res.filter((participante) =>
         profilesFilter.every((profile) =>
           participante.profiles.some((p) =>
             p.toLowerCase().includes(profile.value.toLowerCase())
@@ -55,7 +69,7 @@ export default function ParticipantesPage() {
       );
     }
     if (technologyFilter.length !== 0) {
-      participantes = participantes.filter((participante) =>
+      res = res.filter((participante) =>
         technologyFilter.every((technology) =>
           participante.technology.some((tech) =>
             tech.toLowerCase().includes(technology.value.toLowerCase())
@@ -63,8 +77,8 @@ export default function ParticipantesPage() {
         )
       );
     }
-    return participantes;
-  };
+    return res
+  }
 
   const handleUserClick = (user) => {
     setSelectedUser(user);

@@ -9,7 +9,6 @@
       "estado": "en_desarrollo",
       "abierto": "true",
       "participantes": ["Bautista", "Federico", "Pablo"],
-      "admins": ["Bautista", "Federico", "Pablo"],
       "tecnologias": ["HTML", "CSS", "React"]
     },
     {
@@ -21,7 +20,6 @@
       "estado": "finalizado",
       "abierto": "false",
       "participantes": ["Bautista"],
-      "admins": ["Bautista", "Federico", "Pablo"],
       "tecnologias": ["HTML", "CSS", "JavaScript"]
     },
     {
@@ -33,7 +31,6 @@
       "estado": "nuevo",
       "abierto": "true",
       "participantes": ["Pablo"],
-      "admins": ["Pablo"],
       "tecnologias": []
     },
     {
@@ -45,7 +42,6 @@
       "estado": "finalizado",
       "abierto": "true",
       "participantes": ["Bautista", "Ricardo"],
-      "admins": ["Bautista"],
       "tecnologias": ["JavaScript"]
     },
     {
@@ -57,7 +53,6 @@
       "estado": "finalizado",
       "abierto": "false",
       "participantes": ["Roberto"],
-      "admins": ["Roberto"],
       "tecnologias": ["HTML", "CSS", "JavaScript"]
     },
     {
@@ -69,7 +64,6 @@
       "estado": "finalizado",
       "abierto": "false",
       "participantes": ["Bautista"],
-      "admins": ["Bautista"],
       "tecnologias": ["TypeScript"]
     },
     {
@@ -81,7 +75,6 @@
       "estado": "en_desarrollo",
       "abierto": "false",
       "participantes": ["Pablo"],
-      "admins": ["Pablo"],
       "tecnologias": ["HTML", "CSS", "React", "Shadcn/ui", "Firebase"]
     },
     {
@@ -93,7 +86,6 @@
       "estado": "finalizado",
       "abierto": "false",
       "participantes": ["Pablo"],
-      "admins": ["Pablo"],
       "tecnologias": ["HTML", "CSS", "React", "Tailwind"]
     },
     {
@@ -105,7 +97,6 @@
       "estado": "en_desarrollo",
       "abierto": "false",
       "participantes": ["Pablo"],
-      "admins": ["Pablo"],
       "tecnologias": ["HTML", "CSS", "React", "Tailwind"]
     }
   ]

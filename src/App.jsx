@@ -1,32 +1,78 @@
 import React, { useState, useCallback } from "react";
-import { ModalProvider } from "./components/ModalsHandler";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { LandingPage } from "./pages/LandingPage";
+import Cookies from "js-cookie";
+
 import ParticipantesPage from "./pages/ParticipantesPage";
 import ProyectosPage from "./pages/ProyectosPage";
+import { LandingPage } from "./pages/LandingPage";
 import { PasswordChange } from "./pages/PasswordChange";
+import { ModalProvider } from "./components/ModalsHandler";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
-import "./globals.css";
 import { EditUserProfile } from "./pages/EditUserProfile";
 import { EditProjects } from "./pages/EditProjects";
 
-export default function App() {
-  const [isLogged, setLogged] = useState(true);
+import "./globals.css";
 
-  const onIniciarSesion = useCallback(() => {
+export default function App() {
+  const [isLogged, setLogged] = useState(Cookies.get("usuario_token")?true:false);
+  const [tokenSesion, setTokenSesion] = useState(Cookies.get("usuario_token"));
+
+  const [usuario, setUsuario] = useState({
+    nombre: Cookies.get("usuario_nombre"),
+    imagen: localStorage.getItem('usuario_imagen'),
+  });
+
+  const onIniciarSesion = useCallback((datosUsuario,token) => {
+    setTokenSesion(token)
+    setUsuario({
+      nombre: datosUsuario.nombre,
+      imagen: datosUsuario.imagen,
+    })
+
+    Cookies.set('usuario_nombre', datosUsuario.nombre);
+    Cookies.set('usuario_token', token);
+    localStorage.setItem('usuario_imagen', datosUsuario.imagen);
+
     setLogged(true);
-    console.log("Usuario logueado");
+  }, []);
+  
+  const onRegistrarse = useCallback((datosUsuario,token) => {
+    setTokenSesion(token)
+    setUsuario({
+      nombre: datosUsuario.nombre,
+      imagen: datosUsuario.imagen,
+    })
+
+    Cookies.set('usuario_nombre', datosUsuario.nombre);
+    Cookies.set('usuario_token', token);
+    localStorage.setItem('usuario_imagen', datosUsuario.imagen);
+
+    setLogged(true);
   }, []);
 
-  const onRegistrarse = useCallback(() => {
-    setLogged(true);
-    console.log("Usuario registrado");
+  const onEditUserProfile = useCallback((datosUsuario) => {
+    setUsuario({
+      nombre: datosUsuario.nombre,
+      imagen: datosUsuario.imagen,
+    })
+
+    Cookies.set('usuario_nombre', datosUsuario.nombre);
+    localStorage.setItem('usuario_imagen', datosUsuario.imagen);
   }, []);
 
   const onCerrarSesion = useCallback(() => {
+    setTokenSesion("")
+    setUsuario({
+      nombre: "",
+      imagen: "",
+    })
+
+    Cookies.set('usuario_nombre', "");
+    Cookies.set('usuario_token', "");
+    localStorage.setItem('usuario_imagen', "");
+
     setLogged(false);
-    console.log("Sesión cerrada");
   }, []);
 
   return (
@@ -37,14 +83,14 @@ export default function App() {
         onCerrarSesion={onCerrarSesion}
       >
         <div className="flex flex-col min-h-screen">
-          <Navbar isLogged={isLogged} logOutCallback={onCerrarSesion} />
+          <Navbar isLogged={isLogged} datosUsuario={usuario} logOutCallback={onCerrarSesion} />
           <main className="flex flex-grow">
             <Routes>
-              <Route path="/" element={<LandingPage />} />
-              <Route path="/contactanos" element={<LandingPage />} />
+              <Route path="/" element={<LandingPage isLogged={isLogged} />} />
+              <Route path="/contactanos" element={<LandingPage isLogged={isLogged} />} />
               <Route path="/participantes" element={<ParticipantesPage />} />
               <Route path="/proyectos" element={<ProyectosPage />} />
-              <Route path="/editar-perfil" element={<EditUserProfile />} />
+              <Route path="/editar-perfil" element={<EditUserProfile tokenSesion={tokenSesion} onEditUserProfile={onEditUserProfile}/>} />
               <Route path="/editar-perfil/clave" element={<PasswordChange />} />
               <Route path="/editar-proyectos" element={<EditProjects />} />
               <Route path="*" element={<NotFound />} />
