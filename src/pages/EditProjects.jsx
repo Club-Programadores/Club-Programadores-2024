@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik";
 import { projectValidation } from "@/validationSchema";
+import { AddProjectModal } from "../components/addProjectModal";
+import { Save, Trash2, UserPlus, Shield, X } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,7 +13,6 @@ import {
   CardHeader,
   CardTitle,
   CardDescription,
-  CardFooter,
 } from "@/components/ui/card";
 import {
   Accordion,
@@ -27,15 +28,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Save, Trash2 } from "lucide-react";
-import ReactSelect from "react-select";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import proyectosJson from "../../assets/proyectos.json";
+import miembrosJson from "../../assets/miembros.json";
 import aptitudesJson from "../../assets/aptitudes.json";
-import { AddProjectModal } from "../components/addProjectModal";
+import ReactSelect from "react-select";
+import * as Yup from "yup";
 
 export const EditProjects = () => {
   const [projects, setProjects] = useState(proyectosJson.proyectos);
   const { technologyOptions } = aptitudesJson;
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [members, setMembers] = useState(miembrosJson.miembros);
 
   const handleSubmit = (values, { setSubmitting }) => {
     setProjects(values.projects);
@@ -49,6 +53,7 @@ export const EditProjects = () => {
 
   const handleAddProject = (newProject) => {
     setProjects([...projects, { ...newProject, id: Date.now() }]);
+    setIsAddModalOpen(false);
   };
 
   return (
@@ -62,11 +67,13 @@ export const EditProjects = () => {
         </CardHeader>
         <Formik
           initialValues={initialValues}
-          validationSchema={projectValidation}
+          validationSchema={Yup.object({
+            projects: Yup.array().of(projectValidation),
+          })}
           onSubmit={handleSubmit}
           enableReinitialize
         >
-          {({ values, isSubmitting, setFieldValue, handleSubmit }) => (
+          {({ values, isSubmitting, setFieldValue, handleSubmit, dirty }) => (
             <Form>
               <CardContent>
                 <FieldArray name="projects">
@@ -140,11 +147,135 @@ export const EditProjects = () => {
                                     className="text-red-500 text-sm"
                                   />
                                 </div>
+                                <div>
+                                  <Label htmlFor={`projects.${index}.abierto`}>
+                                    Abierto
+                                  </Label>
+                                  <Select
+                                    onValueChange={(value) =>
+                                      setFieldValue(
+                                        `projects.${index}.abierto`,
+                                        value
+                                      )
+                                    }
+                                    defaultValue={project.abierto}
+                                  >
+                                    <SelectTrigger className="w-full">
+                                      <SelectValue placeholder="¿Está abierto a nuevos integrantes?" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                      <SelectGroup>
+                                        <SelectItem value="true">Sí</SelectItem>
+                                        <SelectItem value="false">
+                                          No
+                                        </SelectItem>
+                                      </SelectGroup>
+                                    </SelectContent>
+                                  </Select>
+                                  <ErrorMessage
+                                    name={`projects.${index}.abierto`}
+                                    component="p"
+                                    className="text-red-500 text-sm"
+                                  />
+                                </div>
+
+                                <div>
+                                  <Label
+                                    htmlFor={`projects.${index}.participantes`}
+                                  >
+                                    Participantes
+                                  </Label>
+                                  <ReactSelect
+                                    isMulti
+                                    name={`projects.${index}.participantes`}
+                                    options={members.map((member) => ({
+                                      value: member.nombre,
+                                      label: member.nombre,
+                                      imageUrl: member.imageUrl,
+                                    }))}
+                                    value={project.participantes.map((p) => ({
+                                      value: p,
+                                      label: p,
+                                      imageUrl: members.find(
+                                        (m) => m.nombre === p
+                                      )?.imageUrl,
+                                    }))}
+                                    onChange={(selectedOptions) => {
+                                      setFieldValue(
+                                        `projects.${index}.participantes`,
+                                        selectedOptions.map(
+                                          (option) => option.value
+                                        )
+                                      );
+                                    }}
+                                    className="w-full"
+                                    classNamePrefix="react-select"
+                                  />
+                                </div>
+                                <div className="space-y-2">
+                                  {project.participantes.map(
+                                    (participant, pIndex) => {
+                                      const memberData = members.find(
+                                        (m) => m.nombre === participant
+                                      );
+                                      return (
+                                        <div
+                                          key={pIndex}
+                                          className="flex items-center justify-between bg-gray-100 p-2 rounded"
+                                        >
+                                          <div className="flex items-center space-x-2">
+                                            <Avatar>
+                                              <AvatarImage
+                                                src={memberData?.imageUrl}
+                                                alt={participant}
+                                              />
+                                              <AvatarFallback>
+                                                {participant[0]}
+                                              </AvatarFallback>
+                                            </Avatar>
+                                            <span>{participant}</span>
+                                          </div>
+                                          <div className="flex space-x-2">
+                                            <Button
+                                              size="sm"
+                                              variant="outline"
+                                              onClick={() => {
+                                                // Lógica para hacer admin
+                                                console.log(
+                                                  `Hacer admin a ${participant}`
+                                                );
+                                              }}
+                                            >
+                                              <Shield className="h-4 w-4" />
+                                            </Button>
+                                            <Button
+                                              size="sm"
+                                              variant="outline"
+                                              onClick={() => {
+                                                const newParticipants =
+                                                  project.participantes.filter(
+                                                    (p) => p !== participant
+                                                  );
+                                                setFieldValue(
+                                                  `projects.${index}.participantes`,
+                                                  newParticipants
+                                                );
+                                              }}
+                                            >
+                                              <X className="h-4 w-4" />
+                                            </Button>
+                                          </div>
+                                        </div>
+                                      );
+                                    }
+                                  )}
+                                </div>
+
                                 <div className="flex space-x-2 mt-4">
                                   <Button
                                     type="button"
                                     variant="link"
-                                    disabled={isSubmitting}
+                                    disabled={isSubmitting || !dirty}
                                     onClick={() => {
                                       console.log(
                                         JSON.stringify(project, null, 2)
@@ -173,6 +304,8 @@ export const EditProjects = () => {
                       <AddProjectModal
                         onAddProject={handleAddProject}
                         technologyOptions={technologyOptions}
+                        isOpen={isAddModalOpen}
+                        setIsOpen={setIsAddModalOpen}
                       />
                     </>
                   )}
