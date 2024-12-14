@@ -54,8 +54,8 @@ export const EditUserProfile = ({tokenSesion, onEditUserProfile}) => {
           email: resultado.data.email,
           github: resultado.data.url_github,
           bio: resultado.data.informacion,
-          profile: resultado.data.profiles? resultado.data.profiles.map((profile) => profile.toLowerCase()): [],
-          technology: resultado.data.technology? resultado.data.technology.map((tech) => tech.toLowerCase()): [],
+          profile: resultado.data.perfiles? resultado.data.perfiles.map((profile) => profile.toLowerCase()): [],
+          technology: resultado.data.tecnologias? resultado.data.tecnologias.map((tech) => tech.toLowerCase()): [],
         }
         setProfilePicture(resultado.data.imagen)
       }
