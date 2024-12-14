@@ -16,10 +16,15 @@ export const CustomLink = ({
 
   const handleClick = (e) => {
     if (to === "/contactanos") {
-      navigate("/");
-      setTimeout(() => {
-        scroller.scrollTo(to.slice(1));
-      }, 100);
+      e.preventDefault();
+      if (location.pathname !== "/") {
+        navigate("/");
+        setTimeout(() => {
+          scroller.scrollTo("contactanos", { smooth, duration });
+        }, 100);
+      } else {
+        scroller.scrollTo("contactanos", { smooth, duration });
+      }
     } else {
       navigate(to);
       animateScroll.scrollToTop({
