@@ -6,7 +6,7 @@ export default class ProyectosDBContext {
     // SYNCHRONOUS
 
     static obtenerProyectos = function () {
-        const response = fetch(`${Secrets.ApiUrl}/endpoint`)
+        const response = fetch(`${Secrets.ApiUrl}/proyectos`)
 
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
@@ -16,8 +16,14 @@ export default class ProyectosDBContext {
         return responseData;
     }
     
-    static obtenerProyectosAdministrador = function () {
-        const response = fetch(`${Secrets.ApiUrl}/endpoint`)
+    static obtenerProyectosAdministrador = function (tokenSesion) {
+        const response = fetch(`${Secrets.ApiUrl}/proyectos_admin`,{
+            method: 'GET',
+            headers: {
+              "Accept": "*/*",
+              "Authorization": tokenSesion
+            }
+          })
 
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
@@ -27,8 +33,15 @@ export default class ProyectosDBContext {
         return responseData;
     }
     
-    static crearProyecto = function () {
-        const response = fetch(`${Secrets.ApiUrl}/endpoint`)
+    static crearProyecto = function (tokenSesion,formData) {
+        const response = fetch(`${Secrets.ApiUrl}/proyectos`, {
+            method: 'POST',
+            headers: {
+                "Accept": "*/*",
+                "Authorization": tokenSesion
+            },
+            body: formData
+          })
 
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
@@ -38,8 +51,15 @@ export default class ProyectosDBContext {
         return responseData;
     }
     
-    static actualizarProyecto = function () {
-        const response = fetch(`${Secrets.ApiUrl}/endpoint`)
+    static actualizarProyecto = function (tokenSesion, formData) {
+        const response = fetch(`${Secrets.ApiUrl}/proyectos`, {
+            method: 'PUT',
+            headers: {
+                "Accept": "*/*",
+                "Authorization": tokenSesion
+            },
+            body: formData
+          })
 
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
@@ -49,8 +69,15 @@ export default class ProyectosDBContext {
         return responseData;
     }
     
-    static borrarProyecto = function () {
-        const response = fetch(`${Secrets.ApiUrl}/endpoint`)
+    static borrarProyecto = function (tokenSesion, formData) {
+        const response = fetch(`${Secrets.ApiUrl}/proyectos`, {
+            method: 'DELETE',
+            headers: {
+                "Accept": "*/*",
+                "Authorization": tokenSesion
+            },
+            body: formData
+          })
 
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
@@ -60,8 +87,15 @@ export default class ProyectosDBContext {
         return responseData;
     }
     
-    static añadirParticipanteProyecto = function () {
-        const response = fetch(`${Secrets.ApiUrl}/endpoint`)
+    static añadirParticipanteProyecto = function (tokenSesion, formData) {
+        const response = fetch(`${Secrets.ApiUrl}/sumarse_proyecto`, {
+            method: 'POST',
+            headers: {
+                "Accept": "*/*",
+                "Authorization": tokenSesion
+            },
+            body: formData
+          })
 
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
@@ -71,8 +105,15 @@ export default class ProyectosDBContext {
         return responseData;
     }
     
-    static borrarParticipanteProyecto = function () {
-        const response = fetch(`${Secrets.ApiUrl}/endpoint`)
+    static borrarParticipanteProyecto = function (tokenSesion, formData) {
+        const response = fetch(`${Secrets.ApiUrl}/endpoint`, {
+            method: 'DELETE',
+            headers: {
+                "Accept": "*/*",
+                "Authorization": tokenSesion
+            },
+            body: formData
+          })
 
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
@@ -82,19 +123,15 @@ export default class ProyectosDBContext {
         return responseData;
     }
     
-    static añadirAdministradorProyecto = function () {
-        const response = fetch(`${Secrets.ApiUrl}/endpoint`)
-
-        if (!response.ok) {
-            throw new Error(`Response status: ${response.status}`);
-        }
-
-        const responseData = response.json();
-        return responseData;
-    }
-    
-    static borrarAdministradorProyecto = function () {
-        const response = fetch(`${Secrets.ApiUrl}/endpoint`)
+    static cambiarPermisoAdministradorProyecto = function (tokenSesion, formData) {
+        const response = fetch(`${Secrets.ApiUrl}/cambiar_rol_proyecto`, {
+            method: 'PUT',
+            headers: {
+                "Accept": "*/*",
+                "Authorization": tokenSesion
+            },
+            body: formData
+          })
 
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
@@ -107,8 +144,8 @@ export default class ProyectosDBContext {
 
     // ASYNCHRONOUS
 
-    static asyncObtenerProyectos = function () {
-        const response = fetch(`${Secrets.ApiUrl}/endpoint`)
+    static asyncObtenerProyectos = async function () {
+        const response = await fetch(`${Secrets.ApiUrl}/proyectos`)
 
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
@@ -118,8 +155,32 @@ export default class ProyectosDBContext {
         return responseData;
     }
     
-    static asyncObtenerProyectosAdministrador = function () {
-        const response = fetch(`${Secrets.ApiUrl}/endpoint`)
+    static asyncObtenerProyectosAdministrador = async function (tokenSesion) {
+        const response = await fetch(`${Secrets.ApiUrl}/proyectos_admin`,{
+            method: 'GET',
+            headers: {
+              "Accept": "*/*",
+              "Authorization": tokenSesion
+            }
+          })
+
+        if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+        }
+        
+        const responseData = response.json();
+        return responseData;
+    }
+    
+    static asyncCrearProyecto = async function (tokenSesion,formData) {
+        const response = await fetch(`${Secrets.ApiUrl}/proyectos`, {
+            method: 'POST',
+            headers: {
+                "Accept": "*/*",
+                "Authorization": tokenSesion
+            },
+            body: formData
+          })
 
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
@@ -129,8 +190,15 @@ export default class ProyectosDBContext {
         return responseData;
     }
     
-    static asyncCrearProyecto = function () {
-        const response = fetch(`${Secrets.ApiUrl}/endpoint`)
+    static asyncActualizarProyecto = async function (tokenSesion, formData) {
+        const response = await fetch(`${Secrets.ApiUrl}/proyecto`, {
+            method: 'PUT',
+            headers: {
+                "Accept": "*/*",
+                "Authorization": tokenSesion
+            },
+            body: formData
+          })
 
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
@@ -140,8 +208,15 @@ export default class ProyectosDBContext {
         return responseData;
     }
     
-    static asyncActualizarProyecto = function () {
-        const response = fetch(`${Secrets.ApiUrl}/endpoint`)
+    static asyncBorrarProyecto = async function (tokenSesion, formData) {
+        const response = await fetch(`${Secrets.ApiUrl}/proyecto`, {
+            method: 'DELETE',
+            headers: {
+                "Accept": "*/*",
+                "Authorization": tokenSesion
+            },
+            body: formData
+          })
 
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
@@ -151,8 +226,33 @@ export default class ProyectosDBContext {
         return responseData;
     }
     
-    static asyncBorrarProyecto = function () {
-        const response = fetch(`${Secrets.ApiUrl}/endpoint`)
+    static asyncSumarseProyecto = async function (tokenSesion, formData) {
+        const response = await fetch(`${Secrets.ApiUrl}/sumarse_proyecto`, {
+            method: 'POST',
+            headers: {
+                "Accept": "*/*",
+                "Authorization": tokenSesion
+            },
+            body: formData
+          })
+
+        if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+        }
+
+        const responseData = response.json();
+        return responseData;
+    }
+
+    static asyncAñadirParticipanteProyecto = async function (tokenSesion, formData) {
+        const response = await fetch(`${Secrets.ApiUrl}/sumarse_proyecto`, {
+            method: 'POST',
+            headers: {
+                "Accept": "*/*",
+                "Authorization": tokenSesion
+            },
+            body: formData
+          })
 
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
@@ -162,8 +262,15 @@ export default class ProyectosDBContext {
         return responseData;
     }
     
-    static asyncAñadirParticipanteProyecto = function () {
-        const response = fetch(`${Secrets.ApiUrl}/endpoint`)
+    static asyncBorrarParticipanteProyecto = async function (tokenSesion, formData) {
+        const response = await fetch(`${Secrets.ApiUrl}/salir_proyecto`, {
+            method: 'DELETE',
+            headers: {
+                "Accept": "*/*",
+                "Authorization": tokenSesion
+            },
+            body: formData
+          })
 
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
@@ -173,30 +280,15 @@ export default class ProyectosDBContext {
         return responseData;
     }
     
-    static asyncBorrarParticipanteProyecto = function () {
-        const response = fetch(`${Secrets.ApiUrl}/endpoint`)
-
-        if (!response.ok) {
-            throw new Error(`Response status: ${response.status}`);
-        }
-
-        const responseData = response.json();
-        return responseData;
-    }
-    
-    static asyncAñadirAdministradorProyecto = function () {
-        const response = fetch(`${Secrets.ApiUrl}/endpoint`)
-
-        if (!response.ok) {
-            throw new Error(`Response status: ${response.status}`);
-        }
-
-        const responseData = response.json();
-        return responseData;
-    }
-    
-    static asyncBorrarAdministradorProyecto = function () {
-        const response = fetch(`${Secrets.ApiUrl}/endpoint`)
+    static asyncCambiarPermisoAdministradorProyecto = async function (tokenSesion, formData) {
+        const response = await fetch(`${Secrets.ApiUrl}/cambiar_rol_proyecto`, {
+            method: 'PUT',
+            headers: {
+                "Accept": "*/*",
+                "Authorization": tokenSesion
+            },
+            body: formData
+          })
 
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);

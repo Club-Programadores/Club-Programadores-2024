@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { PlusCircle, Code, Earth } from "lucide-react";
 import ProyectoModal from "./ProyectoModal";
 
-export default function ProyectoBox({ data }) {
+export default function ProyectoBox({ data, onUnirseCallback }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const renderTechnologies = () => (
@@ -20,26 +20,31 @@ export default function ProyectoBox({ data }) {
   );
 
   const renderContent = () => {
+    let called = false;
     switch (data.estado) {
       case "nuevo":
         return (
           <>
             <p className="text-sm text-gray-600 mb-4">{data.descripcion}</p>
             {renderTechnologies()}
-            <a
-              className="w-full"
-              href={data.url_pagina}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button
-                variant="secondary"
-                className="w-full flex items-center justify-center"
-              >
-                <PlusCircle className="mr-2" size={20} />
-                Unirse al proyecto
-              </Button>
-            </a>
+            {
+              !data.permite_sumarse?<></>:
+                <Button
+                  // variant="secondary"
+                  className="w-full flex items-center justify-center"
+                  onClick={onUnirseCallback}
+                  >
+                  <PlusCircle className="mr-2" size={20} />
+                  Unirse al proyecto
+                </Button>
+              // <a
+              //   className="w-full"
+              //   href={data.url_pagina}
+              //   target="_blank"
+              //   rel="noopener noreferrer"
+              //   >
+              // </a>
+            }
           </>
         );
 

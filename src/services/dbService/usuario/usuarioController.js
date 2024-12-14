@@ -183,8 +183,8 @@ export default class ParticipantesController {
     backFormData.append("github", formData.github);
     backFormData.append("password", formData.password);
     backFormData.append("informacion_adicional", formData.bio);
-    backFormData.append("perfiles[]", formData.profile);
-    backFormData.append("tecnologias[]", formData.technology);
+    backFormData.append("perfiles", formData.profile);
+    backFormData.append("tecnologias", formData.technology);
 
     try {
       const response = await ParticipantesDBContext.asyncRegistrarUsuario(backFormData);

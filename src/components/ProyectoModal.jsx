@@ -11,23 +11,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { UserPlus, Code, Earth, Circle } from "lucide-react";
 
-// Importamos los datos de los miembros
-import miembrosData from "/assets/miembros.json";
-
 export default function ProyectoModal({ isOpen, onClose, proyecto }) {
-  const [miembros, setMiembros] = useState([]);
-
-  useEffect(() => {
-    setMiembros(miembrosData.miembros);
-    // Pre-carga de imágenes
-    miembrosData.miembros.forEach((miembro) => {
-      if (miembro.imageUrl) {
-        const img = new Image();
-        img.src = miembro.imageUrl;
-      }
-    });
-  }, []);
-
   if (!proyecto) return null;
 
   const renderEstadoBadge = () => {
@@ -54,21 +38,18 @@ export default function ProyectoModal({ isOpen, onClose, proyecto }) {
   const renderParticipantes = () => (
     <div className="flex flex-wrap gap-2">
       {proyecto.participantes.map((participante) => {
-        const miembro = miembros.find((m) => m.nombre === participante);
         return (
           <Avatar
             key={participante}
-            title={
-              miembro ? `${miembro.nombre} ${miembro.apellido}` : participante
-            }
+            title={`${participante.nombre} ${participante.apellido}`}
           >
             <AvatarImage
               src={
-                miembro?.imageUrl ||
+                participante.image ||
                 `https://api.dicebear.com/6.x/initials/svg?seed=${participante}`
               }
               alt={
-                miembro ? `${miembro.nombre} ${miembro.apellido}` : participante
+                participante
               }
             />
             <AvatarFallback>{participante[0]}</AvatarFallback>
@@ -96,7 +77,7 @@ export default function ProyectoModal({ isOpen, onClose, proyecto }) {
           key="repo"
           className="flex-1 flex items-center justify-center"
           disabled={!proyecto.url_proyecto}
-          onClick={() => window.open(proyecto.url_proyecto, "_blank")}
+          onClick={() => location.replace(proyecto.url_proyecto)}
         >
           <Code className="mr-2" size={20} />
           Repositorio

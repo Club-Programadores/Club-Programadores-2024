@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Masonry from "react-masonry-css";
 import { Input } from "@/components/ui/input";
@@ -7,7 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Search, ChevronDown, ChevronUp } from "lucide-react";
 import ProyectoBox from "@/components/ProyectoBox";
 import EstadosDropdown from "@/components/FiltersDropdown/EstadoDropdown";
-import ProyectosJson from "../../assets/proyectos.json";
+import ProyectosController from "@/services/dbService/proyectos/proyectosController";
 
 const container = {
   hidden: { opacity: 1, scale: 0 },
@@ -29,29 +29,84 @@ const item = {
   },
 };
 
-export default function ProyectosPage() {
+export default function ProyectosPage({ tokenSesion }) {
   const [search, setSearch] = useState("");
   const [estadosFilter, setEstadosFilter] = useState([]);
   const [showDropdowns, setShowDropdowns] = useState(false);
+  const [proyectos, setProyectos] = useState([])
+  const [requestSumarParticipante, setRequestSumarParticipante] = useState({
+    requested: false,
+    proyecto_id: -1
+  })
+
+  useEffect(() => {
+    async function getProyectos() {
+      let proyectos = [];
+      try {
+        const resultado = await ProyectosController.asyncObtenerProyectos();
+        if (resultado.exitoso) {
+          proyectos = resultado.datos.proyectos;
+          setProyectos(proyectos);
+        }
+        else {
+          console.log(resultado.detalle)
+        }
+      }
+      catch (e) {
+        console.log(e)
+      }
+    }
+
+    async function añadirParticipante() {
+      try {
+        console.log(2)
+        const resultado = await ProyectosController.asyncSumarseProyecto(tokenSesion,requestSumarParticipante.proyecto_id);
+        if (resultado.exitoso) {
+          alert("Se registro exitosamente al proyecto.")
+        }
+        else {
+          alert(resultado.detalle)
+          console.log(resultado.detalle)
+        }
+      }
+      catch (e) {
+        alert(e)
+        console.log(e)
+      }
+      finally {
+        setRequestSumarParticipante({
+          requested: false,
+          proyecto_id: -1
+        })
+      }
+    }
+
+    if (requestSumarParticipante.requested) {
+      añadirParticipante()
+    }
+
+    getProyectos();
+  }, [requestSumarParticipante])
 
   const filteredProyectos = () => {
-    let proyectos = [...ProyectosJson.proyectos];
+    let proyectosFiltrado = proyectos;
 
     if (search !== "") {
-      proyectos = proyectos.filter((proyecto) =>
+      proyectosFiltrado = proyectosFiltrado.filter((proyecto) =>
         proyecto.titulo.toLowerCase().startsWith(search.toLowerCase())
       );
     }
 
     if (estadosFilter.length !== 0) {
-      proyectos = proyectos.filter((proyecto) =>
+      proyectosFiltrado = proyectosFiltrado.filter((proyecto) =>
         estadosFilter.some(
           (estado) =>
             estado.value.toLowerCase() === proyecto.estado.toLowerCase()
         )
       );
     }
-    return proyectos;
+
+    return proyectosFiltrado;
   };
 
   const breakpointColumnsObj = {
@@ -99,6 +154,8 @@ export default function ProyectosPage() {
           )}
         </CardContent>
       </Card>
+      {
+      !proyectos?<></>:
       <motion.div variants={container} initial="hidden" animate="visible">
         <Masonry
           breakpointCols={breakpointColumnsObj}
@@ -107,11 +164,17 @@ export default function ProyectosPage() {
         >
           {filteredProyectos().map((proyecto) => (
             <motion.div key={proyecto.id} variants={item} className="mb-6">
-              <ProyectoBox data={proyecto} />
+              <ProyectoBox data={proyecto} onUnirseCallback={()=>{
+                setRequestSumarParticipante({
+                  requested: true,
+                  proyecto_id: proyecto.id
+                })
+              }} />
             </motion.div>
           ))}
         </Masonry>
       </motion.div>
+      }
     </div>
   );
 }

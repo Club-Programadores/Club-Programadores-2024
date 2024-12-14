@@ -1,5 +1,5 @@
 import * as Yup from "yup";
-import Secrets from "@/../private/secrets.json"
+import Secrets from "../private/secrets.json"
 
 export const fullUserValidation = Yup.object({
   codigo: Yup.string()
@@ -61,8 +61,6 @@ export const projectValidation = Yup.object({
   url_proyecto: Yup.string().max(100, "Máximo 100 caracteres").trim(),
   url_pagina: Yup.string().max(100, "Máximo 100 caracteres").trim(),
   estado: Yup.string().required("Debes definir un estado"),
-  abierto: Yup.boolean().required("Debes definir si el proyecto está abierto"),
-  participantes: Yup.array().required("Debe tener al menos un participante"),
   tecnologías: Yup.array(),
 });
 
