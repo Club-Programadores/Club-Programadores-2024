@@ -1,5 +1,5 @@
 import * as Yup from "yup";
-import Secrets from "@/../private/secrets.json"
+import Secrets from "../private/secrets.json"
 
 export const fullUserValidation = Yup.object({
   codigo: Yup.string()
