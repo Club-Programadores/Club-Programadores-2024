@@ -54,7 +54,6 @@ export const AddProjectModal = function ({tokenSesion, onAddProject,technologyOp
 
   useEffect(()=>{
     async function crearProyecto(apiResponseTimeout) {
-      console.log("test");
       try {
         const resultado = await ProyectosController.asyncCrearProyecto(tokenSesion,requestCrearProyecto.data.proyecto);
         if (resultado.exitoso) {
