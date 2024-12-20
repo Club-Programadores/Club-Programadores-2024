@@ -33,11 +33,11 @@ export const LandingPage = ({isLogged}) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <section className="relative select-none h-[400px] mb-12">
           <img
-            src="/imgs/heroBanner1.jpg"
+            src="/imgs/club-desarrolladores_participantes.jpg"
             alt="Estudiantes programando"
             className="w-full h-full object-cover rounded-lg"
           />
-          <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center rounded-lg">
+          <div className="absolute inset-0 bg-black bg-opacity-25 flex flex-col items-center justify-center rounded-lg">
             <motion.div
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}

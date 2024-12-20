@@ -1,5 +1,5 @@
 import * as Yup from "yup";
-import Secrets from "../private/secrets.json"
+import Secrets from "@/../private/secrets.json"
 
 export const fullUserValidation = Yup.object({
   codigo: Yup.string()
@@ -7,7 +7,7 @@ export const fullUserValidation = Yup.object({
     .test(
       "codigo",
       (d) => `El codigo no es valido`,
-      (value) => value == Secrets.REGISTRATION_AUTORIZATION_CODE,
+      (value) => value == Secrets.REGISTRATION_AUTHORIZATION_CODE
     ),
   email: Yup.string()
     .email("Correo electrónico inválido")
