@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useParams } from "react";
+import React, { useState, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { passwordValidation } from "@/validationSchema";
 import { Button } from "@/components/ui/button";
@@ -17,12 +17,13 @@ import { CustomLink } from "../components/CustomLink";
 import ParticipantesController from "@/dbService/usuario/usuarioController"
 
 export const RecuperarPassActualizacionPage = () => {
-  const { token } = useParams();
+  const urlParams = new URLSearchParams(window.location.search);
+  const token = urlParams.get('token');
+
   const [updatePasswordRequest, setUpdatePasswordRequest] = useState({
     requested: false,
     newPass: ""
   });
-
   const initialValues = {
     password: "",
     confirmPassword: "",
@@ -31,19 +32,8 @@ export const RecuperarPassActualizacionPage = () => {
   useEffect(() => {
     async function actualizarContraseña(){
       try{
-        let detalleResultado = "";
-        const resultadoValidacionToken = await ParticipantesController.asyncCheckRetrieveUserPassToken(token);
-        if(resultadoValidacionToken.exitoso)
-        {
-          const resultadoCambioPass = await ParticipantesController.asyncUpdateUserPassword(tokenSesion,updatePasswordRequest.newPass)
-          detalleResultado = resultadoCambioPass.detalle
-          window.location.href = "http://club-desarrolladores.site/";
-        }
-        else
-        {
-          detalleResultado = resultadoValidacionToken.detalle
-        }
-        alert(detalleResultado)
+        const resultadoCambioPass = await ParticipantesController.asyncRetrieveUserPass_Update(token,updatePasswordRequest.newPass)
+        alert(resultadoCambioPass.detalle)
       }
       catch(e){
         alert("Error al actualizar la contraseña.")
@@ -53,6 +43,7 @@ export const RecuperarPassActualizacionPage = () => {
           requested: false,
           newPass: ""
         })    
+        window.location.href = "http://club-desarrolladores.site/";
       }
 
     }

@@ -133,7 +133,7 @@ const LoginModal = ({ loggedInCallback, onClose }) => {
             <Button type="submit">Entrar</Button>
           </div>
         </form>
-        <CustomLink to="./recuperar-contra">
+        <CustomLink to="./recuperar-contra/validacion">
           <Button className="mx-4 px-0" variant="link" onClick={() => {onClose()}}>
             Olvide mi contraseña
           </Button>

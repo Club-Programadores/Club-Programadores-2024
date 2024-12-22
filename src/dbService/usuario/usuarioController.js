@@ -1,3 +1,4 @@
+import { passwordValidation } from '@/validationSchema';
 import ParticipantesDBContext from './usuarioDBContext'
 
 
@@ -302,7 +303,7 @@ export default class ParticipantesController {
     }
   }
 
-  static asyncRetrieveUserPass = async function (correo){
+  static asyncRetrieveUserPass_Validation = async function (correo){
     let resultado = {
       detalle: "",
       exitoso: false
@@ -312,7 +313,7 @@ export default class ParticipantesController {
     backFormData.append("email", correo);
 
     try{
-      const response = await ParticipantesDBContext.asyncRetrieveUserPass(backFormData);
+      const response = await ParticipantesDBContext.asyncRetrieveUserPass_Validation(backFormData);
       resultado.exitoso = true;
       resultado.detalle = response.mensaje;
     }
@@ -323,24 +324,22 @@ export default class ParticipantesController {
       return resultado;
     }
   }
-
-  static asyncCheckRetrieveUserPassToken = async function (correo){
+  static asyncRetrieveUserPass_Update = async function (token,newPass){
     let resultado = {
       detalle: "",
       exitoso: false
     }
 
-    try{
-      const response = await ParticipantesDBContext.asyncRetrieveUserPass(backFormData);
+    const backFormData = new FormData();
+    backFormData.append("token_id", token);
+    backFormData.append("password", newPass);
+
+    const response = await ParticipantesDBContext.asyncRetrieveUserPass_Update(backFormData);
+    if(response.ok){
       resultado.exitoso = true;
-      resultado.detalle = response.mensaje;
     }
-    catch(e){
-      resultado.detalle = e;
-    }
-    finally{
-      return resultado;
-    }
+    resultado.detalle = response.mensaje;
+    return resultado;
   }
 }
 

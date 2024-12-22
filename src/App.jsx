@@ -11,7 +11,7 @@ import "./globals.css";
 import { EditUserProfile } from "./pages/EditUserProfile";
 import { EditProjects } from "./pages/EditProjects";
 import { RecuperarPassValidacionPage } from "./pages/RecuperarPassValidacionPage";
-import { RecuperarPassActualizacionPage, RecuperarPassValidacionPage } from "./pages/RecuperarPassActualizacionPage";
+import { RecuperarPassActualizacionPage } from "./pages/RecuperarPassActualizacionPage";
 
 export default function App() {
   const [isLogged, setLogged] = useState(false);
@@ -75,7 +75,7 @@ export default function App() {
               <Route path="/editar-perfil/clave" element={<ChangeUserPassPage tokenSesion={tokenSesion}/>} />
               <Route path="/editar-proyectos" element={<EditProjects />} />
               <Route path="/recuperar-contra/validacion" element={<RecuperarPassValidacionPage />} />
-              <Route path="/recuperar-contra/actualizacion/:token?" element={<RecuperarPassActualizacionPage />} />
+              <Route path="/recuperar-contra/actualizar/:token?" element={<RecuperarPassActualizacionPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>

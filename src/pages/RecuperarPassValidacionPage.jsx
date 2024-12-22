@@ -14,7 +14,7 @@ export const RecuperarPassValidacionPage = () => {
   useEffect(() => {
     async function retrievePassword(){
       try{
-        const resultado = await ParticipantesController.asyncRetrieveUserPass(retrievePasswordRequest.email)
+        const resultado = await ParticipantesController.asyncRetrieveUserPass_Validation(retrievePasswordRequest.email)
         if(resultado.exitoso){
           alert("Correo enviado, abralo para continuar con la recuperación de contraseña.");
         }

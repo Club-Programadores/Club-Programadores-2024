@@ -187,7 +187,6 @@ export default class ParticipantesDBContext {
   }
 
   static asyncUpdateUserPassword = async function (token,formData) {
-    console.log(token)
     const response = await fetch(`${Secrets.ApiUrl}/actualizar_password`, {
       method: 'PUT',
       headers: {
@@ -205,8 +204,8 @@ export default class ParticipantesDBContext {
     return responseJson;
   }
 
-  static asyncRetrieveUserPass = async function (formData){
-    const response = await fetch(`${Secrets.ApiUrl}/recuperar_password`, {
+  static asyncRetrieveUserPass_Validation = async function (formData){
+    const response = await fetch(`${Secrets.ApiUrl}/recuperar_contra/validacion`, {
       method: 'POST',
       headers: {
         "Accept": "*/*",
@@ -222,20 +221,19 @@ export default class ParticipantesDBContext {
     return responseJson;
   }
 
-  static asyncCheckRetrieveUserPassToken = async function (token){
-    const response = await fetch(`${Secrets.ApiUrl}/valdidar_token_recuperar_password`, {
-      method: 'GET',
+  static asyncRetrieveUserPass_Update = async function (formData){
+    const response = await fetch(`${Secrets.ApiUrl}/recuperar_contra/validacion`, {
+      method: 'PUT',
       headers: {
-        "Accept": "*/*",
-        "token": "token"
-      }
+        "Accept": "*/*"
+      },
+      body: formData
     })
+    
+    const responseJson = await response.json();
+    responseJson.status = response.status
+    responseJson.ok = response.ok
 
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
-
-    const responseJson = response.json();
     return responseJson;
   }
 }
