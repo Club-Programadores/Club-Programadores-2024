@@ -1,3 +1,4 @@
+import { passwordValidation } from '@/validationSchema';
 import ParticipantesDBContext from './usuarioDBContext'
 
 
@@ -143,8 +144,12 @@ export default class ParticipantesController {
       exitoso: false
     }
 
+    const formData = {
+      password: newPass
+    }
+
     try{
-      const response = ParticipantesDBContext.recuperarPass(token,data);
+      const response = ParticipantesDBContext.updatePass(token,formData);
       resultado.exitoso = true;
       resultado.detalle = response.mensaje;
     }
@@ -156,28 +161,27 @@ export default class ParticipantesController {
     }
   }
 
-  static changePassword = function (token,password){
+  static retrieveUserPass = function (correo){
     let resultado = {
       detalle: "",
       exitoso: false
     }
 
-    const formData = {
-      password: password 
-    }
+    const backFormData = new FormData();
+    backFormData.append("email", correo);
 
     try{
-      const response = ParticipantesDBContext.updatePassword(token,formData);
+      const response = ParticipantesDBContext.retrieveUserPass(token,backFormData);
       resultado.exitoso = true;
       resultado.detalle = response.mensaje;
     }
     catch(e){
-
+      resultado.detalle = e;
     }
     finally{
       return resultado;
     }
-  } 
+  }
 
 // asynchronous
 
@@ -322,27 +326,43 @@ export default class ParticipantesController {
     }
   }
 
-  static asyncChangePassword = async function (token,password){
+  static asyncRetrieveUserPass_Validation = async function (correo){
     let resultado = {
       detalle: "",
       exitoso: false
     }
 
-    const formData = {
-      password: password 
-    }
+    const backFormData = new FormData();
+    backFormData.append("email", correo);
 
     try{
-      const response = await ParticipantesDBContext.asyncUpdatePassword(token,formData);
+      const response = await ParticipantesDBContext.asyncRetrieveUserPass_Validation(backFormData);
       resultado.exitoso = true;
       resultado.detalle = response.mensaje;
     }
     catch(e){
-
+      resultado.detalle = e;
     }
     finally{
       return resultado;
     }
-  } 
+  }
+  static asyncRetrieveUserPass_Update = async function (token,newPass){
+    let resultado = {
+      detalle: "",
+      exitoso: false
+    }
+
+    const backFormData = new FormData();
+    backFormData.append("token_id", token);
+    backFormData.append("password", newPass);
+
+    const response = await ParticipantesDBContext.asyncRetrieveUserPass_Update(backFormData);
+    if(response.ok){
+      resultado.exitoso = true;
+    }
+    resultado.detalle = response.mensaje;
+    return resultado;
+  }
 }
 

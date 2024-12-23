@@ -11,7 +11,8 @@ import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { EditUserProfile } from "./pages/EditUserProfile";
 import { EditProjects } from "./pages/EditProjects";
-import { RecuperarPassPage } from "./pages/RecuperarPassPage";
+import { RecuperarPassValidacionPage } from "./pages/RecuperarPassValidacionPage";
+import { RecuperarPassActualizacionPage } from "./pages/RecuperarPassActualizacionPage";
 
 import "./globals.css";
 
@@ -93,8 +94,9 @@ export default function App() {
               <Route path="/proyectos" element={<ProyectosPage tokenSesion={tokenSesion}/>} />
               <Route path="/editar-perfil" element={<EditUserProfile tokenSesion={tokenSesion} onEditUserProfile={onEditUserProfile}/>} />
               <Route path="/editar-perfil/clave" element={<ChangeUserPassPage tokenSesion={tokenSesion}/>} />
-              <Route path="/editar-proyectos" element={<EditProjects tokenSesion={tokenSesion} user={usuario}/>} />
-              <Route path="/recuperar-contra" element={<RecuperarPassPage />} />
+              <Route path="/editar-proyectos" element={<EditProjects />} />
+              <Route path="/recuperar-contra/validacion" element={<RecuperarPassValidacionPage />} />
+              <Route path="/recuperar-contra/actualizar/:token?" element={<RecuperarPassActualizacionPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
