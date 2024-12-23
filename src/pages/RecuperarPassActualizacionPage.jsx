@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/card";
 import { CustomLink } from "../components/CustomLink";
 
-import ParticipantesController from "@/dbService/usuario/usuarioController"
+import ParticipantesController from "@/services/dbService/usuario/usuarioController"
 
 export const RecuperarPassActualizacionPage = () => {
   const urlParams = new URLSearchParams(window.location.search);
