@@ -53,16 +53,20 @@ export default function ProyectoBox({ data, onUnirseCallback }) {
           <>
             <p className="text-sm text-gray-600 mb-4">{data.descripcion}</p>
             {renderTechnologies()}
-            <a
-              href={data.url_proyecto}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button className="w-full flex items-center justify-center">
-                <Code className="mr-2" size={20} />
-                Repositorio
-              </Button>
-            </a>
+            {
+              data.url_proyecto && data.url_proyecto !== ""?
+                <a
+                href={data.url_proyecto}
+                target="_blank"
+                rel="noopener noreferrer"
+                >
+                  <Button className="w-full flex items-center justify-center">
+                    <Code className="mr-2" size={20} />
+                    Repositorio
+                  </Button>
+                </a>:
+                <></>
+            }
           </>
         );
 
@@ -72,28 +76,37 @@ export default function ProyectoBox({ data, onUnirseCallback }) {
             <p className="text-sm text-gray-600 mb-4">{data.descripcion}</p>
             {renderTechnologies()}
             <div className="flex gap-2">
-              <a
-                className="w-full"
-                href={data.url_pagina}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button className="w-full flex items-center justify-center">
-                  <Earth className="mr-2" size={20} />
-                  Página web
-                </Button>
-              </a>
-              <a
-                className="w-full"
-                href={data.url_proyecto}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button className="w-full flex items-center justify-center">
-                  <Code className="mr-2" size={20} />
-                  Repositorio
-                </Button>
-              </a>
+              {
+                data.url_pagina && data.url_pagina !== ""?
+                  <a
+                    className="w-full"
+                    href={data.url_pagina}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button className="w-full flex items-center justify-center">
+                      <Earth className="mr-2" size={20} />
+                      Página web
+                    </Button>
+                  </a>:
+                  <></>
+                
+              }
+              {
+                data.url_proyecto && data.url_proyecto !== ""?
+                  <a
+                    className="w-full"
+                    href={data.url_proyecto}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button className="w-full flex items-center justify-center">
+                      <Code className="mr-2" size={20} />
+                      Repositorio
+                    </Button>
+                  </a>:
+                  <></>
+              }
             </div>
           </>
         );

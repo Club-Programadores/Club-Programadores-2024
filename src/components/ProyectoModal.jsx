@@ -71,7 +71,7 @@ export default function ProyectoModal({ isOpen, onClose, proyecto }) {
       );
     }
 
-    if (proyecto.url_proyecto) {
+    if (proyecto.url_proyecto && proyecto.url_proyecto !== "") {
       buttons.push(
         <Button
           key="repo"
@@ -85,7 +85,7 @@ export default function ProyectoModal({ isOpen, onClose, proyecto }) {
       );
     }
 
-    if (proyecto.url_pagina) {
+    if (proyecto.url_pagina && proyecto.url_pagina !== "") {
       buttons.push(
         <Button
           key="web"
