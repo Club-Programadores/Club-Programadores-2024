@@ -1,25 +1,20 @@
-import React, { useCallback, useEffect, useState } from "react";
+import UserController from "@/services/dbService/user/userController"
+
+import { useEffect, useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { AlertCircle } from "lucide-react";
 import { Alert, AlertTitle } from "@/components/ui/alert";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { CustomLink } from "@/components/CustomLink";
-
-import ParticipantesController from "@/services/dbService/usuario/usuarioController"
 import { BarLoader } from "react-spinners";
 
 
 const LoginModal = ({ loggedInCallback, onClose }) => {
   const [showIncorrectUserMsg, setShowIncorrectUserMsg] = useState(false);
   const [loginRequest, setLoginRequest] = useState({
-    state: false,
+    requested: false,
     input: {
       email: "",
       password: ""
@@ -36,36 +31,29 @@ const LoginModal = ({ loggedInCallback, onClose }) => {
   };
 
   useEffect(() => {
-    async function asyncFunction(logingTimeout) {
-      try {
-        const response = await ParticipantesController.asyncLoginUsuario(loginRequest.input);
-        if (response.datosValidos) {
-          loggedInCallback(response.datosUsuario, response.tokenSesion);
-          onClose();
+    async function logInUser(logingTimeout) {
+      const loginResult = await UserController.asyncLoginUser(loginRequest.input);
+      setLoading(false);
+      clearTimeout(logingTimeout);
+      
+      if (loginResult.successful) {
+        loggedInCallback(loginResult.userInfo, loginResult.tokenSesion);
+        onClose();
+      }
+      else{
+        setShowIncorrectUserMsg(true);
+      }
+      
+      setLoginRequest({
+        requested: false,
+        input: {
+          email: "",
+          password: ""
         }
-        else{
-          setShowIncorrectUserMsg(true);
-        }
-      }
-      catch (e) {
-        console.log(e);
-      }
-      finally {
-        //Reset Login Request
-        setLoading(false);
-        clearTimeout(logingTimeout);
-        setLoginRequest({
-          state: false,
-          input: {
-            email: "",
-            password: ""
-          }
-        });
-      }
+      });
     }
 
-
-    if (loginRequest.state == true) {
+    if (loginRequest.requested) {
       setLoading(true);
       const logingTimeout = setTimeout(() => {
         alert("Error: Timeout Login")
@@ -73,14 +61,14 @@ const LoginModal = ({ loggedInCallback, onClose }) => {
       }, loginTimeOutTime)
 
       //Call API.
-      asyncFunction(logingTimeout);
+      logInUser(logingTimeout);
     }
   }, [loginRequest])
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoginRequest({
-      state: true,
+      requested: true,
       input: {
         email: e.target.email.value,
         password: e.target.password.value

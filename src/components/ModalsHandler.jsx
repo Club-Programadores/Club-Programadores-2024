@@ -1,15 +1,16 @@
-import React, { useState, createContext, useContext } from "react";
-import RegistrationModal from "./RegistrationModal.jsx";
 import LoginModal from "./LoginModal.jsx";
+import RegistrationModal from "./RegistrationModal.jsx";
+import { useState, createContext, useContext } from "react";
+
 const ModalContext = createContext();
 
 export const useModal = () => useContext(ModalContext);
 
 export function ModalProvider({
   children,
-  onIniciarSesion,
-  onRegistrarse,
-  onCerrarSesion,
+  onLogIn,
+  onSignIn,
+  onLogOut,
 }) {
   const [modalState, setModalState] = useState({
     isRegistrationOpen: false,
@@ -32,9 +33,9 @@ export function ModalProvider({
         modalState,
         toggleRegistration,
         toggleLogin,
-        onIniciarSesion,
-        onRegistrarse,
-        onCerrarSesion,
+        onLogIn,
+        onSignIn,
+        onLogOut,
       }}
     >
       {children}
@@ -48,20 +49,20 @@ function ModalsHandler() {
     modalState,
     toggleRegistration,
     toggleLogin,
-    onIniciarSesion,
-    onRegistrarse,
+    onLogIn,
+    onSignIn,
   } = useModal();
 
   return (
     <>
       {modalState.isRegistrationOpen && (
         <RegistrationModal
-          signedUpCallback={onRegistrarse}
+          signedUpCallback={onSignIn}
           onClose={toggleRegistration}
         />
       )}
       {modalState.isLoginOpen && (
-        <LoginModal loggedInCallback={onIniciarSesion} onClose={toggleLogin} />
+        <LoginModal loggedInCallback={onLogIn} onClose={toggleLogin} />
       )}
     </>
   );

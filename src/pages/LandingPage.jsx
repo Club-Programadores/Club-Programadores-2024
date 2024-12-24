@@ -1,3 +1,5 @@
+import MailSender from "@/services/mailsender/mailsender"
+
 import { Card, CardContent } from "@/components/ui/card";
 import { RegisterButton } from "@/components/Buttons";
 import { useModal } from "@/components/ModalsHandler";
@@ -5,16 +7,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
-import {
-  CalendarIcon,
-  UserIcon,
-  CheckCircleIcon,
-  MapPinIcon,
-} from "lucide-react";
+import { CalendarIcon, UserIcon, CheckCircleIcon, MapPinIcon } from "lucide-react";
 
-import MailSender from "@/services/mailsender/mailsender"
-
-export const LandingPage = ({isLogged}) => {
+export const LandingPage = ({ isLogged }) => {
   const { toggleRegistration } = useModal();
 
   const handleSubmit = (e) => {
@@ -24,7 +19,7 @@ export const LandingPage = ({isLogged}) => {
     const fromMail = formData.mail.value;
     const mailBody = formData.mensaje.value;
 
-    MailSender.receiveTextMail(fromName,fromMail,mailBody);
+    MailSender.receiveTextMail(fromName, fromMail, mailBody);
     alert("Correo Enviado!")
   }
 
@@ -48,7 +43,7 @@ export const LandingPage = ({isLogged}) => {
                 ¡SUMATE AL CLUB DE PROGRAMADOR@S!
               </h2>
             </motion.div>
-            {isLogged? <></>:
+            {isLogged ? <></> :
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}

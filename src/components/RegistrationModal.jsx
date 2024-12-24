@@ -15,7 +15,7 @@ import aptitudes from "../../assets/aptitudes.json";
 import Select from "react-select";
 import { BarLoader } from "react-spinners";
 
-import ParticipantesController from "@/services/dbService/usuario/usuarioController"
+import UserController from "@/services/dbService/user/userController"
 
 const RegistrationModal = ({ signedUpCallback, onClose }) => {
   const profilesOptions = aptitudes.profilesOptions;
@@ -32,39 +32,33 @@ const RegistrationModal = ({ signedUpCallback, onClose }) => {
   const [loadingColor, setLoadingColor] = useState( "#9333ea")
   const [fotoDePerfil_Base64, setFotoDePerfil_Base64] = useState("");
 
-  const [requestRegister, setRequestRegister] = useState({
-    state: false,
+  const [registerRequest, setRegisterRequest] = useState({
+    requested: false,
     data: {}
   });
 
   useEffect(() => {
-    async function asyncFunction(apiResponseTimeout) {
-      try {
-        const resultadoRegistro = await ParticipantesController.asyncRegistrarUsuario(requestRegister.data);
-        if (resultadoRegistro.registroExitoso) {
-          signedUpCallback(resultadoRegistro.datosUsuario, resultadoRegistro.tokenSesion);
-        }
-        else {
-          alert("Error:"+resultadoRegistro.detalle);
-        }
-      }
-      catch (e) {
-        console.log(e);
-      }
-      finally{
-        //Reset Login Request
-        setLoading(false);
-        clearTimeout(apiResponseTimeout)
-        setRequestRegister({
-          state: false,
-          data: {}
-        })
-        onClose();
+    async function registerUser(apiResponseTimeout) {
+      const result = await UserController.asyncRegisterUser(registerRequest.data);
+      
+      if (result.successful) {
+        signedUpCallback(result.userData, result.tokenSesion);
       }
 
+      alert(result.details);
+
+      //Reset Login Request
+      setLoading(false);
+      clearTimeout(apiResponseTimeout)
+      setRegisterRequest({
+        requested: false,
+        data: {}
+      })
+      onClose();
     }
 
-    if(requestRegister.state === true){
+    if(registerRequest.requested){
+      //Loading bar.
       setLoading(true)
       const apiResponseTimeout = setTimeout(() => {
         alert("Error: Timeout Registro")
@@ -72,13 +66,13 @@ const RegistrationModal = ({ signedUpCallback, onClose }) => {
       }, registrationTimeOut);
 
       //Call Api.
-      asyncFunction(apiResponseTimeout);
+      registerUser(apiResponseTimeout);
     }
-  }, [requestRegister])
+  }, [registerRequest])
 
   const handleSubmit = (formData) => {
-    setRequestRegister({
-      state: true,
+    setRegisterRequest({
+      requested: true,
       data: {
         email: formData.email,
         password: formData.password,

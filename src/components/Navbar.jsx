@@ -14,7 +14,7 @@ import {
   DropdownMenuTrigger as MenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-export const Navbar = ({ isLogged, datosUsuario, logOutCallback }) => {
+export const Navbar = ({ isLogged, userData, logOutCallback }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { toggleRegistration, toggleLogin } = useModal();
@@ -87,12 +87,12 @@ export const Navbar = ({ isLogged, datosUsuario, logOutCallback }) => {
                 >
                   <div>
                     <p className="hidden md:flex select-none px-1">
-                      {datosUsuario.nombre}
+                      {userData.name}
                     </p>
                     <Avatar className="flex mx-auto md:-mr-4 ring-4 ring-white">
                       <AvatarImage
                         className="select-none"
-                        src={datosUsuario.imagen}
+                        src={userData.image}
                         alt="Foto de perfil"
                       />
                     </Avatar>

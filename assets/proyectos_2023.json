@@ -2,8 +2,8 @@
   "proyectos": [
     {
       "id": 900,
-      "titulo": "Club Programadores (prototipo)",
-      "descripcion": "Base de datos de programadores que participan del Club de Programadores del Centro Universitario de Vicente López. ¡Es lo que estás viendo ahora!",
+      "titulo": "Club Programadores (Prototipo 2023)",
+      "descripcion": "Base de datos de programadores que participan del Club de Programadores del Centro Universitario de Vicente López.",
       "url_proyecto": "https://github.com/Club-Programadores/Club-Programadores",
       "url_pagina": "https://club-programadores.netlify.app/",
       "estado": "finalizado",
