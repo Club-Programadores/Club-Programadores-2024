@@ -7,7 +7,7 @@ import { LuGithub as Github } from "react-icons/lu";
 
 export default function ParticipantModal({ isOpen, onClose, user }) {
   if (!user) return null;
-
+  console.log(user)
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[550px] p-0 overflow-hidden">
@@ -33,20 +33,24 @@ export default function ParticipantModal({ isOpen, onClose, user }) {
                   <h2 className="text-2xl font-bold">
                     {user.nombre} {user.apellido}
                   </h2>
-                  <a
-                    href={user.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center text-white hover:underline mt-1"
-                    title="Ir al perfil de GitHub"
-                  >
-                    <Github size={16} className="mr-1" />
-                    {user.github ? (
-                      user.github.replace("https://github.com/", "")
-                    ) : (
-                      <></>
-                    )}
-                  </a>
+                  {
+                  user.github&& user.github!=''?
+                    <a
+                      href={user.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center text-white hover:underline mt-1"
+                      title="Ir al perfil de GitHub"
+                    >
+                      <Github size={16} className="mr-1" />
+                      {user.github? (
+                        user.github.replace("https://github.com/", "")
+                      ) : (
+                        <></>
+                      )}
+                    </a>:
+                    <></>
+                  }
                 </div>
               </div>
             </div>
