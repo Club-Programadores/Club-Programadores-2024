@@ -8,6 +8,7 @@ import { Search, ChevronDown, ChevronUp } from "lucide-react";
 import ProyectoBox from "@/components/ProyectoBox";
 import EstadosDropdown from "@/components/FiltersDropdown/EstadoDropdown";
 import ProyectosController from "@/services/dbService/proyectos/proyectosController";
+import Proyectos2023json from "../../assets/proyectos_2023.json";
 
 const container = {
   hidden: { opacity: 1, scale: 0 },
@@ -88,8 +89,8 @@ export default function ProyectosPage({ tokenSesion }) {
     getProyectos();
   }, [requestSumarParticipante])
 
-  const filteredProyectos = () => {
-    let proyectosFiltrado = proyectos;
+  const filteredProyectos = (proyectosAFiltrar) => {
+    let proyectosFiltrado = proyectosAFiltrar;
 
     if (search !== "") {
       proyectosFiltrado = proyectosFiltrado.filter((proyecto) =>
@@ -156,13 +157,14 @@ export default function ProyectosPage({ tokenSesion }) {
       </Card>
       {
       !proyectos?<></>:
+      <>
       <motion.div variants={container} initial="hidden" animate="visible">
         <Masonry
           breakpointCols={breakpointColumnsObj}
           className="flex w-auto -ml-6"
           columnClassName="pl-6 bg-clip-padding"
         >
-          {filteredProyectos().map((proyecto) => (
+          {filteredProyectos(proyectos).map((proyecto) => (
             <motion.div key={proyecto.id} variants={item} className="mb-6">
               <ProyectoBox data={proyecto} onUnirseCallback={()=>{
                 setRequestSumarParticipante({
@@ -174,6 +176,25 @@ export default function ProyectosPage({ tokenSesion }) {
           ))}
         </Masonry>
       </motion.div>
+      <motion.div variants={container} initial="hidden" animate="visible">
+        <Masonry
+          breakpointCols={breakpointColumnsObj}
+          className="flex w-auto -ml-6"
+          columnClassName="pl-6 bg-clip-padding"
+        >
+          {filteredProyectos(Proyectos2023json.proyectos).map((proyecto) => (
+            <motion.div key={proyecto.id} variants={item} className="mb-6">
+              <ProyectoBox data={proyecto} onUnirseCallback={()=>{
+                setRequestSumarParticipante({
+                  requested: true,
+                  proyecto_id: proyecto.id
+                })
+              }} />
+            </motion.div>
+          ))}
+        </Masonry>
+      </motion.div>
+      </>
       }
     </div>
   );
