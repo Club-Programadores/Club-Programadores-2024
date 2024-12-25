@@ -75,6 +75,7 @@ export default function App() {
     localStorage.setItem('user_image', "");
 
     setIsLoggedIn(false);
+    window.location.href = "http://club-desarrolladores.site/";
   }, []);
 
   return (
