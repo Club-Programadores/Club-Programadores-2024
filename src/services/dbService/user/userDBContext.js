@@ -108,7 +108,7 @@ export default class userDBContext {
   }
 
   static asyncRetrieveUserPass_Update = async function (formData){
-    const response = await fetch(`${Secrets.ApiUrl}/recuperar_contra/validacion`, {
+    const response = await fetch(`${Secrets.ApiUrl}/recuperar_contra/cambio`, {
       method: 'PUT',
       headers: {
         "Accept": "*/*"
