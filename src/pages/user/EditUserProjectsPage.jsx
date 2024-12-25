@@ -17,7 +17,7 @@ import { Select,SelectContent,SelectGroup,SelectItem,SelectTrigger,SelectValue} 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { BarLoader } from "react-spinners";
 
-export const EditUserProjectsPage = ({ tokenSesion, user }) => {
+export const EditUserProjectsPage = ({ tokenSesion }) => {
   const { technologyOptions } = aptitudesJson;
   const loadingProjectsTimeOut = 100000;
   const loadingCSSOverride = {

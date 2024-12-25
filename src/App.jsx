@@ -94,7 +94,7 @@ export default function App() {
               <Route path="/proyectos" element={<ProjectsPage tokenSesion={tokenSesion}/>} />
               <Route path="/editar-perfil" element={<EditUserProfilePage tokenSesion={tokenSesion} onEditUserProfile={editUserProfileCallback}/>} />
               <Route path="/editar-perfil/clave" element={<EditUserPasswordPage tokenSesion={tokenSesion}/>} />
-              <Route path="/editar-proyectos" element={<EditUserProjectsPage />} />
+              <Route path="/editar-proyectos" element={<EditUserProjectsPage tokenSesion={tokenSesion}/>} />
               <Route path="/recuperar-contra/validacion" element={<RetrieveUserPass_ValidationPage/>} />
               <Route path="/recuperar-contra/actualizar/:token?" element={<RetrieveUserPass_ChangePasswordPage/>} />
               <Route path="*" element={<NotFound />} />
