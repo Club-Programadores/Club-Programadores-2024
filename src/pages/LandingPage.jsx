@@ -1,3 +1,5 @@
+import MailSender from "@/services/mailsender/mailsender"
+
 import { Card, CardContent } from "@/components/ui/card";
 import { RegisterButton } from "@/components/Buttons";
 import { useModal } from "@/components/ModalsHandler";
@@ -5,48 +7,56 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
-import {
-  CalendarIcon,
-  UserIcon,
-  CheckCircleIcon,
-  MapPinIcon,
-} from "lucide-react";
+import { CalendarIcon, UserIcon, CheckCircleIcon, MapPinIcon } from "lucide-react";
 
-export const LandingPage = () => {
+export const LandingPage = ({ isLogged }) => {
   const { toggleRegistration } = useModal();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = e.target;
+    const fromName = formData.name.value;
+    const fromMail = formData.mail.value;
+    const mailBody = formData.mensaje.value;
+
+    MailSender.receiveTextMail(fromName, fromMail, mailBody);
+    alert("Correo Enviado!")
+  }
 
   return (
     <div className="flex items-center justify-center flex-grow">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <section className="relative select-none h-[400px] mb-12">
           <img
-            src="/imgs/heroBanner1.jpg"
+            src="/imgs/club-desarrolladores_participantes.jpg"
             alt="Estudiantes programando"
             className="w-full h-full object-cover rounded-lg"
           />
-          <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center rounded-lg">
+          <div className="absolute inset-0 bg-black bg-opacity-25 flex flex-col items-center justify-center rounded-lg">
             <motion.div
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
               className="text-center"
             >
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+              <h2 className="text-3xl sm:text-4xl tracking-wide font-bold text-white mb-4">
                 ¡SUMATE AL CLUB DE PROGRAMADOR@S!
               </h2>
             </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.2 }}
-            >
-              <RegisterButton onClick={toggleRegistration} />
-            </motion.div>
+            {isLogged ? <></> :
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.2 }}
+              >
+                <RegisterButton onClick={toggleRegistration} />
+              </motion.div>
+            }
           </div>
         </section>
 
         <section className="mb-12" id="about-us">
-          <h2 className="text-2xl sm:text-3xl font-semibold text-center mb-8">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8">
             El Club de Programadores es un espacio para compartir, practicar y
             colaborar
           </h2>
@@ -180,7 +190,7 @@ export const LandingPage = () => {
           <h2 className="text-2xl font-semibold mb-6 text-center">
             CONTÁCTANOS
           </h2>
-          <form className="max-w-md mx-auto">
+          <form className="max-w-md mx-auto" onSubmit={handleSubmit}>
             <div className="mb-4">
               <Input
                 placeholder="Nombre"

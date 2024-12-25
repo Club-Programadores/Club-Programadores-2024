@@ -1,77 +1,103 @@
-import React, { useState, useCallback } from "react";
-import { ModalProvider } from "./components/ModalsHandler";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { LandingPage } from "./pages/LandingPage";
-import ParticipantesPage from "./pages/ParticipantesPage";
-import ProyectosPage from "./pages/ProyectosPage";
-import { PasswordChange } from "./pages/PasswordChange";
-import { Navbar } from "./components/Navbar";
-import { Footer } from "./components/Footer";
 import "./globals.css";
-import { EditUserProfile } from "./pages/EditUserProfile";
-import { EditProjects } from "./pages/EditProjects";
+import Cookies from "js-cookie";
+
+import { useState, useCallback } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Navbar } from "@/components/Navbar";
+import { ModalProvider } from "@/components/ModalsHandler";
+import { Footer } from "@/components/Footer";
+import { LandingPage } from "@/pages/LandingPage";
+import { ParticipantsPage } from "@/pages/ParticipantsPage";
+import { ProjectsPage } from "@/pages/ProjectsPage";
+import { EditUserProfilePage }  from "@/pages/user/EditUserProfilePage";
+import { EditUserPasswordPage } from "@/pages/user/EditUserPasswordPage";
+import { EditUserProjectsPage } from "@/pages/user/EditUserProjectsPage";
+import { RetrieveUserPass_ValidationPage } from "@/pages/user/RetrieveUserPass_ValidationPage";
+import { RetrieveUserPass_ChangePasswordPage } from "@/pages/user/RetrieveUserPass_ChangePassPage";
+
 
 export default function App() {
-  const [isLogged, setLogged] = useState(false);
-  const [tokenSesion, setTokenSesion] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(Cookies.get("user_token")?true:false);
+  const [tokenSesion, setTokenSesion] = useState(Cookies.get("user_token"));
 
-  const [usuario, setUsuario] = useState({
-    nombre: "",
-    imagen: "",
+  const [user, setUser] = useState({
+    name: Cookies.get("user_name"),
+    image: localStorage.getItem('user_image'),
   });
 
-  const onIniciarSesion = useCallback((datosUsuario,token) => {
+  const logInCallback = useCallback((userData,token) => {
     setTokenSesion(token)
-    setUsuario({
-      nombre: datosUsuario.nombre,
-      imagen: datosUsuario.imagen,
+    setUser({
+      name: userData.name,
+      image: userData.image,
     })
-    setLogged(true);
+
+    Cookies.set('user_name', userData.name);
+    Cookies.set('user_token', token);
+    localStorage.setItem('user_image', userData.image);
+
+    setIsLoggedIn(true);
   }, []);
   
-  const onRegistrarse = useCallback((datosUsuario,token) => {
+  const signInCallback = useCallback((userData,token) => {
     setTokenSesion(token)
-    setUsuario({
-      nombre: datosUsuario.nombre,
-      imagen: datosUsuario.imagen,
+    setUser({
+      name: userData.name,
+      image: userData.image,
     })
-    setLogged(true);
+
+    Cookies.set('user_name', userData.nombr);
+    Cookies.set('user_token', token);
+    localStorage.setItem('user_image', userData.image);
+
+    setIsLoggedIn(true);
   }, []);
 
-  const onEditUserProfile = useCallback((datosUsuario) => {
-    setUsuario({
-      nombre: datosUsuario.nombre,
-      imagen: datosUsuario.imagen,
+  const editUserProfileCallback = useCallback((userData) => {
+    setUser({
+      name: userData.name,
+      image: userData.image,
     })
+
+    Cookies.set('user_name', userData.name);
+    localStorage.setItem('user_image', userData.image);
   }, []);
 
-  const onCerrarSesion = useCallback(() => {
+  const logOutCallback = useCallback(() => {
     setTokenSesion("")
-    setUsuario({
-      nombre: "",
-      imagen: "",
+    setUser({
+      name: "",
+      image: "",
     })
-    setLogged(false);
+
+    Cookies.set('user_name', "");
+    Cookies.set('user_token', "");
+    localStorage.setItem('user_image', "");
+
+    setIsLoggedIn(false);
+    window.location.href = "http://club-desarrolladores.site/";
   }, []);
 
   return (
     <BrowserRouter>
       <ModalProvider
-        onIniciarSesion={onIniciarSesion}
-        onRegistrarse={onRegistrarse}
-        onCerrarSesion={onCerrarSesion}
+        onLogIn={logInCallback}
+        onSignIn={signInCallback}
+        onLogOut={logOutCallback}
       >
         <div className="flex flex-col min-h-screen">
-          <Navbar isLogged={isLogged} datosUsuario={usuario} logOutCallback={onCerrarSesion} />
+          <Navbar isLogged={isLoggedIn} userData={user} logOutCallback={logOutCallback} />
           <main className="flex flex-grow">
             <Routes>
-              <Route path="/" element={<LandingPage />} />
-              <Route path="/contactanos" element={<LandingPage />} />
-              <Route path="/participantes" element={<ParticipantesPage />} />
-              <Route path="/proyectos" element={<ProyectosPage />} />
-              <Route path="/editar-perfil" element={<EditUserProfile tokenSesion={tokenSesion} onEditUserProfile={onEditUserProfile}/>} />
-              <Route path="/editar-perfil/clave" element={<PasswordChange />} />
-              <Route path="/editar-proyectos" element={<EditProjects />} />
+              <Route path="/" element={<LandingPage isLogged={isLoggedIn} />} />
+              <Route path="/contactanos" element={<LandingPage isLogged={isLoggedIn} />} />
+              <Route path="/participantes" element={<ParticipantsPage />} />
+              <Route path="/proyectos" element={<ProjectsPage tokenSesion={tokenSesion}/>} />
+              <Route path="/editar-perfil" element={<EditUserProfilePage tokenSesion={tokenSesion} onEditUserProfile={editUserProfileCallback}/>} />
+              <Route path="/editar-perfil/clave" element={<EditUserPasswordPage tokenSesion={tokenSesion}/>} />
+              <Route path="/editar-proyectos" element={<EditUserProjectsPage tokenSesion={tokenSesion}/>} />
+              <Route path="/recuperar-contra/validacion" element={<RetrieveUserPass_ValidationPage/>} />
+              <Route path="/recuperar-contra/actualizar/:token?" element={<RetrieveUserPass_ChangePasswordPage/>} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>

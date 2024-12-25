@@ -14,7 +14,7 @@ import {
   DropdownMenuTrigger as MenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-export const Navbar = ({ isLogged, datosUsuario, logOutCallback }) => {
+export const Navbar = ({ isLogged, userData, logOutCallback }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { toggleRegistration, toggleLogin } = useModal();
@@ -37,7 +37,7 @@ export const Navbar = ({ isLogged, datosUsuario, logOutCallback }) => {
             className="animated-responsive flex-1 flex justify-start cursor-pointer select-none items-center"
             onClick={handleItemClick}
           >
-            <span className="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center text-white font-mono tracking-tighter font-black text-xl mr-2">
+            <span className="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center text-white font-[Monospace] tracking-tighter font-black text-xl mr-2">
               {"</>"}
             </span>
             <h1 className="font-semibold text-purple-600 hidden md:block">
@@ -87,12 +87,12 @@ export const Navbar = ({ isLogged, datosUsuario, logOutCallback }) => {
                 >
                   <div>
                     <p className="hidden md:flex select-none px-1">
-                      {datosUsuario.nombre}
+                      {userData.name}
                     </p>
                     <Avatar className="flex mx-auto md:-mr-4 ring-4 ring-white">
                       <AvatarImage
                         className="select-none"
-                        src={datosUsuario.imagen}
+                        src={userData.image}
                         alt="Foto de perfil"
                       />
                     </Avatar>

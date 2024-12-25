@@ -1,0 +1,97 @@
+{
+  "proyectos": [
+    {
+      "id": 900,
+      "titulo": "Club Programadores (Prototipo 2023)",
+      "descripcion": "Base de datos de programadores que participan del Club de Programadores del Centro Universitario de Vicente López.",
+      "url_proyecto": "https://github.com/Club-Programadores/Club-Programadores",
+      "url_pagina": "https://club-programadores.netlify.app/",
+      "estado": "finalizado",
+      "abierto": "true",
+      "participantes": [
+        {
+        "nombre": "Bautista",
+        "apellido": "Mateo",
+        "image": "https://media.licdn.com/dms/image/v2/C4D03AQEFYkytWszRow/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1612150314469?e=1740614400&v=beta&t=0hN8u9YJYO4JiqNDUdOpXJtlhdIdAfSmygJuOSpMhh8"
+        }, 
+        {
+        "nombre": "Maite",
+        "apellido": "Arakaki",
+        "image": "https://avatars.githubusercontent.com/u/67213065?v=4"
+        } 
+    ],
+      "tecnologias": ["HTML", "CSS", "React", "JavaScript"]
+    },
+    {
+      "id": 901,
+      "titulo": "Schokoland Bombon Factory",
+      "descripcion": "Este proyecto es una web interactiva que permite a los usuarios crear bombones personalizados. Los usuarios pueden seleccionar entre diferentes coberturas y rellenos para diseñar su bombón ideal. Una vez que se eligen las opciones, la aplicación genera una image del bombón resultante.",
+      "url_proyecto": "https://github.com/Club-Programadores/Chocoland-Bombon_Factory",
+      "url_pagina": "https://schokoland-bombon-factory.netlify.app/",
+      "estado": "finalizado",
+      "abierto": "false",
+      "participantes": [
+        {
+        "nombre": "Bautista",
+        "apellido": "Mateo",
+        "image": "https://media.licdn.com/dms/image/v2/C4D03AQEFYkytWszRow/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1612150314469?e=1740614400&v=beta&t=0hN8u9YJYO4JiqNDUdOpXJtlhdIdAfSmygJuOSpMhh8"
+        }, 
+        {
+        "nombre": "Maite",
+        "apellido": "Arakaki",
+        "image": "https://avatars.githubusercontent.com/u/67213065?v=4"
+        },
+        {
+        "nombre": "Miguel",
+        "apellido": "",
+        "image": "https://avatars.githubusercontent.com/u/132763454?v=4"
+        }
+      ],
+      "tecnologias": ["HTML", "CSS", "JavaScript"]
+    },
+    {
+      "id": 902,
+      "titulo": "Bubble Pop",
+      "descripcion": "El juego bubble pop es un juego de rompecabezas en el que debes disparar burbujas de colores y agruparlas por tonalidades para hacerlas desaparecer del tablero.",
+      "url_proyecto": "https://github.com/Club-Programadores/Bubble_Pop",
+      "url_pagina": "https://bubble-pop-club.netlify.app/",
+      "estado": "finalizado",
+      "abierto": "true",
+      "participantes": [
+        {
+        "nombre": "Bautista",
+        "apellido": "Mateo",
+        "image": "https://media.licdn.com/dms/image/v2/C4D03AQEFYkytWszRow/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1612150314469?e=1740614400&v=beta&t=0hN8u9YJYO4JiqNDUdOpXJtlhdIdAfSmygJuOSpMhh8"
+        }, 
+        {
+        "nombre": "Ricardo",
+        "apellido": "",
+        "image": ""
+        }
+      ],
+      "tecnologias": ["JavaScript"]
+    },
+    {
+      "id": 903,
+      "titulo": "Calculadora IMC",
+      "descripcion": "Una calculadora IMC es una herramienta que te permite conocer tu índice de masa corporal, que es una medida que relaciona tu peso con tu altura. El IMC se usa para estimar si tu peso es adecuado para tu salud, y se clasifica en diferentes categorías, como bajo peso, peso normal, sobrepeso u obesidad.",
+      "url_proyecto": "https://github.com/Club-Programadores/calculadora-IMC",
+      "url_pagina": "https://calculadora-imc-p5.netlify.app/",
+      "estado": "finalizado",
+      "abierto": "false",
+      "participantes": [
+        {
+        "nombre": "Bautista",
+        "apellido": "Mateo",
+        "image": "https://media.licdn.com/dms/image/v2/C4D03AQEFYkytWszRow/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1612150314469?e=1740614400&v=beta&t=0hN8u9YJYO4JiqNDUdOpXJtlhdIdAfSmygJuOSpMhh8"
+        }, 
+        {
+        "nombre": "Roberto",
+        "apellido": "",
+        "image": ""
+        }
+      ],
+      "tecnologias": ["HTML", "CSS", "JavaScript"]
+    }
+  ]
+}

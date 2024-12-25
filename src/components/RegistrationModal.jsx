@@ -15,7 +15,7 @@ import aptitudes from "../../assets/aptitudes.json";
 import Select from "react-select";
 import { BarLoader } from "react-spinners";
 
-import ParticipantesController from "@/dbService/usuario/usuarioController"
+import UserController from "@/services/dbService/user/userController"
 
 const RegistrationModal = ({ signedUpCallback, onClose }) => {
   const profilesOptions = aptitudes.profilesOptions;
@@ -27,44 +27,38 @@ const RegistrationModal = ({ signedUpCallback, onClose }) => {
     borderColor: "red",
   };
   
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(0);
   const [loading, setLoading] = useState(false);
   const [loadingColor, setLoadingColor] = useState( "#9333ea")
   const [fotoDePerfil_Base64, setFotoDePerfil_Base64] = useState("");
 
-  const [requestRegister, setRequestRegister] = useState({
-    state: false,
+  const [registerRequest, setRegisterRequest] = useState({
+    requested: false,
     data: {}
   });
 
   useEffect(() => {
-    async function asyncFunction(apiResponseTimeout) {
-      try {
-        const resultadoRegistro = await ParticipantesController.asyncRegistrarUsuario(requestRegister.data);
-        if (resultadoRegistro.registroExitoso) {
-          signedUpCallback(resultadoRegistro.datosUsuario, resultadoRegistro.tokenSesion);
-        }
-        else {
-          alert("Error:"+resultadoRegistro.detalle);
-        }
-      }
-      catch (e) {
-        console.log(e);
-      }
-      finally{
-        //Reset Login Request
-        setLoading(false);
-        clearTimeout(apiResponseTimeout)
-        setRequestRegister({
-          state: false,
-          data: {}
-        })
-        onClose();
+    async function registerUser(apiResponseTimeout) {
+      const result = await UserController.asyncRegisterUser(registerRequest.data);
+      
+      if (result.successful) {
+        signedUpCallback(result.userData, result.tokenSesion);
       }
 
+      alert(result.details);
+
+      //Reset Login Request
+      setLoading(false);
+      clearTimeout(apiResponseTimeout)
+      setRegisterRequest({
+        requested: false,
+        data: {}
+      })
+      onClose();
     }
 
-    if(requestRegister.state === true){
+    if(registerRequest.requested){
+      //Loading bar.
       setLoading(true)
       const apiResponseTimeout = setTimeout(() => {
         alert("Error: Timeout Registro")
@@ -72,13 +66,13 @@ const RegistrationModal = ({ signedUpCallback, onClose }) => {
       }, registrationTimeOut);
 
       //Call Api.
-      asyncFunction(apiResponseTimeout);
+      registerUser(apiResponseTimeout);
     }
-  }, [requestRegister])
+  }, [registerRequest])
 
   const handleSubmit = (formData) => {
-    setRequestRegister({
-      state: true,
+    setRegisterRequest({
+      requested: true,
       data: {
         email: formData.email,
         password: formData.password,
@@ -107,6 +101,7 @@ const RegistrationModal = ({ signedUpCallback, onClose }) => {
         }
         <Formik
           initialValues={{
+            codigo: "",
             email: "",
             password: "",
             confirmPassword: "",
@@ -123,6 +118,25 @@ const RegistrationModal = ({ signedUpCallback, onClose }) => {
         >
           {({ isSubmitting, setFieldValue, validateForm }) => (
             <Form className="space-y-4" method="post" encType="multipart/form-data">
+              {step === 0 && (
+                <div className="space-y-4">
+                  <div>
+                    <Label htmlFor="codigo">Codigo de Autorización</Label>
+                    <Field
+                      as={Input}
+                      type="text"
+                      id="codigo"
+                      name="codigo"
+                      className="w-full"
+                    />
+                    <ErrorMessage
+                      name="codigo"
+                      component="p"
+                      className="text-red-500 text-sm"
+                    />
+                  </div>
+                </div>
+              )}
               {step === 1 && (
                 <div className="space-y-4">
                   <div>
@@ -316,6 +330,26 @@ const RegistrationModal = ({ signedUpCallback, onClose }) => {
                 </div>
               )}
               <div className="flex justify-center space-x-2">
+                {step === 0 && (
+                  <Button
+                    type="button"
+                    onClick={async () => {
+                      const stepErrors = await validateForm();
+                      const step0Fields = [
+                        "codigo"
+                      ];
+                      const hasStep0Errors = step0Fields.some(
+                        (field) => stepErrors[field]
+                      );
+
+                      if (!hasStep0Errors) {
+                        setStep(1);
+                      }
+                    }}
+                  >
+                    Siguiente
+                  </Button>
+                )}
                 {step === 1 && (
                   <Button
                     type="button"

@@ -9,6 +9,7 @@
     { "label": "Quality Assurance", "value": "quality assurance" },
     { "label": "Testing", "value": "testing" },
     { "label": "Networking", "value": "networking" },
+    { "label": "Cloud", "value": "cloud" },
     {
       "label": "Functional Oriented Programming",
       "value": "functional oriented programming"
@@ -80,7 +81,10 @@
   { "label": "Dart", "value": "dart" },
   { "label": "jQuery", "value": "jquery" },
   { "label": "MATLAB", "value": "matlab" },
-  { "label": "Bash", "value": "bash" }
+  { "label": "Bash", "value": "bash" },
+  { "label": "AWS", "value": "aws" },
+  { "label": "Azure", "value": "azure" },
+  { "label": "Google Cloud", "value": "google_cloud" }
 ]
 
 }

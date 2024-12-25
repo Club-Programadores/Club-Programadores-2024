@@ -52,7 +52,10 @@ const techIcons = {
   dart: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg",
   jquery: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jquery/jquery-original.svg",
   matlab: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matlab/matlab-original.svg",
-  bash: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg"
+  bash: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg",
+  aws: "https://github.com/devicons/devicon/blob/v2.16.0/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
+  azure: "https://github.com/devicons/devicon/blob/v2.16.0/icons/azure/azure-original.svg",
+  google_cloud: "https://github.com/devicons/devicon/blob/v2.16.0/icons/googlecloud/googlecloud-original.svg"
 };
 
 export default function techNameToImage(techName) {
