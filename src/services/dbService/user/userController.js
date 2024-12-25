@@ -4,7 +4,7 @@ import userDBContext from './userDBContext'
 export default class UserController {
 
   static asyncLoginUser = async function (loginInput) {
-    let resultado = {
+    let result = {
       successful: false,
       details: '',
       tokenSesion: '',
@@ -18,19 +18,19 @@ export default class UserController {
     try {
       const response = await userDBContext.asyncLoginUsuario(backFormData);
 
-      resultado.successful = true;
-      resultado.details = response.mensaje;
-      resultado.tokenSesion = response.token;
-      resultado.userInfo = {
+      result.successful = true;
+      result.details = response.mensaje;
+      result.tokenSesion = response.token;
+      result.userInfo = {
         name: `${response.datos.nombre} ${response.datos.apellido}`,
         image: response.datos.imagenBase64,
       }
     }
     catch (e) {
-      resultado.details = e;
+      result.details = e;
     }
     finally {
-      return resultado;
+      return result;
     }
   }
 

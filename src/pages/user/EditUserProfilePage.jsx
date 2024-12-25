@@ -68,8 +68,8 @@ export const EditUserProfilePage = ({tokenSesion, onEditUserProfile}) => {
       if(result.successful){
         //Update navbar.
         onEditUserProfile({
-          nombre: updateUserDataRequest.data.firstName+" "+updateUserDataRequest.data.lastName,
-          imagen: updateUserDataRequest.data.image
+          name: updateUserDataRequest.data.firstName+" "+updateUserDataRequest.data.lastName,
+          image: updateUserDataRequest.data.image
         })
       }
 
